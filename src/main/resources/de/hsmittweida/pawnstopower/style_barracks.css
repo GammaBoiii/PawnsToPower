@@ -1,0 +1,32 @@
+#pawns-list {
+    -fx-background-color: #cce7cc;
+}
+
+/* Hintergrund des Hauptmenüs */
+#main-menu {
+    -fx-background-color: #1a1a1a;
+    -fx-alignment: center;
+}
+
+.button {
+    -fx-background-color: #333;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 2 3;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #555;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease-in-out;
+    -fx-text-alignment: center;
+}
+.button:hover {
+    -fx-background-color: #555;
+    -fx-border-color: #777;
+}
+
+.button:pressed {
+    -fx-background-color: #222;
+    -fx-border-color: #444;
+}

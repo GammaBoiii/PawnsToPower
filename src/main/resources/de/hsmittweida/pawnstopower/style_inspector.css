@@ -1,0 +1,13 @@
+#panel {
+    -fx-background-image: url("image/avatar.png");
+
+}
+.button {
+    -fx-background-radius: 5;
+    -fx-border-radius: 15;
+    -fx-text-fill: rgba(0,0,0,0.0);
+    -fx-border-color: rgba(220,35,35,0.5);
+    -fx-background-color: rgba(253, 253, 253, 0.5);
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
