@@ -1,5 +1,8 @@
 package de.hsmittweida.pawnstopower;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 import java.util.ArrayList;
 
 /**
@@ -11,20 +14,21 @@ public class Inventory {
     private static ArrayList<Armor> armor;
     private static ArrayList<Pawn> pawns;
 
-    private static int money;
+    private static IntegerProperty money;
 
     public static void setup() {
         weapons = new ArrayList<Weapon>();
         armor = new ArrayList<Armor>();
         pawns = new ArrayList<Pawn>();
-        money = 0;
+        money = new SimpleIntegerProperty();
+        money.set(0);
     }
 
     public static ArrayList<Weapon> getWeapons() {
         return weapons;
     }
 
-    public static void addWeapon(Weapon w) {
+    private static void addWeapon(Weapon w) {
         weapons.add(w);
     }
 
@@ -32,8 +36,16 @@ public class Inventory {
         return armor;
     }
 
-    public static void addArmor(Armor c) {
+    private static void addArmor(Armor c) {
         armor.add(c);
+    }
+
+    public static void addItem(Item item) {
+        if(item.getItemType().equals("Weapon")) {
+            addWeapon((Weapon) item);
+        } else if(item.getItemType().equals("Armor")) {
+            addArmor((Armor) item);
+        }
     }
 
     public static ArrayList<Pawn> getPawns() {
@@ -45,10 +57,13 @@ public class Inventory {
     }
 
     public static int getMoney() {
-        return money;
+        return money.get();
     }
 
-    public static void setMoney(int money) {
-        Inventory.money = money;
+    public static IntegerProperty getMoneyAsSimpleInt() {
+        return money;
+    }
+    public static void addMoney(int money) {
+        Inventory.money.set(Inventory.money.get() + money);
     }
 }

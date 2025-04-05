@@ -25,11 +25,13 @@ public class Shop {
     private static ArrayList<Armor> armor_offer;
 
     private final IntegerProperty ptp; //price to pay
+    private ArrayList<Item>  shopping_cart;
 
     Shop() {
         ptp = new SimpleIntegerProperty(0);
         weapon_offer = new ArrayList<Weapon>();
         armor_offer = new ArrayList<Armor>();
+        shopping_cart = new ArrayList<Item>();
 
         refreshShop(); //DEBUG
 
@@ -56,8 +58,12 @@ public class Shop {
             cb.setOnAction(e -> {
                 if(cb.isSelected()) {
                     ptp.set(ptp.get() + w.getWClass().basePrice);
+                    stage.setTitle("Kontostand nach Kauf: " + (Inventory.getMoney() - ptp.get()) + "$");
+                    shopping_cart.add(w);
                 } else {
                     ptp.set(ptp.get() - w.getWClass().basePrice);
+                    stage.setTitle("Kontostand nach Kauf: " + (Inventory.getMoney() + ptp.get()) + "$");
+                    shopping_cart.remove(w);
                 }
             });
 
@@ -68,6 +74,7 @@ public class Shop {
             HBox.setHgrow(name, Priority.ALWAYS);
             name.setMaxWidth(Double.MAX_VALUE);
             price.setPadding(new Insets(0,15,0,0));
+            cb.setPadding(new Insets(0,10,0,0));
             hbox.getChildren().addAll(cb, name, price);
             weapon_list.getChildren().add(hbox);
         }
@@ -93,6 +100,16 @@ public class Shop {
         bottom.setPadding(new Insets(15, 7, 15, 7));
         bottom.setSpacing(10);
         Button purchase = new Button("Kauf bestätigen");
+        purchase.setOnAction(e -> {
+            if(Inventory.getMoney() >= ptp.get()) {
+                for(Item x : shopping_cart) {
+                    Inventory.addItem(x);
+                    stage.close();
+                }
+                Inventory.addMoney(-1 * ptp.get());
+            }
+        });
+
         Label price = new Label();
         price.setMaxHeight(Double.MAX_VALUE);
         price.textProperty().bind(Bindings.concat(ptp.asString(), "$"));
@@ -106,6 +123,7 @@ public class Shop {
 
         Tools.defaultClose(stage, "shop");
         stage.setScene(s);
+        stage.setTitle("Kontostand nach Kauf: " + Inventory.getMoney() + "$");
         stage.show();
     }
 

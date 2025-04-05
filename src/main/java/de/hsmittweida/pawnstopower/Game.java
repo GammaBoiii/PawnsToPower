@@ -24,8 +24,8 @@ public class Game {
     Game() {
 //        pawns = new ArrayList<Pawn>();
         day = new SimpleIntegerProperty(0);
-        CreateWindow();
         Inventory.setup();
+        CreateWindow();
         Debug();
     }
 
@@ -219,6 +219,7 @@ public class Game {
         Label label_rep = new Label("Reputation:\n" + reputation);
         Label label_day = new Label("Tag:\n" + day);
         label_day.textProperty().bind(Bindings.concat("Tag:\n", day.asString()));
+        label_money.textProperty().bind((Bindings.concat("Goldstücke:\n", Inventory.getMoneyAsSimpleInt())));
         /*
         label_pawns.getStyleClass().add("small-label");
         label_money.getStyleClass().add("small-label");
@@ -266,17 +267,17 @@ public class Game {
 
     private void newDay() {
         day.set(day.get() + 1);
-
     }
 
     private void Debug() {
         for (int i = 0; i < 2; i++) {
             Inventory.addPawn(new Pawn());
         }
-        Inventory.addWeapon(new Weapon(Weapon.WeaponClass.AXT, null));
-        Inventory.addWeapon(new Weapon(Weapon.WeaponClass.KTN, null));
-        Inventory.addArmor(new Armor(Armor.ArmorClass.FAB, "Helmut"));
-        Inventory.addArmor(new Armor(Armor.ArmorClass.IRN, "gunt"));
+        Inventory.addMoney(3874);
+        Inventory.addItem(new Weapon(Weapon.WeaponClass.AXT, null));
+        Inventory.addItem(new Weapon(Weapon.WeaponClass.KTN, null));
+        Inventory.addItem(new Armor(Armor.ArmorClass.FAB, "Helmut"));
+        Inventory.addItem(new Armor(Armor.ArmorClass.IRN, "gunt"));
     }
 
 }
