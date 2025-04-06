@@ -47,7 +47,7 @@ public class Slot {
                 /* Entsprechend für jede Waffe wird ein Eintrag in der Liste erstellt, die dem Spieler dann als Auswahl vorliegt, was er ausrüsten möchte.
                  * Des Weiteren existiert ein Knopf, der ein paar Informationen zu einem Item anzeigt. */
                 for (Weapon w : Inventory.getWeapons()) {
-                    System.out.println("keeee");
+
                     HBox hbox = new HBox();
                     Label name = new Label(w.getName());
                     Button details = new Button("Details");
@@ -60,12 +60,12 @@ public class Slot {
                             equip.setOnAction(e -> {
                                 String res = Tools.confirmPopup("Item bereits ausgerüstet.", "Dieses Item ist bereits bei" + w.getOwner().getName() + " ausgerüstet.", "Möchtest du es bei dem aktuellen Pawn ausrüsten?");
                                 if (res.equals("yes")) {
-                                    System.out.println("skibiddi");
+
 
                                     for (Weapon wep : w.getOwner().weapons) {
                                         if (wep != null) System.out.println(wep.getName());
                                     }
-                                    System.out.println("---------");
+
                                     for (Weapon wep : p.weapons) {
                                         if (wep != null) System.out.println(wep.getName());
                                     }
@@ -75,7 +75,7 @@ public class Slot {
                                     p.giveWeapon(i, reference, w, (byte) id);
                                     stage.close();
                                 } else if (res.equals("no")) {
-                                    System.out.println("ohioo");
+
                                 }
                             });
 
@@ -84,7 +84,7 @@ public class Slot {
                             equip.setOnAction(e -> {
 
                             });
-                            System.out.println("NOOOOOOOOO");
+
                         }
                     } else {
                         equip.setOnAction(e -> {
@@ -110,13 +110,13 @@ public class Slot {
             case "clothing":
 
                 if (Inventory.getArmor().isEmpty()) {
-                    System.out.println("Nope, nix da");
+
                     Tools.popup("Inventar", "Es wurden keine Kleidungsstücke im Inventar gefunden.", "Besuche den Shop, um Items zu kaufen!");
                     return;
                 }
 
                 for (Armor a : Inventory.getArmor()) {
-                    System.out.println("keeee");
+
                     HBox hbox = new HBox();
                     Label name = new Label(a.getName());
                     Button details = new Button("Details");
@@ -129,12 +129,12 @@ public class Slot {
                             equip.setOnAction(e -> {
                                 String res = Tools.confirmPopup("Item bereits ausgerüstet.", "Dieses Item ist bereits bei" + a.getOwner().getName() + " ausgerüstet.", "Möchtest du es bei dem aktuellen Pawn ausrüsten?");
                                 if (res.equals("yes")) {
-                                    System.out.println("skibiddi");
+
 
                                     for (Armor arm : a.getOwner().armors) {
                                         if (arm != null) System.out.println(arm.getName());
                                     }
-                                    System.out.println("---------");
+
                                     for (Armor arm : p.armors) {
                                         if (arm != null) System.out.println(arm.getName());
                                     }
@@ -144,7 +144,7 @@ public class Slot {
                                     p.giveArmor(i, reference, a, (byte) id);
                                     stage.close();
                                 } else if (res.equals("no")) {
-                                    System.out.println("ohioo");
+
                                 }
                             });
 
@@ -153,11 +153,12 @@ public class Slot {
                             equip.setOnAction(e -> {
 
                             });
-                            System.out.println("NOOOOOOOOO");
+
                         }
                     } else {
                         equip.setOnAction(e -> {
                             p.giveArmor(i, reference, a, (byte) id);
+
                             stage.close();
                         });
                     }

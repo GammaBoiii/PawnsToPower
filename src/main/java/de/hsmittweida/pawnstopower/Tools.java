@@ -115,7 +115,6 @@ public class Tools {
             res = dialog.showAndWait().get();
         } catch (NoSuchElementException nsex) {
         }
-//		System.out.println(" result: " + res);
         return res;
 
     }

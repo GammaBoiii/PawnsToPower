@@ -49,7 +49,6 @@ public class Game {
     }
 
     public void CreateWindow() {
-        System.out.println("NEW GAME BABAY");
         stage = new Stage();
         BorderPane panel = new BorderPane();
         Scene s = new Scene(panel, Tools.getScreenSize().get('w'), Tools.getScreenSize().get('h'));
@@ -248,21 +247,19 @@ public class Game {
     }
 
     private void barracks() {
-        System.out.println("Laaager");
         new Barracks();
     }
 
     private void shop() {
-        System.out.println("GEschifft");
         new Shop();
     }
 
     private void arena() {
-        System.out.println("Aräna");
+
     }
 
     private void other() {
-        System.out.println("Sonstigs");
+
     }
 
     private void newDay() {
@@ -276,8 +273,8 @@ public class Game {
         Inventory.addMoney(3874);
         Inventory.addItem(new Weapon(Weapon.WeaponClass.AXT, null));
         Inventory.addItem(new Weapon(Weapon.WeaponClass.KTN, null));
-        Inventory.addItem(new Armor(Armor.ArmorClass.FAB, "Helmut"));
-        Inventory.addItem(new Armor(Armor.ArmorClass.IRN, "gunt"));
+        Inventory.addItem(new Armor());
+        Inventory.addItem(new Armor());
     }
 
 }
