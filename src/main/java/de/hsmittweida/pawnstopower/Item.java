@@ -57,4 +57,21 @@ public class Item {
     protected String getItemType() {
         return "Item";
     }
+
+    public static byte getSlotOfItem(Item item) {
+        if (item.getItemType().equals("Weapon")) {
+            for (byte i = 0; i < 2; i++) {
+                if (item.getOwner().getWeapon(i) != null && item.getOwner().getWeapon(i).equals(item)) {
+                    return i;
+                }
+            }
+        } else if (item.getItemType().equals("Armor")) {
+            for (byte i = 0; i < 4; i++) {
+                if (item.getOwner().getArmor(i) != null && item.getOwner().getArmor(i).equals(item)) {
+                    return i;
+                }
+            }
+        }
+        return 0;
+    }
 }
