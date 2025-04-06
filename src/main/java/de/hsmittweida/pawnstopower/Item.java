@@ -12,6 +12,23 @@ public class Item {
         setName();
     }
 
+    public static byte getSlotOfItem(Item item) {
+        if (item.getItemType().equals("Weapon")) {
+            for (byte i = 0; i < 2; i++) {
+                if (item.getOwner().getWeapon(i) != null && item.getOwner().getWeapon(i).equals(item)) {
+                    return i;
+                }
+            }
+        } else if (item.getItemType().equals("Armor")) {
+            for (byte i = 0; i < 4; i++) {
+                if (item.getOwner().getArmor(i) != null && item.getOwner().getArmor(i).equals(item)) {
+                    return i;
+                }
+            }
+        }
+        return 0;
+    }
+
     protected void equip(Pawn p) {
         if (p == null) {
             this.equipped = false;
@@ -49,29 +66,27 @@ public class Item {
             Random rnd = new Random();
             return mysticalWeaponNames[rnd.nextInt(mysticalWeaponNames.length)];
         } else if (item.getItemType().equals("Armor")) {
-            return "";
+            String name;
+            Armor armor = (Armor) item;
+            name = switch (armor.getSlotType()) {
+                case 0 -> " - Helm";
+                case 1 -> " - Brustplatte";
+                case 2 -> " - Handschuhe";
+                case 3 -> " - Beinschutz";
+                default -> "";
+            };
+            name = switch (armor.getArmorClass()) {
+                case FAB -> "Stoff" + name;
+                case LTH -> "Leder" + name;
+                case IRN -> "Eisen" + name;
+                case STL -> "Stahl" + name;
+            };
+            return name;
         }
         return "";
     }
 
     protected String getItemType() {
         return "Item";
-    }
-
-    public static byte getSlotOfItem(Item item) {
-        if (item.getItemType().equals("Weapon")) {
-            for (byte i = 0; i < 2; i++) {
-                if (item.getOwner().getWeapon(i) != null && item.getOwner().getWeapon(i).equals(item)) {
-                    return i;
-                }
-            }
-        } else if (item.getItemType().equals("Armor")) {
-            for (byte i = 0; i < 4; i++) {
-                if (item.getOwner().getArmor(i) != null && item.getOwner().getArmor(i).equals(item)) {
-                    return i;
-                }
-            }
-        }
-        return 0;
     }
 }
