@@ -6,31 +6,35 @@ public class Armor extends Item {
     private final ArmorClass ac;
     private int baseProtection;
     private boolean equipped;
-    private byte slot;
+    private byte slot;// = -1; //Erste Setzung ist hier notwendig, da die super() sonst standardmäßig 0 erkennt.
     private Pawn owner;
 
     Armor(ArmorClass cls, byte Slot, Pawn p) {
         super(p);
         setSlotType(slot);
         this.ac = cls;
+        super.setName();
     }
 
     Armor(Pawn p, byte slot) {
         super(p);
-        setSlotType(slot);
         ac = getRandomArmorClass();
+        setSlotType(slot);
+        super.setName();
     }
 
     Armor(Pawn p) {
         super(p);
         ac = getRandomArmorClass();
-        setSlotType(setRandomSlotType());
+        setSlotType(this.setRandomSlotType());
+        super.setName(); // muss erneut aufgerufen werden, da super() beim Initialisieren den Slot noch nicht kennt!
     }
 
     Armor() {
         super(null);
         ac = getRandomArmorClass();
-        setSlotType(setRandomSlotType());
+        setSlotType(this.setRandomSlotType());
+        super.setName(); // muss erneut aufgerufen werden, da super() beim Initialisieren den Slot noch nicht kennt!
     }
 
     public ArmorClass getArmorClass() {
@@ -45,6 +49,9 @@ public class Armor extends Item {
      * @return Slot des Rüstungsstückes
      */
     public byte getSlotType() {
+        if(this.slot == -1) {
+            this.slot = setRandomSlotType();
+        }
         return this.slot;
     }
 

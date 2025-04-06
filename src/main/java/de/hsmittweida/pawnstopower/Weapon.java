@@ -21,6 +21,7 @@ public class Weapon extends Item {
         super(p);
         damageModifier = new ArrayList<Double>();
         wc = cls;
+        super.setName();
     }
 
     /**
@@ -31,6 +32,7 @@ public class Weapon extends Item {
         super(p);
         damageModifier = new ArrayList<Double>();
         wc = getRandomWeaponClass();
+        super.setName();
     }
 
     /**
@@ -40,13 +42,14 @@ public class Weapon extends Item {
         super(null);
         damageModifier = new ArrayList<Double>();
         wc = getRandomWeaponClass();
+        super.setName();
     }
 
     public boolean isTwoHanded() {
         return twoHanded;
     }
 
-    public WeaponClass getWClass() {
+    public WeaponClass getWeaponClass() {
         return this.wc;
     }
 
