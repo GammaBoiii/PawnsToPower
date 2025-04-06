@@ -24,11 +24,20 @@ public class Weapon extends Item {
     }
 
     /**
-     * Erstellt ein neues, komplett zufälliges Weapon Objekt
+     * Erstellt ein neues, komplett zufälliges Weapon Objekt.
      * @param p
      */
     Weapon(Pawn p) {
         super(p);
+        damageModifier = new ArrayList<Double>();
+        wc = getRandomWeaponClass();
+    }
+
+    /**
+     * Erstellt ein neues, komplett zufälliges Weapon Objekt. Ohne Besitzer.
+     */
+    Weapon() {
+        super(null);
         damageModifier = new ArrayList<Double>();
         wc = getRandomWeaponClass();
     }
