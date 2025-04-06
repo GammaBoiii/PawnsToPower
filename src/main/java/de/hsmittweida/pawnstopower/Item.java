@@ -9,7 +9,6 @@ public class Item {
 
     protected Item(Pawn owner) {
         this.owner = owner;
-        setName();
     }
 
     public static byte getSlotOfItem(Item item) {
@@ -56,8 +55,12 @@ public class Item {
         return name;
     }
 
-    protected void setName() {
-        name = randomName(this);
+    protected void setName(String s) {
+        this.name = s;
+    }
+
+    protected void setName(){
+        this.name = randomName(this);
     }
 
     protected String randomName(Item item) {
@@ -75,12 +78,15 @@ public class Item {
                 case 3 -> " - Beinschutz";
                 default -> "";
             };
-            name = switch (armor.getArmorClass()) {
-                case FAB -> "Stoff" + name;
-                case LTH -> "Leder" + name;
-                case IRN -> "Eisen" + name;
-                case STL -> "Stahl" + name;
-            };
+            if (armor.getArmorClass() == null) { //Wird benötigt, da die Super-Klasse den Slot beim Initialisiern des Rüstungsstückes noch nicht kennt! (Siehe Armor Klasse)
+                return "Stoff" + name;
+            } else
+                name = switch (armor.getArmorClass()) {
+                    case FAB -> "Stoff" + name;
+                    case LTH -> "Leder" + name;
+                    case IRN -> "Eisen" + name;
+                    case STL -> "Stahl" + name;
+                };
             return name;
         }
         return "";
