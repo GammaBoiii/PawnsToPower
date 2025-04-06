@@ -40,7 +40,6 @@ public class StartMenu {
 					res = dialog.showAndWait().get();
 				} catch (NoSuchElementException nsex) {}*/
 				String res = Tools.inputPopup("Spiel laden", "Gib den Pfad an!", "Es sollte eine \"\\.ptpfile\\\" sein.");
-				System.out.println(res);
 			});
 
 			exit.setOnAction(e -> {
