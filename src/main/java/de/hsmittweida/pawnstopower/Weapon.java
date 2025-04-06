@@ -11,7 +11,6 @@ public class Weapon extends Item {
     private final WeaponClass wc;
     private final ArrayList<Double> damageModifier;
     private boolean twoHanded;
-    private Pawn owner;
 
     /**
      * Erstellt ein neues Weapon Objekt mit vorgegebener Weapon-Class
