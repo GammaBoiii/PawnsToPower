@@ -23,7 +23,7 @@ public class ItemStats {
         name.setPadding(new Insets(0, 0, 15.0, 0));
 
         Label wClassLabel = new Label("Klasse:");
-        Label wClassVal = new Label(w.getWClass().toString());
+        Label wClassVal = new Label(w.getWeaponClass().toString());
         wClassVal.setOnMousePressed(e-> {
             System.out.print("Das ist eine Waffe. DEBUG!");
         });

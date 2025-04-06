@@ -77,7 +77,7 @@ public class Inspector {
 
         //Slot 0 - siehe Pawn.weaponSlotUsed
         if(p.getWeapon((byte)0) != null) {
-            setImage(btnRight, p.getWeapon((byte)0).getWClass());
+            setImage(btnRight, p.getWeapon((byte)0).getWeaponClass());
         }
         AnchorPane.setRightAnchor(btnRight, 7.0);
         AnchorPane.setTopAnchor(btnRight, 195.0);
@@ -87,7 +87,7 @@ public class Inspector {
 
         //Slot 1
         if(p.getWeapon((byte)1) != null) {
-            setImage(btnLeft, p.getWeapon((byte)1).getWClass());
+            setImage(btnLeft, p.getWeapon((byte)1).getWeaponClass());
         }
         AnchorPane.setLeftAnchor(btnLeft, 7.0);
         AnchorPane.setTopAnchor(btnLeft, 195.0);

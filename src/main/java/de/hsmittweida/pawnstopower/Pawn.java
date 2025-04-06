@@ -70,7 +70,7 @@ public class Pawn {
     public boolean giveWeapon(Inspector i, Button ref, Weapon weapon, byte slot) {
         if (!weaponSlotUsed(slot)) {
             weapons[slot] = weapon;
-            i.setImage(ref, weapon.getWClass());
+            i.setImage(ref, weapon.getWeaponClass());
             weapon.equip(this);
             return true;
         }
