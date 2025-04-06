@@ -8,11 +8,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="init">
+    <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="added getSlotOfItem and naming armor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Armor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Armor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Item.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Weapon.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +148,8 @@
       <workItem from="1742198671565" duration="10159000" />
       <workItem from="1743705414444" duration="1794000" />
       <workItem from="1743850469598" duration="8652000" />
-      <workItem from="1743876575479" duration="1597000" />
+      <workItem from="1743876575479" duration="1735000" />
+      <workItem from="1743927897146" duration="8733000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -164,7 +167,87 @@
       <option name="project" value="LOCAL" />
       <updated>1743861678359</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="-">
+      <option name="closed" value="true" />
+      <created>1743878254655</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1743878254655</updated>
+    </task>
+    <task id="LOCAL-00004" summary="removed Pawn variable">
+      <option name="closed" value="true" />
+      <created>1743934706254</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1743934706254</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added new default constructor">
+      <option name="closed" value="true" />
+      <created>1743935379557</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1743935379558</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added new default constructor">
+      <option name="closed" value="true" />
+      <created>1743935394603</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1743935394603</updated>
+    </task>
+    <task id="LOCAL-00007" summary="removed unecessary comments">
+      <option name="closed" value="true" />
+      <created>1743939042940</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1743939042940</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added new getSlotOfItem method">
+      <option name="closed" value="true" />
+      <created>1743939107354</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1743939107354</updated>
+    </task>
+    <task id="LOCAL-00009" summary="removed unnecessary comments">
+      <option name="closed" value="true" />
+      <created>1743939188917</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1743939188917</updated>
+    </task>
+    <task id="LOCAL-00010" summary="renamed method">
+      <option name="closed" value="true" />
+      <created>1743939319713</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1743939319713</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added price method and slottype">
+      <option name="closed" value="true" />
+      <created>1743940582898</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1743940582898</updated>
+    </task>
+    <task id="LOCAL-00012" summary="added getSlotOfItem and naming armor">
+      <option name="closed" value="true" />
+      <created>1743941008838</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1743941008838</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,6 +266,15 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="-" />
+    <MESSAGE value="removed Pawn variable" />
+    <MESSAGE value="added new default constructor" />
+    <MESSAGE value="removed unecessary comments" />
+    <MESSAGE value="added new getSlotOfItem method" />
+    <MESSAGE value="removed unnecessary comments" />
+    <MESSAGE value="renamed method" />
+    <MESSAGE value="added price method and slottype" />
+    <MESSAGE value="added getSlotOfItem and naming armor" />
+    <option name="LAST_COMMIT_MESSAGE" value="added getSlotOfItem and naming armor" />
   </component>
 </project>
