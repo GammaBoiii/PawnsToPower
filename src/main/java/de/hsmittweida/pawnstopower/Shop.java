@@ -5,10 +5,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -25,7 +22,7 @@ public class Shop {
     private static ArrayList<Armor> armor_offer;
 
     private final IntegerProperty ptp; //price to pay
-    private ArrayList<Item>  shopping_cart;
+    private final ArrayList<Item> shopping_cart;
 
     Shop() {
         ptp = new SimpleIntegerProperty(0);
@@ -51,42 +48,56 @@ public class Shop {
         armor.setFitToWidth(true);
 
         for (Weapon w : weapon_offer) {
-            System.out.println("aaa");
             HBox hbox = new HBox();
             CheckBox cb = new CheckBox();
 
             cb.setOnAction(e -> {
-                if(cb.isSelected()) {
-                    ptp.set(ptp.get() + w.getWClass().basePrice);
+                if (cb.isSelected()) {
+                    ptp.set(ptp.get() + w.getWeaponClass().basePrice);
                     stage.setTitle("Kontostand nach Kauf: " + (Inventory.getMoney() - ptp.get()) + "$");
                     shopping_cart.add(w);
                 } else {
-                    ptp.set(ptp.get() - w.getWClass().basePrice);
+                    ptp.set(ptp.get() - w.getWeaponClass().basePrice);
                     stage.setTitle("Kontostand nach Kauf: " + (Inventory.getMoney() + ptp.get()) + "$");
                     shopping_cart.remove(w);
                 }
             });
 
-            Label name = new Label(w.getName() + " (" + w.getWClass().toString() + ")");
-            Label price = new Label(w.getWClass().basePrice + "$");
+            Label name = new Label(w.getName() + " (" + w.getWeaponClass().toString() + ")");
+            Label price = new Label(w.getWeaponClass().basePrice + "$");
             //Label wclass = new Label(w.getWClass().toString());
 
             HBox.setHgrow(name, Priority.ALWAYS);
             name.setMaxWidth(Double.MAX_VALUE);
-            price.setPadding(new Insets(0,15,0,0));
-            cb.setPadding(new Insets(0,10,0,0));
+            price.setPadding(new Insets(0, 15, 0, 0));
+            cb.setPadding(new Insets(0, 10, 0, 0));
             hbox.getChildren().addAll(cb, name, price);
             weapon_list.getChildren().add(hbox);
         }
         for (Armor a : armor_offer) {
             HBox hbox = new HBox();
             CheckBox cb = new CheckBox();
+
+            cb.setOnAction(e -> {
+                if (cb.isSelected()) {
+                    ptp.set(ptp.get() + a.getBasePrice());
+                    stage.setTitle("Kontostand nach Kauf: " + (Inventory.getMoney() - ptp.get()) + "$");
+                    shopping_cart.add(a);
+                } else {
+                    ptp.set(ptp.get() - a.getBasePrice());
+                    stage.setTitle("Kontostand nach Kauf: " + (Inventory.getMoney() + ptp.get()) + "$");
+                    shopping_cart.remove(a);
+                }
+            });
+
             Label name = new Label(a.getName());
-            Label aclass = new Label(a.getArmorClass().toString());
+            Label price = new Label(a.getBasePrice() + "$");
 
             HBox.setHgrow(name, Priority.ALWAYS);
             name.setMaxWidth(Double.MAX_VALUE);
-            hbox.getChildren().addAll(cb, name, aclass);
+            price.setPadding(new Insets(0,15,0,0));
+            cb.setPadding(new Insets(0,10,0,0));
+            hbox.getChildren().addAll(cb, name,  price);
             armor_list.getChildren().add(hbox);
         }
 
@@ -101,8 +112,8 @@ public class Shop {
         bottom.setSpacing(10);
         Button purchase = new Button("Kauf bestätigen");
         purchase.setOnAction(e -> {
-            if(Inventory.getMoney() >= ptp.get()) {
-                for(Item x : shopping_cart) {
+            if (Inventory.getMoney() >= ptp.get()) {
+                for (Item x : shopping_cart) {
                     Inventory.addItem(x);
                     stage.close();
                 }
@@ -128,18 +139,16 @@ public class Shop {
     }
 
     public static void refreshShop() {
-        weapon_offer.add(new Weapon(null));
-        weapon_offer.add(new Weapon(null));
-        weapon_offer.add(new Weapon(null));
-        weapon_offer.add(new Weapon(null));
-        weapon_offer.add(new Weapon(null));
+        weapon_offer.add(new Weapon());
+        weapon_offer.add(new Weapon());
+        weapon_offer.add(new Weapon());
+        weapon_offer.add(new Weapon());
+        weapon_offer.add(new Weapon());
 
-
-        armor_offer.add(new Armor(Armor.ArmorClass.IRN, "skibi"));
-        armor_offer.add(new Armor(Armor.ArmorClass.FAB, "huchu"));
-        armor_offer.add(new Armor(Armor.ArmorClass.STL, "ioesen"));
-        armor_offer.add(new Armor(Armor.ArmorClass.LTH, "maugazu"));
-        armor_offer.add(new Armor(Armor.ArmorClass.STL, "nazgul"));
-
+        armor_offer.add(new Armor());
+        armor_offer.add(new Armor());
+        armor_offer.add(new Armor());
+        armor_offer.add(new Armor());
+        armor_offer.add(new Armor());
     }
 }
