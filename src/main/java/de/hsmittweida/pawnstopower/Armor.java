@@ -1,20 +1,27 @@
 package de.hsmittweida.pawnstopower;
 
+import java.util.Random;
+
 public class Armor extends Item{
     private final ArmorClass ac;
-    private final String name;
     private int baseProtection;
     private boolean equipped;
     private Pawn owner;
 
-    Armor(ArmorClass cls, String name) {
-        super(null);
+    Armor(ArmorClass cls, Pawn p) {
+        super(p);
         this.ac = cls;
-        this.name = name;
-        equipped = false;
     }
 
+    Armor(Pawn p) {
+        super(p);
+        ac = getRandomArmorClass();
+    }
 
+    Armor() {
+        super(null);
+        ac = getRandomArmorClass();
+    }
 
     public ArmorClass getArmorClass() {
         return ac;
@@ -23,7 +30,6 @@ public class Armor extends Item{
     public int getBaseProtection() {
         return baseProtection;
     }
-
 
     public enum ArmorClass {
         FAB, //Stoff
@@ -36,4 +42,8 @@ public class Armor extends Item{
         return "Armor";
     }
 
+    private ArmorClass getRandomArmorClass() {
+        Random rnd = new Random();
+        return ArmorClass.values()[rnd.nextInt(ArmorClass.values().length)];
+    }
 }
