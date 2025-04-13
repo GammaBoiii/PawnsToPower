@@ -1,16 +1,19 @@
 package de.hsmittweida.pawnstopower;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Button;
 
 import java.util.Random;
 
 public class Pawn {
     private final short health = 100;
-    private final short max_health = 100;
+    //private final short max_health = 100;
     private final String name;
     Armor[] armors = new Armor[4];
     Weapon[] weapons = new Weapon[2];
     private byte level;
+    private IntegerProperty experience;
 
     Pawn() {
         for (Weapon w : weapons) {
@@ -20,6 +23,11 @@ public class Pawn {
             c = null;
         }
         this.name = getRandomName();
+        this.level = 1;
+        this.experience = new SimpleIntegerProperty(0);
+        this.experience.addListener((a,b,newVal) -> {
+            calcLevel(newVal.intValue());
+        });
     }
 
     /**
@@ -138,4 +146,26 @@ public class Pawn {
     public String getName() {
         return this.name;
     }
+
+    /**
+     * Diese Methode beinhaltet die Logik zum Aufleveln. Dazu wird die Formel {@code f(x) = 5 * ( x - 1 ) + 50} verwendet <i>(umgestellt
+     * nach x, da die Erfahrungspunkte (y-Achse) gegeben sind, und x (das Level) eigentlich gesucht wird.) </i> <br>
+     * Diese gibt die benötigten Erfahrungspunkte ({@code experience}) an. Level 1 braucht also 50 Erfahrungspunkt, Level 2 55,
+     * Level 3 60, [...] Erfahrungspunkte für das jeweilige nächste Level.
+     */
+    private void calcLevel(int val) {
+        this.level = (byte) Math.floor((double) (val - 45) / 5);
+    }
+    public int getLevel() {
+        return this.level;
+    }
+
+    public void addExperience(int xp) {
+        experience.add(xp);
+    }
+    private int getExperience() {
+        return experience.get();
+    }
+
+
 }
