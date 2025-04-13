@@ -1,9 +1,16 @@
 package de.hsmittweida.pawnstopower;
 
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import javax.swing.*;
 
 public class Inspector {
     Button btnHead;
@@ -29,6 +36,10 @@ public class Inspector {
         btnLegs = new Button("Legs");
         btnLeft = new Button("Left");
         btnRight = new Button("Right");
+
+        VBox stats = createStats();
+        AnchorPane.setLeftAnchor(stats, 7.0);
+        AnchorPane.setTopAnchor(stats, 6.0);
 
         //Slot 0 - siehe Pawn.clothingSlotUsed
         if(p.getArmor((byte)0) != null) {
@@ -96,7 +107,7 @@ public class Inspector {
         btnLeft.setOnAction(e -> new Slot(this, btnLeft, p, "weapon", 1));
 
 
-        pane.getChildren().addAll(btnHead, btnArms, btnTorso, btnLegs, btnLeft, btnRight);
+        pane.getChildren().addAll(btnHead, btnArms, btnTorso, btnLegs, btnLeft, btnRight, stats);
 
         stage.setScene(s);
         stage.show();
@@ -139,4 +150,32 @@ public class Inspector {
     public void clearImage(Button ref) {
         ref.setStyle(("-fx-background-image: none"));
     }
+
+    public VBox createStats() {
+        VBox box = new VBox();
+        box.setPrefWidth(200.0);
+
+        box.setStyle("-fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 4");
+
+        // Name
+        HBox name = new HBox();
+        Label nameLabel = new Label("Name:");
+        Label pawnName = new Label(pawn.getName());
+        HBox.setHgrow(nameLabel, Priority.ALWAYS);
+        nameLabel.setMaxWidth(Double.MAX_VALUE);
+        name.getChildren().addAll(nameLabel,pawnName);
+
+        // Level
+        HBox level = new HBox();
+        Label levelLabel = new Label("Level:");
+        Label pawnLevel = new Label(pawn.getLevel() + "");
+        HBox.setHgrow(levelLabel, Priority.ALWAYS);
+        levelLabel.setMaxWidth(Double.MAX_VALUE);
+        level.getChildren().addAll(levelLabel, pawnLevel);
+
+
+        box.getChildren().addAll(name, level);
+        return box;
+    }
+
 }
