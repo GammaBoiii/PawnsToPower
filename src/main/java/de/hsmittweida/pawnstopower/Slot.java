@@ -117,6 +117,11 @@ public class Slot {
 
                 for (Armor a : Inventory.getArmor()) {
 
+                    /* Kurzer Check, dass auch nur Kleidungsstücke angezeigt werden, die auch an dem bestimmten Slot ausgerüstet werden können. */
+                    if(!(a.getSlotType() == id)) {
+                        continue;
+                    }
+
                     HBox hbox = new HBox();
                     Label name = new Label(a.getName());
                     Button details = new Button("Details");
