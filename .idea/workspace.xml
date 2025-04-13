@@ -8,13 +8,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="added getSlotOfItem and naming armor">
+    <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="-">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Armor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Armor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Weapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Slot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Slot.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +145,10 @@
       <workItem from="1743705414444" duration="1794000" />
       <workItem from="1743850469598" duration="8652000" />
       <workItem from="1743876575479" duration="1735000" />
-      <workItem from="1743927897146" duration="8733000" />
+      <workItem from="1743927897146" duration="9011000" />
+      <workItem from="1744047150742" duration="715000" />
+      <workItem from="1744216102793" duration="735000" />
+      <workItem from="1744540705211" duration="486000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -247,7 +246,39 @@
       <option name="project" value="LOCAL" />
       <updated>1743941008838</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fixed name gen">
+      <option name="closed" value="true" />
+      <created>1743943325622</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1743943325622</updated>
+    </task>
+    <task id="LOCAL-00014" summary="added name gen for armor + fixed name gen">
+      <option name="closed" value="true" />
+      <created>1743943347199</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1743943347199</updated>
+    </task>
+    <task id="LOCAL-00015" summary="finished shop implementation for armor">
+      <option name="closed" value="true" />
+      <created>1743943430389</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1743943430389</updated>
+    </task>
+    <task id="LOCAL-00016" summary="-">
+      <option name="closed" value="true" />
+      <created>1743943444448</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1743943444448</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,7 +297,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
-    <MESSAGE value="-" />
     <MESSAGE value="removed Pawn variable" />
     <MESSAGE value="added new default constructor" />
     <MESSAGE value="removed unecessary comments" />
@@ -275,6 +305,10 @@
     <MESSAGE value="renamed method" />
     <MESSAGE value="added price method and slottype" />
     <MESSAGE value="added getSlotOfItem and naming armor" />
-    <option name="LAST_COMMIT_MESSAGE" value="added getSlotOfItem and naming armor" />
+    <MESSAGE value="fixed name gen" />
+    <MESSAGE value="added name gen for armor + fixed name gen" />
+    <MESSAGE value="finished shop implementation for armor" />
+    <MESSAGE value="-" />
+    <option name="LAST_COMMIT_MESSAGE" value="-" />
   </component>
 </project>
