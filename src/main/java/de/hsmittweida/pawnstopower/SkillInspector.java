@@ -18,6 +18,8 @@ public class SkillInspector {
         VBox box = new VBox();
         Scene s = new Scene(box,400.0, 250.0);
 
+        Label skillPointLabel = new Label("Skillpunkte verfügbar: " + pawn.getSkillPoints());
+
         for(Skill skill : pawn.getSkills()) {
             HBox hbox = new HBox();
             hbox.setAlignment(Pos.CENTER);
@@ -34,6 +36,8 @@ public class SkillInspector {
 //            HBox.setMargin(increase, new Insets(0,0,0,35));
             hbox.setPadding(new Insets(0,0,15,0));
             increase.setOnAction(e -> {
+                pawn.removeSkkillpoint();
+
                 System.out.println(skill.getId());
                 System.out.println("Skibidi");
             });
@@ -43,7 +47,7 @@ public class SkillInspector {
 
         Tools.defaultClose(stage, "skillinspector");
         stage.setScene(s);
-        stage.setTitle("Skills");
+        stage.setTitle("Skills - " + pawn.getSkillPoints() + "Skillpunkte verfügbar.");
         stage.show();
     }
 }
