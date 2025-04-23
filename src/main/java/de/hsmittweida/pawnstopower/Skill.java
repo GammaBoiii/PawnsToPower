@@ -1,5 +1,7 @@
 package de.hsmittweida.pawnstopower;
 
+// lol
+
 public class Skill {
     private final String id;
     private final String name;
