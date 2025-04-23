@@ -1,9 +1,12 @@
 package de.hsmittweida.pawnstopower;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -155,7 +158,7 @@ public class Inspector {
         VBox box = new VBox();
         box.setPrefWidth(200.0);
 
-        box.setStyle("-fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 4");
+//        box.setStyle("-fx-border-width: 1; -fx-border-color: rgba(15,15,15,75); -fx-border-radius: 4");
 
         // Name
         HBox name = new HBox();
@@ -173,8 +176,31 @@ public class Inspector {
         levelLabel.setMaxWidth(Double.MAX_VALUE);
         level.getChildren().addAll(levelLabel, pawnLevel);
 
+        // Erfahrungspunkte
+        HBox xp = new HBox();
+        ProgressBar pb = new ProgressBar(pawn.xpForLevelup((byte) pawn.getLevel()));
+        pb.setProgress( ((double) pawn.getExperience()) / (double) (pawn.xpForLevelup(pawn.getLevel()) ));
+        HBox.setHgrow(pb, Priority.ALWAYS);
+        pb.setMaxWidth(Double.MAX_VALUE);
+        pb.setPadding(new Insets(10,22,10,0));
+        Button openSkill = new Button("+");
+        openSkill.setId("skill-button");
+        xp.setAlignment(Pos.CENTER);
 
-        box.getChildren().addAll(name, level);
+        openSkill.setOnAction(e -> {
+            new SkillInspector(pawn);
+        });
+        xp.getChildren().addAll(pb, openSkill);
+
+        Button debug = new Button("ayoo");
+
+        //Debug
+        /*debug.setOnAction(e -> {
+            pawn.addExperience(3);
+            System.out.println(pawn.getExperience());
+        });*/
+
+        box.getChildren().addAll(name, level, xp/*, debug*/);
         return box;
     }
 
