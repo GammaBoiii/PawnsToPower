@@ -3,6 +3,7 @@ package de.hsmittweida.pawnstopower;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -105,6 +106,12 @@ public class Game {
         house3 = new Button("Arena");
         house4 = new Button("Sonstiges");
 
+        ArrayList<Button> buttons = new ArrayList<>();
+        buttons.add(house1);
+        buttons.add(house2);
+        buttons.add(house3);
+        buttons.add(house4);
+
 //        Image i1 = new Image(this.getClass().getResource("image/barracks.png").toExternalForm());
 //        Image i2 = new Image(this.getClass().getResource("image/shop.png").toExternalForm());
 //        Image i3 = new Image(this.getClass().getResource("image/arena.png").toExternalForm());
@@ -120,10 +127,13 @@ public class Game {
         Tools.setBackground(house3, 15, this.getClass().getResource("image/barracks.png").toExternalForm());
         Tools.setBackground(house4, 15, this.getClass().getResource("image/barracks.png").toExternalForm());*/
 
-        Tools.addHoverEffect(house1, 100, 1.02, true);
+        for(Button button : buttons) {
+            Tools.addHoverEffect(button, 100, 1.02, true);
+        }
+        /*Tools.addHoverEffect(house1, 100, 1.02, true);
         Tools.addHoverEffect(house2, 100, 1.02, true);
         Tools.addHoverEffect(house3, 100, 1.02, true);
-        Tools.addHoverEffect(house4, 100, 1.02, true);
+        Tools.addHoverEffect(house4, 100, 1.02, true);*/
 
         house1.setId("barracks");
         house2.setId("shop");
@@ -139,14 +149,29 @@ public class Game {
         field.setHgap(200);
         field.setVgap(125);
 //        field.setPadding(new Insets(15, 15, 15, 15));
-        house1.setMaxWidth(Double.MAX_VALUE);
+
+/*        house1.setMaxWidth(Double.MAX_VALUE);
         house1.setMaxHeight(Double.MAX_VALUE);
         house2.setMaxWidth(Double.MAX_VALUE);
         house2.setMaxHeight(Double.MAX_VALUE);
         house3.setMaxWidth(Double.MAX_VALUE);
         house3.setMaxHeight(Double.MAX_VALUE);
         house4.setMaxWidth(Double.MAX_VALUE);
-        house4.setMaxHeight(Double.MAX_VALUE);
+        house4.setMaxHeight(Double.MAX_VALUE);*/
+
+        for(Button button : buttons) {
+            button.setMaxWidth(75);
+            button.setMaxHeight(75);
+        }
+       /* house1.setMaxHeight(75);
+        house1.setMaxWidth(75);
+        house2.setMaxWidth(75);
+        house2.setMaxHeight(75);
+        house3.setMaxWidth(75);
+        house3.setMaxHeight(75);
+        house4.setMaxWidth(75);
+        house4.setMaxHeight(75);*/
+
 
         house1.setOnAction(e -> {
             barracks();
@@ -168,6 +193,7 @@ public class Game {
     private VBox createSideBar() {
         VBox box = new VBox();
         box.setPrefWidth(400);
+        //VBox.setMargin(box, new Insets(0,0,0,25));
         box.setId("side-bar");
 
         Label header = new Label("Tagebuch");
