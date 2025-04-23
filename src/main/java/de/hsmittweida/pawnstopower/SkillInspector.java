@@ -18,58 +18,24 @@ public class SkillInspector {
         VBox box = new VBox();
         Scene s = new Scene(box,400.0, 250.0);
 
-        /*HBox health = new HBox();
-        health.setPadding(new Insets(0,0,20,0));
-        skillLabel = new Label("Leben");
-        increase = new Button("+");
-        increase.setOnAction(e -> {
-            System.out.println("healthe");
-        });
-        health.getChildren().addAll(skillLabel, increase);
-
-        HBox damage = new HBox();
-        damage.setPadding(new Insets(0,0,20,0));
-        skillLabel = new Label("Schaden");
-        increase = new Button("+");
-        increase.setOnAction(e -> {
-            System.out.println("damage");
-        });
-        damage.getChildren().addAll(skillLabel,increase);
-
-        HBox resistance = new HBox();
-        resistance.setPadding(new Insets(0,0,20,0));
-        skillLabel = new Label("Widerstand");
-        increase = new Button("+");
-        increase.setOnAction(e -> {
-            System.out.println("resist");
-        });
-        resistance.getChildren().addAll(skillLabel,increase);
-
-        HBox speed = new HBox();
-        speed.setPadding(new Insets(0,0,20,0));
-        skillLabel = new Label("Agilität");
-        increase = new Button("+");
-        increase.setOnAction(e -> {
-            System.out.println("speed");
-        });
-        speed.getChildren().addAll(skillLabel,increase);
-
-        box.getChildren().addAll(health, damage, resistance, speed);*/
-
         for(Skill skill : pawn.getSkills()) {
             HBox hbox = new HBox();
             hbox.setAlignment(Pos.CENTER);
+            HBox.setHgrow(hbox, Priority.ALWAYS);
+            hbox.setMaxHeight(Double.MAX_VALUE);
 
             Label label = new Label(skill.getName());
-
             Label level = new Label("Level: " + skill.getSkillLevel());
+            level.setPadding(new Insets(0,8,0,0));
             HBox.setHgrow(label, Priority.ALWAYS);
             label.setMaxWidth(Double.MAX_VALUE);
 
             Button increase = new Button("+");
-            HBox.setMargin(increase, new Insets(0,0,0,7));
+//            HBox.setMargin(increase, new Insets(0,0,0,35));
+            hbox.setPadding(new Insets(0,0,15,0));
             increase.setOnAction(e -> {
                 System.out.println(skill.getId());
+                System.out.println("Skibidi");
             });
             hbox.getChildren().addAll(label, level, increase);
             box.getChildren().add(hbox);
