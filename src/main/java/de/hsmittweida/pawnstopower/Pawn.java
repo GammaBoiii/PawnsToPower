@@ -1,19 +1,23 @@
 package de.hsmittweida.pawnstopower;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Button;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Pawn {
-    private final short health = 100;
+/*    private final int baseHealth = 100;
+    private final int baseDamage = 5;
+    private final int baseResistance = 10;
+    private final int baseSpeed = 15;*/
     //private final short max_health = 100;
     private final String name;
     Armor[] armors = new Armor[4];
     Weapon[] weapons = new Weapon[2];
     private byte level;
-    private IntegerProperty experience;
+    private int experience;
+    //    private HashMap<String, Double> skillFactor;
+    private final ArrayList<Skill> skills;
 
     Pawn() {
         for (Weapon w : weapons) {
@@ -24,10 +28,23 @@ public class Pawn {
         }
         this.name = getRandomName();
         this.level = 1;
-        this.experience = new SimpleIntegerProperty(0);
-        this.experience.addListener((a,b,newVal) -> {
-            calcLevel(newVal.intValue());
-        });
+        this.experience = 0;
+
+/*        skillFactor = new HashMap<String, Double>();
+        skillFactor.put("health", 1.0);
+        skillFactor.put("damage", 1.0);
+        skillFactor.put("resistance", 1.0);
+        skillFactor.put("speed", 1.0);*/
+
+        Skill health = new Skill("health", "Leben", 100, this);
+        Skill damage = new Skill("damage", "Schaden", 5, this);
+        Skill resistance = new Skill("resistance", "Widerstand", 10, this);
+        Skill speed = new Skill("speed", "Agilität", 15, this);
+        skills = new ArrayList<>();
+        skills.add(health);
+        skills.add(damage);
+        skills.add(resistance);
+        skills.add(speed);
     }
 
     /**
@@ -55,8 +72,8 @@ public class Pawn {
         return false;
     }
 
-    public  boolean giveArmor(Inspector i, Button ref, Armor armor, byte slot) {
-        if(!clothingSlotUsed(slot)) {
+    public boolean giveArmor(Inspector i, Button ref, Armor armor, byte slot) {
+        if (!clothingSlotUsed(slot)) {
             armors[slot] = armor;
             i.setImage(ref, armor.getArmorClass(), slot);
             armor.equip(this);
@@ -106,8 +123,8 @@ public class Pawn {
     }
 
     public boolean removeArmor(Armor a) {
-        for(byte b = 0; b<=3; b++) {
-            if(getArmor(b) != null && getArmor(b).equals(a)) {
+        for (byte b = 0; b <= 3; b++) {
+            if (getArmor(b) != null && getArmor(b).equals(a)) {
                 armors[b] = null;
                 a.unequip();
                 return true;
@@ -156,16 +173,48 @@ public class Pawn {
     private void calcLevel(int val) {
         this.level = (byte) Math.floor((double) (val - 45) / 5);
     }
-    public int getLevel() {
+
+    public int xpForLevelup(byte level) {
+        return 5 * (level - 1) + 50;
+    }
+
+    public byte getLevel() {
         return this.level;
     }
 
     public void addExperience(int xp) {
-        experience.add(xp);
-    }
-    private int getExperience() {
-        return experience.get();
+        this.experience += xp;
+        if (this.getExperience() >= this.xpForLevelup(this.getLevel())) {
+            this.experience = 0;
+            this.level++;
+        }
     }
 
+    public int getExperience() {
+        return experience;
+    }
+
+    /**
+     * Gibt die (finalen) Stats des Pawns an, inkl. des Levelbonus und des Skill-Bonus.
+     * <br> <br>
+     * Funktioniert, indem zuerst jedes Level ab level 2 um den Factor 0.1 erhöht wird <em>(Level 2 -> *1.1,
+     * Level 3 -> *1.2, Level 4 -> *1.3,...)</em>, dann der Skillfactor damit multipliziert wird (aus {@code skillFactor})
+     * und dann auf den Basiswert addiert wird.
+     *
+     * param skill Der abzufragende Skill ({@code health, damage, resistance} oder {@code speed})
+     * return Den totalen Skill-Wert
+     */
+    /*public double getSkillValue(String skill) {
+        return switch (skill) {
+            case "health" -> ((9.0+this.getLevel()) / 10.0) * skillFactor.get("health") + baseHealth;
+            case "damage" -> ((9.0+this.getLevel()) / 10.0) * skillFactor.get("damage") + baseDamage;
+            case "resistance" -> ((9.0+this.getLevel()) / 10.0) * skillFactor.get("resistance") + baseResistance;
+            case "speed" -> ((9.0+this.getLevel()) / 10.0) * skillFactor.get("speed") + baseSpeed;
+            default -> 0.0;
+        };
+    }*/
+    public ArrayList<Skill> getSkills() {
+        return this.skills;
+    }
 
 }
