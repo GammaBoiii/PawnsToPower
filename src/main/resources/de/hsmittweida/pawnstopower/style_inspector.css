@@ -11,3 +11,10 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
+
+#skill-button {
+    -fx-text-fill: black;
+    -fx-border-radius: 7;
+    -fx-background-color: white;
+    -fx-border-color: black;
+}
