@@ -19,7 +19,7 @@ public class SkillInspector {
         Scene s = new Scene(box,400.0, 250.0);
 
         Label skillPointLabel = new Label("Skillpunkte verfügbar: " + pawn.getSkillPoints());
-
+        //test
         for(Skill skill : pawn.getSkills()) {
             HBox hbox = new HBox();
             hbox.setAlignment(Pos.CENTER);

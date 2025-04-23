@@ -8,11 +8,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="updated skill window">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/SkillInspector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/SkillInspector.java" afterDir="false" />
-    </list>
+    <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="added skillpoints" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -175,7 +171,7 @@
       <workItem from="1745331479856" duration="4680000" />
       <workItem from="1745393105276" duration="1059000" />
       <workItem from="1745405589416" duration="4533000" />
-      <workItem from="1745423563656" duration="4994000" />
+      <workItem from="1745423563656" duration="5717000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -369,7 +365,23 @@
       <option name="project" value="LOCAL" />
       <updated>1745430214236</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="added skillpoints">
+      <option name="closed" value="true" />
+      <created>1745431330252</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1745431330252</updated>
+    </task>
+    <task id="LOCAL-00026" summary="added skillpoints">
+      <option name="closed" value="true" />
+      <created>1745431342898</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1745431342898</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -406,6 +418,7 @@
     <MESSAGE value="test" />
     <MESSAGE value="updated game window" />
     <MESSAGE value="updated skill window" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated skill window" />
+    <MESSAGE value="added skillpoints" />
+    <option name="LAST_COMMIT_MESSAGE" value="added skillpoints" />
   </component>
 </project>
