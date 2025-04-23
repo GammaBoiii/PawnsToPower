@@ -16,8 +16,6 @@ import javafx.stage.Window;
 
 import java.util.ArrayList;
 
-//Achtung: für die korrekte Anzeige der einzelnen Elemente der Fenster sollte eine Bildschirmauflösung von 1920x1080 und eine Skalierung von 100% vorhanden sein!
-
 public class Game {
     static ArrayList<Pawn> pawns;
     static Stage stage;
@@ -148,8 +146,8 @@ public class Game {
         field.add(house4, 1, 1);
 
         field.setAlignment(Pos.CENTER);
-        field.setHgap(125);
-        field.setVgap(95);
+        field.setHgap(200);
+        field.setVgap(125);
 //        field.setPadding(new Insets(15, 15, 15, 15));
 
 /*        house1.setMaxWidth(Double.MAX_VALUE);
@@ -162,9 +160,18 @@ public class Game {
         house4.setMaxHeight(Double.MAX_VALUE);*/
 
         for(Button button : buttons) {
-            button.setMaxWidth(Double.MAX_VALUE);
-            button.setMaxHeight(Double.MAX_VALUE);
+            button.setMaxWidth(75);
+            button.setMaxHeight(75);
         }
+       /* house1.setMaxHeight(75);
+        house1.setMaxWidth(75);
+        house2.setMaxWidth(75);
+        house2.setMaxHeight(75);
+        house3.setMaxWidth(75);
+        house3.setMaxHeight(75);
+        house4.setMaxWidth(75);
+        house4.setMaxHeight(75);*/
+
 
         house1.setOnAction(e -> {
             barracks();
