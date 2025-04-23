@@ -8,13 +8,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="added Stats window">
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Skill.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/SkillInspector.java" afterDir="false" />
+    <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="-">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Inspector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Inspector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_inspector.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_inspector.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,6 +153,9 @@
       <workItem from="1745331479856" duration="4680000" />
       <workItem from="1745393105276" duration="1059000" />
       <workItem from="1745405589416" duration="4533000" />
+      <workItem from="1745422089211" duration="747000" />
+      <workItem from="1745423342664" duration="668000" />
+      <workItem from="1745424025451" duration="869000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -319,7 +317,55 @@
       <option name="project" value="LOCAL" />
       <updated>1744558585598</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="added Experience logic">
+      <option name="closed" value="true" />
+      <created>1745422154472</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1745422154472</updated>
+    </task>
+    <task id="LOCAL-00022" summary="removed base values for skills; added new Level and Experience logic">
+      <option name="closed" value="true" />
+      <created>1745422183574</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1745422183574</updated>
+    </task>
+    <task id="LOCAL-00023" summary="init">
+      <option name="closed" value="true" />
+      <created>1745422195411</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1745422195411</updated>
+    </task>
+    <task id="LOCAL-00024" summary="init">
+      <option name="closed" value="true" />
+      <created>1745422203041</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1745422203041</updated>
+    </task>
+    <task id="LOCAL-00025" summary="added button style">
+      <option name="closed" value="true" />
+      <created>1745422213682</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1745422213682</updated>
+    </task>
+    <task id="LOCAL-00026" summary="-">
+      <option name="closed" value="true" />
+      <created>1745422225828</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1745422225828</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -337,7 +383,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="init" />
     <MESSAGE value="removed Pawn variable" />
     <MESSAGE value="added new default constructor" />
     <MESSAGE value="removed unecessary comments" />
@@ -350,9 +395,13 @@
     <MESSAGE value="added name gen for armor + fixed name gen" />
     <MESSAGE value="finished shop implementation for armor" />
     <MESSAGE value="added check for slot equipping" />
-    <MESSAGE value="-" />
     <MESSAGE value="added Level and Experience" />
     <MESSAGE value="added Stats window" />
-    <option name="LAST_COMMIT_MESSAGE" value="added Stats window" />
+    <MESSAGE value="added Experience logic" />
+    <MESSAGE value="removed base values for skills; added new Level and Experience logic" />
+    <MESSAGE value="init" />
+    <MESSAGE value="added button style" />
+    <MESSAGE value="-" />
+    <option name="LAST_COMMIT_MESSAGE" value="-" />
   </component>
 </project>
