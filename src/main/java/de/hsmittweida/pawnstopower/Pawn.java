@@ -19,6 +19,8 @@ public class Pawn {
     //    private HashMap<String, Double> skillFactor;
     private final ArrayList<Skill> skills;
 
+    private int skillPoints;
+
     Pawn() {
         for (Weapon w : weapons) {
             w = null;
@@ -29,6 +31,7 @@ public class Pawn {
         this.name = getRandomName();
         this.level = 1;
         this.experience = 0;
+        this.skillPoints = 0;
 
 /*        skillFactor = new HashMap<String, Double>();
         skillFactor.put("health", 1.0);
@@ -45,6 +48,8 @@ public class Pawn {
         skills.add(damage);
         skills.add(resistance);
         skills.add(speed);
+
+        this.skillPoints += 5;
     }
 
     /**
@@ -217,4 +222,11 @@ public class Pawn {
         return this.skills;
     }
 
+    public int getSkillPoints() {
+        return skillPoints;
+    }
+
+    public void removeSkkillpoint() {
+        this.skillPoints--;
+    }
 }
