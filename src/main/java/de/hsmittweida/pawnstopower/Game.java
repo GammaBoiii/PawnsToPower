@@ -160,8 +160,8 @@ public class Game {
         house4.setMaxHeight(Double.MAX_VALUE);*/
 
         for(Button button : buttons) {
-            button.setMaxWidth(75);
-            button.setMaxHeight(75);
+            button.setMaxWidth(Double.MAX_VALUE);
+            button.setMaxHeight(Double.MAX_VALUE);
         }
        /* house1.setMaxHeight(75);
         house1.setMaxWidth(75);
