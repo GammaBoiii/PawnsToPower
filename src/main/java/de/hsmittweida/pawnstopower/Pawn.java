@@ -19,6 +19,8 @@ public class Pawn {
     //    private HashMap<String, Double> skillFactor;
     private final ArrayList<Skill> skills;
 
+    private int skillPoints;
+
     Pawn() {
         for (Weapon w : weapons) {
             w = null;
@@ -215,6 +217,14 @@ public class Pawn {
     }*/
     public ArrayList<Skill> getSkills() {
         return this.skills;
+    }
+
+    public int getSkillPoints() {
+        return this.skillPoints;
+    }
+
+    public void addSkillPoints(int num) {
+        this.skillPoints += num;
     }
 
 }
