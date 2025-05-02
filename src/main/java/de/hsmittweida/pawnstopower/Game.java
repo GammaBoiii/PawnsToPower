@@ -112,28 +112,9 @@ public class Game {
         buttons.add(house3);
         buttons.add(house4);
 
-//        Image i1 = new Image(this.getClass().getResource("image/barracks.png").toExternalForm());
-//        Image i2 = new Image(this.getClass().getResource("image/shop.png").toExternalForm());
-//        Image i3 = new Image(this.getClass().getResource("image/arena.png").toExternalForm());
-//        Image i4 = new Image(this.getClass().getResource("image/other.png").toExternalForm());
-//        house1.setBackground(new Background(new BackgroundImage(i1, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
-//
-////        house1.setBackground(new Background(new BackgroundFill(new ImagePattern(i1,20,20,1,1,true), new CornerRadii(1.0), new Insets(0,0,0,0))));
-//        house2.setBackground(new Background(new BackgroundFill(new ImagePattern(i2,0,0,1,1,true), new CornerRadii(1.0), new Insets(0,0,0,0))));
-//        house3.setBackground(new Background(new BackgroundFill(new ImagePattern(i3,0,0,1,1,true), new CornerRadii(1.0), new Insets(0,0,0,0))));
-//        house4.setBackground(new Background(new BackgroundFill(new ImagePattern(i4,0,0,1,1,true), new CornerRadii(1.0), new Insets(0,0,0,0))));
-        /*Tools.setBackground(house1, 15, this.getClass().getResource("image/barracks.png").toExternalForm());
-        Tools.setBackground(house2, 15, this.getClass().getResource("image/barracks.png").toExternalForm());
-        Tools.setBackground(house3, 15, this.getClass().getResource("image/barracks.png").toExternalForm());
-        Tools.setBackground(house4, 15, this.getClass().getResource("image/barracks.png").toExternalForm());*/
-
         for(Button button : buttons) {
             Tools.addHoverEffect(button, 100, 1.02, true);
         }
-        /*Tools.addHoverEffect(house1, 100, 1.02, true);
-        Tools.addHoverEffect(house2, 100, 1.02, true);
-        Tools.addHoverEffect(house3, 100, 1.02, true);
-        Tools.addHoverEffect(house4, 100, 1.02, true);*/
 
         house1.setId("barracks");
         house2.setId("shop");
@@ -150,28 +131,10 @@ public class Game {
         field.setVgap(125);
 //        field.setPadding(new Insets(15, 15, 15, 15));
 
-/*        house1.setMaxWidth(Double.MAX_VALUE);
-        house1.setMaxHeight(Double.MAX_VALUE);
-        house2.setMaxWidth(Double.MAX_VALUE);
-        house2.setMaxHeight(Double.MAX_VALUE);
-        house3.setMaxWidth(Double.MAX_VALUE);
-        house3.setMaxHeight(Double.MAX_VALUE);
-        house4.setMaxWidth(Double.MAX_VALUE);
-        house4.setMaxHeight(Double.MAX_VALUE);*/
-
         for(Button button : buttons) {
             button.setMaxWidth(Double.MAX_VALUE);
             button.setMaxHeight(Double.MAX_VALUE);
         }
-       /* house1.setMaxHeight(75);
-        house1.setMaxWidth(75);
-        house2.setMaxWidth(75);
-        house2.setMaxHeight(75);
-        house3.setMaxWidth(75);
-        house3.setMaxHeight(75);
-        house4.setMaxWidth(75);
-        house4.setMaxHeight(75);*/
-
 
         house1.setOnAction(e -> {
             barracks();
