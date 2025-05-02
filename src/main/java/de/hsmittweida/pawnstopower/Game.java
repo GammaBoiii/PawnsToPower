@@ -28,6 +28,13 @@ public class Game {
         Inventory.setup();
         CreateWindow();
         Debug();
+
+        /* Musik im Spiel */
+        SoundManager mainmenutheme = new SoundManager("GameDefaultMusic_1.mp3", "GameDefaultMusic_2.mp3", "GameDefaultMusic_3.mp3", "GameDefaultMusic_4.mp3");
+        stage.setOnHiding(e -> {
+            mainmenutheme.getMediaPlayer().stop();
+        });
+
     }
 
 /*    public static String requestInput(String title, String header, String context) {

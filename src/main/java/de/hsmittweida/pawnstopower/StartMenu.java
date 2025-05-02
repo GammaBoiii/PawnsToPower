@@ -9,14 +9,17 @@ import javafx.stage.Stage;
 
 public class StartMenu {
 	StartMenu(Stage stage) {
-		try {
 			VBox root = new VBox(15);
 			Scene scene = new Scene(root,400,500);
 			//scene.getStylesheets().add(getClass().getResource("style_mainmenu.css").toExternalForm());
 			Tools.addStylesheet(scene, "style_mainmenu.css");
 			stage.setScene(scene);
 
-//			new SoundManager("MainMenuTheme.mp3");
+			/* Musik im Startmeu */
+			SoundManager startmenusound = new SoundManager("StartMenuTheme.mp3");
+			stage.setOnHiding(e -> {
+				startmenusound.getMediaPlayer().stop();
+			});
 
 			Label title = new Label("Pawn to Power");
 			Button newGame = new Button("Neues Spiel");
@@ -55,8 +58,5 @@ public class StartMenu {
 			root.setAlignment(Pos.CENTER);
 			
 			stage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
 	}
 }
