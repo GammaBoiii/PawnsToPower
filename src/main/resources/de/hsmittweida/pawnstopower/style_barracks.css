@@ -1,5 +1,5 @@
 #pawns-list {
-    -fx-background-color: #cce7cc;
+    -fx-background-color: #1a1a1a;
 }
 
 /* Hintergrund des Hauptmenüs */
@@ -12,6 +12,7 @@
     -fx-background-color: #333;
     -fx-text-fill: white;
     -fx-font-size: 14px;
+    -fx-font-weight: bold;
     -fx-padding: 2 3;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
@@ -29,4 +30,11 @@
 .button:pressed {
     -fx-background-color: #222;
     -fx-border-color: #444;
+}
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Book Antiqua";
 }

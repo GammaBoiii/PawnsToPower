@@ -9,12 +9,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="danksagung an java garbage collector">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/sound/sfx/click.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/sound/sfx/hover.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/StartMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/StartMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Tools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Barracks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Barracks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_barracks.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_barracks.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +81,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -181,7 +178,7 @@
       <workItem from="1745423563656" duration="6281000" />
       <workItem from="1745507621085" duration="799000" />
       <workItem from="1745517431031" duration="350000" />
-      <workItem from="1746262522355" duration="1960000" />
+      <workItem from="1746262522355" duration="6333000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />

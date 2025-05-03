@@ -11,7 +11,7 @@
     -fx-text-fill: #d4af37;
     -fx-padding: 20px;
     -fx-alignment: center;
-    -fx-font-family: "Georgia", "Serif";
+    -fx-font-family: "Book Antiqua";
     -fx-text-alignment: center;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 5, 0.3, 2, 2);
 }
@@ -20,6 +20,8 @@
     -fx-background-color: #333;
     -fx-text-fill: white;
     -fx-font-size: 18px;
+    -fx-font-family: "Book Antiqua";
+    -fx-font-weight: bold;
     -fx-padding: 10px 20px;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
