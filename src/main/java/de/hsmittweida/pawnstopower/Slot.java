@@ -17,14 +17,13 @@ public class Slot {
     /**
      * Diese Klasse erstellt ein neues Fenster zum Ausrüsten der Items.
      *
-     * @param i         - Inspector-Klasse, die mit zur Referenz übergeben wird.
      * @param reference - Knopf, der mit zur Referenz übergeben wird. Hierbei handelt es sich um das "Körperteil" das der Spieler anklickt, um an der Stelle etwas auszurüsten
      *                  Siehe dazu auch die Slotverteilung in Pawn.clothingSlotUsed bzw. Pawn.weaponSlotUsed.
      * @param p         - Der Pawn, der aktuell ausgerüstet wird.
      * @param type      - Waffe oder Kleidungsstück (Rüstung).
      * @param id        - Die ID des Slots, an dem die Ausrüstung ausgerüstet werden soll. Unterschieden wird bei den Slots gemäß {@code @param type}.
      */
-    Slot(Inspector i, Button reference, Pawn p, String type, int id) {
+    Slot(Button reference, Pawn p, String type, int id) {
         /* Das Fenster wird ganz normal aufgesetzt und bestückt. */
         Stage stage = new Stage();
         ScrollPane sp = new ScrollPane();
@@ -72,7 +71,7 @@ public class Slot {
 
                                     /* Dem alten Pawn entrüsten */
                                     w.getOwner().removeWeapon(w);
-                                    p.giveWeapon(i, reference, w, (byte) id);
+                                    p.giveWeapon(reference, w, (byte) id);
                                     stage.close();
                                 } else if (res.equals("no")) {
 
@@ -88,7 +87,7 @@ public class Slot {
                         }
                     } else {
                         equip.setOnAction(e -> {
-                            p.giveWeapon(i, reference, w, (byte) id);
+                            p.giveWeapon(reference, w, (byte) id);
                             stage.close();
                         });
                     }
@@ -146,7 +145,7 @@ public class Slot {
 
                                     /* Dem alten Pawn entrüsten */
                                     a.getOwner().removeArmor(a);
-                                    p.giveArmor(i, reference, a, (byte) id);
+                                    p.giveArmor(reference, a, (byte) id);
                                     stage.close();
                                 } else if (res.equals("no")) {
 
@@ -162,7 +161,7 @@ public class Slot {
                         }
                     } else {
                         equip.setOnAction(e -> {
-                            p.giveArmor(i, reference, a, (byte) id);
+                            p.giveArmor( reference, a, (byte) id);
 
                             stage.close();
                         });

@@ -74,10 +74,10 @@ public class Pawn {
         return false;
     }
 
-    public boolean giveArmor(Inspector i, Button ref, Armor armor, byte slot) {
+    public boolean giveArmor(Button ref, Armor armor, byte slot) {
         if (!clothingSlotUsed(slot)) {
             armors[slot] = armor;
-            i.setImage(ref, armor.getArmorClass(), slot);
+            Inspector.setImage(ref, armor.getArmorClass(), slot);
             armor.equip(this);
             return true;
         }
@@ -88,16 +88,15 @@ public class Pawn {
      * Gibt dem Bauer eine Waffe. Jeder Bauer hat 2 Hände, in die er 2
      * verschiedene Waffen legen kann, oder eine große Waffe in beiden Händen tragen kann.
      *
-     * @param i      - Referenz für den Inspector, damit das Bild sofort aktualisiert werden kann. Nutzt hier nur die Methode {@code setImage()}der {@code Inspector}-Klasse.
      * @param ref    - Referenz für den entsprechenden Button, der das aktualisierte Bild erhalten soll.
      * @param weapon - Die Waffe, die ausgerüstet werden soll.
      * @param slot   - Der Waffenslot, an dem die Waffe ausgerüstet werden soll.
      * @return {@code true}, wenn die Waffe erfolgreich ausgerüstet wurde, {@code false}, wenn der Slot bereits belegt ist.
      */
-    public boolean giveWeapon(Inspector i, Button ref, Weapon weapon, byte slot) {
+    public boolean giveWeapon( Button ref, Weapon weapon, byte slot) {
         if (!weaponSlotUsed(slot)) {
             weapons[slot] = weapon;
-            i.setImage(ref, weapon.getWeaponClass());
+            Inspector.setImage(ref, weapon.getWeaponClass());
             weapon.equip(this);
             return true;
         }

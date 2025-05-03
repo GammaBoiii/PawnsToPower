@@ -7,31 +7,48 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Inspector {
-    Button btnHead;
-    Button btnTorso;
-    Button btnArms;
-    Button btnLegs;
-    Button btnLeft;
-    Button btnRight;
+    private static Button btnHead;
+    private static Button btnTorso;
+    private static Button btnArms;
+    private static Button btnLegs;
+    private static Button btnLeft;
+    private static Button btnRight;
 
-    Pawn pawn;
+    private static Pawn pawn;
 
-    Inspector(Pawn p) {
+    public static Pane Inspector_view(Pawn p) {
         pawn = p;
-        Stage stage = new Stage();
-        AnchorPane pane = new AnchorPane();
-        pane.setId("panel");
-        Scene s = new Scene(pane, 584, 618);
-        Tools.addStylesheet(s, "style_inspector.css");
+        AnchorPane background = new AnchorPane();
+        background.setId("pane");
+        Tools.addStylesheet(background, "style_inspector.css");
+        Button mainMenu = new Button("Hauptmenu");
+        Button barracks = new Button("Barracken");
+        mainMenu.setOnAction(e -> {
+            Game.drawSpace();
+        });
+        barracks.setOnAction(e -> {
+            Game.drawSpace(Barracks.Barrack_view());
+        });
+        AnchorPane.setTopAnchor(mainMenu, 2.0);
+        AnchorPane.setLeftAnchor(mainMenu, 2.0);
+        AnchorPane.setTopAnchor(barracks, 2.0);
+        AnchorPane.setLeftAnchor(barracks, 100.0);
+
+
+        AnchorPane anchorPane = new AnchorPane();
+        background.getChildren().addAll(mainMenu, barracks, anchorPane);
+        anchorPane.setId("anchorPane");
+        AnchorPane.setTopAnchor(anchorPane, 30.0);
+        AnchorPane.setLeftAnchor(anchorPane, 0.0);
+        AnchorPane.setRightAnchor(anchorPane, 0.0);
+        AnchorPane.setBottomAnchor(anchorPane, 0.0);
 
         btnHead = new Button("Head");
         btnTorso = new Button("Torso");
@@ -53,7 +70,7 @@ public class Inspector {
         AnchorPane.setTopAnchor(btnHead, 6.0);
         btnHead.setPrefWidth(70);
         btnHead.setPrefHeight(85);
-        btnHead.setOnAction(e -> new Slot(this, btnHead, p, "clothing", 0));
+        btnHead.setOnAction(e -> new Slot( btnHead, p, "clothing", 0));
 
         //Slot 1
         if(p.getArmor((byte)1) != null) {
@@ -64,7 +81,7 @@ public class Inspector {
         AnchorPane.setTopAnchor(btnTorso, 115.0);
         btnTorso.setPrefHeight(250);
         btnTorso.setPrefWidth(50);
-        btnTorso.setOnAction(e -> new Slot(this, btnTorso, p, "clothing", 1));
+        btnTorso.setOnAction(e -> new Slot( btnTorso, p, "clothing", 1));
 
         //Slot 2
         if(p.getArmor((byte)2) != null) {
@@ -75,7 +92,7 @@ public class Inspector {
         AnchorPane.setTopAnchor(btnArms, 115.0);
         btnArms.setPrefHeight(250);
         btnArms.setPrefWidth(150);
-        btnArms.setOnAction(e -> new Slot(this, btnArms, p, "clothing", 2));
+        btnArms.setOnAction(e -> new Slot(btnArms, p, "clothing", 2));
 
         //Slot 3
         if(p.getArmor((byte)3) != null) {
@@ -86,7 +103,7 @@ public class Inspector {
         AnchorPane.setTopAnchor(btnLegs, 350.0);
         btnLegs.setPrefHeight(250);
         btnLegs.setPrefWidth(50);
-        btnLegs.setOnAction(e -> new Slot(this, btnLegs, p, "clothing", 3));
+        btnLegs.setOnAction(e -> new Slot(btnLegs, p, "clothing", 3));
 
 
         //Slot 0 - siehe Pawn.weaponSlotUsed
@@ -97,7 +114,7 @@ public class Inspector {
         AnchorPane.setTopAnchor(btnRight, 195.0);
         btnRight.setPrefWidth(65);
         btnRight.setPrefHeight(200);
-        btnRight.setOnAction(e -> new Slot(this, btnRight, p, "weapon", 0));
+        btnRight.setOnAction(e -> new Slot(btnRight, p, "weapon", 0));
 
         //Slot 1
         if(p.getWeapon((byte)1) != null) {
@@ -107,17 +124,14 @@ public class Inspector {
         AnchorPane.setTopAnchor(btnLeft, 195.0);
         btnLeft.setPrefWidth(65);
         btnLeft.setPrefHeight(200);
-        btnLeft.setOnAction(e -> new Slot(this, btnLeft, p, "weapon", 1));
+        btnLeft.setOnAction(e -> new Slot(btnLeft, p, "weapon", 1));
 
 
-        pane.getChildren().addAll(btnHead, btnArms, btnTorso, btnLegs, btnLeft, btnRight, stats);
-
-        stage.setScene(s);
-        stage.show();
-        Tools.defaultClose(stage, "inspector");
+        anchorPane.getChildren().addAll(btnHead, btnArms, btnTorso, btnLegs, btnLeft, btnRight, stats);
+        return background;
     }
 
-    public void setImage(Button ref, Weapon.WeaponClass wc) {
+    public static void setImage(Button ref, Weapon.WeaponClass wc) {
         String picName = switch (wc) {
             case AXT -> "AXT.png";
             case DOL -> "DOL.png";
@@ -131,10 +145,10 @@ public class Inspector {
             case SWT -> "SWT.png";
             case ZWH -> "ZWH.png";
         };
-        String location = getClass().getResource("image/weapons/"+picName).toExternalForm();
+        String location = Inspector.class.getResource("image/weapons/"+picName).toExternalForm();
         ref.setStyle("-fx-background-image: url('" + location + "');");
     }
-    public void setImage(Button ref, Armor.ArmorClass ac, byte slot) {
+    public static void setImage(Button ref, Armor.ArmorClass ac, byte slot) {
         String path = "";
         path = switch (slot) {
             case 0 -> "haube.png";
@@ -150,11 +164,11 @@ public class Inspector {
             case STL -> "stahl_" + path;
         };
     }
-    public void clearImage(Button ref) {
+    public static void clearImage(Button ref) {
         ref.setStyle(("-fx-background-image: none"));
     }
 
-    public VBox createStats() {
+    private static VBox createStats() {
         VBox box = new VBox();
         box.setPrefWidth(200.0);
 

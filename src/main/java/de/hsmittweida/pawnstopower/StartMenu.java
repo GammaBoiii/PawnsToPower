@@ -30,7 +30,7 @@ public class StartMenu {
 			Tools.addButtonSfx(newGame,loadGame,setup,exit);
 			
 			newGame.setOnAction(e -> {
-                new Game();
+                Game.Game_view();
 				stage.close();
 			});
 

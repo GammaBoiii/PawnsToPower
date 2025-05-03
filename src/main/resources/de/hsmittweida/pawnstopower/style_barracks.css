@@ -1,11 +1,11 @@
 #pawns-list {
     -fx-background-color: #1a1a1a;
 }
-
-/* Hintergrund des Hauptmenüs */
-#main-menu {
+#background {
     -fx-background-color: #1a1a1a;
-    -fx-alignment: center;
+}
+#pane {
+    -fx-background-color: #1a1a1a;
 }
 
 .button {

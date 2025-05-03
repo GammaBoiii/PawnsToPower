@@ -13,10 +13,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.stage.Stage;
@@ -122,8 +119,18 @@ public class Tools {
 
     }
 
+    /**
+     * Fügt einer Scene eine .css an
+     * @deprecated
+     * @param s Scene, die das Stylesheet erhalten soll
+     * @param name Name der .css
+     */
     public static void addStylesheet(Scene s, String name) {
         s.getStylesheets().add(Tools.class.getResource(name).toExternalForm());
+    }
+
+    public static void addStylesheet(Pane pane, String name) {
+        pane.getStylesheets().add(Barracks.class.getResource(name).toExternalForm());
     }
 
     /**
@@ -175,12 +182,12 @@ public class Tools {
              * und es daher zu überschreibungen kommen würde */
 
             b.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-                System.out.println("drag entered");
+//                System.out.println("drag entered");
                 SoundManager hoversound = new SoundManager("sfx/hover.wav");
             });
 
             b.addEventHandler(ActionEvent.ACTION, event -> {
-                System.out.println("action event");
+//                System.out.println("action event");
                 SoundManager clicksound = new SoundManager("sfx/click.wav");
             });
         }

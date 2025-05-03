@@ -49,6 +49,12 @@
     -fx-vgap: 25;
 }
 
+#help-bar .label {
+    -fx-font-family: "Book Antiqua";
+    -fx-font-weight: bold;
+    -fx-font-size: 15;
+}
+
 
 #game .label {
     -fx-font-size: 26px;

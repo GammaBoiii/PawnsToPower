@@ -1,15 +1,30 @@
-#panel {
+#anchorPane {
     -fx-background-image: url("image/avatar.png");
-
+    -fx-background-repeat: no-repeat;
+    -fx-background-insets: #1a1a1a;
+    -fx-background-position: center;
+}
+#pane {
+    -fx-background-color: radial-gradient(
+            center 50% 50%,
+            radius 60%,
+            #ffffff 0%,
+            #1a1a1a 100%
+    );
 }
 .button {
-    -fx-background-radius: 5;
-    -fx-border-radius: 15;
-    -fx-text-fill: rgba(0,0,0,0.0);
-    -fx-border-color: rgba(220,35,35,0.5);
-    -fx-background-color: rgba(253, 253, 253, 0.5);
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center;
+    -fx-background-color: rgba(4,40,40,0.4);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 2 3;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #555;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease-in-out;
+    -fx-text-alignment: center;
 }
 
 #skill-button {
@@ -17,4 +32,11 @@
     -fx-border-radius: 7;
     -fx-background-color: white;
     -fx-border-color: black;
+}
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-family: "Book Antiqua";
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
 }

@@ -3,7 +3,6 @@ package de.hsmittweida.pawnstopower;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,13 +16,24 @@ import javafx.stage.Window;
 import java.util.ArrayList;
 
 public class Game {
-    static ArrayList<Pawn> pawns;
-    static Stage stage;
-    int reputation;
-    IntegerProperty day;
+    private static ArrayList<Pawn> pawns;
+    private static Stage stage;
+    private static int reputation;
+    private static IntegerProperty day;
+
+    private static Pane gameSpace;
+    private static BorderPane panel;
+    private static HBox helpBar;
+    private static VBox sideBar;
+
 
     Game() {
-//        pawns = new ArrayList<Pawn>();
+
+
+    }
+
+    public static void Game_view() {
+        //        pawns = new ArrayList<Pawn>();
         day = new SimpleIntegerProperty(0);
         Inventory.setup();
         CreateWindow();
@@ -34,7 +44,6 @@ public class Game {
         stage.setOnHiding(e -> {
             mainmenutheme.getMediaPlayer().stop();
         });
-
     }
 
 /*    public static String requestInput(String title, String header, String context) {
@@ -56,19 +65,19 @@ public class Game {
         return stage;
     }
 
-    public void CreateWindow() {
+    public static void CreateWindow() {
         stage = new Stage();
-        BorderPane panel = new BorderPane();
+        panel = new BorderPane();
         Scene s = new Scene(panel, Tools.getScreenSize().get('w'), Tools.getScreenSize().get('h'));
         //s.getStylesheets().add(getClass().getResource("style_game.css").toExternalForm());
         Tools.addStylesheet(s, "style_game.css");
         stage.setScene(s);
 
-        HBox helpBar = createHelpBar();
+        helpBar = createHelpBar();
 
-        VBox gameSpace = createGameView();
+        gameSpace = createGameView();
 
-        VBox sideBar = createSideBar();
+        sideBar = createSideBar();
 
         panel.setCenter(gameSpace);
         panel.setTop(helpBar);
@@ -99,8 +108,9 @@ public class Game {
         });
     }
 
-    private VBox createGameView() {
+    private static VBox createGameView() {
         VBox box = new VBox();
+//        box.setStyle("-fx-border-color: red; -fx-border-style: solid; -fx-border-width: 2;"); //debug
         box.setId("game");
 
         GridPane field = new GridPane();
@@ -162,7 +172,7 @@ public class Game {
         return box;
     }
 
-    private VBox createSideBar() {
+    private static VBox createSideBar() {
         VBox box = new VBox();
         box.setPrefWidth(400);
         //VBox.setMargin(box, new Insets(0,0,0,25));
@@ -195,7 +205,7 @@ public class Game {
         return box;
     }
 
-    private HBox createHelpBar() {
+    private static HBox createHelpBar() {
         HBox box = new HBox();
         box.setPrefWidth(Double.MAX_VALUE);
         box.setId("help-bar");
@@ -244,27 +254,27 @@ public class Game {
         return box;
     }
 
-    private void barracks() {
-        new Barracks();
+    private static  void barracks() {
+        Game.drawSpace(Barracks.Barrack_view());
     }
 
-    private void shop() {
+    private static void shop() {
         new Shop();
     }
 
-    private void arena() {
+    private static  void arena() {
 
     }
 
-    private void other() {
+    private static void other() {
 
     }
 
-    private void newDay() {
+    private static void newDay() {
         day.set(day.get() + 1);
     }
 
-    private void Debug() {
+    private static void Debug() {
         for (int i = 0; i < 2; i++) {
             Inventory.addPawn(new Pawn());
         }
@@ -274,5 +284,18 @@ public class Game {
         Inventory.addItem(new Armor());
         Inventory.addItem(new Armor());
     }
+
+    public static void drawSpace(Pane pane) {
+        Game.gameSpace = pane;
+        panel.setCenter(gameSpace);
+
+    }
+
+    public static void drawSpace() {
+        Game.gameSpace = createGameView();
+        panel.setCenter(gameSpace);
+        System.out.println("ayooooooo");
+    }
+
 
 }
