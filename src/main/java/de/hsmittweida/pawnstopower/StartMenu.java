@@ -26,9 +26,11 @@ public class StartMenu {
 			Button loadGame = new Button("Spiel laden");
 			Button setup = new Button("Setup");
 			Button exit = new Button ("Exit");
+
+			Tools.addButtonSfx(newGame,loadGame,setup,exit);
 			
 			newGame.setOnAction(e -> {
-				new Game();
+                new Game();
 				stage.close();
 			});
 
@@ -42,7 +44,7 @@ public class StartMenu {
 				try {
 					res = dialog.showAndWait().get();
 				} catch (NoSuchElementException nsex) {}*/
-				String res = Tools.inputPopup("Spiel laden", "Gib den Pfad an!", "Es sollte eine \"\\.ptpfile\\\" sein.");
+				String res = Tools.inputPopup("Spiel laden", "Gib den Pfad an!", "Es sollte eine \".ptpfile\" sein.");
 			});
 
 			exit.setOnAction(e -> {
@@ -50,7 +52,7 @@ public class StartMenu {
 			});
 			
 			setup.setOnAction(e -> {
-				
+				System.out.println("lol");
 			});
 			
 			root.setId("main-menu");

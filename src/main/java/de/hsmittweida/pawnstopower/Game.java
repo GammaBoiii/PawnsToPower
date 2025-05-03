@@ -113,6 +113,8 @@ public class Game {
         house3 = new Button("Arena");
         house4 = new Button("Sonstiges");
 
+        Tools.addButtonSfx(house1,house2,house3,house4);
+
         ArrayList<Button> buttons = new ArrayList<>();
         buttons.add(house1);
         buttons.add(house2);

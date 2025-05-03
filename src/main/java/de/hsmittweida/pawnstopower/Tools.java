@@ -4,12 +4,15 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
@@ -163,5 +166,23 @@ public class Tools {
             glowOut.playFromStart();
             if (glowEffect) scaleOut.playFromStart();
         });
+    }
+
+    public static void addButtonSfx(Button... buttons) {
+        for(Button b : buttons) {
+
+            /* Hier addEventHandler, da setOnAction() bereits bei den Buttons benutzt wird,
+             * und es daher zu überschreibungen kommen würde */
+
+            b.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+                System.out.println("drag entered");
+                SoundManager hoversound = new SoundManager("sfx/hover.wav");
+            });
+
+            b.addEventHandler(ActionEvent.ACTION, event -> {
+                System.out.println("action event");
+                SoundManager clicksound = new SoundManager("sfx/click.wav");
+            });
+        }
     }
 }
