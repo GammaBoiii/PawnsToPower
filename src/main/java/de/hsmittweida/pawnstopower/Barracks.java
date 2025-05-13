@@ -15,8 +15,8 @@ public class Barracks {
     public static Pane Barrack_view() {
         AnchorPane background = new AnchorPane();
         background.setId("pane");
-        background.setMaxWidth(Double.MAX_VALUE);
-        background.setMaxHeight(Double.MAX_VALUE);
+        //background.setMaxWidth(Double.MAX_VALUE);
+        //background.setMaxHeight(Double.MAX_VALUE);
 //        background.setAlignment(Pos.CENTER);
         Tools.addStylesheet(background, "style_barracks.css");
         Button mainMenu = new Button("Hauptmenu");

@@ -1,0 +1,37 @@
+#ap {
+    -fx-background-color: #1a1a1a;
+}
+#pane {
+    -fx-background-color: #1a1a1a;
+}
+
+.button {
+    -fx-background-color: #333;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 2 3;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #555;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease-in-out;
+    -fx-text-alignment: center;
+}
+.button:hover {
+    -fx-background-color: #555;
+    -fx-border-color: #777;
+}
+
+.button:pressed {
+    -fx-background-color: #222;
+    -fx-border-color: #444;
+}
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Book Antiqua";
+}

@@ -259,7 +259,8 @@ public class Game {
     }
 
     private static void shop() {
-        new Shop();
+        Game.drawSpace(Shop.Shop_view());
+        // new Shop();
     }
 
     private static  void arena() {
