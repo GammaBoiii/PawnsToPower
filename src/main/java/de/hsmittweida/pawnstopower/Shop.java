@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -145,12 +146,20 @@ public class Shop {
         refreshShop(); //DEBUG
 
         AnchorPane anchorPane = new AnchorPane();
-        anchorPane.setStyle("-fx-border-color: blue; -fx-border-style: solid;");
+
+        Tools.addStylesheet(anchorPane, "style_shop.css");
+       // anchorPane.setStyle("-fx-border-color: blue; -fx-border-style: solid;");
         anchorPane.setId("ap");
         //Tools.addStylesheet(anchorPane, "style_shop.css");
         BorderPane pane = new BorderPane();
         pane.setId("pane");
-        pane.setStyle("-fx-border-color: red; -fx-border-width: 5px");
+        AnchorPane.setTopAnchor(pane, 50.0);
+        AnchorPane.setBottomAnchor(pane, 150.0);
+        AnchorPane.setLeftAnchor(pane, 55.0);
+        AnchorPane.setRightAnchor(pane, 55.0);
+        pane.setMaxWidth(Double.MAX_VALUE);
+        pane.setMaxWidth(Double.MAX_VALUE);
+        pane.setPadding(new Insets(150.0,0.0,0.0,0.0));
         //Scene s = new Scene(pane, Tools.getScreenSize().get('w') * 0.5, Tools.getScreenSize().get('h') * 0.5);
 
         Button mainMenu = new Button("Hauptmenu");
@@ -166,8 +175,11 @@ public class Shop {
 
         ScrollPane weapons = new ScrollPane();
         ScrollPane armor = new ScrollPane();
+
         VBox weapon_list = new VBox();
         VBox armor_list = new VBox();
+        weapon_list.setId("list");
+        armor_list.setId("list");
         weapons.setContent(weapon_list);
         armor.setContent(armor_list);
         weapons.setFitToHeight(true);
@@ -198,7 +210,9 @@ public class Shop {
             HBox.setHgrow(name, Priority.ALWAYS);
             name.setMaxWidth(Double.MAX_VALUE);
             price.setPadding(new Insets(0, 15, 0, 0));
-            cb.setPadding(new Insets(0, 10, 0, 0));
+            cb.setPadding(new Insets(9, 15, 11, 15));
+            hbox.setPadding(new Insets(15,0,0,0));
+            cb.setAlignment(Pos.CENTER_LEFT);
             hbox.getChildren().addAll(cb, name, price);
             weapon_list.getChildren().add(hbox);
         }
@@ -223,8 +237,10 @@ public class Shop {
 
             HBox.setHgrow(name, Priority.ALWAYS);
             name.setMaxWidth(Double.MAX_VALUE);
-            price.setPadding(new Insets(0,15,0,0));
-            cb.setPadding(new Insets(0,10,0,0));
+            price.setPadding(new Insets(0, 15, 0, 0));
+            cb.setPadding(new Insets(9, 15, 11, 15));
+            hbox.setPadding(new Insets(15,0,0,0));
+            cb.setAlignment(Pos.CENTER_LEFT);
             hbox.getChildren().addAll(cb, name,  price);
             armor_list.getChildren().add(hbox);
         }

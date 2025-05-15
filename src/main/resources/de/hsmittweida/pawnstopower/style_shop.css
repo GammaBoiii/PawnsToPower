@@ -3,6 +3,7 @@
 }
 #pane {
     -fx-background-color: #1a1a1a;
+    -fx-alignment: center;
 }
 
 .button {
@@ -31,7 +32,11 @@
 
 .label {
     -fx-text-fill: white;
-    -fx-font-size: 14px;
+    -fx-font-size: 28px;
     -fx-font-weight: bold;
     -fx-font-family: "Book Antiqua";
+}
+
+#list {
+    -fx-background-color: #1a1a1a;
 }
