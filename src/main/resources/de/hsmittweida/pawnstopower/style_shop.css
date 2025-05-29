@@ -1,13 +1,16 @@
 #ap {
     -fx-background-color: #1a1a1a;
     -fx-background-image: url("image/holz_fackel.jpg");
-    -fx-background-size: contain;
+    -fx-background-position: top;
+    -fx-background-size: cover;
 }
 #pane {
-    -fx-background-color: #1a1a1a;
+    -fx-background-color: rgba(255,255,255,0.0);
     -fx-alignment: center;
-    -fx-background-image: url("image/holz_fackel.jpg");
+    /*
+    -fx-background-image: url("image/wall_texture.png");
     -fx-background-size: contain;
+     */
 }
 
 .button {
@@ -44,7 +47,7 @@
 #list {
     -fx-background-color: #1a1a1a;
     -fx-effect: innershadow(gaussian, black, 15, 0.3, 0, 0);
-    -fx-background-image: url("image/holz_fackel.jpg");
+    -fx-background-image: url("image/wall_texture.png");
     -fx-background-size: contain;
 }
 
@@ -62,7 +65,7 @@
 }
 
 .label {
-    -fx-text-fill: red;
+    -fx-text-fill: white;
     -fx-stroke: black;
     -fx-stroke-width: 1;
     -fx-stroke-type: outside;

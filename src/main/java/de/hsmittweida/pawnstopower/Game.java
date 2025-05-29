@@ -279,6 +279,7 @@ public class Game {
         for (int i = 0; i < 15; i++) {
             Inventory.addPawn(new Pawn());
         }
+        Inventory.getPawns().get(0).setLevel((byte) 10);
         Inventory.addMoney(3874);
         Inventory.addItem(new Weapon(Weapon.WeaponClass.AXT, null));
         Inventory.addItem(new Weapon(Weapon.WeaponClass.KTN, null));

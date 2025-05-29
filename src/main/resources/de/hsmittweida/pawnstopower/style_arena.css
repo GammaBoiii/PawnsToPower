@@ -1,0 +1,10 @@
+#arenaBG {
+    -fx-background-image: url("image/arena_background.png");
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
+
+#log {
+    -fx-font-size: 25;
+}
+
