@@ -185,18 +185,18 @@ public class Inspector {
         // Level
         HBox level = new HBox();
         Label levelLabel = new Label("Level:");
-        Label pawnLevel = new Label(pawn.getLevel() + "");
+        Label pawnLevel = new Label(pawn.getLvl() + "");
         HBox.setHgrow(levelLabel, Priority.ALWAYS);
         levelLabel.setMaxWidth(Double.MAX_VALUE);
         level.getChildren().addAll(levelLabel, pawnLevel);
 
         // Erfahrungspunkte
         HBox xp = new HBox();
-        ProgressBar pb = new ProgressBar(pawn.xpForLevelup((byte) pawn.getLevel()));
-        pb.setProgress( ((double) pawn.getExperience()) / (double) (pawn.xpForLevelup(pawn.getLevel()) ));
-        HBox.setHgrow(pb, Priority.ALWAYS);
-        pb.setMaxWidth(Double.MAX_VALUE);
-        pb.setPadding(new Insets(10,22,10,0));
+//        ProgressBar pb = new ProgressBar(pawn.xpForLevelup((byte) pawn.getLevel()));
+//        pb.setProgress( ((double) pawn.getExperience()) / (double) (pawn.xpForLevelup(pawn.getLevel()) ));
+//        HBox.setHgrow(pb, Priority.ALWAYS);
+//        pb.setMaxWidth(Double.MAX_VALUE);
+//        pb.setPadding(new Insets(10,22,10,0));
         Button openSkill = new Button("+");
         openSkill.setId("skill-button");
         xp.setAlignment(Pos.CENTER);
@@ -204,7 +204,7 @@ public class Inspector {
         openSkill.setOnAction(e -> {
             new SkillInspector(pawn);
         });
-        xp.getChildren().addAll(pb, openSkill);
+        xp.getChildren().addAll(/* pb, */ openSkill);
 
         Button debug = new Button("ayoo");
 
