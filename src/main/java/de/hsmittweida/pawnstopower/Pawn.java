@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Pawn {
-/*    private final int baseHealth = 100;
-    private final int baseDamage = 5;
-    private final int baseResistance = 10;
-    private final int baseSpeed = 15;*/
+    /*    private final int baseHealth = 100;
+        private final int baseDamage = 5;
+        private final int baseResistance = 10;
+        private final int baseSpeed = 15;*/
     //private final short max_health = 100;
     private final String name;
     Armor[] armors = new Armor[4];
@@ -23,8 +23,8 @@ public class Pawn {
     private final ArrayList<Skill> skills;
     private int skillPoints;
 
-    private IntegerProperty xp;
-    private IntegerBinding lvl;
+    private final IntegerProperty xp;
+    private final IntegerBinding lvl;
 
     Pawn() {
         for (Weapon w : weapons) {
@@ -54,7 +54,9 @@ public class Pawn {
         this.xp = new SimpleIntegerProperty(0);
         this.lvl = new IntegerBinding() {
 
-            {super.bind(xp);}
+            {
+                super.bind(xp);
+            }
 
             @Override
             protected int computeValue() {
@@ -64,6 +66,7 @@ public class Pawn {
 
                 while (currentXP >= requiredXP) {
                     l++;
+                    skillPoints++;
                     // Steigerung: jedes Level braucht 5 XP mehr
                     currentXP -= requiredXP;
                     requiredXP += 5;
@@ -119,7 +122,7 @@ public class Pawn {
      * @param slot   - Der Waffenslot, an dem die Waffe ausgerüstet werden soll.
      * @return {@code true}, wenn die Waffe erfolgreich ausgerüstet wurde, {@code false}, wenn der Slot bereits belegt ist.
      */
-    public boolean giveWeapon( Button ref, Weapon weapon, byte slot) {
+    public boolean giveWeapon(Button ref, Weapon weapon, byte slot) {
         if (!weaponSlotUsed(slot)) {
             weapons[slot] = weapon;
             Inspector.setImage(ref, weapon.getWeaponClass());
@@ -227,7 +230,7 @@ public class Pawn {
      * Funktioniert, indem zuerst jedes Level ab level 2 um den Factor 0.1 erhöht wird <em>(Level 2 -> *1.1,
      * Level 3 -> *1.2, Level 4 -> *1.3,...)</em>, dann der Skillfactor damit multipliziert wird (aus {@code skillFactor})
      * und dann auf den Basiswert addiert wird.
-     *
+     * <p>
      * param skill Der abzufragende Skill ({@code health, damage, resistance} oder {@code speed})
      * return Den totalen Skill-Wert
      */
@@ -270,7 +273,22 @@ public class Pawn {
         return this.lvl.get();
     }
 
+    /**
+     * Da das Level nun ein IntegerBinding ist, der an den xp "hängt", kann man das level nicht ohne weiteres einfach setzen.
+     * Daher muss man mit den Erfahrungspunkten (xp) direkt arbeiten. Hierfür muss man also das Level erst in die benötigten
+     * xp "umrechnen" und die xp selbst updaten. Das Level aktualisiert sich automatisch.
+     * Da diese Methode eigentlich nur zur Generierung der Gegner genutzt wird, und diese immer mit dem StandardLevel (1) generiert
+     * werden, ist es nicht nötig vorher abzufragen, wie viel xp der Pawn aktuell hat.
+     *
+     * @param l Level, welches gesetzt - oder besser gesagt: "erreicht" - werden soll.
+     */
     public void setLvl(int l) {
-        this.lvl.add(l - this.lvl.get());
+        if (l <= 1) return;
+        int nextLvlXp = 50;
+        for (int i = 1; i < l; i++) {
+            addXp(nextLvlXp);
+            nextLvlXp += 5;
+            System.out.println("xxx");
+        }
     }
 }

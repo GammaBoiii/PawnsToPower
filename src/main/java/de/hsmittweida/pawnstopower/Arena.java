@@ -145,7 +145,7 @@ public class Arena {
         log.setText(log.getText() + "\n" + "AYOOOOOOOOOOOOOOOOOOOYOYOYOOOOOOOOOOOOOOOO82822828828282828LOOOOOOOOOOOOOOOOOl");
 
 
-        //generateEnemy();
+        generateEnemy();
 
         return pane;
     }
@@ -162,14 +162,13 @@ public class Arena {
         byte diff = (byte) rnd.nextInt(3);
         byte level = (byte) (Math.random() < 0.5 ? diff * -1 : diff);
         if(level < 1) level = 1;
-        p.setLvl((byte) (choosenFighter.getLvl() + level));
+        p.setLvl(choosenFighter.getLvl() + level);
 
         System.out.println("Level: " + p.getLvl());
 
         /* Skills zuweisen. 1 Level = 1 SkillPunkt. Diese müssen noch zufällig auf
          * alle Skills verteilt werden.
          */
-        p.addSkillPoints((int) p.getLvl());
         while(p.getSkillPoints() > 0) {
             Random rand = new Random();
             p.getSkills().get(rand.nextInt(p.getSkills().size())).addSkillLevel();
