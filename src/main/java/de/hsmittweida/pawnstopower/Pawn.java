@@ -226,4 +226,11 @@ public class Pawn {
         this.skillPoints += num;
     }
 
+    /**
+     * Setzt das Level eines Pawns direkt. Wird eigentlich nur bei der Genereirung von Gegnern in der Arena verwendet.
+     * @param level Das zu setzende Level
+     */
+    public void setLevel(byte level) {
+        this.level = level;
+    }
 }

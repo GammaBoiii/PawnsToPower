@@ -159,7 +159,7 @@ public class Shop {
         AnchorPane.setRightAnchor(pane, 55.0);
         pane.setMaxWidth(Double.MAX_VALUE);
         pane.setMaxWidth(Double.MAX_VALUE);
-        pane.setPadding(new Insets(150.0,0.0,0.0,0.0));
+        pane.setPadding(new Insets(90,0.0,0.0,0.0));
         //Scene s = new Scene(pane, Tools.getScreenSize().get('w') * 0.5, Tools.getScreenSize().get('h') * 0.5);
 
         Button mainMenu = new Button("Hauptmenu");
@@ -175,6 +175,12 @@ public class Shop {
 
         ScrollPane weapons = new ScrollPane();
         ScrollPane armor = new ScrollPane();
+
+        /* Wird verwendet, um bereits gekaufte Gegenstände später im Shop zu sperren (nur einmaliger Kauf möglich). */
+        ArrayList<CheckBox> purchased = new ArrayList<CheckBox>();
+
+        weapons.vbarPolicyProperty().set(ScrollPane.ScrollBarPolicy.NEVER);
+        armor.vbarPolicyProperty().set(ScrollPane.ScrollBarPolicy.NEVER);
 
         VBox weapon_list = new VBox();
         VBox armor_list = new VBox();
@@ -193,10 +199,12 @@ public class Shop {
 
             cb.setOnAction(e -> {
                 if (cb.isSelected()) {
+                    purchased.add(cb);
                     ptp.set(ptp.get() + w.getWeaponClass().basePrice);
                     //stage.setTitle("Kontostand nach Kauf: " + (Inventory.getMoney() - ptp.get()) + "$");
                     shopping_cart.add(w);
                 } else {
+                    purchased.remove(cb);
                     ptp.set(ptp.get() - w.getWeaponClass().basePrice);
                     //stage.setTitle("Kontostand nach Kauf: " + (Inventory.getMoney() + ptp.get()) + "$");
                     shopping_cart.remove(w);
@@ -222,10 +230,12 @@ public class Shop {
 
             cb.setOnAction(e -> {
                 if (cb.isSelected()) {
+                    purchased.add(cb);
                     ptp.set(ptp.get() + a.getBasePrice());
                     //stage.setTitle("Kontostand nach Kauf: " + (Inventory.getMoney() - ptp.get()) + "$");
                     shopping_cart.add(a);
                 } else {
+                    purchased.remove(cb);
                     ptp.set(ptp.get() - a.getBasePrice());
                     //stage.setTitle("Kontostand nach Kauf: " + (Inventory.getMoney() + ptp.get()) + "$");
                     shopping_cart.remove(a);
@@ -261,10 +271,22 @@ public class Shop {
             if (Inventory.getMoney() >= ptp.get()) {
                 for (Item x : shopping_cart) {
                     Inventory.addItem(x);
-                    //stage.close();
-                    Game.drawSpace();
+
+                    //Game.drawSpace();
+
+                }
+                for(CheckBox cb : purchased) {
+                    //cb.setDisable(true);
+                    cb.setStyle("-fx-background-color: dark-red");
+                    cb.setSelected(false);
                 }
                 Inventory.addMoney(-1 * ptp.get());
+
+                /* Rücksetzen der Einkaufsvaraiblen */
+                shopping_cart.clear();
+                ptp.set(0);
+            } else {
+                /* Nicht genug Geld */
             }
         });
 
@@ -282,16 +304,9 @@ public class Shop {
     }
 
     public static void refreshShop() {
-        weapon_offer.add(new Weapon());
-        weapon_offer.add(new Weapon());
-        weapon_offer.add(new Weapon());
-        weapon_offer.add(new Weapon());
-        weapon_offer.add(new Weapon());
-
-        armor_offer.add(new Armor());
-        armor_offer.add(new Armor());
-        armor_offer.add(new Armor());
-        armor_offer.add(new Armor());
-        armor_offer.add(new Armor());
+        for(int i = 0; i<12; i++) {
+            weapon_offer.add(new Weapon());
+            armor_offer.add(new Armor());
+        }
     }
 }

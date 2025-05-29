@@ -1,9 +1,13 @@
 #ap {
     -fx-background-color: #1a1a1a;
+    -fx-background-image: url("image/holz_fackel.jpg");
+    -fx-background-size: contain;
 }
 #pane {
     -fx-background-color: #1a1a1a;
     -fx-alignment: center;
+    -fx-background-image: url("image/holz_fackel.jpg");
+    -fx-background-size: contain;
 }
 
 .button {
@@ -39,4 +43,27 @@
 
 #list {
     -fx-background-color: #1a1a1a;
+    -fx-effect: innershadow(gaussian, black, 15, 0.3, 0, 0);
+    -fx-background-image: url("image/holz_fackel.jpg");
+    -fx-background-size: contain;
+}
+
+.check-box .box {
+    -fx-background-color: #1e1e1e;
+    /* -fx-background-image: url("image/GameBackground2.png");
+    -fx-background-size: contain; */
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+}
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.label {
+    -fx-text-fill: red;
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
+    -fx-stroke-type: outside;
 }

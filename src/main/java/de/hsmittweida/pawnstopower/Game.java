@@ -264,7 +264,7 @@ public class Game {
     }
 
     private static  void arena() {
-
+        Game.drawSpace(Arena.chooseFighter());
     }
 
     private static void other() {
@@ -276,7 +276,7 @@ public class Game {
     }
 
     private static void Debug() {
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 15; i++) {
             Inventory.addPawn(new Pawn());
         }
         Inventory.addMoney(3874);
