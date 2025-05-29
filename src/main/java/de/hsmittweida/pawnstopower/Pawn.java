@@ -1,5 +1,8 @@
 package de.hsmittweida.pawnstopower;
 
+import javafx.beans.binding.IntegerBinding;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Button;
 
 import java.util.ArrayList;
@@ -14,12 +17,14 @@ public class Pawn {
     private final String name;
     Armor[] armors = new Armor[4];
     Weapon[] weapons = new Weapon[2];
-    private byte level;
-    private int experience;
+    // private byte level;
+    // private int experience;
     //    private HashMap<String, Double> skillFactor;
     private final ArrayList<Skill> skills;
-
     private int skillPoints;
+
+    private IntegerProperty xp;
+    private IntegerBinding lvl;
 
     Pawn() {
         for (Weapon w : weapons) {
@@ -29,14 +34,8 @@ public class Pawn {
             c = null;
         }
         this.name = getRandomName();
-        this.level = 1;
-        this.experience = 0;
-
-/*        skillFactor = new HashMap<String, Double>();
-        skillFactor.put("health", 1.0);
-        skillFactor.put("damage", 1.0);
-        skillFactor.put("resistance", 1.0);
-        skillFactor.put("speed", 1.0);*/
+        // this.level = 1;
+        // this.experience = 0;
 
         Skill health = new Skill("health", "Leben", 100, this);
         Skill damage = new Skill("damage", "Schaden", 5, this);
@@ -47,6 +46,33 @@ public class Pawn {
         skills.add(damage);
         skills.add(resistance);
         skills.add(speed);
+
+        /* Im folgenden Abschnitt wird mittels IntegerBinding und der dazugehörigen computeValue() Methode
+         * das Level an die Erfahrungspunkte gebunden. Dabei braucht ein weiteres Level immer 5 Erfahrungspunkte (xp)
+         * mehr, als das vorherige Level - beginnend bei 50 benötigten Erfahrungspunkten für Level 2.
+         */
+        this.xp = new SimpleIntegerProperty(0);
+        this.lvl = new IntegerBinding() {
+
+            {super.bind(xp);}
+
+            @Override
+            protected int computeValue() {
+                int currentXP = xp.get();
+                int requiredXP = 50;
+                int l = 1;
+
+                while (currentXP >= requiredXP) {
+                    l++;
+                    // Steigerung: jedes Level braucht 5 XP mehr
+                    currentXP -= requiredXP;
+                    requiredXP += 5;
+                }
+
+                return l;
+            }
+
+        };
     }
 
     /**
@@ -171,7 +197,7 @@ public class Pawn {
      * Diese gibt die benötigten Erfahrungspunkte ({@code experience}) an. Level 1 braucht also 50 Erfahrungspunkt, Level 2 55,
      * Level 3 60, [...] Erfahrungspunkte für das jeweilige nächste Level.
      */
-    private void calcLevel(int val) {
+    /* private void calcLevel(int val) {
         this.level = (byte) Math.floor((double) (val - 45) / 5);
     }
 
@@ -193,7 +219,7 @@ public class Pawn {
 
     public int getExperience() {
         return experience;
-    }
+    } */
 
     /**
      * Gibt die (finalen) Stats des Pawns an, inkl. des Levelbonus und des Skill-Bonus.
@@ -225,12 +251,26 @@ public class Pawn {
     public void addSkillPoints(int num) {
         this.skillPoints += num;
     }
-
+/*
     /**
      * Setzt das Level eines Pawns direkt. Wird eigentlich nur bei der Genereirung von Gegnern in der Arena verwendet.
      * @param level Das zu setzende Level
      */
-    public void setLevel(byte level) {
+     /* public void setLevel(byte level) {
         this.level = level;
+    } */
+
+    public IntegerBinding addXp(int x) {
+        this.xp.set(this.xp.get() + x);
+        System.out.println("xp: " + this.xp.get());
+        return this.lvl;
+    }
+
+    public int getLvl() {
+        return this.lvl.get();
+    }
+
+    public void setLvl(int l) {
+        this.lvl.add(l - this.lvl.get());
     }
 }

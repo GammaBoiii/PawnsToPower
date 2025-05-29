@@ -44,7 +44,7 @@ public class Barracks {
         sp.vbarPolicyProperty().setValue(ScrollPane.ScrollBarPolicy.NEVER);
         for (Pawn p : Inventory.getPawns()) {
             HBox box = new HBox();
-            Label name = new Label(p.getName() + " - Level " + p.getLevel());
+            Label name = new Label(p.getName() + " - Level " + p.getLvl()); //p.getLevel());
             Button inspect = new Button("Details");
 
             box.setPadding(new Insets(0, 0, 15, 0));

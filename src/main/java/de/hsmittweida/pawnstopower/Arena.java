@@ -10,6 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+import javax.sound.midi.SysexMessage;
 import java.util.Random;
 
 public class Arena {
@@ -126,11 +127,25 @@ public class Arena {
         textField.setStyle("-fx-border-color: green; -fx-border-width: 1");
         field.setStyle("-fx-border-color: red; -fx-border-width: 1");
         arena.setStyle("-fx-border-color: blue; -fx-border-width: 1");
+        Button add10 = new Button("10"), add50 = new Button("50"), add150 = new Button("150");
+        add10.setOnAction(e-> {
+            System.out.println(Inventory.getPawns().get(0).addXp(10).get());
+        });
+        add50.setOnAction(e-> {
+            System.out.println(Inventory.getPawns().get(0).addXp(50).get());
+        });
+        add150.setOnAction(e-> {
+            System.out.println(Inventory.getPawns().get(0).addXp(150).get());
+        });
+        AnchorPane.setTopAnchor(add10, 20.0);
+        AnchorPane.setTopAnchor(add50, 50.0);
+        AnchorPane.setTopAnchor(add150, 70.0);
+        arena.getChildren().addAll(add10,add50,add150);
 
         log.setText(log.getText() + "\n" + "AYOOOOOOOOOOOOOOOOOOOYOYOYOOOOOOOOOOOOOOOO82822828828282828LOOOOOOOOOOOOOOOOOl");
 
 
-        generateEnemy();
+        //generateEnemy();
 
         return pane;
     }

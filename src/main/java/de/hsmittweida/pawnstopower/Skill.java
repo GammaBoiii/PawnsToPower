@@ -26,7 +26,7 @@ public class Skill {
      * @return Den totalen Skill-Wert
      */
     public double getSkillValue() {
-        return ((9.0+pawn.getLevel()) / 10.0) * getFactor() + baseVal;
+        return ((9.0+pawn.getLvl()) / 10.0) * getFactor() + baseVal;
     }
 
     private double getFactor() {
