@@ -174,7 +174,7 @@ public class Game {
 
     private static VBox createSideBar() {
         VBox box = new VBox();
-        box.setPrefWidth(400);
+        box.setPrefWidth(Tools.getScreenSize().get('w') * 0.2);
         //VBox.setMargin(box, new Insets(0,0,0,25));
         box.setId("side-bar");
 
@@ -196,7 +196,7 @@ public class Game {
          */
         Text text = new Text();
         text.setText("Hallo Welt, das hier ist nich schön. Es passieren zu viele schlimme Dinge. Man kann sich nicht gutes tun. Aber, dass ist die Reise ins ungewisse, nirvana, whatever. hier unten blühen blumen so schön gelb und rot. wohin damit? das fragt man sich im Nachhinaein immer wohin damit");
-        text.setWrappingWidth(400);
+        text.wrappingWidthProperty().bind(content.widthProperty());
         content.setContent(text);
 
 

@@ -2,20 +2,25 @@ package de.hsmittweida.pawnstopower;
 
 // lol
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 public class Skill {
     private final String id;
     private final String name;
     private byte level;
-    private final int baseVal;
+    private final IntegerProperty baseVal;
 
     Pawn pawn;
     public Skill(String id, String name, int baseVal, Pawn pawn) {
         this.id = id;
         this.name = name;
-        this.baseVal = baseVal;
+        this.baseVal = new SimpleIntegerProperty(baseVal);
         this.pawn = pawn;
         level = 0;
     }
+
 
     /**
      * Gibt die (finalen) Stats des Pawns an, inkl. des Levelbonus und des Skill-Bonus.
@@ -26,7 +31,10 @@ public class Skill {
      * @return Den totalen Skill-Wert
      */
     public double getSkillValue() {
-        return ((9.0+pawn.getLvl()) / 10.0) * getFactor() + baseVal;
+        return ((9.0+pawn.getLvl()) / 10.0) * getFactor() + baseVal.get();
+    }
+    public SimpleDoubleProperty getBaseVal() {
+        return new SimpleDoubleProperty(((9.0+pawn.getLvl()) / 10.0) * getFactor() + baseVal.get());
     }
 
     private double getFactor() {

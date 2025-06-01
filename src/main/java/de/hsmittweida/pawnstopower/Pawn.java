@@ -67,7 +67,8 @@ public class Pawn {
                 while (currentXP >= requiredXP) {
                     l++;
                     skillPoints++;
-                    // Steigerung: jedes Level braucht 5 XP mehr
+
+                    /* Steigerung: jedes Level braucht 5 XP mehr */
                     currentXP -= requiredXP;
                     requiredXP += 5;
                 }
@@ -265,7 +266,7 @@ public class Pawn {
 
     public IntegerBinding addXp(int x) {
         this.xp.set(this.xp.get() + x);
-        System.out.println("xp: " + this.xp.get());
+        // System.out.println("xp: " + this.xp.get() + " - " + this.lvl.get());
         return this.lvl;
     }
 
@@ -288,7 +289,7 @@ public class Pawn {
         for (int i = 1; i < l; i++) {
             addXp(nextLvlXp);
             nextLvlXp += 5;
-            System.out.println("xxx");
+            // System.out.println("xxx");
         }
     }
 }

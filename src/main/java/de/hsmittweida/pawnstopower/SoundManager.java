@@ -29,7 +29,7 @@ public class SoundManager {
         for (String s : name) {
             playlist.add(new File(this.getClass().getResource("sound/" + s).getFile()));
         }
-        System.out.println(playlist.size());
+        //System.out.println(playlist.size());
         playCurrentSong();
 
     }
@@ -45,7 +45,7 @@ public class SoundManager {
      */
     private void playCurrentSong() {
         File currentSong = playlist.get(index);
-        System.out.println("Playing song: " + currentSong.getName());
+        //System.out.println("Playing song: " + currentSong.getName());
         mp = createSound(currentSong);
         mp.play();
         mp.setOnEndOfMedia(() -> {
