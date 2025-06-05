@@ -1,18 +1,27 @@
 package de.hsmittweida.pawnstopower;
 
 import javafx.application.Platform;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
+import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
 import javax.sound.midi.SysexMessage;
+
 import java.util.Random;
 
 public class Arena {
@@ -22,6 +31,8 @@ public class Arena {
     private static boolean fightFinished = false;
     private static TextFlow log;
     private static ScrollPane textField; /* Wird hier definiert, damit es den anderen Methoden sichtbar ist. */
+    private static DoubleProperty currentHealth_enemy, currentHealth_fighter;
+    private static Pawn nextTurn;
 
     public static Pane chooseFighter() {
         AnchorPane pane = new AnchorPane();
@@ -114,27 +125,99 @@ public class Arena {
         pane.getChildren().addAll(mainMenu,field);
         field.setBottom(textField);
 
+
+        enemy = generateEnemy();
+
         /* Schlacthfeld */
         AnchorPane arena = new AnchorPane();
         field.setCenter(arena);
         arena.setMaxWidth(Double.MAX_VALUE);
         arena.setMaxHeight(Double.MAX_VALUE);
         arena.setId("arenaBG");
+        Button attack = new Button("Angreifen"), defense = new Button("Verteidigen");
+        AnchorPane.setTopAnchor(attack, 650.0);
+        AnchorPane.setTopAnchor(defense, 650.0);
+        AnchorPane.setLeftAnchor(attack, 500.0);
+        AnchorPane.setRightAnchor(defense, 500.0);
+        String quickStyle = "-fx-font-size: 25";
+        attack.setStyle(quickStyle);
+        defense.setStyle(quickStyle);
+        arena.getChildren().addAll(attack, defense);
+
+        /* Charactere darstellen */
+        ImageView char2 = new ImageView(new Image(Arena.class.getResource("image/stickman.png").toExternalForm()));
+        ImageView char1 = new ImageView(new Image(Arena.class.getResource("image/stickman.png").toExternalForm()));
+        char1.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+        char1.setFitHeight(250);
+        char1.setFitWidth(250);
+        char2.setFitHeight(250);
+        char2.setFitWidth(250);
+        arena.getChildren().addAll(char2,char1);
+        AnchorPane.setLeftAnchor(char1, 150.0);
+        AnchorPane.setTopAnchor(char1, 350.0);
+        AnchorPane.setRightAnchor(char2, 150.0);
+        AnchorPane.setTopAnchor(char2, 350.0);
 
         /* Lebensanzeigen */
-        ProgressBar hb_enemy = new ProgressBar();
-        ProgressBar hb_fighter = new ProgressBar();
+        currentHealth_enemy = new SimpleDoubleProperty(enemy.getSkills().get(0).getSkillValue());
+        currentHealth_fighter = new SimpleDoubleProperty(choosenFighter.getSkills().get(0).getSkillValue());
+
+        /*
+         * Die folgenden DoubleBindings dienen dazu, die ProgressBar korrekt anzuzeigen. Da die ProgressBar nur Werte von 0 bis 1 akzeptiert,
+         * muessen die aktuellen Leben (currentHealth..), welche ja bereis vom Typ Property sind, erneut in ein Wert zwischen 0 und 1 normalisiert
+         * werden. Dazu dienen die DoubleBindings mit ihren jeweiligen computeValue Methoden.
+         */
+        DoubleBinding healthProgress_enemy = new DoubleBinding() {
+            {super.bind(currentHealth_enemy);}
+            @Override
+            protected double computeValue() {
+                return currentHealth_enemy.get() / enemy.getSkills().get(0).getSkillValue();
+            }
+        };
+        DoubleBinding healthProgress_fighter = new DoubleBinding() {
+            {super.bind(currentHealth_fighter);}
+            @Override
+            protected double computeValue() {
+                return currentHealth_fighter.get()  / choosenFighter.getSkills().get(0).getSkillValue();
+            }
+        };
+
+        ProgressBar hb_enemy = new ProgressBar(currentHealth_enemy.get() / enemy.getSkills().get(0).getSkillValue());
+        ProgressBar hb_fighter = new ProgressBar(currentHealth_fighter.get() / choosenFighter.getSkills().get(0).getSkillValue());
+        hb_enemy.progressProperty().bind(healthProgress_enemy);
+        hb_fighter.progressProperty().bind(healthProgress_fighter);
+        arena.getChildren().addAll(hb_fighter, hb_enemy);
+        AnchorPane.setLeftAnchor(hb_fighter, 150.0);
+        AnchorPane.setTopAnchor(hb_fighter, 450.0);
+        AnchorPane.setRightAnchor(hb_enemy, 150.0);
+        AnchorPane.setTopAnchor(hb_enemy, 450.0);
+
+
+        /* Kampf Logik */
+
+        /*Wer beginnt */
+        nextTurn = Math.random() < 0.5 ? enemy : choosenFighter;
+        if(!nextTurn.getName().equals(choosenFighter.getName())) {
+            Arena.log("Der Gegner beginnt", "-fx-fill: red;");
+        } else {
+            Arena.log("Du beginnst", "-fx-fill: green;");
+        }
+
+
 
         // Debuggin Boxes:
         textField.setStyle("-fx-border-color: green; -fx-border-width: 1");
         field.setStyle("-fx-border-color: red; -fx-border-width: 1");
         arena.setStyle("-fx-border-color: blue; -fx-border-width: 1");
-        Button add10 = new Button("10"), add50 = new Button("50"), add150 = new Button("150");
+        Button add10 = new Button("+"), add50 = new Button("-"), add150 = new Button("150");
         add10.setOnAction(e-> {
-            System.out.println(choosenFighter.addXp(10).get());
+            currentHealth_fighter.set(currentHealth_fighter.get() + 10.0);
+            System.out.println(currentHealth_fighter.get());
         });
         add50.setOnAction(e-> {
-            System.out.println(choosenFighter.addXp(50).get());
+            currentHealth_fighter.set(currentHealth_fighter.get() - 10.0);
+            System.out.println(currentHealth_fighter.get());
+
         });
         add150.setOnAction(e-> {
             System.out.println(choosenFighter.addXp(150).get());
@@ -143,8 +226,6 @@ public class Arena {
         AnchorPane.setTopAnchor(add50, 50.0);
         AnchorPane.setTopAnchor(add150, 70.0);
         arena.getChildren().addAll(add10,add50,add150);
-
-        enemy = generateEnemy();
 
         return pane;
     }

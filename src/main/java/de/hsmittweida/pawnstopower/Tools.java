@@ -192,4 +192,12 @@ public class Tools {
             });
         }
     }
+
+    public static void pauseGame(int time) {
+        try {
+            Thread.sleep((long) time);
+        } catch (InterruptedException e) {
+            System.out.println("Interrupted while break");
+        }
+    }
 }

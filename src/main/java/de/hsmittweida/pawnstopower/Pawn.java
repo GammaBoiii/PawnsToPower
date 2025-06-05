@@ -244,6 +244,11 @@ public class Pawn {
             default -> 0.0;
         };
     }*/
+
+    /**
+     *
+     * @return Skills: <br> <blockquote> 0 = health <br> 1 = damage <br> 2 = resistance <br> 3 = speed</blockquote>
+     */
     public ArrayList<Skill> getSkills() {
         return this.skills;
     }

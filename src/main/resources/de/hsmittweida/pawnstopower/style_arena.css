@@ -8,3 +8,7 @@
     -fx-font-size: 25;
 }
 
+.progress-bar .bar {
+    -fx-progress-color: green;
+    -fx-background-color: red;
+}
