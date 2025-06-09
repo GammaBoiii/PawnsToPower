@@ -297,4 +297,11 @@ public class Pawn {
             // System.out.println("xxx");
         }
     }
+
+    public boolean ownedByPlayer() {
+        for(Pawn p : Inventory.getPawns()){
+            if (this.equals(p)) return true;
+        }
+        return false;
+    }
 }

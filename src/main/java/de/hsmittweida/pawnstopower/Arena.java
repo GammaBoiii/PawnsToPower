@@ -6,6 +6,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
@@ -33,6 +34,10 @@ public class Arena {
     private static ScrollPane textField; /* Wird hier definiert, damit es den anderen Methoden sichtbar ist. */
     private static DoubleProperty currentHealth_enemy, currentHealth_fighter;
     private static Pawn nextTurn;
+
+    public Arena() {
+
+    }
 
     public static Pane chooseFighter() {
         AnchorPane pane = new AnchorPane();
@@ -162,6 +167,17 @@ public class Arena {
         currentHealth_enemy = new SimpleDoubleProperty(enemy.getSkills().get(0).getSkillValue());
         currentHealth_fighter = new SimpleDoubleProperty(choosenFighter.getSkills().get(0).getSkillValue());
 
+        currentHealth_fighter.addListener((observable, oldValue, newValue) -> {
+            if(newValue.intValue() <= 0) {
+                char1.setRotate(90);
+            }
+        });
+        currentHealth_enemy.addListener((observable, oldValue, newValue) -> {
+            if(newValue.intValue() <= 0) {
+                char2.setRotate(270);
+            }
+        });
+
         /*
          * Die folgenden DoubleBindings dienen dazu, die ProgressBar korrekt anzuzeigen. Da die ProgressBar nur Werte von 0 bis 1 akzeptiert,
          * muessen die aktuellen Leben (currentHealth..), welche ja bereis vom Typ Property sind, erneut in ein Wert zwischen 0 und 1 normalisiert
@@ -203,6 +219,7 @@ public class Arena {
             Arena.log("Du beginnst", "-fx-fill: green;");
         }
 
+        Turn turn = new Turn(nextTurn);
 
 
         // Debuggin Boxes:
@@ -212,11 +229,13 @@ public class Arena {
         Button add10 = new Button("+"), add50 = new Button("-"), add150 = new Button("150");
         add10.setOnAction(e-> {
             currentHealth_fighter.set(currentHealth_fighter.get() + 10.0);
-            System.out.println(currentHealth_fighter.get());
+            currentHealth_enemy.set(currentHealth_enemy.get() + 10.0);
+            System.out.println(currentHealth_fighter.get() / choosenFighter.getSkills().get(0).getSkillValue());
         });
         add50.setOnAction(e-> {
             currentHealth_fighter.set(currentHealth_fighter.get() - 10.0);
-            System.out.println(currentHealth_fighter.get());
+            currentHealth_enemy.set(currentHealth_enemy.get() - 10.0);
+            System.out.println(currentHealth_fighter.get() / choosenFighter.getSkills().get(0).getSkillValue());
 
         });
         add150.setOnAction(e-> {
@@ -278,20 +297,60 @@ public class Arena {
         return p;
     }
 
-    private static void log(String text) {
+    /**
+     * Logt einen Text ohne Stil in den Log der Arena.
+     * Das Platform.runLater() wird hierbei benötgit, damit auch von anderen Threads (außerhalb des FX-Threads) eine Nachricht
+     * im Log angezeigt werden kann. JavaFX erlaubt es andernweitig nicht, dass ein Thread UI-Aktualisierungen in dem FX-Thread
+     * vornimmt, und wirft daher standarmäßig einen Fehler. Verwendet wird dies zum Beispiel in der Turn-Klasse, welche einen
+     * eigenen Thread erstellt. Die dort aufgefürhten "sleep" Befehle lassen sich aber auch nicht in dem FX-Thread verwenden,
+     * da sonst das ganze UI eingefroren wird, und sind daher nicht für diese Anwendung geeignet.
+     * @param text Der Text, der im Arena Log ausgegeben werden soll.
+     */
+    public static void log(String text) {
         Text newText = new Text("\n"+text);
 
         /* Da zu diesem Zeitpunkt die Grafik Elemente noch nicht gerendert sind, müssen Anpassungen
          * erst später vorgenommen werden. Dazu wird einfach der Property der Breite vom Text an die der VBox gehangen..
          * Ist daher auch später dynamisch, wenn das Fenster vergrößert/verkleinert wird.
          */
-        newText.wrappingWidthProperty().bind(textField.widthProperty());
+        Platform.runLater(() -> {
+            newText.wrappingWidthProperty().bind(textField.widthProperty());
 
-        log.getChildren().add(newText);
+            log.getChildren().add(newText);
+        });
     }
-    private static void log(String text, String style) {
-        Text newText = new Text(text+"\n");
-        newText.setStyle(style);
-        log.getChildren().add(newText);
+    public static void log(String text, String style) {
+        Platform.runLater(() -> {
+            Text newText = new Text(text+"\n");
+            newText.setStyle(style);
+            log.getChildren().add(newText);
+        });
+    }
+
+    /**
+     * Fügt dem Pawn schaden hinzu. Diese Methode wurde vor allem für die Spielführung entworfen, damit man von der Turn-Klasse schaden hinzufügen kann.
+     * @param p Pawn, der Schaden erhalten soll.
+     * @param damage WIe viel Schaden verursacht werden sol.
+     */
+    public static void damage(Pawn p, double damage) {
+        if(p.equals(choosenFighter)) {
+            currentHealth_fighter.set(currentHealth_fighter.get() - damage);
+        } else if(p.equals(enemy)) {
+            currentHealth_enemy.set(currentHealth_enemy.get() - damage);
+        }
+    }
+
+    /**
+     * Einfache Methode, die den Pawn zurückgibt, der gerade nicht am Zug ist. Da nur 2 gegeneinander Kämpfen, kann es entweder der Kämpfer sein, der
+     * dem Spieler gehört oder nicht.
+     * @param pawn Pawn, der gerade am Zug ist und dessen Gegner returned werden soll.
+     * @return Der Pawn, der gerade nicht am Zug ist.
+     */
+    public static Pawn getOther(Pawn pawn) {
+        if(pawn.ownedByPlayer()) {
+            return enemy;
+        } else {
+            return choosenFighter;
+        }
     }
 }
