@@ -34,6 +34,7 @@ public class Arena {
     private static ScrollPane textField; /* Wird hier definiert, damit es den anderen Methoden sichtbar ist. */
     private static DoubleProperty currentHealth_enemy, currentHealth_fighter;
     private static Pawn nextTurn;
+    private static Button attack, defense;
 
     public Arena() {
 
@@ -139,7 +140,8 @@ public class Arena {
         arena.setMaxWidth(Double.MAX_VALUE);
         arena.setMaxHeight(Double.MAX_VALUE);
         arena.setId("arenaBG");
-        Button attack = new Button("Angreifen"), defense = new Button("Verteidigen");
+        attack = new Button("Angreifen");
+        defense = new Button("Verteidigen");
         AnchorPane.setTopAnchor(attack, 650.0);
         AnchorPane.setTopAnchor(defense, 650.0);
         AnchorPane.setLeftAnchor(attack, 500.0);
@@ -352,5 +354,16 @@ public class Arena {
         } else {
             return choosenFighter;
         }
+    }
+
+    /**
+     * Deaktiviert die Action Buttons (Angreifen/Verteidigen), wenn der Spieler nicht am Zug ist
+     * Nutzt ebenfalls runLater(), da die Methode aus einem anderen (nicht FX-) Thread aufgerufen wird (Turn-Klasse)
+     */
+    public static void disableActionButtons(boolean disabled) {
+            Platform.runLater(() -> {
+                attack.setDisable(disabled);
+                defense.setDisable(disabled);
+            });
     }
 }

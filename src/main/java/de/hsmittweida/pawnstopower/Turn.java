@@ -27,29 +27,22 @@ public class Turn extends Thread {
         /* Zug begonnen */
         if (!pawn.ownedByPlayer()) {
             Arena.log("Der Gegner ist nun am Zug.");
-            waitFor(1500);
-            Arena.log("\b a");
-            waitFor(150);
-            Arena.log("\b a");
-            waitFor(150);
-            Arena.log("\b a");
-            waitFor(150);
-            Arena.log("\b a");
+            Arena.disableActionButtons(true);
         } else {
-            waitFor(150);
-            Arena.log("\b x");
-            waitFor(150);
-            Arena.log("\b x");
-            waitFor(150);
-            Arena.log("\b x");
-            waitFor(150);
-            Arena.log("\b x");
-
+            Arena.log("Du bist am Zug");
+            Arena.disableActionButtons(false);
         }
+        waitFor(5000);
+        new Turn(Arena.getOther(pawn));
+        kill();
     }
 
     public void kill() {
-        thread.kill();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
