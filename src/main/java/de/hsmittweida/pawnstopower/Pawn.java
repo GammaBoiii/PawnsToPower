@@ -304,4 +304,48 @@ public class Pawn {
         }
         return false;
     }
+
+    /**
+     * Errechnet den Schaden, der ein Pawn einem anderen gnerischen Pawn hinzufügt.
+     *
+     * <p></pr>Berücksicht dabei: <br>
+     *  - den Schaden, die Waffe und Geschwindigkeit des Angreifers ("{@code this}"-Pawn")</p>
+     *  - die Leben, Rüstung, Verteidigung (inkl Verteidigungsaktion in der Arena) und Geschwindigkeit des angegriffenen Pawns "{@code enemy}"
+     * @param enemy
+     * @return
+     */
+    public int calcDamage(Pawn enemy) {
+        double damage = 0;
+        /* Zunächst wird die Geschwindigkeit verglichen. Der schneller Pawn hat hier den Vorteil.
+         * Beim Angriff führt eine geringere Geschwindigkeit zu Fehltreffern oder Streifschüssen.
+         * Damit der Kampf spannend bleibt, gibt es immer die Chance für den Langsameren zu treffen
+         * oder auszuweichen. (Dafür die {@code graze = 0.05} und {@code graze = 0.95}*/
+        double graze = 0.0; // Streifschuss von 0 ergibt 100% Trefferchance..
+        Skill pSpeed = this.getSkills().get(3);
+        Skill eSpeed = enemy.getSkills().get(3);
+        if(pSpeed.getSkillValue() - eSpeed.getSkillValue() > 3) {
+            graze = 0.05;
+        } else if(pSpeed.getSkillValue() - eSpeed.getSkillValue() > 0){
+            graze = 0.1;
+        } else {
+            graze = Math.pow(Math.log(1-(pSpeed.getSkillValue() / eSpeed.getSkillValue())), -1) * -1;
+            System.out.println("graze: " + graze + "-> " + pSpeed.getSkillValue() + " | " +  eSpeed.getSkillValue());
+        }
+        if(graze >= 0.99) {
+            graze = 0.95;
+        }
+
+
+
+        /* Falls der fehlgeschlagene Angriff ein Streifschuss war, dann wird auf den gesamten vorher
+         * berechneten Schaden eine Verringerung um 90% gelegt. Daher steht die Überprüfung
+         * danach erst am Ende dieser Methode.
+         * Bei einem kompletten Fehltreffer ist der Schaden einfach 0.
+         * Zwischen Streifschuss und Fehltreffer wird einfach per 50/50 Wahrscheinlichkeit entschieden.
+         */
+        if(Math.random()<graze) {
+            damage = Math.random() < 0.5 ? damage * 0.1 : 0;
+        }
+        return (int) Math.floor(damage);
+    }
 }

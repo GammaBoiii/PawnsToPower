@@ -32,9 +32,6 @@ public class Turn extends Thread {
             Arena.log("Du bist am Zug");
             Arena.disableActionButtons(false);
         }
-        waitFor(5000);
-        new Turn(Arena.getOther(pawn));
-        kill();
     }
 
     public void kill() {

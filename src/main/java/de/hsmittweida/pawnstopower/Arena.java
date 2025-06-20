@@ -142,6 +142,12 @@ public class Arena {
         arena.setId("arenaBG");
         attack = new Button("Angreifen");
         defense = new Button("Verteidigen");
+        attack.setOnAction(e -> {
+            attack();
+        });
+        defense.setOnAction(e -> {
+            defense();
+        });
         AnchorPane.setTopAnchor(attack, 650.0);
         AnchorPane.setTopAnchor(defense, 650.0);
         AnchorPane.setLeftAnchor(attack, 500.0);
@@ -365,5 +371,13 @@ public class Arena {
                 attack.setDisable(disabled);
                 defense.setDisable(disabled);
             });
+    }
+
+    private static void attack() {
+        choosenFighter.calcDamage(enemy);
+    }
+
+    private static void defense() {
+
     }
 }
