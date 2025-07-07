@@ -57,10 +57,20 @@ public class Weapon extends Item {
         return this.damageModifier;
     }
 
+    /**
+     * Fügt der Waffe einen beliebigen Damage-Modifier hinzu. Dieser kann die Waffe stärken
+     * oder schwächen. Alle Modifier werden in einer Liste gespeichert und zusammengezählt.
+     * @param modifier Der Modifier, der hinzugefügt werden soll.
+     */
     public void addDamageModifier(double modifier) {
         this.damageModifier.add(modifier);
     }
 
+    /**
+     * Entfernt einen gegebenen Modifier. Sollte es zufälligerweise mehrmals denselben Modifier geben,
+     * wird der erste in der Liste entfernt.
+     * @param modifier Der Modifier, der entfernt werden soll.
+     */
     public void removeDamageModifier(double modifier) {
         int index = 0;
         for (double d : damageModifier) {
@@ -71,6 +81,10 @@ public class Weapon extends Item {
         }
     }
 
+    /**
+     * Berechnet den gesamten Schaden einer Waffe, inkl. der Modifier.
+     * @return Totalen Schaden der Waffe.
+     */
     public double getTotalDamage() {
         double damage = wc.baseDamage;
         for (Double d : getDamageModifier()) {
@@ -80,7 +94,8 @@ public class Weapon extends Item {
     }
 
     /**
-     * Beinhaltet die Klasse der Waffe. Wenn hier etwas geänderd wird, dann auch in {@code Inspector.setImage} nachtragen!
+     * Beinhaltet die Klasse der Waffe.
+     * <small><br><br>Wenn hier etwas geänderd wird, dann auch in {@code Inspector.setImage} nachtragen!
      */
     public enum WeaponClass {
         SWT(80, 8.0), //Schwert
@@ -104,6 +119,9 @@ public class Weapon extends Item {
         }
     }
 
+    /**
+     * @return Eine zufällige Waffenklasse.
+     */
     private WeaponClass getRandomWeaponClass() {
         Random rnd = new Random();
         return WeaponClass.values()[rnd.nextInt(WeaponClass.values().length)];

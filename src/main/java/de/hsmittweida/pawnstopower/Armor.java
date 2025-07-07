@@ -101,10 +101,25 @@ public class Armor extends Item {
         return ArmorClass.values()[rnd.nextInt(ArmorClass.values().length)];
     }
 
+    public double getTotalProtection() {
+        int baseProtection = switch(this.getSlotType()) {
+            case 0 -> 15;
+            case 1 -> 35;
+            default -> 20; // Zählt für Arm- und Beinschutz
+        };
+        return baseProtection * ac.modifier;
+    }
+
     public enum ArmorClass {
-        FAB, //Stoff
-        LTH, //Leder
-        IRN, //Eisen
-        STL, //Stahl
+        FAB(0.6), //Stoff
+        LTH(0.8), //Leder
+        IRN(1.0), //Eisen
+        STL(1.25); //Stahl
+
+        public double modifier;
+
+        ArmorClass(double modifier) {
+            this.modifier =  modifier;
+        }
     }
 }

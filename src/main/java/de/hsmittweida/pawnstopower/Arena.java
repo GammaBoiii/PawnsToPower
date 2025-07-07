@@ -24,6 +24,8 @@ import javafx.scene.text.TextFlow;
 import javax.sound.midi.SysexMessage;
 
 import java.util.Random;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Arena {
 
@@ -35,6 +37,7 @@ public class Arena {
     private static DoubleProperty currentHealth_enemy, currentHealth_fighter;
     private static Pawn nextTurn;
     private static Button attack, defense;
+    private final BlockingQueue<String> inputQueue = new LinkedBlockingQueue<>(); /* Wird benötigt, um Events zwischen Arena.java und Turn.java zu erwarten (versch. Threads)" */
 
     public Arena() {
 
@@ -302,6 +305,20 @@ public class Arena {
         if(Math.abs(p.getLvl()-choosenFighter.getLvl()) >= 2) dif_mod = "sehr ";
         Arena.log("Dieser Kampf wird " + dif_mod + difficult, "-fx-font-style: italic; -fx-font-weight: bold");
 
+        /* Der Gegner braucht natürlich noch Equippment..
+        * Dies wird komplett zufällig generiert*/
+        Weapon w = new Weapon(p);
+        p.giveWeapon(w, (byte) 0);
+        Armor a1 = new Armor(p, (byte) 0);
+        Armor a2 = new Armor(p, (byte) 1);
+        Armor a3 = new Armor(p, (byte) 2);
+        Armor a4 = new Armor(p, (byte) 3);
+        p.giveArmor(a1, (byte) 0);
+        p.giveArmor(a2, (byte) 1);
+        p.giveArmor(a3, (byte) 2);
+        p.giveArmor(a4, (byte) 3);
+        System.out.println("Gegner Equippment: " +  p.getWeapon((byte) 0).getName() + " - " + p.getWeapon((byte) 0).getWeaponClass() + "| " + p.getArmor((byte) 0).getName() + " | " + p.getArmor((byte) 1).getName() +" | " + p.getArmor((byte) 2).getName() +" | " + p.getArmor((byte) 3).getName() );
+
         return p;
     }
 
@@ -379,5 +396,9 @@ public class Arena {
 
     private static void defense() {
 
+    }
+
+    public BlockingQueue<String> getBlockingQeue() {
+        return this.inputQueue;
     }
 }

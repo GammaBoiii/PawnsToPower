@@ -24,13 +24,30 @@ public class Turn extends Thread {
      */
     @Override
     public void run() {
-        /* Zug begonnen */
-        if (!pawn.ownedByPlayer()) {
-            Arena.log("Der Gegner ist nun am Zug.");
-            Arena.disableActionButtons(true);
-        } else {
-            Arena.log("Du bist am Zug");
-            Arena.disableActionButtons(false);
+        boolean mayRun = true;
+        while (mayRun) {
+            /* Zug begonnen */
+            if (!pawn.ownedByPlayer()) {
+                Arena.log("Der Gegner ist nun am Zug.");
+                Arena.disableActionButtons(true);
+            } else {
+                Arena.log("Du bist am Zug");
+                Arena.disableActionButtons(false);
+            }
+            waitFor(1500);
+            Arena.log("Der Gegner trägt..");
+            waitFor(500);
+            for(Armor a : pawn.getAllArmor()) {
+                if(a != null) {
+                    Arena.log("\t-" + a.getName());
+                }
+            }
+            waitFor(250);
+            Arena.log("Der Gegner führt die Waffe: " + pawn.getWeapon((byte) 0).getName() + " vom Typ " + pawn.getWeapon((byte) 0).getWeaponClass());
+
+            /* Angriff/Verteidigung */
+
+            /* Zug abschließen */
         }
     }
 

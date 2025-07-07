@@ -5,21 +5,14 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Button;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Pawn {
-    /*    private final int baseHealth = 100;
-        private final int baseDamage = 5;
-        private final int baseResistance = 10;
-        private final int baseSpeed = 15;*/
-    //private final short max_health = 100;
     private final String name;
     Armor[] armors = new Armor[4];
     Weapon[] weapons = new Weapon[2];
-    // private byte level;
-    // private int experience;
-    //    private HashMap<String, Double> skillFactor;
     private final ArrayList<Skill> skills;
     private int skillPoints;
 
@@ -167,6 +160,14 @@ public class Pawn {
 
     public Armor getArmor(byte slot) {
         return armors[slot];
+    }
+
+    public Armor[] getAllArmor() {
+        return armors;
+    }
+
+    public Weapon[] getAllWeapons() {
+        return weapons;
     }
 
     /**
@@ -335,6 +336,16 @@ public class Pawn {
             graze = 0.95;
         }
 
+        /* Weiterhin wird der Angriffswert der Waffe mit dem Schadenswert des Angreifers zusammengefügt
+         * und mit dem Rüstungswert des Gegners, sowie dessen Reistance Wert verglichen.
+         */
+        double weapondamage1 = this.getWeapon((byte) 0) != null ? this.getWeapon((byte) 0).getTotalDamage() : 0;
+        double weapondamage2 = this.getWeapon((byte) 1) != null ? this.getWeapon((byte) 1).getTotalDamage() : 0;
+        damage += this.getSkills().get(1).getSkillValue();
+        damage += weapondamage1 + weapondamage2;
+        System.out.println("damage without enemy values: " + damage);
+        System.out.println("gegner rüstung: " + enemy.getTotalProtectionValue());
+
 
 
         /* Falls der fehlgeschlagene Angriff ein Streifschuss war, dann wird auf den gesamten vorher
@@ -347,5 +358,14 @@ public class Pawn {
             damage = Math.random() < 0.5 ? damage * 0.1 : 0;
         }
         return (int) Math.floor(damage);
+    }
+
+    public int getTotalProtectionValue() {
+        int val = 0;
+        for(Armor a : this.armors){
+            if(a == null) continue;
+            val += (int) Math.floor(a.getTotalProtection());
+        }
+        return val;
     }
 }
