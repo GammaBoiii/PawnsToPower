@@ -6,7 +6,7 @@ import javafx.application.Platform;
  * Diese Klasse dient der Ausführung eines Zuges in der Arena
  */
 public class Turn extends Thread {
-    private final Pawn pawn;
+    private Pawn pawn;
     private final Turn thread;
 
     public Turn(Pawn p) {
@@ -26,28 +26,62 @@ public class Turn extends Thread {
     public void run() {
         boolean mayRun = true;
         while (mayRun) {
-            /* Zug begonnen */
+            /* Zug für den Gegner */
             if (!pawn.ownedByPlayer()) {
-                Arena.log("Der Gegner ist nun am Zug.");
+                /* Zug begonnen */
                 Arena.disableActionButtons(true);
-            } else {
-                Arena.log("Du bist am Zug");
-                Arena.disableActionButtons(false);
-            }
-            waitFor(1500);
-            Arena.log("Der Gegner trägt..");
-            waitFor(500);
-            for(Armor a : pawn.getAllArmor()) {
-                if(a != null) {
-                    Arena.log("\t-" + a.getName());
+                Arena.log("Der Gegner ist nun am Zug.");
+                waitFor(2500);
+
+                /* Angriff/Verteidigung */
+                /* Der Gegner geht zu 70% in Angriff und zu 30% in Verteidigung über */
+                double rnd = Math.random();
+                if(rnd > 0.3) {
+                    /* Angriff */
+                    pawn.goInDefenseMode(false);
+                    String[] msg = Arena.getEnemyAttackMessage();
+                    Arena.log(msg[0], "-fx-font-style: italic;");
+                    waitFor(1500);
+                    Arena.log(msg[1], "-fx-font-style: italic;");
+                    waitFor(1500);
+                    Arena.log(msg[2], "-fx-font-style: italic;");
+                    Arena.log("");
+                    waitFor(3500);
+                } else {
+                    /* Verteidigung */
+                    pawn.goInDefenseMode(true);
+                    Arena.log(Arena.getEnemyDefenseMessage(), "-fx-font-style: italic;");
+                    waitFor(1500);
+                    Arena.log("");
+                    waitFor(3500);
                 }
             }
+            /* Zug für Spieler selbst */
+            else {
+                /* Zug begonnen */
+                Arena.log("Du bist am Zug");
+                Arena.disableActionButtons(false);
+                String in;
+                try {
+                    in = Arena.getBlockingQeue().take();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            /*
             waitFor(250);
-            Arena.log("Der Gegner führt die Waffe: " + pawn.getWeapon((byte) 0).getName() + " vom Typ " + pawn.getWeapon((byte) 0).getWeaponClass());
+            String in;
+            try {
+                 in = Arena.getBlockingQeue().take();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("aaaa");
+            System.out.println(in);
+*/
 
-            /* Angriff/Verteidigung */
-
-            /* Zug abschließen */
+            pawn = Arena.getOther(pawn);
         }
     }
 

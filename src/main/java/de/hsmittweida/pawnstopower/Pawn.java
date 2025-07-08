@@ -368,4 +368,15 @@ public class Pawn {
         }
         return val;
     }
+
+    /**
+     * Wird in der Arena benutzt, wenn der Pawn sich in die Defensive (Verteidigung) begibt
+     */
+    public void goInDefenseMode(boolean defense) {
+        if(defense) {
+            this.getSkills().get(3).setMultiplier(1.5);
+        } else  {
+            this.getSkills().get(3).setMultiplier(1.0);
+        }
+    }
 }

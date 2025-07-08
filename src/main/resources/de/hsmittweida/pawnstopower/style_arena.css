@@ -12,3 +12,7 @@
     -fx-progress-color: green;
     -fx-background-color: red;
 }
+
+.scroll-bar:vertical {
+    -fx-background-color: #1a1a1a;
+}

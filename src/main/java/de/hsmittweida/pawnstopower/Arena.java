@@ -37,7 +37,7 @@ public class Arena {
     private static DoubleProperty currentHealth_enemy, currentHealth_fighter;
     private static Pawn nextTurn;
     private static Button attack, defense;
-    private final BlockingQueue<String> inputQueue = new LinkedBlockingQueue<>(); /* Wird benötigt, um Events zwischen Arena.java und Turn.java zu erwarten (versch. Threads)" */
+    private static final BlockingQueue<String> inputQueue = new LinkedBlockingQueue<>(); /* Wird benötigt, um Events zwischen Arena.java und Turn.java zu erwarten (versch. Threads)" */
 
     public Arena() {
 
@@ -128,8 +128,10 @@ public class Arena {
         AnchorPane.setRightAnchor(field, 35.0);
         AnchorPane.setTopAnchor(field, 50.0);
         AnchorPane.setBottomAnchor(field, 20.0);
-        textField.setMinHeight(150.0);
-        textField.vbarPolicyProperty().set(ScrollPane.ScrollBarPolicy.NEVER);
+        textField.setMinHeight(250.0);
+        textField.setMaxHeight(250.0);
+        textField.vvalueProperty().bind(textBox.heightProperty());
+        // textField.vbarPolicyProperty().set(ScrollPane.ScrollBarPolicy.NEVER);
         textField.hbarPolicyProperty().set(ScrollPane.ScrollBarPolicy.NEVER);
         pane.getChildren().addAll(mainMenu,field);
         field.setBottom(textField);
@@ -146,6 +148,7 @@ public class Arena {
         attack = new Button("Angreifen");
         defense = new Button("Verteidigen");
         attack.setOnAction(e -> {
+            inputQueue.offer("test1");
             attack();
         });
         defense.setOnAction(e -> {
@@ -234,9 +237,9 @@ public class Arena {
 
 
         // Debuggin Boxes:
-        textField.setStyle("-fx-border-color: green; -fx-border-width: 1");
-        field.setStyle("-fx-border-color: red; -fx-border-width: 1");
-        arena.setStyle("-fx-border-color: blue; -fx-border-width: 1");
+        textField.setStyle("-fx-border-color: green; -fx-border-width: 3");
+        //field.setStyle("-fx-border-color: red; -fx-border-width: 1");
+        //arena.setStyle("-fx-border-color: blue; -fx-border-width: 1");
         Button add10 = new Button("+"), add50 = new Button("-"), add150 = new Button("150");
         add10.setOnAction(e-> {
             currentHealth_fighter.set(currentHealth_fighter.get() + 10.0);
@@ -332,21 +335,22 @@ public class Arena {
      * @param text Der Text, der im Arena Log ausgegeben werden soll.
      */
     public static void log(String text) {
-        Text newText = new Text("\n"+text);
 
         /* Da zu diesem Zeitpunkt die Grafik Elemente noch nicht gerendert sind, müssen Anpassungen
          * erst später vorgenommen werden. Dazu wird einfach der Property der Breite vom Text an die der VBox gehangen..
          * Ist daher auch später dynamisch, wenn das Fenster vergrößert/verkleinert wird.
          */
         Platform.runLater(() -> {
+            Text newText = new Text("\n"+text);
             newText.wrappingWidthProperty().bind(textField.widthProperty());
-
             log.getChildren().add(newText);
         });
     }
     public static void log(String text, String style) {
+
         Platform.runLater(() -> {
-            Text newText = new Text(text+"\n");
+            Text newText = new Text("\n"+text);
+            newText.wrappingWidthProperty().bind(textField.widthProperty()); // ?
             newText.setStyle(style);
             log.getChildren().add(newText);
         });
@@ -398,7 +402,100 @@ public class Arena {
 
     }
 
-    public BlockingQueue<String> getBlockingQeue() {
-        return this.inputQueue;
+    public static BlockingQueue<String> getBlockingQeue() {
+        return inputQueue;
+    }
+
+    public static String[] getEnemyAttackMessage() {
+        String[] gegnerInitial = {
+                "Der Gegner beobachtet die Umgebung.",
+                "Der Gegner knackt mit den Fingern und grinst finster.",
+                "Der Gegner hebt seine Waffe langsam an.",
+                "Der Gegner umrundet dich vorsichtig.",
+                "Der Gegner blickt dir tief in die Augen und wartet auf deine Reaktion.",
+                "Der Gegner richtet seinen Stand aus und atmet tief durch.",
+                "Der Gegner schleift seine Klinge am Boden entlang.",
+                "Ein leises Knurren kommt aus seiner Kehle.",
+                "Der Gegner duckt sich leicht – bereit zum Sprung.",
+                "Er streckt den Rücken durch und spannt die Muskeln an.",
+                "Seine Augen verengen sich, als würde er deine nächste Bewegung erraten.",
+                "Der Gegner klopft sich den Staub von den Schultern.",
+                "Ein finsteres Lächeln spielt auf seinen Lippen.",
+                "Er hebt eine Augenbraue, als wolle er dich herausfordern.",
+                "Der Gegner wirbelt seine Waffe einmal durch die Luft.",
+                "Du hörst, wie er die Zähne zusammenbeißt.",
+                "Der Gegner holt tief Luft – als wäre dies sein Moment.",
+                "Der Gegner setzt einen Fuß nach vorne – langsam, aber bestimmt.",
+                "Ein Flackern von Entschlossenheit liegt in seinem Blick.",
+                "Der Gegner schlägt sich leicht mit der Faust gegen die Brust – ein Kampfritual."
+        };
+        String[] gegnerAktion = {
+                "Der Gegner prescht nach vorne.",
+                "Der Gegner springt mit einem Kampfschrei auf dich zu.",
+                "Der Gegner schleudert sich mit voller Wucht in deine Richtung.",
+                "Der Gegner führt einen Seitwärtsschlag aus.",
+                "Der Gegner setzt zu einem wuchtigen Angriff an.",
+                "Mit überraschender Geschwindigkeit schnellt der Gegner vor.",
+                "Der Gegner schleudert seine Waffe mit einem gezielten Schwung.",
+                "Ein schneller Ausfallschritt bringt ihn direkt vor dich.",
+                "Er lässt seine Faust mit voller Wucht auf dich zuschießen.",
+                "Der Gegner schwingt seine Klinge in weitem Bogen.",
+                "Ein harter Tritt zielt auf deinen Oberkörper.",
+                "Der Gegner holt zu einem wuchtigen Schlag aus.",
+                "Ein Schrei begleitet seinen blitzschnellen Angriff.",
+                "Er dreht sich zur Seite und attackiert aus der Drehung heraus.",
+                "Der Gegner springt hoch und zielt auf deinen Kopf.",
+                "Er greift mit beiden Händen gleichzeitig an.",
+                "Der Gegner rollt sich ab und kommt direkt unter dir hervor.",
+                "Ein schneller Stoß zielt auf deinen Bauch.",
+                "Er tritt einen Schritt zur Seite und greift sofort an.",
+                "Der Gegner schlägt von oben herab wie ein Sturm."
+        };
+        String[] gegnerFolge = {
+                "Die Waffe des Gegners saust auf dich herab.",
+                "Ein dumpfer Schlag trifft dich an der Schulter.",
+                "Du weichst im letzten Moment aus – der Angriff verfehlt dich knapp.",
+                "Ein Schnitt durchzieht die Luft, gefolgt von einem schmerzhaften Aufprall.",
+                "Der Boden unter dir erzittert leicht, als der Angriff aufprallt.",
+                "Ein harter Treffer bringt dich kurz aus dem Gleichgewicht.",
+                "Du spürst den Luftzug des Schlags an deinem Gesicht vorbeirauschen.",
+                "Ein klirrender Aufprall lässt deine Waffe erzittern.",
+                "Der Angriff trifft dein Bein – du knickst leicht ein.",
+                "Der Schlag streift deine Seite – ein brennender Schmerz bleibt zurück.",
+                "Ein knurrender Laut entweicht dem Gegner, als der Angriff sitzt.",
+                "Du stolperst rückwärts, während Funken durch die Luft fliegen.",
+                "Ein Stück deiner Kleidung wird zerrissen.",
+                "Du landest schwer auf dem Rücken.",
+                "Der Gegner nutzt den Schwung und wirbelt erneut herum.",
+                "Ein pochender Schmerz zieht durch deinen Arm.",
+                "Du taumelst einige Schritte zurück.",
+                "Der Boden splittert unter dem Einschlag.",
+                "Eine Druckwelle schleudert dich zur Seite.",
+                "Dein Atem stockt kurz – der Treffer war härter als gedacht."
+        };
+        Random rnd = new Random();
+        return new String[]{gegnerInitial[rnd.nextInt(gegnerInitial.length)], gegnerAktion[rnd.nextInt(gegnerAktion.length)], gegnerFolge[rnd.nextInt(gegnerFolge.length)]};
+    }
+
+    public static String getEnemyDefenseMessage() {
+        String[] gegnerVerteidigung = {
+                "Der Gegner nimmt eine defensive Haltung ein.",
+                "Mit erhobenen Armen geht der Gegner langsam in Deckung.",
+                "Der Gegner stemmt die Beine fest in den Boden – bereit für deinen Angriff.",
+                "Ein kurzer Atemzug, dann bringt er sich in Verteidigungsposition.",
+                "Der Gegner senkt seinen Schwerpunkt und beobachtet dich wachsam.",
+                "Er hebt die Schultern und zieht die Waffe eng an den Körper.",
+                "Der Gegner zieht sich leicht zurück, ohne den Blick von dir abzuwenden.",
+                "Ein stiller Moment – der Gegner fixiert dich und spannt die Muskeln an.",
+                "Seine Bewegungen verlangsamen sich – voll konzentriert auf die Abwehr.",
+                "Mit einem Schritt zur Seite bringt er sich in Position.",
+                "Der Gegner hebt sein linkes Bein leicht, um den Stand anzupassen.",
+                "Er richtet seinen Schild aus und stellt sich breit auf.",
+                "Ein leichtes Nicken – als hätte er deinen Angriff schon kommen sehen.",
+                "Der Gegner atmet ruhig aus und fokussiert sich ganz auf deine Haltung.",
+                "Mit ruhiger Entschlossenheit bereitet sich der Gegner auf deinen nächsten Zug vor."
+        };
+        Random rnd = new Random();
+        return gegnerVerteidigung[rnd.nextInt(gegnerVerteidigung.length)] + "\n\t- Der Gegner geht in die Verteidigung";
     }
 }

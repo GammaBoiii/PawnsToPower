@@ -11,6 +11,7 @@ public class Skill {
     private final String name;
     private byte level;
     private final IntegerProperty baseVal;
+    private double multiplier;
 
     Pawn pawn;
     public Skill(String id, String name, int baseVal, Pawn pawn) {
@@ -19,6 +20,7 @@ public class Skill {
         this.baseVal = new SimpleIntegerProperty(baseVal);
         this.pawn = pawn;
         level = 0;
+        multiplier = 1.0;
     }
 
 
@@ -31,8 +33,10 @@ public class Skill {
      * @return Den totalen Skill-Wert
      */
     public double getSkillValue() {
-        return ((9.0+pawn.getLvl()) / 10.0) * getFactor() + baseVal.get();
+        return (((9.0+pawn.getLvl()) / 10.0) * getFactor() + baseVal.get()) * multiplier;
     }
+
+    @Deprecated
     public SimpleDoubleProperty getBaseVal() {
         return new SimpleDoubleProperty(((9.0+pawn.getLvl()) / 10.0) * getFactor() + baseVal.get());
     }
@@ -55,5 +59,9 @@ public class Skill {
 
     public String getName() {
         return name;
+    }
+
+    public void setMultiplier(double multiplier) {
+        this.multiplier = multiplier;
     }
 }
