@@ -12,9 +12,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Arena.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Skill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Skill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/SoundManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/SoundManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Turn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Turn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_arena.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_arena.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,11 +66,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Main.executor": "Debug",
+    "Application.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/johann/IdeaProjects/PawnsToPower/src/main/resources/de/hsmittweida/pawnstopower/sound",
     "list.type.of.created.stylesheet": "CSS",
@@ -192,7 +192,9 @@
       <workItem from="1750747806498" duration="2626000" />
       <workItem from="1751889727996" duration="7992000" />
       <workItem from="1751909203714" duration="1240000" />
-      <workItem from="1751965772075" duration="3491000" />
+      <workItem from="1751965772075" duration="3808000" />
+      <workItem from="1751994976943" duration="343000" />
+      <workItem from="1752058470848" duration="4069000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />

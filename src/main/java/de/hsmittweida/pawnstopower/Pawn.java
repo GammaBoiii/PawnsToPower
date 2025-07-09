@@ -330,21 +330,21 @@ public class Pawn {
             graze = 0.1;
         } else {
             graze = Math.pow(Math.log(1-(pSpeed.getSkillValue() / eSpeed.getSkillValue())), -1) * -1;
-            System.out.println("graze: " + graze + "-> " + pSpeed.getSkillValue() + " | " +  eSpeed.getSkillValue());
+            //System.out.println("graze: " + graze + "-> " + pSpeed.getSkillValue() + " | " +  eSpeed.getSkillValue());
         }
         if(graze >= 0.99) {
             graze = 0.95;
         }
 
         /* Weiterhin wird der Angriffswert der Waffe mit dem Schadenswert des Angreifers zusammengefügt
-         * und mit dem Rüstungswert des Gegners, sowie dessen Reistance Wert verglichen.
+         * und mit dem Rüstungswert des Gegners, sowie dessen Resistance Wert verglichen.
          */
         double weapondamage1 = this.getWeapon((byte) 0) != null ? this.getWeapon((byte) 0).getTotalDamage() : 0;
         double weapondamage2 = this.getWeapon((byte) 1) != null ? this.getWeapon((byte) 1).getTotalDamage() : 0;
         damage += this.getSkills().get(1).getSkillValue();
         damage += weapondamage1 + weapondamage2;
-        System.out.println("damage without enemy values: " + damage);
-        System.out.println("gegner rüstung: " + enemy.getTotalProtectionValue());
+        System.out.println("damage without enemy values: " + damage + " - Skill: " + this.getSkills().get(1).getSkillValue());
+        //System.out.println("gegner rüstung: " + enemy.getTotalProtectionValue());
 
 
 

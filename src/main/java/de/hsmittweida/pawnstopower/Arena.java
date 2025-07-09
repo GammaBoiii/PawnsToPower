@@ -3,10 +3,7 @@ package de.hsmittweida.pawnstopower;
 import javafx.application.Platform;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
@@ -20,8 +17,6 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
-
-import javax.sound.midi.SysexMessage;
 
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
@@ -38,6 +33,8 @@ public class Arena {
     private static Pawn nextTurn;
     private static Button attack, defense;
     private static final BlockingQueue<String> inputQueue = new LinkedBlockingQueue<>(); /* Wird benötigt, um Events zwischen Arena.java und Turn.java zu erwarten (versch. Threads)" */
+    private static Turn turn;
+
 
     public Arena() {
 
@@ -50,6 +47,7 @@ public class Arena {
         label.setStyle("-fx-border-color: red; -fx-border-width: 2"); //Debug
         Button mainMenu = new Button("Hauptmenu");
         mainMenu.setOnAction(e -> {
+
             Game.drawSpace();
         });
         AnchorPane.setTopAnchor(mainMenu, 2.0);
@@ -105,6 +103,7 @@ public class Arena {
         Tools.addStylesheet(pane, "style_arena.css");
         Button mainMenu = new Button("Hauptmenu");
         mainMenu.setOnAction(e -> {
+            if(turn != null) turn.kill();
             Game.drawSpace();
         });
         AnchorPane.setTopAnchor(mainMenu, 2.0);
@@ -148,11 +147,12 @@ public class Arena {
         attack = new Button("Angreifen");
         defense = new Button("Verteidigen");
         attack.setOnAction(e -> {
-            inputQueue.offer("test1");
-            attack();
+            inputQueue.offer("attack");
+            Arena.disableActionButtons(true);
         });
         defense.setOnAction(e -> {
-            defense();
+            inputQueue.offer("defense");
+            Arena.disableActionButtons(true);
         });
         AnchorPane.setTopAnchor(attack, 650.0);
         AnchorPane.setTopAnchor(defense, 650.0);
@@ -181,6 +181,8 @@ public class Arena {
         currentHealth_enemy = new SimpleDoubleProperty(enemy.getSkills().get(0).getSkillValue());
         currentHealth_fighter = new SimpleDoubleProperty(choosenFighter.getSkills().get(0).getSkillValue());
 
+
+        /* Tot */
         currentHealth_fighter.addListener((observable, oldValue, newValue) -> {
             if(newValue.intValue() <= 0) {
                 char1.setRotate(90);
@@ -233,7 +235,7 @@ public class Arena {
             Arena.log("Du beginnst", "-fx-fill: green;");
         }
 
-        Turn turn = new Turn(nextTurn);
+        turn = new Turn(nextTurn);
 
 
         // Debuggin Boxes:
@@ -244,16 +246,16 @@ public class Arena {
         add10.setOnAction(e-> {
             currentHealth_fighter.set(currentHealth_fighter.get() + 10.0);
             currentHealth_enemy.set(currentHealth_enemy.get() + 10.0);
-            System.out.println(currentHealth_fighter.get() / choosenFighter.getSkills().get(0).getSkillValue());
+            //System.out.println(currentHealth_fighter.get() / choosenFighter.getSkills().get(0).getSkillValue());
         });
         add50.setOnAction(e-> {
             currentHealth_fighter.set(currentHealth_fighter.get() - 10.0);
             currentHealth_enemy.set(currentHealth_enemy.get() - 10.0);
-            System.out.println(currentHealth_fighter.get() / choosenFighter.getSkills().get(0).getSkillValue());
+            //System.out.println(currentHealth_fighter.get() / choosenFighter.getSkills().get(0).getSkillValue());
 
         });
         add150.setOnAction(e-> {
-            System.out.println(choosenFighter.addXp(150).get());
+            //System.out.println(choosenFighter.addXp(150).get());
         });
         AnchorPane.setTopAnchor(add10, 20.0);
         AnchorPane.setTopAnchor(add50, 50.0);
@@ -273,13 +275,13 @@ public class Arena {
         /* Level generieren. Abweichung von max +- 2 Leveln */
         Random rnd = new Random();
         byte diff = (byte) rnd.nextInt(3);
-        System.out.println("diff" + diff);
+        //System.out.println("diff" + diff);
         byte level = (byte) (Math.random() < 0.5 ? diff * -1 : diff);
-        System.out.println("level" + level);
+        //System.out.println("level" + level);
         if(choosenFighter.getLvl() + level < 1) level = 0;
         p.setLvl(choosenFighter.getLvl() + level);
 
-        System.out.println("Level Gegner: " + p.getLvl() + " >----< " + "Level Kaempfer: " + choosenFighter.getLvl());
+        //System.out.println("Level Gegner: " + p.getLvl() + " >----< " + "Level Kaempfer: " + choosenFighter.getLvl());
 
         /* Skills zuweisen. 1 Level = 1 SkillPunkt. Diese müssen noch zufällig auf
          * alle Skills verteilt werden.
@@ -292,7 +294,7 @@ public class Arena {
         for(Skill s : p.getSkills()) {
            // System.out.println(s.getName() + ": " + s.getSkillLevel() + " -> " + s.getSkillValue());
         }
-        System.out.println("---------------");
+        //System.out.println("---------------");
         for(Skill s : choosenFighter.getSkills()) {
             // System.out.println(s.getName() + ": " + s.getSkillLevel() + " -> " + s.getSkillValue());
         }
@@ -320,7 +322,7 @@ public class Arena {
         p.giveArmor(a2, (byte) 1);
         p.giveArmor(a3, (byte) 2);
         p.giveArmor(a4, (byte) 3);
-        System.out.println("Gegner Equippment: " +  p.getWeapon((byte) 0).getName() + " - " + p.getWeapon((byte) 0).getWeaponClass() + "| " + p.getArmor((byte) 0).getName() + " | " + p.getArmor((byte) 1).getName() +" | " + p.getArmor((byte) 2).getName() +" | " + p.getArmor((byte) 3).getName() );
+        //System.out.println("Gegner Equippment: " +  p.getWeapon((byte) 0).getName() + " - " + p.getWeapon((byte) 0).getWeaponClass() + "| " + p.getArmor((byte) 0).getName() + " | " + p.getArmor((byte) 1).getName() +" | " + p.getArmor((byte) 2).getName() +" | " + p.getArmor((byte) 3).getName() );
 
         return p;
     }
@@ -370,6 +372,17 @@ public class Arena {
     }
 
     /**
+     *
+     * @param p Pawn, von dem die Lebenspunkte zurückgegeben werden sollen.
+     * @return Die Lebenspunkte des angegebenen Pawns
+     */
+    public static double getLife(Pawn p) {
+        if(p.equals(choosenFighter)) return currentHealth_fighter.get();
+        else if(p.equals(enemy)) return currentHealth_enemy.get();
+        return 0;
+    }
+
+    /**
      * Einfache Methode, die den Pawn zurückgibt, der gerade nicht am Zug ist. Da nur 2 gegeneinander Kämpfen, kann es entweder der Kämpfer sein, der
      * dem Spieler gehört oder nicht.
      * @param pawn Pawn, der gerade am Zug ist und dessen Gegner returned werden soll.
@@ -392,14 +405,6 @@ public class Arena {
                 attack.setDisable(disabled);
                 defense.setDisable(disabled);
             });
-    }
-
-    private static void attack() {
-        choosenFighter.calcDamage(enemy);
-    }
-
-    private static void defense() {
-
     }
 
     public static BlockingQueue<String> getBlockingQeue() {

@@ -24,8 +24,7 @@ public class Turn extends Thread {
      */
     @Override
     public void run() {
-        boolean mayRun = true;
-        while (mayRun) {
+        while (!Thread.currentThread().isInterrupted()) {
             /* Zug für den Gegner */
             if (!pawn.ownedByPlayer()) {
                 /* Zug begonnen */
@@ -44,9 +43,12 @@ public class Turn extends Thread {
                     waitFor(1500);
                     Arena.log(msg[1], "-fx-font-style: italic;");
                     waitFor(1500);
-                    Arena.log(msg[2], "-fx-font-style: italic;");
+                    Arena.log(msg[2], "-fx-font-style: italic; -fx-text-fill: red;");
                     Arena.log("");
-                    waitFor(3500);
+                    waitFor(2000);
+                    int damage = pawn.calcDamage(Arena.getOther(pawn));
+                    Arena.log("Du verlierst " + damage + " Lebenspunkte. Dir verbleiben noch " + Arena.getLife(Arena.getOther(pawn)));
+                    Arena.damage(Arena.getOther(pawn), damage);
                 } else {
                     /* Verteidigung */
                     pawn.goInDefenseMode(true);
@@ -61,11 +63,25 @@ public class Turn extends Thread {
                 /* Zug begonnen */
                 Arena.log("Du bist am Zug");
                 Arena.disableActionButtons(false);
-                String in;
+                String in = "";
                 try {
                     in = Arena.getBlockingQeue().take();
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    Thread.currentThread().interrupt();
+                }
+                switch (in) {
+                    case "attack":
+                        int damage = pawn.calcDamage(Arena.getOther(pawn));
+                        Arena.damage(Arena.getOther(pawn), damage);
+                        Arena.log("Du hast " + damage + " Schaden beim Gegner verursacht.");
+                        waitFor(1500);
+                        break;
+                    case "defense":
+
+                        break;
+
+                    default:
+                        break;
                 }
             }
 
@@ -83,14 +99,11 @@ public class Turn extends Thread {
 
             pawn = Arena.getOther(pawn);
         }
+        System.out.println("Thread " + Thread.currentThread().getName() + " wurde beendet.");
     }
 
     public void kill() {
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        thread.interrupt();
     }
 
     /**
@@ -104,7 +117,7 @@ public class Turn extends Thread {
         try {
             Thread.sleep(ms);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            Thread.currentThread().interrupt();
         }
     }
 }

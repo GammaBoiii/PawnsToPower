@@ -41,7 +41,7 @@ public class SoundManager {
     /**
      * Hilft beim Abspielen eines Songs aus einer Playlist. Nach jedem Ende eines Tracks wird automatisch der nächste ausgewählt.
      * Ist die Liste einmal durchgespielt, fangen die Tracks wieder von vorne an.
-     * Danke hierbei an den Java Garbage-Collector, der mir dabei hilft, die Songs aufzuräumen.
+     * Danke hierbei an den Java Garbage-Collector.
      */
     private void playCurrentSong() {
         File currentSong = playlist.get(index);
