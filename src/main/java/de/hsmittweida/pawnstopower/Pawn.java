@@ -64,6 +64,7 @@ public class Pawn {
                     /* Steigerung: jedes Level braucht 5 XP mehr */
                     currentXP -= requiredXP;
                     requiredXP += 5;
+                    System.out.println("XP: " + currentXP + " - " + requiredXP + " | Level: " + l);
                 }
 
                 return l;
@@ -324,16 +325,24 @@ public class Pawn {
         double graze = 0.0; // Streifschuss von 0 ergibt 100% Trefferchance..
         Skill pSpeed = this.getSkills().get(3);
         Skill eSpeed = enemy.getSkills().get(3);
+        System.out.println("Skillcheck: " + pSpeed.getSkillValue() + " - " + eSpeed.getSkillValue() );
         if(pSpeed.getSkillValue() - eSpeed.getSkillValue() > 3) {
+            System.out.println("much faster");
             graze = 0.05;
         } else if(pSpeed.getSkillValue() - eSpeed.getSkillValue() > 0){
+            System.out.println("faster");
             graze = 0.1;
         } else {
+            System.out.println("slower");
+            /* Die folgende Formel dient dazu, die Chance für einen Fehltreffer logarithmisch zu erhöhen, sollte der Angreifer
+             * einen geringeren Geschwindigkeitsskill haben. */
             graze = Math.pow(Math.log(1-(pSpeed.getSkillValue() / eSpeed.getSkillValue())), -1) * -1;
-            //System.out.println("graze: " + graze + "-> " + pSpeed.getSkillValue() + " | " +  eSpeed.getSkillValue());
         }
-        if(graze >= 0.99) {
-            graze = 0.95;
+
+        if (graze > 0.8) {
+            graze = 0.8;
+        } else if (graze < 0.1) {
+            graze = 0.1;
         }
 
         /* Weiterhin wird der Angriffswert der Waffe mit dem Schadenswert des Angreifers zusammengefügt
@@ -343,11 +352,12 @@ public class Pawn {
         double weapondamage2 = this.getWeapon((byte) 1) != null ? this.getWeapon((byte) 1).getTotalDamage() : 0;
         damage += this.getSkills().get(1).getSkillValue();
         damage += weapondamage1 + weapondamage2;
-        System.out.println("damage without enemy values: " + damage + " - Skill: " + this.getSkills().get(1).getSkillValue());
+        //System.out.println("damage without enemy values: " + damage + " - Skill: " + this.getSkills().get(1).getSkillValue());
         //System.out.println("gegner rüstung: " + enemy.getTotalProtectionValue());
 
 
 
+        System.out.println("graze: " + graze + " | " + damage);
         /* Falls der fehlgeschlagene Angriff ein Streifschuss war, dann wird auf den gesamten vorher
          * berechneten Schaden eine Verringerung um 90% gelegt. Daher steht die Überprüfung
          * danach erst am Ende dieser Methode.

@@ -34,6 +34,8 @@ public class Arena {
     private static Button attack, defense;
     private static final BlockingQueue<String> inputQueue = new LinkedBlockingQueue<>(); /* Wird benötigt, um Events zwischen Arena.java und Turn.java zu erwarten (versch. Threads)" */
     private static Turn turn;
+    private static Pawn winner;
+    private static int[] price;
 
 
     public Arena() {
@@ -76,6 +78,7 @@ public class Arena {
             Button choose = new Button("Kampf!");
 
             choose.setOnAction(e -> {
+                choose.setDisable(true);
                 choosenFighter = p;
                 Game.drawSpace(Arena.arenaFight());
             });
@@ -108,6 +111,8 @@ public class Arena {
         });
         AnchorPane.setTopAnchor(mainMenu, 2.0);
         AnchorPane.setLeftAnchor(mainMenu, 2.0);
+
+        winner = null;
 
         /* Textbereich, der als Kampf-Log dient */
         textField = new ScrollPane();
@@ -181,16 +186,28 @@ public class Arena {
         currentHealth_enemy = new SimpleDoubleProperty(enemy.getSkills().get(0).getSkillValue());
         currentHealth_fighter = new SimpleDoubleProperty(choosenFighter.getSkills().get(0).getSkillValue());
 
-
         /* Tot */
         currentHealth_fighter.addListener((observable, oldValue, newValue) -> {
-            if(newValue.intValue() <= 0) {
+            if (newValue.intValue() < 0) {
+                currentHealth_fighter.set(0);
+            } else if (newValue.intValue() == 0) {
+                if (winner == null) {
+                    winner = enemy;
+                    fightOver(false);
+                }
                 char1.setRotate(90);
             }
         });
         currentHealth_enemy.addListener((observable, oldValue, newValue) -> {
-            if(newValue.intValue() <= 0) {
+            if (newValue.intValue() < 0) {
+                currentHealth_enemy.set(0);
+            } else if (newValue.intValue() == 0) {
+                if (winner == null) {
+                    winner = choosenFighter;
+                    fightOver(true);
+                }
                 char2.setRotate(270);
+
             }
         });
 
@@ -223,6 +240,16 @@ public class Arena {
         AnchorPane.setTopAnchor(hb_fighter, 450.0);
         AnchorPane.setRightAnchor(hb_enemy, 150.0);
         AnchorPane.setTopAnchor(hb_enemy, 450.0);
+
+        Label healthlabel_fighter = new Label("");
+        Label healthlabel_enemy = new Label("");
+        healthlabel_fighter.textProperty().bind(currentHealth_fighter.asString("%.0f"));
+        healthlabel_enemy.textProperty().bind(currentHealth_enemy.asString("%.0f"));
+        arena.getChildren().addAll(healthlabel_enemy, healthlabel_fighter);
+        AnchorPane.setLeftAnchor(healthlabel_fighter, 150.0);
+        AnchorPane.setTopAnchor(healthlabel_fighter, 430.0);
+        AnchorPane.setRightAnchor(healthlabel_enemy, 150.0);
+        AnchorPane.setTopAnchor(healthlabel_enemy, 430.0);
 
 
         /* Kampf Logik */
@@ -310,6 +337,25 @@ public class Arena {
         if(Math.abs(p.getLvl()-choosenFighter.getLvl()) >= 2) dif_mod = "sehr ";
         Arena.log("Dieser Kampf wird " + dif_mod + difficult, "-fx-font-style: italic; -fx-font-weight: bold");
 
+        /* Belohung anpassen */
+        int baseXPreward = 25;
+        int baseMoneyreward = 65;
+        double baseMult = 0.0;
+        if(dif_mod.equals("sehr ")) {
+            baseMult = 0.5;
+        } else baseMult = 0.25;
+        if(difficult.equals("leicht")) {
+            baseMult *= -1;
+        } else if(difficult.equals("moderat")) {
+            baseMult = 0.0;
+        }
+        baseMult += (0.5 - Math.random()) * 0.1; /* Noch etwas RNG mit reinbringen.. */
+
+        baseXPreward *= (int) Math.round(1+baseMult);
+        baseMoneyreward *= (int) Math.round(1+baseMult);
+        price = new int[]{baseMoneyreward, baseXPreward};
+
+
         /* Der Gegner braucht natürlich noch Equippment..
         * Dies wird komplett zufällig generiert*/
         Weapon w = new Weapon(p);
@@ -364,11 +410,13 @@ public class Arena {
      * @param damage WIe viel Schaden verursacht werden sol.
      */
     public static void damage(Pawn p, double damage) {
-        if(p.equals(choosenFighter)) {
-            currentHealth_fighter.set(currentHealth_fighter.get() - damage);
-        } else if(p.equals(enemy)) {
-            currentHealth_enemy.set(currentHealth_enemy.get() - damage);
-        }
+        Platform.runLater(() -> {
+            if(p.equals(choosenFighter)) {
+                currentHealth_fighter.set(Math.round(currentHealth_fighter.get() - damage));
+            } else if(p.equals(enemy)) {
+                currentHealth_enemy.set(Math.round(currentHealth_enemy.get() - damage));
+            }
+        });
     }
 
     /**
@@ -377,9 +425,9 @@ public class Arena {
      * @return Die Lebenspunkte des angegebenen Pawns
      */
     public static double getLife(Pawn p) {
-        if(p.equals(choosenFighter)) return currentHealth_fighter.get();
-        else if(p.equals(enemy)) return currentHealth_enemy.get();
-        return 0;
+            if(p.equals(choosenFighter)) return Math.round(currentHealth_fighter.get());
+            else if(p.equals(enemy)) return Math.round(currentHealth_enemy.get());
+            return 0;
     }
 
     /**
@@ -502,5 +550,42 @@ public class Arena {
         };
         Random rnd = new Random();
         return gegnerVerteidigung[rnd.nextInt(gegnerVerteidigung.length)] + "\n\t- Der Gegner geht in die Verteidigung";
+    }
+
+    private static void fightOver(boolean playerWins) {
+        new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+                Platform.runLater(() -> {
+                    Game.drawSpace(ArenaWinScreen.winscreen(playerWins));
+                });
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+        }).start();
+        /*
+        if(playerWins) {
+            Tools.popup("Die Spiele sind vorbei!", "Du hast den Gegner geschlagen", """
+                    Deine Belohnung ist:
+                        Güldmünzen
+                        Erfahrungspunkte
+                    """ );
+        } else {
+            Tools.popup("Die Spiele sind vorbei!", "Du hast den Kampf verloren", """
+                    Dein Kämpfer verliert:
+                        Goldmünzen
+                        Erfahrungspunkte
+                    """);
+        }
+         */
+    }
+
+    public static int[] getPrice() {
+        return price;
+    }
+
+    public static Pawn[] getCombatans( ){
+        return new Pawn[] {choosenFighter, enemy};
     }
 }

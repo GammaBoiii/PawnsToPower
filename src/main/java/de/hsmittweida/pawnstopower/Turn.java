@@ -35,6 +35,7 @@ public class Turn extends Thread {
                 /* Angriff/Verteidigung */
                 /* Der Gegner geht zu 70% in Angriff und zu 30% in Verteidigung über */
                 double rnd = Math.random();
+                System.out.println("Random angriff oder defense: " + rnd);
                 if(rnd > 0.3) {
                     /* Angriff */
                     pawn.goInDefenseMode(false);
@@ -43,11 +44,15 @@ public class Turn extends Thread {
                     waitFor(1500);
                     Arena.log(msg[1], "-fx-font-style: italic;");
                     waitFor(1500);
-                    Arena.log(msg[2], "-fx-font-style: italic; -fx-text-fill: red;");
+                    Arena.log(msg[2], "-fx-font-style: italic; -fx-fill: red;");
                     Arena.log("");
                     waitFor(2000);
                     int damage = pawn.calcDamage(Arena.getOther(pawn));
-                    Arena.log("Du verlierst " + damage + " Lebenspunkte. Dir verbleiben noch " + Arena.getLife(Arena.getOther(pawn)));
+
+                    /* Durch das runLater() in Arena.damage werden in dem Arena-Log immer zuerst die Leben ausgegeben, und dann erst aktualisiert.
+                     * Daher werden in der Ausgabe in der folgenden Zeile die Leben direkt mit abgezogen, und der eigentliche Damage
+                     * (backend) kann erst danach ausgeführt werden. */
+                    Arena.log("Du verlierst " + damage + " Lebenspunkte. Dir verbleiben noch " + (int) (Arena.getLife(Arena.getOther(pawn)) -damage));
                     Arena.damage(Arena.getOther(pawn), damage);
                 } else {
                     /* Verteidigung */
