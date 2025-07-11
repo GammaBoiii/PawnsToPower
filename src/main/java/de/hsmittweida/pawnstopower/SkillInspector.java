@@ -31,8 +31,14 @@ public class SkillInspector {
             label.setMaxWidth(Double.MAX_VALUE);
 
             Button increase = new Button("+");
-            HBox.setMargin(increase, new Insets(0,0,0,7));
+            HBox.setMargin(increase, new Insets(10,0,0,7));
             increase.setOnAction(e -> {
+                if(pawn.getSkillPoints() > 0) {
+                    skill.addSkillLevel();
+                    pawn.addSkillPoints(-1);
+                    stage.setTitle("Skillunkte: " + pawn.getSkillPoints());
+                    level.setText("Level: " + skill.getSkillLevel());
+                }
                 System.out.println(skill.getId());
             });
             hbox.getChildren().addAll(label, level, increase);
@@ -41,7 +47,7 @@ public class SkillInspector {
 
         Tools.defaultClose(stage, "skillinspector");
         stage.setScene(s);
-        stage.setTitle("Skills");
+        stage.setTitle("Skillunkte: " + pawn.getSkillPoints());
         stage.show();
     }
 }

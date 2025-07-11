@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 
@@ -60,6 +61,13 @@ public class Barracks {
 
             list.getChildren().add(box);
         }
+        Label info = new Label("Neue Pawns kannst du durch erfolgreiche Arenakämpfe gewinnen!");
+        info.setStyle("-fx-font-size: 15px; -fx-font-weight: bold; -fx-font-style: italic; -fx-text-fill: rgb(175,175,175)");
+        info.setTextAlignment(TextAlignment.CENTER);
+        info.setAlignment(Pos.CENTER);
+        info.setMaxWidth(Double.MAX_VALUE);
+        list.getChildren().add(info);
+
         return background;
     }
 }

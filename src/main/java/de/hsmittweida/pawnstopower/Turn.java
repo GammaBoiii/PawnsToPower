@@ -35,7 +35,6 @@ public class Turn extends Thread {
                 /* Angriff/Verteidigung */
                 /* Der Gegner geht zu 70% in Angriff und zu 30% in Verteidigung über */
                 double rnd = Math.random();
-                System.out.println("Random angriff oder defense: " + rnd);
                 if(rnd > 0.3) {
                     /* Angriff */
                     pawn.goInDefenseMode(false);

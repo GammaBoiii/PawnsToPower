@@ -27,13 +27,14 @@ public class Skill {
     /**
      * Gibt die (finalen) Stats des Pawns an, inkl. des Levelbonus und des Skill-Bonus.
      * <br> <br>
-     * Funktioniert, indem zuerst jedes Level ab level 2 um den Factor 0.1 erhöht wird <em>(Level 2 -> *1.1,
-     * Level 3 -> *1.2, Level 4 -> *1.3,...)</em>, dann der Skillfactor damit multipliziert wird (aus {@code skillFactor})
+     * Funktioniert, indem zuerst jedes Level die Leben um 5 erhöht,
+     * dann der Skillfactor damit multipliziert wird (aus {@code skillFactor})
      * und dann auf den Basiswert addiert wird.
+     * Ein eventueller {@code multiplier} wird durch Kampfsituationen mit drauf multipliziert.
      * @return Den totalen Skill-Wert
      */
     public double getSkillValue() {
-        return (((9.0+pawn.getLvl()) / 10.0) * getFactor() + baseVal.get()) * multiplier;
+        return (((pawn.getLvl()-1) * 5) * getFactor() + baseVal.get()) * multiplier;
     }
 
     @Deprecated

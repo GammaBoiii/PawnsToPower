@@ -276,11 +276,10 @@ public class Game {
     }
 
     private static void Debug() {
-        for (int i = 0; i < 15; i++) {
-            Inventory.addPawn(new Pawn());
-        }
+        Inventory.addPawn(new Pawn());
         // Inventory.getPawns().get(0).setLevel((byte) 10);
         Inventory.getPawns().get(0).setLvl(10);
+        Inventory.getPawns().get(0).addSkillPoints(4);
         Inventory.addMoney(3874);
         Inventory.addItem(new Weapon(Weapon.WeaponClass.AXT, null));
         Inventory.addItem(new Weapon(Weapon.WeaponClass.KTN, null));

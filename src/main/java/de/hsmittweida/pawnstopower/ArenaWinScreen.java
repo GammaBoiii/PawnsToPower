@@ -6,8 +6,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import java.awt.geom.Area;
-
 public class ArenaWinScreen {
     public static Pane winscreen(boolean playerWins) {
         BorderPane pane = new BorderPane();
@@ -25,19 +23,37 @@ public class ArenaWinScreen {
                     Arena.getCombatans()[1].getName(),
                     Arena.getPrice()[0],
                     Arena.getCombatans()[0].getName(),
-                    Arena.getPrice()[1]
-            );
+                    Arena.getPrice()[1]);
 
+            /* Wird der Spieler den besiegten Pawn gewinnen? Mit 10% Chance */
+            if(Math.random() < 1.0) { //Debug 100%
+                Pawn p = Arena.getCombatans()[1];
+                for(Armor a : p.armors) {
+                    p.removeArmor(a);
+                }
+                for(Weapon w : p.weapons) {
+                    p.removeWeapon(w);
+                }
+                Inventory.addPawn(p);
+                String congrats = String.format("""
+                        Der Pawn %s schließt sich außerdem deinem Trupp an!
+                        Damit erhälst du einen neuen Level %d Kämpfer.
+                        """, p.getName(), p.getLvl());
+                s+=congrats;
+            }
             msg = new Label(s);
+            Inventory.addMoney(Arena.getPrice()[0]);
+            Arena.getCombatans()[0].addXp(Arena.getPrice()[1]);
         } else {
             String s = String.format("""
-                    Du verlierst gegen %s
-                    und damit %d Goldmünzen.
-                    Dein Kämpfer erhält %d Erfahrungspunkte.
-                    """,
+                            Du verlierst gegen %s
+                            und damit -%d Goldmünzen.
+                            Dein Kämpfer erhält %d Erfahrungspunkte.
+                            """,
                     Arena.getCombatans()[1].getName(), Math.round(Arena.getPrice()[0] * 0.25), Math.round(Arena.getPrice()[1] * 0.4));
-
             msg = new Label(s);
+            Inventory.addMoney(-1 * (int) Math.round(Arena.getPrice()[0] * 0.25));
+            Arena.getCombatans()[0].addXp((int) Math.round(Arena.getPrice()[1] * 0.4));
         }
         stats.getChildren().add(msg);
         pane.setCenter(stats);

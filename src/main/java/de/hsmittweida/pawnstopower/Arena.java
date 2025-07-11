@@ -45,7 +45,7 @@ public class Arena {
     public static Pane chooseFighter() {
         AnchorPane pane = new AnchorPane();
         Tools.addStylesheet(pane, "style_arena.css");
-        Label label = new Label("Wähle deinen Kämpfer aus!");
+        Label label = new Label("Wähle deinen Pawn aus!");
         label.setStyle("-fx-border-color: red; -fx-border-width: 2"); //Debug
         Button mainMenu = new Button("Hauptmenu");
         mainMenu.setOnAction(e -> {
@@ -342,18 +342,19 @@ public class Arena {
         int baseMoneyreward = 65;
         double baseMult = 0.0;
         if(dif_mod.equals("sehr ")) {
-            baseMult = 0.5;
-        } else baseMult = 0.25;
+            baseMult = 0.25;
+        } else baseMult = 0.1;
         if(difficult.equals("leicht")) {
             baseMult *= -1;
         } else if(difficult.equals("moderat")) {
             baseMult = 0.0;
         }
         baseMult += (0.5 - Math.random()) * 0.1; /* Noch etwas RNG mit reinbringen.. */
-
-        baseXPreward *= (int) Math.round(1+baseMult);
-        baseMoneyreward *= (int) Math.round(1+baseMult);
+        //System.out.println("BaseMult: " + (1+baseMult));
+        baseXPreward = (int)(baseXPreward *  (1+baseMult));
+        baseMoneyreward = (int)(baseMoneyreward * (1+baseMult));
         price = new int[]{baseMoneyreward, baseXPreward};
+        System.out.println("Preward: " + price[0] + " Xp: " + price[1]);
 
 
         /* Der Gegner braucht natürlich noch Equippment..
@@ -549,7 +550,7 @@ public class Arena {
                 "Mit ruhiger Entschlossenheit bereitet sich der Gegner auf deinen nächsten Zug vor."
         };
         Random rnd = new Random();
-        return gegnerVerteidigung[rnd.nextInt(gegnerVerteidigung.length)] + "\n\t- Der Gegner geht in die Verteidigung";
+        return gegnerVerteidigung[rnd.nextInt(gegnerVerteidigung.length)] + "\n\t- Der Gegner geht in die Verteidigung und erhöht seine Konzentration";
     }
 
     private static void fightOver(boolean playerWins) {

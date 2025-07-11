@@ -64,7 +64,7 @@ public class Pawn {
                     /* Steigerung: jedes Level braucht 5 XP mehr */
                     currentXP -= requiredXP;
                     requiredXP += 5;
-                    System.out.println("XP: " + currentXP + " - " + requiredXP + " | Level: " + l);
+                    //System.out.println("XP: " + currentXP + " - " + requiredXP + " | Level: " + l);
                 }
 
                 return l;
@@ -325,15 +325,11 @@ public class Pawn {
         double graze = 0.0; // Streifschuss von 0 ergibt 100% Trefferchance..
         Skill pSpeed = this.getSkills().get(3);
         Skill eSpeed = enemy.getSkills().get(3);
-        System.out.println("Skillcheck: " + pSpeed.getSkillValue() + " - " + eSpeed.getSkillValue() );
         if(pSpeed.getSkillValue() - eSpeed.getSkillValue() > 3) {
-            System.out.println("much faster");
             graze = 0.05;
         } else if(pSpeed.getSkillValue() - eSpeed.getSkillValue() > 0){
-            System.out.println("faster");
             graze = 0.1;
         } else {
-            System.out.println("slower");
             /* Die folgende Formel dient dazu, die Chance für einen Fehltreffer logarithmisch zu erhöhen, sollte der Angreifer
              * einen geringeren Geschwindigkeitsskill haben. */
             graze = Math.pow(Math.log(1-(pSpeed.getSkillValue() / eSpeed.getSkillValue())), -1) * -1;
@@ -346,18 +342,20 @@ public class Pawn {
         }
 
         /* Weiterhin wird der Angriffswert der Waffe mit dem Schadenswert des Angreifers zusammengefügt
-         * und mit dem Rüstungswert des Gegners, sowie dessen Resistance Wert verglichen.
-         */
+         * und mit dem Rüstungswert des Gegners, sowie dessen Resistance Wert verglichen. */
         double weapondamage1 = this.getWeapon((byte) 0) != null ? this.getWeapon((byte) 0).getTotalDamage() : 0;
         double weapondamage2 = this.getWeapon((byte) 1) != null ? this.getWeapon((byte) 1).getTotalDamage() : 0;
-        damage += this.getSkills().get(1).getSkillValue();
+        damage += this.getSkills().get(1).getSkillValue() * 2;
         damage += weapondamage1 + weapondamage2;
-        //System.out.println("damage without enemy values: " + damage + " - Skill: " + this.getSkills().get(1).getSkillValue());
-        //System.out.println("gegner rüstung: " + enemy.getTotalProtectionValue());
+        System.out.println("vanila dmg: " + damage);
+        damage -= enemy.getTotalProtectionValue();
+        System.out.println("minus " + enemy.getTotalProtectionValue() + " Rüstung: " + damage);
+        damage /= enemy.getSkills().get(2).getSkillValue() / 100 +1;
+        System.out.println("div: " + enemy.getSkills().get(2).getSkillValue() + ": "+ damage);
 
 
 
-        System.out.println("graze: " + graze + " | " + damage);
+        //System.out.println("graze: " + graze + " | " + damage);
         /* Falls der fehlgeschlagene Angriff ein Streifschuss war, dann wird auf den gesamten vorher
          * berechneten Schaden eine Verringerung um 90% gelegt. Daher steht die Überprüfung
          * danach erst am Ende dieser Methode.
@@ -367,7 +365,9 @@ public class Pawn {
         if(Math.random()<graze) {
             damage = Math.random() < 0.5 ? damage * 0.1 : 0;
         }
-        return (int) Math.floor(damage);
+
+        /* Der Schaden wird noch um +- 50% randomisiert, damit es spannend bleibt. */
+        return (int) Math.round(damage * (1+(0.5-Math.random())));
     }
 
     public int getTotalProtectionValue() {
@@ -384,8 +384,11 @@ public class Pawn {
      */
     public void goInDefenseMode(boolean defense) {
         if(defense) {
-            this.getSkills().get(3).setMultiplier(1.5);
+            /* Verteidigung wird um 50% erhöht und Speed um 25% */
+            this.getSkills().get(2).setMultiplier(1.5);
+            this.getSkills().get(3).setMultiplier(1.25);
         } else  {
+            this.getSkills().get(2).setMultiplier(1.0);
             this.getSkills().get(3).setMultiplier(1.0);
         }
     }
