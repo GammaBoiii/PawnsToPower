@@ -225,6 +225,8 @@ public class Game {
         Label label_money = new Label("Goldstücke:\n" + Inventory.getMoney());
         Label label_rep = new Label("Reputation:\n" + reputation);
         Label label_day = new Label("Tag:\n" + day);
+
+        label_pawns.textProperty().bind(Bindings.concat("Pawns:\n", Inventory.getPawnsNum()));
         label_day.textProperty().bind(Bindings.concat("Tag:\n", day.asString()));
         label_money.textProperty().bind((Bindings.concat("Goldstücke:\n", Inventory.getMoneyAsSimpleInt())));
         /*

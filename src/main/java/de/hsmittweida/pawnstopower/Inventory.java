@@ -15,6 +15,7 @@ public class Inventory {
     private static ArrayList<Pawn> pawns;
 
     private static IntegerProperty money;
+    private static IntegerProperty pawnsNum;
 
     public static void setup() {
         weapons = new ArrayList<Weapon>();
@@ -22,6 +23,8 @@ public class Inventory {
         pawns = new ArrayList<Pawn>();
         money = new SimpleIntegerProperty();
         money.set(0);
+        pawnsNum = new SimpleIntegerProperty();
+        pawnsNum.set(0);
     }
 
     public static ArrayList<Weapon> getWeapons() {
@@ -41,9 +44,9 @@ public class Inventory {
     }
 
     public static void addItem(Item item) {
-        if(item.getItemType().equals("Weapon")) {
+        if (item.getItemType().equals("Weapon")) {
             addWeapon((Weapon) item);
-        } else if(item.getItemType().equals("Armor")) {
+        } else if (item.getItemType().equals("Armor")) {
             addArmor((Armor) item);
         }
     }
@@ -54,6 +57,11 @@ public class Inventory {
 
     public static void addPawn(Pawn p) {
         pawns.add(p);
+        pawnsNum.set(pawnsNum.get() + 1);
+    }
+
+    public static IntegerProperty getPawnsNum() {
+        return pawnsNum;
     }
 
     public static int getMoney() {
@@ -63,6 +71,7 @@ public class Inventory {
     public static IntegerProperty getMoneyAsSimpleInt() {
         return money;
     }
+
     public static void addMoney(int money) {
         Inventory.money.set(Inventory.money.get() + money);
     }

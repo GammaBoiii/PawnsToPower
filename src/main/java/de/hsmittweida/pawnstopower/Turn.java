@@ -37,7 +37,6 @@ public class Turn extends Thread {
                 double rnd = Math.random();
                 if(rnd > 0.3) {
                     /* Angriff */
-                    pawn.goInDefenseMode(false);
                     String[] msg = Arena.getEnemyAttackMessage();
                     Arena.log(msg[0], "-fx-font-style: italic;");
                     waitFor(1500);
@@ -53,6 +52,7 @@ public class Turn extends Thread {
                      * (backend) kann erst danach ausgeführt werden. */
                     Arena.log("Du verlierst " + damage + " Lebenspunkte. Dir verbleiben noch " + (int) (Arena.getLife(Arena.getOther(pawn)) -damage));
                     Arena.damage(Arena.getOther(pawn), damage);
+                    pawn.goInDefenseMode(false);
                 } else {
                     /* Verteidigung */
                     pawn.goInDefenseMode(true);
