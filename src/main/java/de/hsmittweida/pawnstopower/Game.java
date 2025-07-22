@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -25,6 +26,7 @@ public class Game {
     private static BorderPane panel;
     private static HBox helpBar;
     private static VBox sideBar;
+    private static TextFlow diary;
 
 
     Game() {
@@ -182,26 +184,30 @@ public class Game {
         header.setId("diary-header");
 
         ScrollPane content = new ScrollPane();
-        content.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+        //content.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         content.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         content.setId("diary");
         content.setFitToWidth(true);
-        content.setFitToHeight(true);
-        content.setMaxHeight(Double.MAX_VALUE);
+        //content.setFitToHeight(true);
 
-        /*
-        Label contentText = new Label();
-        contentText.setWrapText(true);
-        contentText.setText("Hallo Welt, das hier \nist nich schön. Es passieren zu viele schlimme Dinge. Man kann sich nicht gutes tun. \n Aber, dass ist die Reise ins ungewisse, \nnirvana, whatever. hier unten blühen blumen so schön gelb und rot. wohin damit? das fragt man sich im Nachhinaein immer wohin damit\n");
-         */
-        Text text = new Text();
-        text.setText("Hallo Welt, das hier ist nich schön. Es passieren zu viele schlimme Dinge. Man kann sich nicht gutes tun. Aber, dass ist die Reise ins ungewisse, nirvana, whatever. hier unten blühen blumen so schön gelb und rot. wohin damit? das fragt man sich im Nachhinaein immer wohin damit");
-        text.wrappingWidthProperty().bind(content.widthProperty());
-        content.setContent(text);
+        VBox textBox = new VBox();
+        diary = new TextFlow();
+        textBox.getChildren().add(diary);
+        content.setContent(textBox);
+        content.setMinHeight(Tools.getScreenSize().get('h') * 0.9);
+        content.setMaxHeight(Tools.getScreenSize().get('h') * 0.9);
+
+        //diary.setStyle("-fx-border-color: red; -fx-border-style: solid; -fx-border-width: 2;");
+        //textBox.setStyle("-fx-border-color: green; -fx-border-style: solid; -fx-border-width: 5;");
+        //content.setStyle("-fx-border-color: blue; -fx-border-style: solid; -fx-border-width: 2;");
+
+        /*for(int it = 0; it<250; it++) {
+            Diary.logArenaFight(true);
+        }*/
 
 
         box.getChildren().addAll(header, content);
-
         return box;
     }
 
@@ -248,6 +254,7 @@ public class Game {
         label_rep.setMaxWidth(Double.MAX_VALUE);
         label_day.setMaxWidth((Double.MAX_VALUE));
         Button nextDay = new Button("Nächster Tag");
+        newDay();
         nextDay.setOnAction(e -> {
             newDay();
         });
@@ -275,14 +282,17 @@ public class Game {
 
     private static void newDay() {
         day.set(day.get() + 1);
+        Diary.newDay();
+    }
+    public static int getDay() {
+        return day.get();
     }
 
     private static void Debug() {
-        Inventory.addPawn(new Pawn());
         // Inventory.getPawns().get(0).setLevel((byte) 10);
         Inventory.getPawns().get(0).setLvl(10);
         Inventory.getPawns().get(0).addSkillPoints(4);
-        Inventory.addMoney(3874);
+
         Inventory.addItem(new Weapon(Weapon.WeaponClass.AXT, null));
         Inventory.addItem(new Weapon(Weapon.WeaponClass.KTN, null));
         Inventory.addItem(new Armor());
@@ -299,6 +309,13 @@ public class Game {
         Game.gameSpace = createGameView();
         panel.setCenter(gameSpace);
         System.out.println("ayooooooo");
+    }
+
+    public static TextFlow getDiary() {
+        if(diary == null) {
+            diary = new TextFlow();
+        }
+        return diary;
     }
 
 

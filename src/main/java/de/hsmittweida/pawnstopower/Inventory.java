@@ -25,6 +25,9 @@ public class Inventory {
         money.set(0);
         pawnsNum = new SimpleIntegerProperty();
         pawnsNum.set(0);
+
+        Inventory.addPawn(new Pawn());
+        Inventory.addMoney(250);
     }
 
     public static ArrayList<Weapon> getWeapons() {
