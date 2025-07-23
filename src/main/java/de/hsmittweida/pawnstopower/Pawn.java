@@ -16,8 +16,8 @@ public class Pawn implements Serializable {
     private final ArrayList<Skill> skills;
     private int skillPoints;
 
-    private final transient IntegerProperty xp;
-    private final transient IntegerBinding lvl;
+    private transient IntegerProperty xp;
+    private transient IntegerBinding lvl;
 
     Pawn() {
         for (Weapon w : weapons) {
@@ -53,6 +53,7 @@ public class Pawn implements Serializable {
 
             @Override
             protected int computeValue() {
+                System.out.println("debuuuuuuuuug1");
                 int currentXP = xp.get();
                 int requiredXP = 50;
                 int l = 1;
@@ -272,13 +273,53 @@ public class Pawn implements Serializable {
     } */
 
     public IntegerBinding addXp(int x) {
+        if (this.xp == null) {
+            this.xp = new SimpleIntegerProperty(x);
+            /* kleiner Workaround, damit der IntegerBinding einmal das Level aufsetzt */
+            this.xp.add(1);
+            this.xp.add(-1);
+
+            return this.lvl;
+        }
         this.xp.set(this.xp.get() + x);
         // System.out.println("xp: " + this.xp.get() + " - " + this.lvl.get());
         return this.lvl;
     }
 
     public int getLvl() {
+        if(this.lvl == null) {
+            this.lvl = new IntegerBinding() {
+
+                {
+                    super.bind(xp);
+                }
+
+                @Override
+                protected int computeValue() {
+                    System.out.println("debuuuuug2");
+                    int currentXP = xp.get();
+                    int requiredXP = 50;
+                    int l = 1;
+
+                    while (currentXP >= requiredXP) {
+                        l++;
+                        skillPoints++;
+
+                        /* Steigerung: jedes Level braucht 5 XP mehr */
+                        currentXP -= requiredXP;
+                        requiredXP += 5;
+                        //System.out.println("XP: " + currentXP + " - " + requiredXP + " | Level: " + l);
+                    }
+
+                    return l;
+                }
+            };
+        }
         return this.lvl.get();
+    }
+
+    public int getXpAsInt() {
+        return this.xp.get();
     }
 
     /**

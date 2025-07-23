@@ -20,8 +20,17 @@ public class QuickMenu {
         load.setOnAction(e -> {
             Save.loadAll("/home/johann/Documents/p2p/newsavetypelol.p2p");
         });
-
-        box.getChildren().addAll(save, load);
+        Button cheat = new Button("Cheat");
+        cheat.setOnAction(e -> {
+           Inventory.addMoney(424);
+           Inventory.addPawn(new Pawn());
+           Inventory.addItem(new Armor());
+            Inventory.addItem(new Armor());
+            Inventory.addItem(new Armor());
+            Inventory.addItem(new Armor());
+            Inventory.addItem(new Armor());
+        });
+        box.getChildren().addAll(save, load, cheat);
 
 
         Tools.defaultClose(stage, "quickmenu" );

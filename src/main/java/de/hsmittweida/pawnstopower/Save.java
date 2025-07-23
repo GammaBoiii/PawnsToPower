@@ -18,10 +18,16 @@ public class Save {
      * @param path Wo die Datei mit dem Spielstand gespeichert werden soll.
      */
     public static void saveAll(String path) {
-        ArrayList<Pawn> pawns = new ArrayList<>();
-        pawns.add(new Pawn());
+        /* Da die XP der Pawns mit SimpleInt gespeichert werden, sind diese nicht serialisierbar
+         * und müssen daher manuell als int (serialisierbar) abgespeichert werden. */
+        ArrayList<Integer> pawnXP = new ArrayList<Integer>();
+        for(Pawn p : Inventory.getPawns()) {
+            pawnXP.add(p.getXpAsInt());
+        }
+
         try (PrintWriter writer = new PrintWriter(path)) {
             writer.println(serializing(Inventory.getPawns()));
+            writer.println(serializing(pawnXP));
             writer.println(serializing(Inventory.getWeapons()));
             writer.println(serializing(Inventory.getArmor()));
             writer.println("GOLD=" + Inventory.getMoney());
@@ -35,6 +41,7 @@ public class Save {
     public static void loadAll(String path) {
 
         ArrayList<Pawn> pawns = null;
+        ArrayList<Integer> pawnXP = null;
         ArrayList<Weapon> waffen = null;
         ArrayList<Armor> ruestungen = null;
         int gold = 0;
@@ -42,6 +49,7 @@ public class Save {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             pawns = (ArrayList<Pawn>) deserializing(reader.readLine());
+            pawnXP = (ArrayList<Integer>) deserializing(reader.readLine());
             waffen = (ArrayList<Weapon>) deserializing(reader.readLine());
             ruestungen = (ArrayList<Armor>) deserializing(reader.readLine());
 
@@ -57,7 +65,31 @@ public class Save {
             e.printStackTrace();
         }
 
-        // Test-Ausgabe
+        /* Alles in das Spiel hineinladen */
+        if(pawns != null && !pawns.isEmpty()) {
+            for(int i = 0; i < pawns.size(); i++) {
+                Inventory.addPawn(pawns.get(i));
+                pawns.get(i).addXp(pawnXP.get(i));
+            }
+        }
+
+        if(waffen != null && !waffen.isEmpty()) {
+            for(Weapon w : waffen) {
+                Inventory.addItem(w);
+            }
+        }
+
+        if(ruestungen != null && !ruestungen.isEmpty()) {
+            for(Armor r : ruestungen) {
+                Inventory.addItem(r);
+            }
+        }
+
+        Inventory.addMoney(gold);
+        // Es fehlt noch: Tag, Tagebuch...
+
+
+        /* Test-Ausgabe */
         System.out.println("Gold: " + gold);
         System.out.println("Tag: " + tag);
         System.out.println("Krieger geladen: " + (pawns != null ? pawns.size() : 0));
