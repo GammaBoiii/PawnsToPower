@@ -5,19 +5,19 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Button;
 
-import java.util.AbstractMap;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Pawn {
+public class Pawn implements Serializable {
     private final String name;
     Armor[] armors = new Armor[4];
     Weapon[] weapons = new Weapon[2];
     private final ArrayList<Skill> skills;
     private int skillPoints;
 
-    private final IntegerProperty xp;
-    private final IntegerBinding lvl;
+    private final transient IntegerProperty xp;
+    private final transient IntegerBinding lvl;
 
     Pawn() {
         for (Weapon w : weapons) {

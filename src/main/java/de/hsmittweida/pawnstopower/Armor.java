@@ -2,7 +2,7 @@ package de.hsmittweida.pawnstopower;
 
 import java.util.Random;
 
-public class Armor extends Item {
+public class Armor extends Item  {
     private final ArmorClass ac;
     private int baseProtection;
     private boolean equipped;

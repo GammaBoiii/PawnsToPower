@@ -3,13 +3,14 @@ package de.hsmittweida.pawnstopower;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Diese Klasse enthält alles, was der Spieler besitzt.
  * Dazu zählen Kämpfer, Waffen, Kleidung und sonstige Gegenstände
  */
-public class Inventory {
+public class Inventory implements Serializable {
     private static ArrayList<Weapon> weapons;
     private static ArrayList<Armor> armor;
     private static ArrayList<Pawn> pawns;

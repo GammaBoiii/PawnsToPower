@@ -6,11 +6,13 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class Skill {
+import java.io.Serializable;
+
+public class Skill implements Serializable {
     private final String id;
     private final String name;
     private byte level;
-    private final IntegerProperty baseVal;
+    private transient final IntegerProperty baseVal;
     private double multiplier;
 
     Pawn pawn;

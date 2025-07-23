@@ -1,8 +1,9 @@
 package de.hsmittweida.pawnstopower;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Item {
+public class Item implements Serializable {
     private String name;
     private Pawn owner;
     private boolean equipped;

@@ -277,7 +277,7 @@ public class Game {
     }
 
     private static void other() {
-
+        new QuickMenu();
     }
 
     private static void newDay() {
