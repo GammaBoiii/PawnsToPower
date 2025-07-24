@@ -65,45 +65,45 @@ public class Inspector {
         if(p.getArmor((byte)0) != null) {
 
         }
-        AnchorPane.setLeftAnchor(btnHead, 248.0);
-        AnchorPane.setRightAnchor(btnHead, 248.0);
-        AnchorPane.setTopAnchor(btnHead, 6.0);
+        AnchorPane.setLeftAnchor(btnHead, 710.0);
+        AnchorPane.setRightAnchor(btnHead, 710.0);
+        AnchorPane.setTopAnchor(btnHead, 190.0);
         btnHead.setPrefWidth(70);
-        btnHead.setPrefHeight(85);
-        btnHead.setOnAction(e -> new Slot( btnHead, p, "clothing", 0));
+        btnHead.setPrefHeight(90);
+        btnHead.setOnAction(e -> new Slot( btnHead, p, "clothing", 0, "Kopfschutz"));
 
         //Slot 1
         if(p.getArmor((byte)1) != null) {
 
         }
-        AnchorPane.setLeftAnchor(btnTorso, 240.0);
-        AnchorPane.setRightAnchor(btnTorso, 240.0);
-        AnchorPane.setTopAnchor(btnTorso, 115.0);
-        btnTorso.setPrefHeight(250);
+        AnchorPane.setLeftAnchor(btnTorso, 710.0);
+        AnchorPane.setRightAnchor(btnTorso, 710.0);
+        AnchorPane.setTopAnchor(btnTorso, 300.0);
+        btnTorso.setPrefHeight(235);
         btnTorso.setPrefWidth(50);
-        btnTorso.setOnAction(e -> new Slot( btnTorso, p, "clothing", 1));
+        btnTorso.setOnAction(e -> new Slot( btnTorso, p, "clothing", 1, "Torsoschutz"));
 
         //Slot 2
         if(p.getArmor((byte)2) != null) {
 
         }
-        AnchorPane.setLeftAnchor(btnArms, 180.0);
-        AnchorPane.setRightAnchor(btnArms, 180.0);
-        AnchorPane.setTopAnchor(btnArms, 115.0);
+        AnchorPane.setLeftAnchor(btnArms, 655.0);
+        AnchorPane.setRightAnchor(btnArms, 655.0);
+        AnchorPane.setTopAnchor(btnArms, 300.0);
         btnArms.setPrefHeight(250);
         btnArms.setPrefWidth(150);
-        btnArms.setOnAction(e -> new Slot(btnArms, p, "clothing", 2));
+        btnArms.setOnAction(e -> new Slot(btnArms, p, "clothing", 2, "Armschutz"));
 
         //Slot 3
         if(p.getArmor((byte)3) != null) {
 
         }
-        AnchorPane.setRightAnchor(btnLegs, 240.0);
-        AnchorPane.setLeftAnchor(btnLegs, 240.0);
-        AnchorPane.setTopAnchor(btnLegs, 350.0);
-        btnLegs.setPrefHeight(250);
+        AnchorPane.setRightAnchor(btnLegs, 710.0);
+        AnchorPane.setLeftAnchor(btnLegs, 710.0);
+        AnchorPane.setTopAnchor(btnLegs, 535.0);
+        btnLegs.setPrefHeight(260);
         btnLegs.setPrefWidth(50);
-        btnLegs.setOnAction(e -> new Slot(btnLegs, p, "clothing", 3));
+        btnLegs.setOnAction(e -> new Slot(btnLegs, p, "clothing", 3, "Beinschutz"));
 
 
         //Slot 0 - siehe Pawn.weaponSlotUsed
@@ -114,7 +114,7 @@ public class Inspector {
         AnchorPane.setTopAnchor(btnRight, 195.0);
         btnRight.setPrefWidth(65);
         btnRight.setPrefHeight(200);
-        btnRight.setOnAction(e -> new Slot(btnRight, p, "weapon", 0));
+        btnRight.setOnAction(e -> new Slot(btnRight, p, "weapon", 0, "Rechte Handwaffe"));
 
         //Slot 1
         if(p.getWeapon((byte)1) != null) {
@@ -124,7 +124,7 @@ public class Inspector {
         AnchorPane.setTopAnchor(btnLeft, 195.0);
         btnLeft.setPrefWidth(65);
         btnLeft.setPrefHeight(200);
-        btnLeft.setOnAction(e -> new Slot(btnLeft, p, "weapon", 1));
+        btnLeft.setOnAction(e -> new Slot(btnLeft, p, "weapon", 1, "Linke Handwaffe"));
 
 
         anchorPane.getChildren().addAll(btnHead, btnArms, btnTorso, btnLegs, btnLeft, btnRight, stats);
@@ -190,6 +190,22 @@ public class Inspector {
         levelLabel.setMaxWidth(Double.MAX_VALUE);
         level.getChildren().addAll(levelLabel, pawnLevel);
 
+        // Efahrungspunkte Anzeige
+        HBox xpbar = new HBox();
+        ProgressBar pb = new ProgressBar();
+        pb.progressProperty().bind(pawn.getLevelProgress());
+        Button dbg1 = new Button("Debug");
+        Button dbg2 = new Button("Debug2");
+        dbg1.setOnAction(e -> {
+            pawn.addXp(5);
+            System.out.println(pawn.getXpAsInt());
+        });
+        dbg2.setOnAction(e -> {
+            pawn.addXp(1);
+            System.out.println(pawn.getXpAsInt());
+        });
+        xpbar.getChildren().addAll(pb, dbg1, dbg2);
+
         // Erfahrungspunkte
         HBox xp = new HBox();
 //        ProgressBar pb = new ProgressBar(pawn.xpForLevelup((byte) pawn.getLevel()));
@@ -214,7 +230,7 @@ public class Inspector {
             System.out.println(pawn.getExperience());
         });*/
 
-        box.getChildren().addAll(name, level, xp/*, debug*/);
+        box.getChildren().addAll(name, level, xpbar, xp/*, debug*/);
         return box;
     }
 

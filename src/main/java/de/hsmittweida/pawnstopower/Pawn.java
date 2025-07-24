@@ -1,7 +1,9 @@
 package de.hsmittweida.pawnstopower;
 
 import javafx.beans.binding.IntegerBinding;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Button;
 
@@ -16,8 +18,10 @@ public class Pawn implements Serializable {
     private final ArrayList<Skill> skills;
     private int skillPoints;
 
+    private transient DoubleProperty progress;
     private transient IntegerProperty xp;
     private transient IntegerBinding lvl;
+
 
     Pawn() {
         for (Weapon w : weapons) {
@@ -40,38 +44,7 @@ public class Pawn implements Serializable {
         skills.add(resistance);
         skills.add(speed);
 
-        /* Im folgenden Abschnitt wird mittels IntegerBinding und der dazugehörigen computeValue() Methode
-         * das Level an die Erfahrungspunkte gebunden. Dabei braucht ein weiteres Level immer 5 Erfahrungspunkte (xp)
-         * mehr, als das vorherige Level - beginnend bei 50 benötigten Erfahrungspunkten für Level 2.
-         */
-        this.xp = new SimpleIntegerProperty(0);
-        this.lvl = new IntegerBinding() {
-
-            {
-                super.bind(xp);
-            }
-
-            @Override
-            protected int computeValue() {
-                System.out.println("debuuuuuuuuug1");
-                int currentXP = xp.get();
-                int requiredXP = 50;
-                int l = 1;
-
-                while (currentXP >= requiredXP) {
-                    l++;
-                    skillPoints++;
-
-                    /* Steigerung: jedes Level braucht 5 XP mehr */
-                    currentXP -= requiredXP;
-                    requiredXP += 5;
-                    //System.out.println("XP: " + currentXP + " - " + requiredXP + " | Level: " + l);
-                }
-
-                return l;
-            }
-
-        };
+        initVars();
     }
 
     /**
@@ -274,12 +247,13 @@ public class Pawn implements Serializable {
 
     public IntegerBinding addXp(int x) {
         if (this.xp == null) {
-            this.xp = new SimpleIntegerProperty(x);
-            /* kleiner Workaround, damit der IntegerBinding einmal das Level aufsetzt */
+            /* this.xp = new SimpleIntegerProperty(x);
+            // kleiner Workaround, damit der IntegerBinding einmal das Level "aufsetzt"
             this.xp.add(1);
             this.xp.add(-1);
 
-            return this.lvl;
+            return this.lvl; */
+            initVars();
         }
         this.xp.set(this.xp.get() + x);
         // System.out.println("xp: " + this.xp.get() + " - " + this.lvl.get());
@@ -288,32 +262,36 @@ public class Pawn implements Serializable {
 
     public int getLvl() {
         if(this.lvl == null) {
-            this.lvl = new IntegerBinding() {
-
-                {
-                    super.bind(xp);
-                }
-
-                @Override
-                protected int computeValue() {
-                    System.out.println("debuuuuug2");
-                    int currentXP = xp.get();
-                    int requiredXP = 50;
-                    int l = 1;
-
-                    while (currentXP >= requiredXP) {
-                        l++;
-                        skillPoints++;
-
-                        /* Steigerung: jedes Level braucht 5 XP mehr */
-                        currentXP -= requiredXP;
-                        requiredXP += 5;
-                        //System.out.println("XP: " + currentXP + " - " + requiredXP + " | Level: " + l);
-                    }
-
-                    return l;
-                }
-            };
+//            this.lvl = new IntegerBinding() {
+//
+//                {
+//                    super.bind(xp);
+//                }
+//
+//                @Override
+//                protected int computeValue() {
+//                    if(xp == null) {
+//                         Sicherstellen, dass Xp initiert ist (könnte nach Spielstand laden null sein)
+//                        addXp(0);
+//                    }
+//                    int currentXP = xp.get();
+//                    int requiredXP = 50;
+//                    int l = 1;
+//
+//                    while (currentXP >= requiredXP) {
+//                        l++;
+//                        skillPoints++;
+//
+//                         Steigerung: jedes Level braucht 5 XP mehr
+//                        currentXP -= requiredXP;
+//                        requiredXP += 5;
+//                        //System.out.println("XP: " + currentXP + " - " + requiredXP + " | Level: " + l);
+//                    }
+//
+//                    return l;
+//                }
+//            };
+            initVars();
         }
         return this.lvl.get();
     }
@@ -339,6 +317,10 @@ public class Pawn implements Serializable {
             nextLvlXp += 5;
             // System.out.println("xxx");
         }
+    }
+
+    public DoubleProperty getLevelProgress() {
+        return progress;
     }
 
     public boolean ownedByPlayer() {
@@ -432,5 +414,50 @@ public class Pawn implements Serializable {
             this.getSkills().get(2).setMultiplier(1.0);
             this.getSkills().get(3).setMultiplier(1.0);
         }
+    }
+
+    /** Dient der Initialisierung der Variablen, die nicht Serialisiert werden können.
+     * Insbesondere nach Laden eines Spielstandes!
+     */
+    private void initVars() {
+        /* Im folgenden Abschnitt wird mittels IntegerBinding und der dazugehörigen computeValue() Methode
+         * das Level an die Erfahrungspunkte gebunden. Dabei braucht ein weiteres Level immer 5 Erfahrungspunkte (xp)
+         * mehr, als das vorherige Level - beginnend bei 50 benötigten Erfahrungspunkten für Level 2.
+         */
+        this.progress = new SimpleDoubleProperty();
+        this.xp = new SimpleIntegerProperty(0);
+        this.lvl = new IntegerBinding() {
+            {
+                super.bind(xp);
+            }
+
+            @Override
+            protected int computeValue() {
+                int currentXP = xp.get();
+                int requiredXP = 50;
+                int l = 1;
+
+                while (currentXP >= requiredXP) {
+                    l++;
+                    skillPoints++;
+
+                    /* Steigerung: jedes Level braucht 5 XP mehr */
+                    currentXP -= requiredXP;
+                    requiredXP += 5;
+                    //System.out.println("XP: " + currentXP + " - " + requiredXP + " | Level: " + l);
+                }
+
+                progress.set((double) currentXP / requiredXP);
+                System.out.println("progess: " + progress.get() + " | » " + currentXP + " - " + requiredXP);
+                return l;
+            }
+
+        };
+        /* Da bei einem Integer Bindung das Compute Value nur bei "Benutzung" des Integer Values aufgerufen wird,
+         * wird dieses hier einfach jedes mal abgefragt, wenn man XP erhält.
+         */
+        xp.addListener((observable, oldValue, newValue) -> {
+            this.lvl.get();
+        });
     }
 }

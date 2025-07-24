@@ -49,19 +49,29 @@ public class Diary {
   
         if (Math.abs(Inventory.getMoney() - oldMoney) != 0) {
             if(Inventory.getMoney() > oldMoney) {
-                msg += "Wir haben am letzten Tag " + (Inventory.getMoney() - oldMoney) + " Gold verdient.\n";
+                msg += "Wir haben am letzten Tag " + (Inventory.getMoney() - oldMoney) + " Gold verdient.\n\n";
             } else {
-                msg += "Wir haben am letzten Tag " + (oldMoney - Inventory.getMoney()) + " Gold verloren.\n";
+                msg += "Wir haben am letzten Tag " + (oldMoney - Inventory.getMoney()) + " Gold verloren.\n\n";
             }
         }
-        if(Math.abs(Inventory.getPawnsNum().getValue() - oldPawnNum) != 0) {
-            msg += (Inventory.getPawnsNum().getValue() - oldPawnNum) + " neue Krieger begleiten uns: \n\t";
+        if(Math.abs(Inventory.getPawnsNum().getValue() - oldPawnNum) == 1) {
+            msg += "Ein neuer Krieger begleitet uns: \n\t";
+            msg += Inventory.getPawns().get(Inventory.getPawns().size()-1).getName()+".\n";
+        } else if(Math.abs(Inventory.getPawnsNum().getValue() - oldPawnNum) == 2) {
+            msg += "Zwei neue Krieger begleiten uns: \n\t";
             for(int i = 1; i <= (Inventory.getPawnsNum().getValue() - oldPawnNum); i++) {
                 if(i == Inventory.getPawnsNum().getValue() - oldPawnNum) { msg += " und ";}
-                msg += Inventory.getPawns().get(Inventory.getPawns().size()-i).getName()+", ";
+                msg += Inventory.getPawns().get(Inventory.getPawns().size()-i).getName();
+            }
+        } else if(Math.abs(Inventory.getPawnsNum().getValue() - oldPawnNum) > 2) {
+            msg += (Inventory.getPawnsNum().getValue() - oldPawnNum) + " neue Krieger begleiten uns: \n\t";
+            for(int i = 1; i <= (Inventory.getPawnsNum().getValue() - oldPawnNum); i++) {
+                if(i == Inventory.getPawnsNum().getValue() - oldPawnNum - 1) {msg += Inventory.getPawns().get(Inventory.getPawns().size() - (i)).getName() + " und " + Inventory.getPawns().get(Inventory.getPawns().size() - (i +1)).getName(); break;}
+                msg += Inventory.getPawns().get(Inventory.getPawns().size() - i).getName() + ", ";
+
             }
         }
-
+        msg += "\n\n";
         oldPawnNum = Inventory.getPawnsNum().getValue();
         oldMoney = Inventory.getMoney();
         writeDiaryEntry(msg);

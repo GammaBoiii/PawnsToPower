@@ -23,7 +23,7 @@ public class Slot {
      * @param type      - Waffe oder Kleidungsstück (Rüstung).
      * @param id        - Die ID des Slots, an dem die Ausrüstung ausgerüstet werden soll. Unterschieden wird bei den Slots gemäß {@code @param type}.
      */
-    Slot(Button reference, Pawn p, String type, int id) {
+    Slot(Button reference, Pawn p, String type, int id, String title) {
         /* Das Fenster wird ganz normal aufgesetzt und bestückt. */
         Stage stage = new Stage();
         ScrollPane sp = new ScrollPane();
@@ -188,6 +188,7 @@ public class Slot {
         Tools.addStylesheet(s, "style_slot.css");
         Tools.defaultClose(stage, "slot");
         stage.setScene(s);
+        stage.setTitle(title);
         stage.show();
     }
 }
