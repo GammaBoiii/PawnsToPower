@@ -1,15 +1,21 @@
 package de.hsmittweida.pawnstopower;
 
+import javafx.scene.Node;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Diary {
     private static int oldMoney, oldPawnNum;
+    private static HashMap<Integer, ArrayList<Node>> diaryEntries;
 
     private static void writeDiaryEntry(String s) {
         Game.getDiary().getChildren().add(new Text("» \t " + s + "\n"));
-        System.out.println("» " + s);
+        saveContext();
+        //System.out.println("» " + s);
     }
 
     public static void logArenaFight(boolean won, String... params) {
@@ -45,28 +51,39 @@ public class Diary {
     }
 
     public static void newDay() {
-        String msg = "Ein neuer Tag beginnt.";
-  
+        String msg = "Ein neuer Tag (" + Game.getDay() + ") beginnt.";
+        if (Game.getDay() == 1) {
+            msg += "\n\n";
+            oldPawnNum = Inventory.getPawnsNum().getValue();
+            oldMoney = Inventory.getMoney();
+            writeDiaryEntry(msg);
+            return;
+        }
         if (Math.abs(Inventory.getMoney() - oldMoney) != 0) {
-            if(Inventory.getMoney() > oldMoney) {
+            if (Inventory.getMoney() > oldMoney) {
                 msg += "Wir haben am letzten Tag " + (Inventory.getMoney() - oldMoney) + " Gold verdient.\n\n";
             } else {
                 msg += "Wir haben am letzten Tag " + (oldMoney - Inventory.getMoney()) + " Gold verloren.\n\n";
             }
         }
-        if(Math.abs(Inventory.getPawnsNum().getValue() - oldPawnNum) == 1) {
+        if (Math.abs(Inventory.getPawnsNum().getValue() - oldPawnNum) == 1) {
             msg += "Ein neuer Krieger begleitet uns: \n\t";
-            msg += Inventory.getPawns().get(Inventory.getPawns().size()-1).getName()+".\n";
-        } else if(Math.abs(Inventory.getPawnsNum().getValue() - oldPawnNum) == 2) {
+            msg += Inventory.getPawns().get(Inventory.getPawns().size() - 1).getName() + ".\n";
+        } else if (Math.abs(Inventory.getPawnsNum().getValue() - oldPawnNum) == 2) {
             msg += "Zwei neue Krieger begleiten uns: \n\t";
-            for(int i = 1; i <= (Inventory.getPawnsNum().getValue() - oldPawnNum); i++) {
-                if(i == Inventory.getPawnsNum().getValue() - oldPawnNum) { msg += " und ";}
-                msg += Inventory.getPawns().get(Inventory.getPawns().size()-i).getName();
+            for (int i = 1; i <= (Inventory.getPawnsNum().getValue() - oldPawnNum); i++) {
+                if (i == Inventory.getPawnsNum().getValue() - oldPawnNum) {
+                    msg += " und ";
+                }
+                msg += Inventory.getPawns().get(Inventory.getPawns().size() - i).getName();
             }
-        } else if(Math.abs(Inventory.getPawnsNum().getValue() - oldPawnNum) > 2) {
+        } else if (Math.abs(Inventory.getPawnsNum().getValue() - oldPawnNum) > 2) {
             msg += (Inventory.getPawnsNum().getValue() - oldPawnNum) + " neue Krieger begleiten uns: \n\t";
-            for(int i = 1; i <= (Inventory.getPawnsNum().getValue() - oldPawnNum); i++) {
-                if(i == Inventory.getPawnsNum().getValue() - oldPawnNum - 1) {msg += Inventory.getPawns().get(Inventory.getPawns().size() - (i)).getName() + " und " + Inventory.getPawns().get(Inventory.getPawns().size() - (i +1)).getName(); break;}
+            for (int i = 1; i <= (Inventory.getPawnsNum().getValue() - oldPawnNum); i++) {
+                if (i == Inventory.getPawnsNum().getValue() - oldPawnNum - 1) {
+                    msg += Inventory.getPawns().get(Inventory.getPawns().size() - (i)).getName() + " und " + Inventory.getPawns().get(Inventory.getPawns().size() - (i + 1)).getName();
+                    break;
+                }
                 msg += Inventory.getPawns().get(Inventory.getPawns().size() - i).getName() + ", ";
 
             }
@@ -75,6 +92,34 @@ public class Diary {
         oldPawnNum = Inventory.getPawnsNum().getValue();
         oldMoney = Inventory.getMoney();
         writeDiaryEntry(msg);
+    }
+
+    public static void saveContext(int day, TextFlow entry) {
+        if (Diary.diaryEntries == null) {
+            diaryEntries = new HashMap<Integer, ArrayList<Node>>();
+        }
+        diaryEntries.remove(day - 1);
+        for (Node n : entry.getChildren()) {
+            diaryEntries.get(day - 1).add(n);
+        }
+        entry.getChildren().clear();
+    }
+
+    public static void saveContext() {
+        if (diaryEntries == null) {
+            diaryEntries = new HashMap<Integer, ArrayList<Node>>();
+        }
+        if (diaryEntries.get(Game.getDay() - 1) == null) {
+            diaryEntries.put(Game.getDay() - 1, new ArrayList<Node>());
+        }
+        diaryEntries.get(Game.getDay() - 1).clear();
+        for (Node n : Game.getDiary().getChildren()) {
+            diaryEntries.get(Game.getDay() - 1).add(n);
+        }
+    }
+
+    public static HashMap<Integer, ArrayList<Node>> getDiaryEntries() {
+        return diaryEntries;
     }
 
 }

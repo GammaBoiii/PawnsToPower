@@ -4,6 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,6 +28,7 @@ public class Game {
     private static HBox helpBar;
     private static VBox sideBar;
     private static TextFlow diary;
+    private static int diaryIndex;
 
 
     Game() {
@@ -37,6 +39,7 @@ public class Game {
     public static void Game_view() {
         //        pawns = new ArrayList<Pawn>();
         day = new SimpleIntegerProperty(0);
+        diary = new TextFlow();
         Inventory.setup();
         CreateWindow();
         Debug();
@@ -192,22 +195,46 @@ public class Game {
         //content.setFitToHeight(true);
 
         VBox textBox = new VBox();
-        diary = new TextFlow();
+        //diary = new TextFlow();
+        System.out.println("Diary created");
         textBox.getChildren().add(diary);
         content.setContent(textBox);
         content.setMinHeight(Tools.getScreenSize().get('h') * 0.9);
         content.setMaxHeight(Tools.getScreenSize().get('h') * 0.9);
 
-        //diary.setStyle("-fx-border-color: red; -fx-border-style: solid; -fx-border-width: 2;");
-        //textBox.setStyle("-fx-border-color: green; -fx-border-style: solid; -fx-border-width: 5;");
-        //content.setStyle("-fx-border-color: blue; -fx-border-style: solid; -fx-border-width: 2;");
+        HBox entryChooser = new HBox();
+        Button prevDay = new Button("«");
+        Button nextDay = new Button("»");
+        prevDay.setOnAction(e -> {
+            diaryIndex--;
+            diary.getChildren().clear();
+            for(Node n : Diary.getDiaryEntries().get(diaryIndex-1)) {
+                diary.getChildren().add(n);
+            }
+            nextDay.setDisable(false);
+            if(diaryIndex - 1 <= 0) {
+                prevDay.setDisable(true);
+            }
+        });
+        nextDay.setOnAction(e -> {
+            diaryIndex++;
+            diary.getChildren().clear();
+            for(Node n : Diary.getDiaryEntries().get(diaryIndex-1)) {
+                diary.getChildren().add(n);
+            }
+            prevDay.setDisable(false);
+            if(diaryIndex + 1 > getDay()) {
+                nextDay.setDisable(true);
+            }
+        });
+        prevDay.setDisable(true);
+        nextDay.setDisable(true);
+        entryChooser.getChildren().addAll(prevDay, nextDay);
+        day.addListener((obs, oldDay, newDay) -> {
+           prevDay.setDisable(false);
+        });
 
-        /*for(int it = 0; it<250; it++) {
-            Diary.logArenaFight(true);
-        }*/
-
-
-        box.getChildren().addAll(header, content);
+        box.getChildren().addAll(header, content, entryChooser);
         return box;
     }
 
@@ -254,6 +281,10 @@ public class Game {
         label_rep.setMaxWidth(Double.MAX_VALUE);
         label_day.setMaxWidth((Double.MAX_VALUE));
         Button nextDay = new Button("Nächster Tag");
+
+        /* Beim Initiieren wird einmalig ein neuer Tag gesetzt (von 0 auf 1). Dies wird so gemacht, damit die
+         * Grundwerte (Gold und Kämpfer..), mit denen man das Spiel startet, nicht im Tagebuch log als neue
+         * Errungenschaft dargestellt werden. */
         newDay();
         nextDay.setOnAction(e -> {
             newDay();
@@ -281,8 +312,10 @@ public class Game {
     }
 
     private static void newDay() {
+        diary.getChildren().clear();
         day.set(day.get() + 1);
         Diary.newDay();
+        diaryIndex = day.get();
     }
     public static int getDay() {
         return day.get();
@@ -317,6 +350,5 @@ public class Game {
         }
         return diary;
     }
-
 
 }
