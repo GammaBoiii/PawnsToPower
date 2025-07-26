@@ -22,6 +22,8 @@ public class Pawn implements Serializable {
     private transient IntegerProperty xp;
     private transient IntegerBinding lvl;
 
+    private boolean foughtToday = false;
+
 
     Pawn() {
         for (Weapon w : weapons) {
@@ -459,5 +461,12 @@ public class Pawn implements Serializable {
         xp.addListener((observable, oldValue, newValue) -> {
             this.lvl.get();
         });
+    }
+
+    public boolean hashFoughtToday() {
+        return foughtToday;
+    }
+    public void setFoughtToday(boolean foughtToday) {
+        this.foughtToday = foughtToday;
     }
 }

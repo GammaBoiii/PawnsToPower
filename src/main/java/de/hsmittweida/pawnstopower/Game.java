@@ -312,10 +312,19 @@ public class Game {
     }
 
     private static void newDay() {
+        /* Tagebuch einrichten */
         diary.getChildren().clear();
         day.set(day.get() + 1);
         Diary.newDay();
         diaryIndex = day.get();
+
+        /* Pawn Kämpfe zurücksetzen */
+        for(Pawn p : Inventory.getPawns()) {
+            p.setFoughtToday(false);
+        }
+
+        /* UI-Sachen */
+        Game.drawSpace();
     }
     public static int getDay() {
         return day.get();

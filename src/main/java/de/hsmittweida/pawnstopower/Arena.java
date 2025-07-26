@@ -76,11 +76,14 @@ public class Arena {
                         -fx-translate-y: 0;
                     """);
             Button choose = new Button("Kampf!");
-
+            if(p.hashFoughtToday()) {
+                choose.setDisable(true);
+            }
             choose.setOnAction(e -> {
                 choose.setDisable(true);
                 choosenFighter = p;
                 Game.drawSpace(Arena.arenaFight());
+                p.setFoughtToday(true);
             });
 
             HBox fighter = new HBox(10, name, spacerR, choose);
