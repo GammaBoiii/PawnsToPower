@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class Game {
     private static ArrayList<Pawn> pawns;
     private static Stage stage;
-    private static int reputation;
     private static IntegerProperty day;
 
     private static Pane gameSpace;
@@ -256,10 +255,11 @@ public class Game {
         */
         Label label_pawns = new Label("Bauern:\n" + Inventory.getPawns().size());
         Label label_money = new Label("Goldstücke:\n" + Inventory.getMoney());
-        Label label_rep = new Label("Reputation:\n" + reputation);
+        Label label_rep = new Label("Reputation:\n" + Inventory.getReputation());
         Label label_day = new Label("Tag:\n" + day);
 
         label_pawns.textProperty().bind(Bindings.concat("Pawns:\n", Inventory.getPawnsNum()));
+        label_rep.textProperty().bind(Bindings.concat("Reputation:\n", Inventory.getReputation()));
         label_day.textProperty().bind(Bindings.concat("Tag:\n", day.asString()));
         label_money.textProperty().bind((Bindings.concat("Goldstücke:\n", Inventory.getMoneyAsSimpleInt())));
         /*
@@ -350,7 +350,7 @@ public class Game {
     public static void drawSpace() {
         Game.gameSpace = createGameView();
         panel.setCenter(gameSpace);
-        System.out.println("ayooooooo");
+        Game.setNextDayButtonDisabled(false);
     }
 
     public static TextFlow getDiary() {
@@ -358,6 +358,10 @@ public class Game {
             diary = new TextFlow();
         }
         return diary;
+    }
+
+    public static void setNextDayButtonDisabled(boolean disabled) {
+        if(helpBar != null)helpBar.getChildren().get(helpBar.getChildren().size()-1).setDisable(disabled);
     }
 
 }

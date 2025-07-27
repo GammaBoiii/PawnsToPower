@@ -24,6 +24,7 @@ public class Turn extends Thread {
      */
     @Override
     public void run() {
+        System.out.println("Thread1 " + Thread.currentThread().getName() + " wurde gestartet.");
         while (!Thread.currentThread().isInterrupted()) {
             /* Zug für den Gegner */
             if (!pawn.ownedByPlayer()) {
@@ -103,10 +104,11 @@ public class Turn extends Thread {
 
             pawn = Arena.getOther(pawn);
         }
-        System.out.println("Thread " + Thread.currentThread().getName() + " wurde beendet.");
+        //System.out.println("Thread1 " + Thread.currentThread().getName() + " wurde beendet.");
     }
 
     public void kill() {
+        System.out.println("Thread2 " + thread.getName() + " wurde beendet.");
         thread.interrupt();
     }
 
@@ -123,5 +125,9 @@ public class Turn extends Thread {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    public Thread getThread() {
+        return this.thread;
     }
 }

@@ -136,9 +136,9 @@ public class Tools {
     /**
      * Ersetzt das -fx-transition aus .css
      *
-     * @param b      - Der Button, der animiert werden soll.
-     * @param millis - Transitionszeit in Millisek.
-     * @param fac    - Der Faktor um wie viel vergrößert wird.
+     * @param b Der Button, der animiert werden soll.
+     * @param millis Transitionszeit in Millisek.
+     * @param fac Der Faktor um wie viel vergrößert wird.
      */
     public static void addHoverEffect(Button b, int millis, double fac, boolean glowEffect) {
         ScaleTransition scaleIn = new ScaleTransition(Duration.millis(millis), b);

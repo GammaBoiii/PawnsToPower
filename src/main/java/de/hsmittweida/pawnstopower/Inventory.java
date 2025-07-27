@@ -18,6 +18,8 @@ public class Inventory implements Serializable {
     private static IntegerProperty money;
     private static IntegerProperty pawnsNum;
 
+    private static IntegerProperty reputation;
+
     public static void setup() {
         weapons = new ArrayList<Weapon>();
         armor = new ArrayList<Armor>();
@@ -29,6 +31,7 @@ public class Inventory implements Serializable {
 
         Inventory.addPawn(new Pawn());
         Inventory.addMoney(250);
+        Inventory.addReputation(15);
     }
 
     public static ArrayList<Weapon> getWeapons() {
@@ -78,5 +81,23 @@ public class Inventory implements Serializable {
 
     public static void addMoney(int money) {
         Inventory.money.set(Inventory.money.get() + money);
+    }
+
+    public static IntegerProperty getReputation() {
+        if(Inventory.reputation == null) {
+            Inventory.reputation = new SimpleIntegerProperty(0);
+        }
+        return reputation;
+    }
+
+    public static void addReputation(int reputation) {
+        if(Inventory.reputation == null) {
+            Inventory.reputation = new SimpleIntegerProperty(0);
+        }
+        if (reputation < 0 && Math.abs(reputation) > Math.abs(Inventory.reputation.get())) {
+            Inventory.reputation.set(0);
+        } else {
+            Inventory.reputation.set(Inventory.reputation.get() + reputation);
+        }
     }
 }

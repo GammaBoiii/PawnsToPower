@@ -372,13 +372,8 @@ public class Pawn implements Serializable {
         double weapondamage2 = this.getWeapon((byte) 1) != null ? this.getWeapon((byte) 1).getTotalDamage() : 0;
         damage += this.getSkills().get(1).getSkillValue() * 2;
         damage += weapondamage1 + weapondamage2;
-        System.out.println("vanila dmg: " + damage);
         damage -= enemy.getTotalProtectionValue();
-        System.out.println("minus " + enemy.getTotalProtectionValue() + " Rüstung: " + damage);
         damage /= enemy.getSkills().get(2).getSkillValue() / 100 +1;
-        System.out.println("div: " + enemy.getSkills().get(2).getSkillValue() + ": "+ damage);
-
-
 
         //System.out.println("graze: " + graze + " | " + damage);
         /* Falls der fehlgeschlagene Angriff ein Streifschuss war, dann wird auf den gesamten vorher
@@ -450,7 +445,7 @@ public class Pawn implements Serializable {
                 }
 
                 progress.set((double) currentXP / requiredXP);
-                System.out.println("progess: " + progress.get() + " | » " + currentXP + " - " + requiredXP);
+                //System.out.println("progess: " + progress.get() + " | » " + currentXP + " - " + requiredXP);
                 return l;
             }
 

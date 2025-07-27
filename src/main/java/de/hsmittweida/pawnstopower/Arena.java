@@ -63,8 +63,6 @@ public class Arena {
         VBox fighters = new VBox();
         fighters.setMaxWidth(Double.MAX_VALUE);
         for (Pawn p : Inventory.getPawns()) {
-
-
             Label name = new Label(p.getName());
             Label spacer = new Label("\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-");
 
@@ -84,6 +82,7 @@ public class Arena {
                 choosenFighter = p;
                 Game.drawSpace(Arena.arenaFight());
                 p.setFoughtToday(true);
+                Game.setNextDayButtonDisabled(true);
             });
 
             HBox fighter = new HBox(10, name, spacerR, choose);
@@ -109,8 +108,12 @@ public class Arena {
         Tools.addStylesheet(pane, "style_arena.css");
         Button mainMenu = new Button("Hauptmenu");
         mainMenu.setOnAction(e -> {
-            if(turn != null) turn.kill();
-            Game.drawSpace();
+            String res = Tools.confirmPopup("Kampf abbrechen", "Möchtest du den Kampf beenden?", "Wenn du diesen Kampf abbrichst, verlierst du 50% deiner Reputation und erhälst keine Belohnung.");
+            if(res.equals("yes")) {
+                if(turn != null) turn.kill();
+                Game.drawSpace();
+                Inventory.addReputation((int) (Inventory.getReputation().get() * 0.5 * -1));
+            }
         });
         AnchorPane.setTopAnchor(mainMenu, 2.0);
         AnchorPane.setLeftAnchor(mainMenu, 2.0);
@@ -244,6 +247,15 @@ public class Arena {
         AnchorPane.setRightAnchor(hb_enemy, 150.0);
         AnchorPane.setTopAnchor(hb_enemy, 450.0);
 
+        Label fighterlabel = new Label(choosenFighter.getName());
+        Label enemylabel = new Label(enemy.getName());
+        AnchorPane.setLeftAnchor(fighterlabel, 150.0);
+        AnchorPane.setTopAnchor(fighterlabel, 550.0);
+        AnchorPane.setRightAnchor(enemylabel, 150.0);
+        AnchorPane.setTopAnchor(enemylabel, 550.0);
+        arena.getChildren().addAll(fighterlabel, enemylabel);
+
+
         Label healthlabel_fighter = new Label("");
         Label healthlabel_enemy = new Label("");
         healthlabel_fighter.textProperty().bind(currentHealth_fighter.asString("%.0f"));
@@ -357,8 +369,6 @@ public class Arena {
         baseXPreward = (int)(baseXPreward *  (1+baseMult));
         baseMoneyreward = (int)(baseMoneyreward * (1+baseMult));
         price = new int[]{baseMoneyreward, baseXPreward};
-        System.out.println("Preward: " + price[0] + " Xp: " + price[1]);
-
 
         /* Der Gegner braucht natürlich noch Equippment..
         * Dies wird komplett zufällig generiert*/
@@ -559,10 +569,14 @@ public class Arena {
     private static void fightOver(boolean playerWins) {
         new Thread(() -> {
             try {
+                System.out.println("Before sleep: " + Thread.currentThread().getName());
                 Thread.sleep(2000);
-                Platform.runLater(() -> {
-                    Game.drawSpace(ArenaWinScreen.winscreen(playerWins));
-                });
+                System.out.println("After sleep: " + Thread.currentThread().getName());
+                if(!turn.getThread().isInterrupted()) {
+                    Platform.runLater(() -> {
+                        Game.drawSpace(ArenaWinScreen.winscreen(playerWins));
+                    });
+                }
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
