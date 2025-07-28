@@ -22,6 +22,12 @@ import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * Die Arena Klasse beinhaltet die Oberflächen und die Logik für die Arena.
+ * In einem Arenakampf kämpft immer ein Kämpfer des Spielers gegen einen zufällig generierten Gegener.
+ * Gewinnt der Spieler, so gewinnt er Gold und Erfahrungspunkte für den teilnehmenden Kämpfer. Außerdem
+ * kann der gegnerische, besiegte Kämpfe mit einer gewissen Chance in das Team des Spielers übergehen.
+ */
 public class Arena {
 
     private static Pawn choosenFighter;
@@ -37,19 +43,17 @@ public class Arena {
     private static Pawn winner;
     private static int[] price;
 
-
-    public Arena() {
-
-    }
-
+    /**
+     * Erstellt die Oberfläche, bei der der Spieler sich einen seiner Kämpfer aussucht, mit dem
+     * er in die Arena geht.
+     * @return FX-Element (Pane), welches dann im Spiel mittels {@code Game.drawSpace} angezeigt wird.
+     */
     public static Pane chooseFighter() {
         AnchorPane pane = new AnchorPane();
         Tools.addStylesheet(pane, "style_arena.css");
         Label label = new Label("Wähle deinen Pawn aus!");
-        label.setStyle("-fx-border-color: red; -fx-border-width: 2"); //Debug
         Button mainMenu = new Button("Hauptmenu");
         mainMenu.setOnAction(e -> {
-
             Game.drawSpace();
         });
         AnchorPane.setTopAnchor(mainMenu, 2.0);
@@ -64,8 +68,6 @@ public class Arena {
         fighters.setMaxWidth(Double.MAX_VALUE);
         for (Pawn p : Inventory.getPawns()) {
             Label name = new Label(p.getName());
-            Label spacer = new Label("\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-\t-");
-
             Region spacerR = new Region();
             HBox.setHgrow(spacerR, Priority.ALWAYS);
             spacerR.setStyle("""
@@ -84,10 +86,8 @@ public class Arena {
                 p.setFoughtToday(true);
                 Game.setNextDayButtonDisabled(true);
             });
-
             HBox fighter = new HBox(10, name, spacerR, choose);
             fighter.setPadding(new Insets(20,0,0,0));
-
             fighters.getChildren().add(fighter);
         }
         sp.setContent(fighters);
@@ -102,6 +102,11 @@ public class Arena {
         return pane;
     }
 
+    /**
+     * Dient zum Anzeigen der Arena und zum Initiieren des Kampfes.
+     * Beinhaltet hauptsächlich UI handling.
+     * @return FX-Element (Pane), welches dann im Spiel mittels {@code Game.drawSpace} angezeigt wird.
+     */
     public static Pane arenaFight() {
         AnchorPane pane = new AnchorPane();
         BorderPane field = new BorderPane();
@@ -123,17 +128,12 @@ public class Arena {
         /* Textbereich, der als Kampf-Log dient */
         textField = new ScrollPane();
         VBox textBox = new VBox();
-
         textField.setFitToHeight(true);
         textField.setFitToWidth(true);
         textField.setContent(textBox);
-
         log = new TextFlow();
-        //log2.setText("\nDas hier ist ein Test, nice. Hier sollen später mal gaaaanz viele Kämpfer kämpfen. Mal gucken, wie dieses sich so schlagen wreden. Bin gespannt, hole popcorn!");
-        //log2.setStyle("-fx-font-style: italic; -fx-font-weight: bold;");
         log.setId("log");
         textBox.getChildren().add(log);
-
         AnchorPane.setLeftAnchor(field, 35.0);
         AnchorPane.setRightAnchor(field, 35.0);
         AnchorPane.setTopAnchor(field, 50.0);
@@ -141,12 +141,11 @@ public class Arena {
         textField.setMinHeight(250.0);
         textField.setMaxHeight(250.0);
         textField.vvalueProperty().bind(textBox.heightProperty());
-        // textField.vbarPolicyProperty().set(ScrollPane.ScrollBarPolicy.NEVER);
         textField.hbarPolicyProperty().set(ScrollPane.ScrollBarPolicy.NEVER);
         pane.getChildren().addAll(mainMenu,field);
         field.setBottom(textField);
 
-
+        /* Gegner wird generiert */
         enemy = generateEnemy();
 
         /* Schlacthfeld */
@@ -217,11 +216,9 @@ public class Arena {
             }
         });
 
-        /*
-         * Die folgenden DoubleBindings dienen dazu, die ProgressBar korrekt anzuzeigen. Da die ProgressBar nur Werte von 0 bis 1 akzeptiert,
-         * muessen die aktuellen Leben (currentHealth..), welche ja bereis vom Typ Property sind, erneut in ein Wert zwischen 0 und 1 normalisiert
-         * werden. Dazu dienen die DoubleBindings mit ihren jeweiligen computeValue Methoden.
-         */
+        /* Die folgenden DoubleBindings dienen dazu, die ProgressBar korrekt anzuzeigen. Da die ProgressBar nur Werte von 0 bis 1 akzeptiert,
+         * müssen die aktuellen Leben (currentHealth..), welche ja bereis vom Typ Property sind, erneut in ein Wert zwischen 0 und 1 normalisiert
+         * werden. Dazu dienen die DoubleBindings mit ihren jeweiligen computeValue Methoden. */
         DoubleBinding healthProgress_enemy = new DoubleBinding() {
             {super.bind(currentHealth_enemy);}
             @Override
@@ -247,6 +244,7 @@ public class Arena {
         AnchorPane.setRightAnchor(hb_enemy, 150.0);
         AnchorPane.setTopAnchor(hb_enemy, 450.0);
 
+        /* Name der Kämpfer */
         Label fighterlabel = new Label(choosenFighter.getName());
         Label enemylabel = new Label(enemy.getName());
         AnchorPane.setLeftAnchor(fighterlabel, 150.0);
@@ -255,7 +253,7 @@ public class Arena {
         AnchorPane.setTopAnchor(enemylabel, 550.0);
         arena.getChildren().addAll(fighterlabel, enemylabel);
 
-
+        // Debug
         Label healthlabel_fighter = new Label("");
         Label healthlabel_enemy = new Label("");
         healthlabel_fighter.textProperty().bind(currentHealth_fighter.asString("%.0f"));
