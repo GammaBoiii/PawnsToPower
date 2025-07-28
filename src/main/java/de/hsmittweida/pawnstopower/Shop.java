@@ -276,8 +276,8 @@ public class Shop {
 
                 }
                 for(CheckBox cb : purchased) {
-                    //cb.setDisable(true);
-                    cb.setStyle("-fx-background-color: dark-red");
+                    cb.setDisable(true);
+                    cb.lookup(".box").setStyle("-fx-background-color: darkred");
                     cb.setSelected(false);
                 }
                 Inventory.addMoney(-1 * ptp.get());
@@ -308,5 +308,16 @@ public class Shop {
             weapon_offer.add(new Weapon());
             armor_offer.add(new Armor());
         }
+    }
+
+    private static boolean isPurchased(ArrayList<CheckBox> list, CheckBox cb) {
+        System.out.println("Checking " + cb + " against " + list);
+        for(CheckBox x : list) {
+            System.out.println(x + " | " + cb);
+            if(x.equals(cb)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

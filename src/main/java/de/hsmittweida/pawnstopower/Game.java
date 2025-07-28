@@ -10,12 +10,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Game {
     private static ArrayList<Pawn> pawns;
@@ -29,6 +31,8 @@ public class Game {
     private static TextFlow diary;
     private static int diaryIndex;
 
+    private static HashMap<String, Font> fonts;
+
 
     Game() {
 
@@ -36,6 +40,12 @@ public class Game {
     }
 
     public static void Game_view() {
+        /* Fonts laden */
+        if(fonts == null) {
+            fonts = new HashMap<String, Font>();
+        }
+        loadFonts();
+
         //        pawns = new ArrayList<Pawn>();
         day = new SimpleIntegerProperty(0);
         diary = new TextFlow();
@@ -48,6 +58,11 @@ public class Game {
         stage.setOnHiding(e -> {
             mainmenutheme.getMediaPlayer().stop();
         });
+
+
+        //javafx.scene.text.Font.getFamilies().forEach(System.out::println);
+        //System.out.println("--------------------------------------------------------------------------");
+        //javafx.scene.text.Font.getFontNames().forEach(System.out::println);
     }
 
 /*    public static String requestInput(String title, String header, String context) {
@@ -197,6 +212,7 @@ public class Game {
         //diary = new TextFlow();
         System.out.println("Diary created");
         textBox.getChildren().add(diary);
+        diary.setStyle("-fx-font-family: 'Dancing Script'");
         content.setContent(textBox);
         content.setMinHeight(Tools.getScreenSize().get('h') * 0.9);
         content.setMaxHeight(Tools.getScreenSize().get('h') * 0.9);
@@ -363,5 +379,20 @@ public class Game {
     public static void setNextDayButtonDisabled(boolean disabled) {
         if(helpBar != null)helpBar.getChildren().get(helpBar.getChildren().size()-1).setDisable(disabled);
     }
+
+    private static void loadFonts() {
+        fonts.put("DancingScript", Font.loadFont(Game.class.getResourceAsStream("fonts/DancingScript-Regular.ttf"), 21));
+        fonts.put("MedievalSharp", Font.loadFont(Game.class.getResourceAsStream("fonts/MedievalSharp-Regular.ttf"), 21));
+        fonts.put("MoonDance", Font.loadFont(Game.class.getResourceAsStream("fonts/MoonDance-Regular.ttf"), 21));
+    }
+
+    public static Font getFont(String name) {
+        if(fonts.containsKey(name)) {
+            return fonts.get(name);
+        }
+        return null;
+    }
+
+
 
 }

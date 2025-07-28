@@ -13,8 +13,6 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) {
         //new StartMenu(primaryStage);
-
         Game.Game_view();
-
     }
 }

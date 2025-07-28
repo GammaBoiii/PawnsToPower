@@ -13,7 +13,10 @@ public class Diary {
     private static HashMap<Integer, ArrayList<Node>> diaryEntries;
 
     private static void writeDiaryEntry(String s) {
-        Game.getDiary().getChildren().add(new Text("» \t " + s + "\n"));
+        Text t = new Text("» \t " + s + "\n");
+        t.setFont(Game.getFont("MoonDance"));
+        t.setStyle("-fx-font-size: 36px;");
+        Game.getDiary().getChildren().add(t);
         saveContext();
         //System.out.println("» " + s);
     }

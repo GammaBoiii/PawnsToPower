@@ -1,4 +1,18 @@
 /* Hintergrund des Hauptmenüs */
+@font-face {
+    font-family: "DancingScript";
+    src: url("fonts/DancingScript-Regular.ttf");
+}
+
+@font-face {
+    font-family: "MedievalSharp";
+    src: url("fonts/MedievalSharp-Regular.ttf");
+}
+
+@font-face {
+    font-family: "MoonDance";
+    src: url("fonts/MoonDance-Regular.ttf");
+}
 
 #game {
     -fx-background-color: #1e1e1e;
@@ -44,19 +58,12 @@
     -fx-vgap: 25;
 }
 
-#help-bar .label {
-    -fx-font-family: "Book Antiqua";
-    -fx-font-weight: bold;
-    -fx-font-size: 15;
-}
-
-
 #game .label {
     -fx-font-size: 26px;
     -fx-text-fill: #d4af37;
     -fx-padding: 20px;
     -fx-alignment: center;
-    -fx-font-family: "Georgia", "Serif";
+    -fx-font-family: "MedievalSharp", "Dancing Script", "MoonDance", "Georgia", "Serif";
     -fx-text-alignment: center;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 5, 0.3, 2, 2);
 }
@@ -64,6 +71,8 @@
 #label-small {
     -fx-text-fill: white;
     -fx-padding: 7;
+    -fx-font-family: "MedievalSharp", "Dancing Script", "MoonDance";
+    -fx-font-size: 20px;
 }
 
 #grid-game .button {
