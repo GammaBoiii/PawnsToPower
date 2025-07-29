@@ -266,7 +266,6 @@ public class Arena {
 
 
         /* Kampf Logik */
-
         /*Wer beginnt */
         nextTurn = Math.random() < 0.5 ? enemy : choosenFighter;
         if(!nextTurn.getName().equals(choosenFighter.getName())) {
@@ -306,11 +305,10 @@ public class Arena {
     }
 
     /**
-     * Generiert basierend auf dem eigenen Kämpfer einen Gegner, der innerhlabt eines gewissen Bereiches ungefähr so stark ist.
+     * Generiert basierend auf dem eigenen Kämpfer einen Gegner, der per Zufall in einem gewissen Bereiches ungefähr so stark ist.
      */
     private static Pawn generateEnemy() {
         Pawn p = new Pawn();
-
 
         /* Level generieren. Abweichung von max +- 2 Leveln */
         Random rnd = new Random();
@@ -321,16 +319,15 @@ public class Arena {
         if(choosenFighter.getLvl() + level < 1) level = 0;
         p.setLvl(choosenFighter.getLvl() + level);
 
-        //System.out.println("Level Gegner: " + p.getLvl() + " >----< " + "Level Kaempfer: " + choosenFighter.getLvl());
-
         /* Skills zuweisen. 1 Level = 1 SkillPunkt. Diese müssen noch zufällig auf
-         * alle Skills verteilt werden.
-         */
+         * alle Skills verteilt werden. */
         while(p.getSkillPoints() > 0) {
             Random rand = new Random();
             p.getSkills().get(rand.nextInt(p.getSkills().size())).addSkillLevel();
             p.addSkillPoints(-1);
         }
+
+        //Debug
         for(Skill s : p.getSkills()) {
            // System.out.println(s.getName() + ": " + s.getSkillLevel() + " -> " + s.getSkillValue());
         }
@@ -341,8 +338,7 @@ public class Arena {
 
         /* Damit das ganze im Kampf-Log auch eine Bedeutung bekommt:
         * (Das doppelte "leicht" und "schwer" ist nur ein Workaround für die Zuweisung von "difficult", da sonst evtl ein ArrayOutOfBounds Exception geworfen wird.
-        * Das Level kann nämlich 2 Level unter oder über dem Level des eigenen Kämpfers sein.
-        * */
+        * Das Level kann nämlich 2 Level unter oder über dem Level des eigenen Kämpfers sein.*/
         String[] difficult_arr = {"leicht", "leicht", "moderat", "schwer", "schwer"};
         String dif_mod = "";
         String difficult = "";
@@ -387,7 +383,7 @@ public class Arena {
 
     /**
      * Logt einen Text ohne Stil in den Log der Arena.
-     * Das Platform.runLater() wird hierbei benötgit, damit auch von anderen Threads (außerhalb des FX-Threads) eine Nachricht
+     * Das Platform.runLater() wird hierbei benötigt, damit auch von anderen Threads (außerhalb des FX-Threads) eine Nachricht
      * im Log angezeigt werden kann. JavaFX erlaubt es andernweitig nicht, dass ein Thread UI-Aktualisierungen in dem FX-Thread
      * vornimmt, und wirft daher standarmäßig einen Fehler. Verwendet wird dies zum Beispiel in der Turn-Klasse, welche einen
      * eigenen Thread erstellt. Die dort aufgefürhten "sleep" Befehle lassen sich aber auch nicht in dem FX-Thread verwenden,
@@ -395,7 +391,6 @@ public class Arena {
      * @param text Der Text, der im Arena Log ausgegeben werden soll.
      */
     public static void log(String text) {
-
         /* Da zu diesem Zeitpunkt die Grafik Elemente noch nicht gerendert sind, müssen Anpassungen
          * erst später vorgenommen werden. Dazu wird einfach der Property der Breite vom Text an die der VBox gehangen..
          * Ist daher auch später dynamisch, wenn das Fenster vergrößert/verkleinert wird.
@@ -406,8 +401,14 @@ public class Arena {
             log.getChildren().add(newText);
         });
     }
-    public static void log(String text, String style) {
 
+    /**
+     * Logt einen Text mit einem CSS Style in den Log der Arena.
+     * Weitere Erklärung zur Methode sind in {@code Arena.log()} zu finden
+     * @param text Der Text, der im Arena Log ausgegeben werden soll.
+     * @param style Der CSS Style, der auf den {@code text} angewendet werden soll.
+     */
+    public static void log(String text, String style) {
         Platform.runLater(() -> {
             Text newText = new Text("\n"+text);
             newText.wrappingWidthProperty().bind(textField.widthProperty()); // ?
@@ -417,9 +418,10 @@ public class Arena {
     }
 
     /**
-     * Fügt dem Pawn schaden hinzu. Diese Methode wurde vor allem für die Spielführung entworfen, damit man von der Turn-Klasse schaden hinzufügen kann.
+     * Fügt dem Pawn schaden hinzu. Diese Methode wurde vor allem für die Spielführung entworfen, damit man von der Turn-Klasse, welche in einem
+     * verschieden Thread läugt, Schaden hinzufügen kann. Auch dafür wird {@code Platform.runlater()} verwendet.
      * @param p Pawn, der Schaden erhalten soll.
-     * @param damage WIe viel Schaden verursacht werden sol.
+     * @param damage Wie viel Schaden verursacht werden soll.
      */
     public static void damage(Pawn p, double damage) {
         Platform.runLater(() -> {
@@ -432,7 +434,6 @@ public class Arena {
     }
 
     /**
-     *
      * @param p Pawn, von dem die Lebenspunkte zurückgegeben werden sollen.
      * @return Die Lebenspunkte des angegebenen Pawns
      */
@@ -459,6 +460,7 @@ public class Arena {
     /**
      * Deaktiviert die Action Buttons (Angreifen/Verteidigen), wenn der Spieler nicht am Zug ist
      * Nutzt ebenfalls runLater(), da die Methode aus einem anderen (nicht FX-) Thread aufgerufen wird (Turn-Klasse)
+     * @param disabled Boolean, der den Aktiv-Status der Buttons festlegt.
      */
     public static void disableActionButtons(boolean disabled) {
             Platform.runLater(() -> {
@@ -467,10 +469,18 @@ public class Arena {
             });
     }
 
+    /**
+     * @return inputQeue, an die der "Trigger" gesendet werden soll.
+     */
     public static BlockingQueue<String> getBlockingQeue() {
         return inputQueue;
     }
 
+    /**
+     * Eine einfache Methode, die bei jedem Zug des Gegners eine automatische Nachricht generiert, damit
+     * das ganze Kampfgeschehen im Arena Log etwas mehr Story hat.
+     * @return Angriffsnachricht
+     */
     public static String[] getEnemyAttackMessage() {
         String[] gegnerInitial = {
                 "Der Gegner beobachtet die Umgebung.",
@@ -541,6 +551,10 @@ public class Arena {
         return new String[]{gegnerInitial[rnd.nextInt(gegnerInitial.length)], gegnerAktion[rnd.nextInt(gegnerAktion.length)], gegnerFolge[rnd.nextInt(gegnerFolge.length)]};
     }
 
+    /**
+     * Ähnlich wie {@code getEnemyAttackMessage()}, nur wenn der Gegner in die Verteidigung geht, anstatt in den Angriff.
+     * @return Verteidigungsnachricht
+     */
     public static String getEnemyDefenseMessage() {
         String[] gegnerVerteidigung = {
                 "Der Gegner nimmt eine defensive Haltung ein.",
@@ -563,12 +577,15 @@ public class Arena {
         return gegnerVerteidigung[rnd.nextInt(gegnerVerteidigung.length)] + "\n\t- Der Gegner geht in die Verteidigung und erhöht seine Konzentration";
     }
 
+    /**
+     * Wenn der Kampf vorrüber ist, wird nach einer bestimmten Zeit der Winscreen mit entsprechender Nachricht,
+     * ob der Spieler gewonnen oder verloren hat, angezeigt.
+     * @param playerWins
+     */
     private static void fightOver(boolean playerWins) {
         new Thread(() -> {
             try {
-                System.out.println("Before sleep: " + Thread.currentThread().getName());
                 Thread.sleep(2000);
-                System.out.println("After sleep: " + Thread.currentThread().getName());
                 if(!turn.getThread().isInterrupted()) {
                     Platform.runLater(() -> {
                         Game.drawSpace(ArenaWinScreen.winscreen(playerWins));
@@ -596,10 +613,16 @@ public class Arena {
          */
     }
 
+    /**
+     * @return den Preis, der in der Arena vefügbar ist, wenn der Spieler gewinnt.
+     */
     public static int[] getPrice() {
         return price;
     }
 
+    /**
+     * @return den Kämpfer des Spielers und den generierten Feind; in einem Array.
+     */
     public static Pawn[] getCombatans( ){
         return new Pawn[] {choosenFighter, enemy};
     }
