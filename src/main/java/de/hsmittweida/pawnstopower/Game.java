@@ -19,6 +19,12 @@ import javafx.stage.Window;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Die Hauptklasse des Spiels.
+ * Dient der Anzeige sämtlicher UI im Spielvordergrund.
+ * Zählt Tage.
+ * Lädt Mechaniken wie Fonts.
+ */
 public class Game {
     private static ArrayList<Pawn> pawns;
     private static Stage stage;
@@ -33,12 +39,16 @@ public class Game {
 
     private static HashMap<String, Font> fonts;
 
-
+    /**
+     * @deprecated
+     */
     Game() {
-
-
     }
 
+    /**
+     * Diese Methode lädt die Standardoberfläche in die Szene.
+     * Dient als Startpunkt.
+     */
     public static void Game_view() {
         /* Fonts laden */
         if(fonts == null) {
@@ -46,49 +56,29 @@ public class Game {
         }
         loadFonts();
 
-        //        pawns = new ArrayList<Pawn>();
+        /* Initiierungen */
         day = new SimpleIntegerProperty(0);
         diary = new TextFlow();
         Inventory.setup();
         CreateWindow();
-        Debug();
+        // Debug();
 
-        /* Musik im Spiel */
+        /* Musik */
         SoundManager mainmenutheme = new SoundManager("GameDefaultMusic_1.mp3", "GameDefaultMusic_2.mp3", "GameDefaultMusic_3.mp3", "GameDefaultMusic_4.mp3");
         stage.setOnHiding(e -> {
             mainmenutheme.getMediaPlayer().stop();
         });
-
-
-        //javafx.scene.text.Font.getFamilies().forEach(System.out::println);
-        //System.out.println("--------------------------------------------------------------------------");
-        //javafx.scene.text.Font.getFontNames().forEach(System.out::println);
     }
 
-/*    public static String requestInput(String title, String header, String context) {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle(title);
-        dialog.setHeaderText(header);
-        dialog.setContentText(context);
-        dialog.getDialogPane().getStylesheets().add(Game.class.getResource("style_dialog.css").toExternalForm());
-        String res = "";
-        try {
-            res = dialog.showAndWait().get();
-        } catch (NoSuchElementException e) {
-        }
-        return res;
-//		return dialog.getSelectedItem();
-    }*/
-
-    public static Stage getGameStage() {
-        return stage;
-    }
-
+    /**
+     * Methode, die sämtliche Erstellungen der Oberflächen zusammenfasst.
+     * Beinhaltet das {@code panel}, als zentrale Oberfläche, die die
+     * weiteren Oberflächen zusammenfasst.
+     */
     public static void CreateWindow() {
         stage = new Stage();
         panel = new BorderPane();
         Scene s = new Scene(panel, Tools.getScreenSize().get('w'), Tools.getScreenSize().get('h'));
-        //s.getStylesheets().add(getClass().getResource("style_game.css").toExternalForm());
         Tools.addStylesheet(s, "style_game.css");
         stage.setScene(s);
 
@@ -127,14 +117,18 @@ public class Game {
         });
     }
 
+    /**
+     * Lädt das "Standard" Fenster in die Szene.
+     * Szene ist hier das Hauptfenster, in dem das meiste Geschehen und die meisten
+     * User-Interaktionen stattfinden.
+     * @return Vbox, als zentrales Element.
+     */
     private static VBox createGameView() {
         VBox box = new VBox();
-//        box.setStyle("-fx-border-color: red; -fx-border-style: solid; -fx-border-width: 2;"); //debug
         box.setId("game");
 
         GridPane field = new GridPane();
         field.setId("grid-game");
-
 
         Button house1, house2, house3, house4;
         house1 = new Button("Kämpfer");
@@ -167,7 +161,6 @@ public class Game {
         field.setAlignment(Pos.CENTER);
         field.setHgap(200);
         field.setVgap(125);
-//        field.setPadding(new Insets(15, 15, 15, 15));
 
         for(Button button : buttons) {
             button.setMaxWidth(Double.MAX_VALUE);
@@ -191,10 +184,13 @@ public class Game {
         return box;
     }
 
+    /**
+     * Erstellt die Sidebar, die im Großen und Ganzen nur das Tagebuch beinhaltet.
+     * @return VBox, als zentrales Element.
+     */
     private static VBox createSideBar() {
         VBox box = new VBox();
         box.setPrefWidth(Tools.getScreenSize().get('w') * 0.2);
-        //VBox.setMargin(box, new Insets(0,0,0,25));
         box.setId("side-bar");
 
         Label header = new Label("Tagebuch");
@@ -202,14 +198,11 @@ public class Game {
 
         ScrollPane content = new ScrollPane();
 
-        //content.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         content.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         content.setId("diary");
         content.setFitToWidth(true);
-        //content.setFitToHeight(true);
 
         VBox textBox = new VBox();
-        //diary = new TextFlow();
         System.out.println("Diary created");
         textBox.getChildren().add(diary);
         diary.setStyle("-fx-font-family: 'Dancing Script'");
@@ -253,22 +246,15 @@ public class Game {
         return box;
     }
 
+    /**
+     * Enthält die HelpBar, die die Kernwerte wie Gold, Kämpferanzahl, Reputation und vergangene Tage anzeigt.
+     * @return VBox, als zentrales Element.
+     */
     private static HBox createHelpBar() {
         HBox box = new HBox();
         box.setPrefWidth(Double.MAX_VALUE);
         box.setId("help-bar");
-        /*
-        ComboBox<String> help = new ComboBox<String>();
-        help.setId("help-bar-box");
-        help.setValue("Menu");
-        help.getItems().addAll("Schließen");
-        help.setOnAction(e -> {
-            if (help.getValue().equals("Schließen")) {
-                System.exit(0);
-            }
-        });
-        box.getChildren().add(help);
-        */
+
         Label label_pawns = new Label("Bauern:\n" + Inventory.getPawns().size());
         Label label_money = new Label("Goldstücke:\n" + Inventory.getMoney());
         Label label_rep = new Label("Reputation:\n" + Inventory.getReputation());
@@ -278,11 +264,7 @@ public class Game {
         label_rep.textProperty().bind(Bindings.concat("Reputation:\n", Inventory.getReputation()));
         label_day.textProperty().bind(Bindings.concat("Tag:\n", day.asString()));
         label_money.textProperty().bind((Bindings.concat("Goldstücke:\n", Inventory.getMoneyAsSimpleInt())));
-        /*
-        label_pawns.getStyleClass().add("small-label");
-        label_money.getStyleClass().add("small-label");
-        label_rep.getStyleClass().add("small-label");
-         */
+
         label_pawns.setId("label-small");
         label_money.setId("label-small");
         label_rep.setId("label-small");
@@ -300,7 +282,8 @@ public class Game {
 
         /* Beim Initiieren wird einmalig ein neuer Tag gesetzt (von 0 auf 1). Dies wird so gemacht, damit die
          * Grundwerte (Gold und Kämpfer..), mit denen man das Spiel startet, nicht im Tagebuch log als neue
-         * Errungenschaft dargestellt werden. */
+         * Errungenschaft dargestellt werden. Weitere Absicherungen diesbezüglich sind ebenfalls in Diary.java
+         * zu finden.*/
         newDay();
         nextDay.setOnAction(e -> {
             newDay();
@@ -310,23 +293,37 @@ public class Game {
         return box;
     }
 
+    /**
+     * Extra Methode für die Action vom Barracks-Button.
+     */
     private static  void barracks() {
         Game.drawSpace(Barracks.Barrack_view());
     }
 
+    /**
+     * Extra Methode für die Action vom Shop-Button.
+     */
     private static void shop() {
         Game.drawSpace(Shop.Shop_view());
-        // new Shop();
     }
 
+    /**
+     * Extra Methode für die Action vom Arena-Button.
+     */
     private static  void arena() {
         Game.drawSpace(Arena.chooseFighter());
     }
 
+    /**
+     * Extra Methode für die Action vom Other-Button.
+     */
     private static void other() {
         new QuickMenu();
     }
 
+    /**
+     * Lässt das Spiel einen Tag vorranschreiten.
+     */
     private static void newDay() {
         /* Tagebuch einrichten */
         diary.getChildren().clear();
@@ -339,13 +336,21 @@ public class Game {
             p.setFoughtToday(false);
         }
 
-        /* UI-Sachen */
+        /* UI aktualisieren */
         Game.drawSpace();
     }
+
+    /**
+     * @return Den aktuellen Tag als Integer.
+     */
     public static int getDay() {
         return day.get();
     }
 
+    /**
+     * Eine Debug-Methode, die während der Entwicklung verwendet wurde.
+     * @deprecated
+     */
     private static void Debug() {
         // Inventory.getPawns().get(0).setLevel((byte) 10);
         Inventory.getPawns().get(0).setLvl(10);
@@ -357,18 +362,29 @@ public class Game {
         Inventory.addItem(new Armor());
     }
 
+    /**
+     * Zeichnet ein Pane in die zentrale Szene des Spiels.
+     * @param pane Pane, welches geladen werden soll.
+     */
     public static void drawSpace(Pane pane) {
         Game.gameSpace = pane;
         panel.setCenter(gameSpace);
 
     }
 
+    /**
+     * Lädt das zentrale "Standard"-Fenster mit der Spieleübersicht.
+     */
     public static void drawSpace() {
         Game.gameSpace = createGameView();
         panel.setCenter(gameSpace);
         Game.setNextDayButtonDisabled(false);
     }
 
+    /**
+     * Wird verwendet, um Tagebucheinträge mittels {@¢ode Diary} zu speichern.
+     * @return Den Tagebucheintrag des Tages.
+     */
     public static TextFlow getDiary() {
         if(diary == null) {
             diary = new TextFlow();
@@ -376,16 +392,28 @@ public class Game {
         return diary;
     }
 
+    /**
+     * Erlaubt das deaktivieren des "Nächster Tag"-Buttons, während bestimmten Zeitpunkten des
+     * Spiels
+     * @param disabled {@code true} = deaktiviert; {@code false} = aktiviert
+     */
     public static void setNextDayButtonDisabled(boolean disabled) {
         if(helpBar != null)helpBar.getChildren().get(helpBar.getChildren().size()-1).setDisable(disabled);
     }
 
+    /**
+     * Lädt Custom Fonts in das Spiel, damit diese auch verwendet werden können, wenn das
+     * Spiel einmal fertig verpackt wird.
+     */
     private static void loadFonts() {
         fonts.put("DancingScript", Font.loadFont(Game.class.getResourceAsStream("fonts/DancingScript-Regular.ttf"), 21));
         fonts.put("MedievalSharp", Font.loadFont(Game.class.getResourceAsStream("fonts/MedievalSharp-Regular.ttf"), 21));
         fonts.put("MoonDance", Font.loadFont(Game.class.getResourceAsStream("fonts/MoonDance-Regular.ttf"), 21));
     }
 
+    /**
+     * Gibt eine Font zurück, die an einen UI-Text geheftet werden kann.
+     */
     public static Font getFont(String name) {
         if(fonts.containsKey(name)) {
             return fonts.get(name);

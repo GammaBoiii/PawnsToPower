@@ -2,6 +2,9 @@ package de.hsmittweida.pawnstopower;
 
 import java.util.Random;
 
+/**
+ * Armor Klasse, die die Logik für die Rüstung bereit stellt.
+ */
 public class Armor extends Item  {
     private final ArmorClass ac;
     private int baseProtection;
@@ -9,6 +12,11 @@ public class Armor extends Item  {
     private byte slot;// = -1; //Erste Setzung ist hier notwendig, da die super() sonst standardmäßig 0 erkennt.
     private Pawn owner;
 
+    /**
+     * @param cls Rüstungsklasse, also welches Material (siehe enum {@code ArmorClass})
+     * @param Slot Für welches Körperteil die Rüstung ist.
+     * @param p Pawn, der direkt als Besitzer gesetzt werden soll.
+     */
     Armor(ArmorClass cls, byte Slot, Pawn p) {
         super(p);
         setSlotType(slot);
@@ -16,6 +24,10 @@ public class Armor extends Item  {
         super.setName();
     }
 
+    /** Generiert eine Rüstung mit zufälliger Rüstungsklasse.
+     * @param p Pawn, der direkt als Besitzer gesetzt werden soll.
+     * @param slot Für welches Körperteil die Rüstung ist.
+     */
     Armor(Pawn p, byte slot) {
         super(p);
         ac = getRandomArmorClass();
@@ -23,6 +35,10 @@ public class Armor extends Item  {
         super.setName();
     }
 
+    /**
+     * Generiert eine Rüstung mit zufälliger Rüstungsklasse und zufälligem Slot.
+     * @param p Pawn, der direkt als Besitzer gesetzt werden soll.
+     */
     Armor(Pawn p) {
         super(p);
         ac = getRandomArmorClass();
@@ -30,6 +46,9 @@ public class Armor extends Item  {
         super.setName(); // muss erneut aufgerufen werden, da super() beim Initialisieren den Slot noch nicht kennt!
     }
 
+    /**
+     * Generiert eine Rüstung mit zufälliger Rüstungsklasse und zufälligem Slot. Ohne Besitzer.
+     */
     Armor() {
         super(null);
         ac = getRandomArmorClass();
@@ -37,16 +56,23 @@ public class Armor extends Item  {
         super.setName(); // muss erneut aufgerufen werden, da super() beim Initialisieren den Slot noch nicht kennt!
     }
 
+    /**
+     * @return Die Rüstungsklasse der Rüstung.
+     */
     public ArmorClass getArmorClass() {
         return ac;
     }
 
+    /**
+     * @return Den Standardwert des Schutzes, den die Rüstung gibt.
+     * @deprecated
+     */
     public int getBaseProtection() {
         return baseProtection;
     }
 
     /**
-     * @return Slot des Rüstungsstückes
+     * @return Slot des Rüstungsstückes.
      */
     public byte getSlotType() {
         if(this.slot == -1) {
@@ -69,15 +95,25 @@ public class Armor extends Item  {
         this.slot = slot;
     }
 
+    /**
+     * @return Einen zufälligen Slot (als byte-Wert; entsprechend der 4 Körperregionen).
+     */
     private byte setRandomSlotType() {
         Random rnd = new Random();
         return (byte) rnd.nextInt(4);
     }
 
+    /**
+     * @return Den Item-Typ: Rüstung.
+     */
     public String getItemType() {
         return "Armor";
     }
 
+    /**
+     * @return Den Basispreis den das Rüstungsteil aufgrund der Schutzklasse
+     * und Körperregion zum Ausrüsten hat.
+     */
     public int getBasePrice() {
         int price = switch (this.getSlotType()) {
             case 0 -> 40;
@@ -96,11 +132,18 @@ public class Armor extends Item  {
         return price;
     }
 
+    /**
+     * @return Eine zufällige Rüstunsklasse.
+     */
     private ArmorClass getRandomArmorClass() {
         Random rnd = new Random();
         return ArmorClass.values()[rnd.nextInt(ArmorClass.values().length)];
     }
 
+    /**
+     * @return Den gesamten Schutz, den die Rüstung entsprechend ihrer Ausrüstungsregion und
+     * Rüstungsklasse liefert.
+     */
     public double getTotalProtection() {
         int baseProtection = switch(this.getSlotType()) {
             case 0 -> 15;
@@ -110,6 +153,14 @@ public class Armor extends Item  {
         return baseProtection * ac.modifier;
     }
 
+    /**
+     * Der Enumerator für die Rüstungsklasse:
+     *
+     * <p>FAB = Fabric / Stoff</p>
+     * <p>LTH = Leather / Leder</p>
+     * <p>IRN = Iron / Eisen</p>
+     * <p>STL = Steel / Stahl</p>
+     */
     public enum ArmorClass {
         FAB(0.6), //Stoff
         LTH(0.8), //Leder

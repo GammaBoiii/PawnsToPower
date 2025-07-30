@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Die Inspektor-Klasse dient dem detailierten Anzeigen eines Kämpfers.
+ */
 public class Inspector {
     private static Button btnHead;
     private static Button btnTorso;
@@ -20,9 +23,13 @@ public class Inspector {
     private static Button btnLegs;
     private static Button btnLeft;
     private static Button btnRight;
-
     private static Pawn pawn;
 
+    /**
+     * Die Anzeige, die einen Kämpfer detailliert anzeigt.
+     * @param p Pawn, der inspiziert werden soll.
+     * @return Pane, welches dann in {@code Game.drawSpace()} angezeigt wird.
+     */
     public static Pane Inspector_view(Pawn p) {
         pawn = p;
         AnchorPane background = new AnchorPane();

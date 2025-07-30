@@ -8,10 +8,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+/**
+ * Die Diary-Klasse dient dem Loggen von Spielgeschehnissen im Tagebuch an der
+ * rechten Seite.
+ */
 public class Diary {
     private static int oldMoney, oldPawnNum;
     private static HashMap<Integer, ArrayList<Node>> diaryEntries;
 
+    /**
+     * Schreibt einen String in das Tagebuch.
+     * @param s String, der im Tagebuch hinterlegt werden soll.
+     */
     private static void writeDiaryEntry(String s) {
         Text t = new Text("» \t " + s + "\n");
         t.setFont(Game.getFont("MoonDance"));
@@ -21,6 +29,13 @@ public class Diary {
         //System.out.println("» " + s);
     }
 
+    // Implementierung ausstehend
+    /**
+     * Gibt einen kurzen Log zum letzten Arena-Kampf aus. Je nachdem, ob der Spieler
+     * siegreich war oder nicht, gibt es einen anderen, zufälligen Text.
+     * @param won {@code true}, wenn der Spieler den Arena-Kampf gewonnen hat.
+     * @param params
+     */
     public static void logArenaFight(boolean won, String... params) {
         String[] msg;
         if (won) {
@@ -53,8 +68,14 @@ public class Diary {
         writeDiaryEntry(msg[new Random().nextInt(msg.length)]);
     }
 
+    /**
+     * Diese Methode wird immer ausgeführt, wenn das Spiel einen Tag vorranschreitet.
+     */
     public static void newDay() {
         String msg = "Ein neuer Tag (" + Game.getDay() + ") beginnt.";
+
+        /* Da der der Spieler quasi am ersten Tag (vor Spielbeginnn) sein Inventar gefüllt bekommt,
+         * darf dies nicht geloggt werden. */
         if (Game.getDay() == 1) {
             msg += "\n\n";
             oldPawnNum = Inventory.getPawnsNum().getValue();
@@ -62,6 +83,8 @@ public class Diary {
             writeDiaryEntry(msg);
             return;
         }
+
+        /* Geld dazuverdient oder verloren */
         if (Math.abs(Inventory.getMoney() - oldMoney) != 0) {
             if (Inventory.getMoney() > oldMoney) {
                 msg += "Wir haben am letzten Tag " + (Inventory.getMoney() - oldMoney) + " Gold verdient.\n\n";
@@ -69,6 +92,8 @@ public class Diary {
                 msg += "Wir haben am letzten Tag " + (oldMoney - Inventory.getMoney()) + " Gold verloren.\n\n";
             }
         }
+
+        /* Neue Kämpfer dazugewonnen */
         if (Math.abs(Inventory.getPawnsNum().getValue() - oldPawnNum) == 1) {
             msg += "Ein neuer Krieger begleitet uns: \n\t";
             msg += Inventory.getPawns().get(Inventory.getPawns().size() - 1).getName() + ".\n";
@@ -91,12 +116,24 @@ public class Diary {
 
             }
         }
+
+        /* Reputation/Ehre gewonnen oder verloren*/
+
+
         msg += "\n\n";
         oldPawnNum = Inventory.getPawnsNum().getValue();
         oldMoney = Inventory.getMoney();
         writeDiaryEntry(msg);
     }
 
+    /**
+     * Speichert alle Tagebucheinträge, entsprechend der Tage ab,
+     * sodass diese immer durchlaufen werden können.
+     * Erlaubt dem Spieler also die Einträge der vergangenen Tage zu sehen.
+     * @param day Tag, an dem ein Eintrag abgespeichert werden soll.
+     * @param entry Der Eintrag, der an dem Tag abgespeichert werden soll.
+     * @deprecated
+     */
     public static void saveContext(int day, TextFlow entry) {
         if (Diary.diaryEntries == null) {
             diaryEntries = new HashMap<Integer, ArrayList<Node>>();
@@ -108,6 +145,11 @@ public class Diary {
         entry.getChildren().clear();
     }
 
+    /**
+     * Speichert alle Tagebucheinträge, entsprechend der Tage ab,
+     * sodass diese immer durchlaufen werden können.
+     * Erlaubt dem Spieler also die Einträge der vergangenen Tage zu sehen.
+     */
     public static void saveContext() {
         if (diaryEntries == null) {
             diaryEntries = new HashMap<Integer, ArrayList<Node>>();
@@ -121,6 +163,9 @@ public class Diary {
         }
     }
 
+    /**
+     * @return HashMap, die alle Tagebucheinträge entsprechend der Tage beinhaltet.
+     */
     public static HashMap<Integer, ArrayList<Node>> getDiaryEntries() {
         return diaryEntries;
     }

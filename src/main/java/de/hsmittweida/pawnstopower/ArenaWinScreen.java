@@ -6,7 +6,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Die ArenaWinScreen Klasse beinhaltet die Oberfläche, die angezeigt wird,
+ * wenn der Kampf in der Arena vorrüber ist.
+ */
 public class ArenaWinScreen {
+    /**
+     * @param playerWins true, wenn der Spieler gewonnen hat. Sonst false.
+     * @return Pane, welches dann in {@code Game.drawSpace()} angezeigt wird.
+     */
     public static Pane winscreen(boolean playerWins) {
         BorderPane pane = new BorderPane();
         Label header = new Label("Die Spiele sind vorbei!");

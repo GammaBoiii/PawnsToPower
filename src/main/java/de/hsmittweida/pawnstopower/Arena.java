@@ -46,7 +46,7 @@ public class Arena {
     /**
      * Erstellt die Oberfläche, bei der der Spieler sich einen seiner Kämpfer aussucht, mit dem
      * er in die Arena geht.
-     * @return FX-Element (Pane), welches dann im Spiel mittels {@code Game.drawSpace} angezeigt wird.
+     * @return Pane, welches dann in {@code Game.drawSpace()} angezeigt wird.
      */
     public static Pane chooseFighter() {
         AnchorPane pane = new AnchorPane();
