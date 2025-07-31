@@ -138,6 +138,12 @@ public class Inspector {
         return background;
     }
 
+    /**
+     * Setzt ein Bild auf einen Knopf. Die Knöpfe sind hier die Körperregionen des Kämpfers.
+     * Dadurch wird mehr Interaktivität mit dem Kämpfer geboten.
+     * @param ref Button, auf den das Bild gelegt werden soll.
+     * @param wc Waffenklasse, die als Referenz für das richtige Bild dient.
+     */
     public static void setImage(Button ref, Weapon.WeaponClass wc) {
         String picName = switch (wc) {
             case AXT -> "AXT.png";
@@ -155,6 +161,14 @@ public class Inspector {
         String location = Inspector.class.getResource("image/weapons/"+picName).toExternalForm();
         ref.setStyle("-fx-background-image: url('" + location + "');");
     }
+
+    /**
+     * Setzt ein Bild auf einen Knopf. Die Knöpfe sind hier die Körperregionen des Kämpfers.
+     * Dadurch wird mehr Interaktivität mit dem Kämpfer geboten.
+     * @param ref Button, auf den das Bild gelegt werden soll.
+     * @param ac Rüstungsklasse, die zur Auswahl des richtigen Bildes dient.
+     * @param slot Körperregion, an der das Rüstungsstück ausgerüstet werden soll.
+     */
     public static void setImage(Button ref, Armor.ArmorClass ac, byte slot) {
         String path = "";
         path = switch (slot) {
@@ -171,17 +185,25 @@ public class Inspector {
             case STL -> "stahl_" + path;
         };
     }
+
+    /**
+     * Entfernt ein Bild aus einem Knopf, wenn ein Item abgelegt wird.
+     * @param ref Button, von dem das Bild entfernt werden soll.
+     */
     public static void clearImage(Button ref) {
         ref.setStyle(("-fx-background-image: none"));
     }
 
+    /**
+     * Erstellt in dem Inspector ein kleines Übersichtsfenster zu dem ausgewählten Kämpfer.
+     * Abzulesen sind Level, Name und ein weitere Button für das SkillMenu.
+     * @return VBox, welche oben links im Inspector dargestellt wird.
+     */
     private static VBox createStats() {
         VBox box = new VBox();
         box.setPrefWidth(200.0);
 
-//        box.setStyle("-fx-border-width: 1; -fx-border-color: rgba(15,15,15,75); -fx-border-radius: 4");
-
-        // Name
+        /* Name */
         HBox name = new HBox();
         Label nameLabel = new Label("Name:");
         Label pawnName = new Label(pawn.getName());
@@ -189,7 +211,7 @@ public class Inspector {
         nameLabel.setMaxWidth(Double.MAX_VALUE);
         name.getChildren().addAll(nameLabel,pawnName);
 
-        // Level
+        /* Level */
         HBox level = new HBox();
         Label levelLabel = new Label("Level:");
         Label pawnLevel = new Label(pawn.getLvl() + "");
@@ -197,10 +219,11 @@ public class Inspector {
         levelLabel.setMaxWidth(Double.MAX_VALUE);
         level.getChildren().addAll(levelLabel, pawnLevel);
 
-        // Efahrungspunkte Anzeige
+        /* Efahrungspunkte Anzeige */
         HBox xpbar = new HBox();
         ProgressBar pb = new ProgressBar();
         pb.progressProperty().bind(pawn.getLevelProgress());
+        // Debug
         Button dbg1 = new Button("Debug");
         Button dbg2 = new Button("Debug2");
         dbg1.setOnAction(e -> {
@@ -213,32 +236,17 @@ public class Inspector {
         });
         xpbar.getChildren().addAll(pb, dbg1, dbg2);
 
-        // Erfahrungspunkte
+        /* Erfahrungspunkte */
         HBox xp = new HBox();
-//        ProgressBar pb = new ProgressBar(pawn.xpForLevelup((byte) pawn.getLevel()));
-//        pb.setProgress( ((double) pawn.getExperience()) / (double) (pawn.xpForLevelup(pawn.getLevel()) ));
-//        HBox.setHgrow(pb, Priority.ALWAYS);
-//        pb.setMaxWidth(Double.MAX_VALUE);
-//        pb.setPadding(new Insets(10,22,10,0));
         Button openSkill = new Button("+");
         openSkill.setId("skill-button");
         xp.setAlignment(Pos.CENTER);
-
         openSkill.setOnAction(e -> {
             new SkillInspector(pawn);
         });
         xp.getChildren().addAll(/* pb, */ openSkill);
 
-        Button debug = new Button("ayoo");
-
-        //Debug
-        /*debug.setOnAction(e -> {
-            pawn.addExperience(3);
-            System.out.println(pawn.getExperience());
-        });*/
-
         box.getChildren().addAll(name, level, xpbar, xp/*, debug*/);
         return box;
     }
-
 }

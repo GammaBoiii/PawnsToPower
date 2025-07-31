@@ -3,15 +3,29 @@ package de.hsmittweida.pawnstopower;
 import java.io.Serializable;
 import java.util.Random;
 
+/**
+ * Elternklasse der Items (Rüstung und Waffen).
+ */
 public class Item implements Serializable {
     private String name;
     private Pawn owner;
     private boolean equipped;
 
+    /**
+     * Legt den Besitzer fest.
+     * <br>
+     * Kann null sein.
+     * @param owner
+     */
     protected Item(Pawn owner) {
         this.owner = owner;
     }
 
+    /**
+     * Findet den Slot, an dem das Item ausgerüstet ist, falls es einen Besitzer hat.
+     * @param item Item, welches gesucht werden soll.
+     * @return Slot von dem Item; -1, wenn das Item nicht ausgerüstet ist.
+     */
     public static byte getSlotOfItem(Item item) {
         if (item.getItemType().equals("Weapon")) {
             for (byte i = 0; i < 2; i++) {
@@ -26,9 +40,13 @@ public class Item implements Serializable {
                 }
             }
         }
-        return 0;
+        return -1;
     }
 
+    /**
+     * Legt einem Kämpfer ein Item an.
+     * @param p Pawn, der das Item bekommen soll.
+     */
     protected void equip(Pawn p) {
         if (p == null) {
             this.equipped = false;
@@ -39,23 +57,42 @@ public class Item implements Serializable {
         this.owner = p;
     }
 
+    /**
+     * Entfernt ein Item von einem Kämpfer.
+     * <br>
+     * Sollte nur mit der {@code Pawn.removeArmor() / Pawn.removeWeapon} verwendet werden,
+     * da hier die Itemreferenz beim Pawn nicht entfernt wird.
+     */
     protected void unequip() {
         this.equipped = false;
         this.owner = null;
     }
 
+    /**
+     * @return {@code true}, wenn das Item ausgerüstet ist.
+     */
     protected boolean isEquipped() {
         return equipped;
     }
 
+    /**
+     * @return Pawn, der das Item besitzt, bzw. ausgerüstet hat.
+     */
     protected Pawn getOwner() {
         return owner;
     }
 
+    /**
+     * @return Name des Items.
+     */
     protected String getName() {
         return name;
     }
 
+    /**
+     * Gibt dem Item einen Namen.
+     * @param s Name, den das Item bekommen soll.
+     */
     protected void setName(String s) {
         this.name = s;
     }
