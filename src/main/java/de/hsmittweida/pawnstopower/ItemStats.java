@@ -8,7 +8,15 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Diese Klasse beinhaltet Methoden um die Stats für ein Item anzuzeigen.
+ */
 public class ItemStats {
+
+    /**
+     * Öffnet ein Popup für eine Waffe zur Inspektion.
+     * @param w Die Waffe, die isnpiziert werden soll.
+     */
     ItemStats(Weapon w) {
         Stage stage = new Stage();
         VBox box = new VBox();
@@ -51,7 +59,11 @@ public class ItemStats {
 
     }
 
-    ItemStats(Armor c) {
-
+    /**
+     * Öffnet ein Popup für eine Waffe zur Inspektion.
+     * @param a Das Rüstungsteil, das inspiziert werden soll.
+     */
+    ItemStats(Armor a) {
+        // ToDo
     }
 }

@@ -97,10 +97,18 @@ public class Item implements Serializable {
         this.name = s;
     }
 
+    /**
+     * Gibt dem Item einen zufällig generierten Namen.
+     */
     protected void setName(){
         this.name = randomName(this);
     }
 
+    /**
+     * Generiert einen Namen, basierend auf dem Item Typ.
+     * @param item Das Item, für welches ein Namen generiert werden soll.
+     * @return Den generierten Name.
+     */
     protected String randomName(Item item) {
         if (item.getItemType().equals("Weapon")) {
             String[] mysticalWeaponNames = {"Excalibur", "Durandal", "Anduril", "Joyeuse", "Mjolnir", "Hrunting", "Kusanagi", "Zulfiqar", "Arondight", "Caliburn", "Obsidian", "Eternity", "Infinity", "Celestia", "Elysium", "Oracle", "Destiny", "Legacy", "Revelation", "Ascendant", "Radiance", "Nebula", "Nova", "Zenith", "Apex", "Vanguard", "Sovereign", "Empyrean", "Genesis", "Redemption", "Eclipse", "Requiem", "Mirage", "Mythos", "Empyreal", "Tempest", "Vortex", "Serenity", "Phantom", "Specter", "Arcadia", "Odyssey", "Inferno", "Chimera", "Mythica", "Mystic", "Eon", "Quantum", "Radiant", "Revere", "Solstice", "Equinox", "Aether", "Vesper", "Omen", "Nebulous", "Elysian", "Aurora", "Twilight", "Celestial", "Dominion", "Eminence", "Arcanum", "Enigma", "Singularity", "Nexus", "Reverence", "Ascension", "Solara", "Evanescence", "Majesty", "Celestium", "Oblivion", "Fate", "Reverie", "Paradigm", "Sovereignty", "Eternum", "Abyss", "Spectral", "Vigil", "Horizon", "Arcane", "Rapture", "Lumina", "Seraphim", "Valor", "Phantasm", "Nocturne", "Starlight", "Wraith", "Hallowed", "Sacred", "Mysteria", "Empyre", "Requital", "Veneration", "Ascendancy", "Transcendence", "Illumina"};
@@ -116,7 +124,8 @@ public class Item implements Serializable {
                 case 3 -> " - Beinschutz";
                 default -> "";
             };
-            if (armor.getArmorClass() == null) { //Wird benötigt, da die Super-Klasse den Slot beim Initialisiern des Rüstungsstückes noch nicht kennt! (Siehe Armor Klasse)
+            /* Wird benötigt, da die Super-Klasse den Slot beim Initialisiern des Rüstungsstückes noch nicht kennt! (Siehe Armor Klasse) */
+            if (armor.getArmorClass() == null) {
                 return "Stoff" + name;
             } else
                 name = switch (armor.getArmorClass()) {
@@ -130,6 +139,10 @@ public class Item implements Serializable {
         return "";
     }
 
+    /**
+     * Platzhalter der Super Klasse. Wird von den Kindklassen entsprechend {@Override} überschrieben.
+     * @return Item Typ.
+     */
     protected String getItemType() {
         return "Item";
     }
