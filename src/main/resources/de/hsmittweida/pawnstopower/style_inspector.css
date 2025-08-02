@@ -14,9 +14,6 @@
 }
 .button {
     -fx-background-color: rgba(4,40,40,0.4);
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
     -fx-padding: 2 3;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
@@ -25,6 +22,10 @@
     -fx-cursor: hand;
     -fx-transition: all 0.3s ease-in-out;
     -fx-text-alignment: center;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 22;
+    -fx-font-family: "MedievalSharp";
 }
 
 #skill-button {
@@ -36,7 +37,7 @@
 
 .label {
     -fx-text-fill: white;
-    -fx-font-family: "Book Antiqua";
+    -fx-font-size: 23;
     -fx-font-weight: bold;
-    -fx-font-size: 14;
+    -fx-font-family: "Cinzel Decorative";
 }

@@ -406,9 +406,28 @@ public class Game {
      * Spiel einmal fertig verpackt wird.
      */
     private static void loadFonts() {
-        fonts.put("DancingScript", Font.loadFont(Game.class.getResourceAsStream("fonts/DancingScript-Regular.ttf"), 21));
-        fonts.put("MedievalSharp", Font.loadFont(Game.class.getResourceAsStream("fonts/MedievalSharp-Regular.ttf"), 21));
-        fonts.put("MoonDance", Font.loadFont(Game.class.getResourceAsStream("fonts/MoonDance-Regular.ttf"), 21));
+//        fonts.put("DancingScript", Font.loadFont(Game.class.getResourceAsStream("fonts/DancingScript-Regular.ttf"), 21));
+//        fonts.put("MedievalSharp", Font.loadFont(Game.class.getResourceAsStream("fonts/MedievalSharp-Regular.ttf"), 21));
+//        fonts.put("MoonDance", Font.loadFont(Game.class.getResourceAsStream("fonts/MoonDance-Regular.ttf"), 21));
+//        fonts.put("CinzelDecorative", Font.loadFont(Game.class.getResourceAsStream("fonts/CinzelDecorative-Regular.ttf"), 21));
+
+
+        Font f1 = Font.loadFont(Game.class.getResourceAsStream("fonts/DancingScript-Regular.ttf"), 21);
+        Font f2 = Font.loadFont(Game.class.getResourceAsStream("fonts/MedievalSharp-Regular.ttf"), 21);
+        Font f3 = Font.loadFont(Game.class.getResourceAsStream("fonts/MoonDance-Regular.ttf"), 21);
+        Font f4 = Font.loadFont(Game.class.getResourceAsStream("fonts/CinzelDecorative-Regular.ttf"), 21);
+
+        fonts.put("DancingScript", f1);
+        fonts.put("MedievalSharp", f2);
+        fonts.put("MoonDance", f3);
+        fonts.put("CinzelDecorative", f4);
+
+        System.out.println("DancingScript name: " + f1.getName());
+        System.out.println("MedievalSharp name: " + f2.getName());
+        System.out.println("MoonDance name: " + f3.getName());
+        System.out.println("CinzelDecorative name: " + f4.getName());
+
+
     }
 
     /**

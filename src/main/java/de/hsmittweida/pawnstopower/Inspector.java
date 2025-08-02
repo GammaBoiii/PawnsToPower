@@ -1,5 +1,6 @@
 package de.hsmittweida.pawnstopower;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -35,6 +36,8 @@ public class Inspector {
         AnchorPane background = new AnchorPane();
         background.setId("pane");
         Tools.addStylesheet(background, "style_inspector.css");
+
+        HBox navButtons = new HBox();
         Button mainMenu = new Button("Hauptmenu");
         Button barracks = new Button("Barracken");
         mainMenu.setOnAction(e -> {
@@ -43,14 +46,13 @@ public class Inspector {
         barracks.setOnAction(e -> {
             Game.drawSpace(Barracks.Barrack_view());
         });
-        AnchorPane.setTopAnchor(mainMenu, 2.0);
-        AnchorPane.setLeftAnchor(mainMenu, 2.0);
-        AnchorPane.setTopAnchor(barracks, 2.0);
-        AnchorPane.setLeftAnchor(barracks, 100.0);
+        navButtons.getChildren().addAll(mainMenu, barracks);
+        navButtons.setSpacing(10.0);
+
 
 
         AnchorPane anchorPane = new AnchorPane();
-        background.getChildren().addAll(mainMenu, barracks, anchorPane);
+        background.getChildren().addAll(navButtons, anchorPane);
         anchorPane.setId("anchorPane");
         AnchorPane.setTopAnchor(anchorPane, 30.0);
         AnchorPane.setLeftAnchor(anchorPane, 0.0);
@@ -201,7 +203,7 @@ public class Inspector {
      */
     private static VBox createStats() {
         VBox box = new VBox();
-        box.setPrefWidth(200.0);
+        box.setPrefWidth(250.0);
 
         /* Name */
         HBox name = new HBox();

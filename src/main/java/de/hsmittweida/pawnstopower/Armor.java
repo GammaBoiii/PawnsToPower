@@ -162,15 +162,16 @@ public class Armor extends Item  {
      * <p>STL = Steel / Stahl</p>
      */
     public enum ArmorClass {
-        FAB(0.6), //Stoff
-        LTH(0.8), //Leder
-        IRN(1.0), //Eisen
-        STL(1.25); //Stahl
+        FAB(0.6, "Stoff"),
+        LTH(0.8, "Leder"),
+        IRN(1.0, "Eisen"),
+        STL(1.25, "Stahl");
 
         public double modifier;
-
-        ArmorClass(double modifier) {
+        public String name;
+        ArmorClass(double modifier, String name) {
             this.modifier =  modifier;
+            this.name = name;
         }
     }
 }

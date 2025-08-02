@@ -9,11 +9,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="changed style">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/fonts/CinzelDecorative-Regular.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Arena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Skill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Skill.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Turn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Turn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Armor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Armor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Inspector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Inspector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/ItemStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/ItemStats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_game.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_game.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_inspector.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_inspector.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +214,7 @@
       <workItem from="1753808972300" duration="1334000" />
       <workItem from="1753889847431" duration="3833000" />
       <workItem from="1753978438134" duration="3497000" />
-      <workItem from="1754123840662" duration="7131000" />
+      <workItem from="1754123840662" duration="15319000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -512,6 +515,16 @@
     <MESSAGE value="danksagung an java garbage collector" />
     <MESSAGE value="changed style" />
     <option name="LAST_COMMIT_MESSAGE" value="changed style" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.RuntimeException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,19 +1,4 @@
 /* Hintergrund des Hauptmenüs */
-@font-face {
-    font-family: "DancingScript";
-    src: url("fonts/DancingScript-Regular.ttf");
-}
-
-@font-face {
-    font-family: "MedievalSharp";
-    src: url("fonts/MedievalSharp-Regular.ttf");
-}
-
-@font-face {
-    font-family: "MoonDance";
-    src: url("fonts/MoonDance-Regular.ttf");
-}
-
 #game {
     -fx-background-color: #1e1e1e;
     -fx-background-image: url("image/GameBackground2.png");

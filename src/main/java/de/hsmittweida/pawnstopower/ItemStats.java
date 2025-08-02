@@ -56,7 +56,6 @@ public class ItemStats {
         Tools.addStylesheet(s, "style_itemstats.css");
         stage.setScene(s);
         stage.show();
-
     }
 
     /**
@@ -64,6 +63,55 @@ public class ItemStats {
      * @param a Das Rüstungsteil, das inspiziert werden soll.
      */
     ItemStats(Armor a) {
-        // ToDo
+        Stage stage = new Stage();
+        VBox box = new VBox();
+        Scene s = new Scene(box, 400, 150);
+
+        Label nameLabel = new Label("Rüstung: ");
+        Label nameVal = new Label(a.getName());
+        HBox name = new HBox();
+        HBox.setHgrow(nameLabel, Priority.ALWAYS);
+        nameLabel.setMaxWidth(Double.MAX_VALUE);
+        name.getChildren().addAll(nameLabel, nameVal);
+        name.setPadding(new Insets(0, 0, 15.0, 0));
+
+        Label regionLabel = new Label("Körperregion:");
+        String bodyRegion = switch (a.getSlotType()) {
+            case 0 -> "Kopf";
+            case 1 -> "Torso";
+            case 2 -> "Arme";
+            case 3 -> "Beine";
+            default -> throw new IllegalStateException("Unexpected value: " + a.getSlotType());
+        };
+        Label regionVal = new Label(bodyRegion);
+        HBox region = new HBox();
+        HBox.setHgrow(regionLabel, Priority.ALWAYS);
+        regionLabel.setMaxWidth(Double.MAX_VALUE);
+        region.getChildren().addAll(regionLabel, regionVal);
+        region.setPadding(new Insets(0, 0, 15.0, 0));
+
+        Label aClassLabel = new Label("Klasse:");
+        Label aClassVal = new Label(a.getArmorClass().name);
+        aClassVal.setOnMousePressed(e-> {
+        });
+        HBox aClass = new HBox();
+        HBox.setHgrow(aClassLabel, Priority.ALWAYS);
+        aClassLabel.setMaxWidth(Double.MAX_VALUE);
+        aClass.getChildren().addAll(aClassLabel, aClassVal);
+        aClass.setPadding(new Insets(0, 0, 15.0, 0));
+
+        Label damageLabel = new Label("Rüstungswert:");
+        Label damageVal = new Label(String.valueOf(a.getTotalProtection()));
+        HBox damage = new HBox();
+        HBox.setHgrow(damageLabel, Priority.ALWAYS);
+        damageLabel.setMaxWidth(Double.MAX_VALUE);
+        damage.getChildren().addAll(damageLabel, damageVal);
+        damage.setPadding(new Insets(0.0, 0, 15.0, 0));
+
+        box.getChildren().addAll(name, region, aClass, damage);
+
+        Tools.addStylesheet(s, "style_itemstats.css");
+        stage.setScene(s);
+        stage.show();
     }
 }
