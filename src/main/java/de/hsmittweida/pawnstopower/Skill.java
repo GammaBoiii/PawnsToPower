@@ -25,18 +25,10 @@ public class Skill implements Serializable {
         multiplier = 1.0;
     }
 
-
-    /**
-     * Gibt die (finalen) Stats des Pawns an, inkl. des Levelbonus und des Skill-Bonus.
-     * <br> <br>
-     * Funktioniert, indem zuerst jedes Level die Leben um 5 erhöht,
-     * dann der Skillfactor damit multipliziert wird (aus {@code skillFactor})
-     * und dann auf den Basiswert addiert wird.
-     * Ein eventueller {@code multiplier} wird durch Kampfsituationen mit drauf multipliziert.
-     * @return Den totalen Skill-Wert
-     */
     public double getSkillValue() {
-        return (((pawn.getLvl()-1) * 5) * getFactor() + baseVal.get()) * multiplier;
+        double bV = baseVal.get();
+        double lvlFactor = (((pawn.getLvl()-1.0) * 5.0) / 100.0) * bV;
+        return (bV * getFactor() + lvlFactor ) * multiplier;
     }
 
     @Deprecated
@@ -45,7 +37,7 @@ public class Skill implements Serializable {
     }
 
     private double getFactor() {
-        return 1.0 + (this.level * 0.2);
+        return 1.0 + (this.level * 0.05);
     }
 
     public int getSkillLevel() {

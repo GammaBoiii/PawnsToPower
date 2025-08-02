@@ -46,7 +46,7 @@ public class Turn extends Thread {
                     Arena.log(msg[2], "-fx-font-style: italic; -fx-fill: red;");
                     Arena.log("");
                     waitFor(2000);
-                    int damage = pawn.calcDamage(Arena.getOther(pawn));
+                    int damage = pawn.calcDamage(Arena.getOther(pawn))[0];
 
                     /* Durch das runLater() in Arena.damage werden in dem Arena-Log immer zuerst die Leben ausgegeben, und dann erst aktualisiert.
                      * Daher werden in der Ausgabe in der folgenden Zeile die Leben direkt mit abgezogen, und der eigentliche Damage
@@ -76,7 +76,7 @@ public class Turn extends Thread {
                 }
                 switch (in) {
                     case "attack":
-                        int damage = pawn.calcDamage(Arena.getOther(pawn));
+                        int damage = pawn.calcDamage(Arena.getOther(pawn))[0];
                         Arena.damage(Arena.getOther(pawn), damage);
                         Arena.log("Du hast " + damage + " Schaden beim Gegner verursacht.");
                         waitFor(1500);

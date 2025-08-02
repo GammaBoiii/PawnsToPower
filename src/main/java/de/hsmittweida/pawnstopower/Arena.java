@@ -321,9 +321,13 @@ public class Arena {
 
         /* Skills zuweisen. 1 Level = 1 SkillPunkt. Diese müssen noch zufällig auf
          * alle Skills verteilt werden. */
+        System.out.println("Pawn wird mit " + p.getSkillPoints() + " Skillpunkten generiert.");
+        System.out.println("Diese werden investiert in:");
         while(p.getSkillPoints() > 0) {
             Random rand = new Random();
-            p.getSkills().get(rand.nextInt(p.getSkills().size())).addSkillLevel();
+            int id = rand.nextInt(p.getSkills().size());
+            System.out.println(p.getSkills().get(id).getName());
+            p.getSkills().get(id).addSkillLevel();
             p.addSkillPoints(-1);
         }
 
@@ -378,6 +382,34 @@ public class Arena {
         p.giveArmor(a4, (byte) 3);
         //System.out.println("Gegner Equippment: " +  p.getWeapon((byte) 0).getName() + " - " + p.getWeapon((byte) 0).getWeaponClass() + "| " + p.getArmor((byte) 0).getName() + " | " + p.getArmor((byte) 1).getName() +" | " + p.getArmor((byte) 2).getName() +" | " + p.getArmor((byte) 3).getName() );
 
+        // Debug:
+        System.out.println(String.format("""
+                - Level - 
+                Deins » %d \t Gegner » %d
+                
+                - Skills -
+                Leben:
+                Deins » %.2f \t Gegner » %.2f
+                
+                Schaden:
+                Deins » %.2f \t Gegner » %.2f
+                
+                Widerstand:
+                Deins » %.2f \t Gegner » %.2f
+                
+                Geschwindigkeit:
+                Deins » %.2f \t Gegner » %.2f
+                
+                - Totale Rüstung -
+                Deins » %d \t Gegner » %d
+                """, choosenFighter.getLvl(), p.getLvl(),
+                choosenFighter.getSkills().get(0).getSkillValue(), p.getSkills().get(0).getSkillValue(),
+                choosenFighter.getSkills().get(1).getSkillValue(), p.getSkills().get(1).getSkillValue(),
+                choosenFighter.getSkills().get(2).getSkillValue(), p.getSkills().get(2).getSkillValue(),
+                choosenFighter.getSkills().get(3).getSkillValue(), p.getSkills().get(3).getSkillValue(),
+                choosenFighter.getTotalProtectionValue(), p.getTotalProtectionValue()
+        ));
+
         return p;
     }
 
@@ -404,7 +436,7 @@ public class Arena {
 
     /**
      * Logt einen Text mit einem CSS Style in den Log der Arena.
-     * Weitere Erklärung zur Methode sind in {@code Arena.log()} zu finden
+     * Weitere Erklärung zur Methode sind in {@code Arena.log(String text)} zu finden
      * @param text Der Text, der im Arena Log ausgegeben werden soll.
      * @param style Der CSS Style, der auf den {@code text} angewendet werden soll.
      */

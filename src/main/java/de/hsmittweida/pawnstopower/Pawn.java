@@ -341,53 +341,70 @@ public class Pawn implements Serializable {
      * @param enemy
      * @return
      */
-    public int calcDamage(Pawn enemy) {
+    public int[] calcDamage(Pawn enemy) {
         double damage = 0;
-        /* Zunächst wird die Geschwindigkeit verglichen. Der schneller Pawn hat hier den Vorteil.
-         * Beim Angriff führt eine geringere Geschwindigkeit zu Fehltreffern oder Streifschüssen.
-         * Damit der Kampf spannend bleibt, gibt es immer die Chance für den Langsameren zu treffen
-         * oder auszuweichen. (Dafür die {@code graze = 0.05} und {@code graze = 0.95}*/
-        double graze = 0.0; // Streifschuss von 0 ergibt 100% Trefferchance..
-        Skill pSpeed = this.getSkills().get(3);
-        Skill eSpeed = enemy.getSkills().get(3);
-        if(pSpeed.getSkillValue() - eSpeed.getSkillValue() > 3) {
-            graze = 0.05;
-        } else if(pSpeed.getSkillValue() - eSpeed.getSkillValue() > 0){
-            graze = 0.1;
-        } else {
-            /* Die folgende Formel dient dazu, die Chance für einen Fehltreffer logarithmisch zu erhöhen, sollte der Angreifer
-             * einen geringeren Geschwindigkeitsskill haben. */
-            graze = Math.pow(Math.log(1-(pSpeed.getSkillValue() / eSpeed.getSkillValue())), -1) * -1;
-        }
 
-        if (graze > 0.8) {
-            graze = 0.8;
-        } else if (graze < 0.1) {
-            graze = 0.1;
-        }
+        System.out.println("--------------------------------");
 
+        /* Streifschuss von 0 ergibt 100% Trefferchance */
+        double graze = 0.0;
+        Double pSpeed = this.getSkills().get(3).getSkillValue();
+        Double eSpeed = enemy.getSkills().get(3).getSkillValue();
+        System.out.println("Geschwindigkeit des Angreifers: " + pSpeed);
+        System.out.println("Geschwindigkeit des gegnerischen Pawns: " + eSpeed);
+        if(pSpeed < eSpeed) {
+            graze = 1 - (pSpeed / eSpeed);
+            System.out.println("Grazewahrscheinlichkeit: " + graze);
+            /* Damit die Wahrscheinlichkeit für einen Streifschuss nie über 70% geht: */
+            graze = Math.min(graze, 0.70);
+        }
+        /* Damit auch der schnellere Kämpfer einmal einen Schlag versemmelt. */
+        graze = Math.max(graze, 0.1);
+        System.out.println("Fehltreffwahrscheinlichkeit: " + graze);
         /* Weiterhin wird der Angriffswert der Waffe mit dem Schadenswert des Angreifers zusammengefügt
          * und mit dem Rüstungswert des Gegners, sowie dessen Resistance Wert verglichen. */
         double weapondamage1 = this.getWeapon((byte) 0) != null ? this.getWeapon((byte) 0).getTotalDamage() : 0;
         double weapondamage2 = this.getWeapon((byte) 1) != null ? this.getWeapon((byte) 1).getTotalDamage() : 0;
         damage += this.getSkills().get(1).getSkillValue() * 2;
+        System.out.println("Schadenswert des Angreifers: " + damage);
         damage += weapondamage1 + weapondamage2;
+        System.out.println("Schadenswert mit Waffe: " + damage + " \tmit Waffenschaden:  " + weapondamage1 + " + " + weapondamage2);
         damage -= enemy.getTotalProtectionValue();
+        damage = Math.max(damage, 0);
+        System.out.println("Schadenswert abzüglich der Gegnerischen Rüstung: " + damage);
         damage /= enemy.getSkills().get(2).getSkillValue() / 100 +1;
+        System.out.println("Schadenswert mit Widerstand des Gegners " + damage);
 
-        //System.out.println("graze: " + graze + " | " + damage);
+        System.out.println("» Gesamter Berechneter Schaden: " + damage);
+
         /* Falls der fehlgeschlagene Angriff ein Streifschuss war, dann wird auf den gesamten vorher
          * berechneten Schaden eine Verringerung um 90% gelegt. Daher steht die Überprüfung
          * danach erst am Ende dieser Methode.
          * Bei einem kompletten Fehltreffer ist der Schaden einfach 0.
          * Zwischen Streifschuss und Fehltreffer wird einfach per 50/50 Wahrscheinlichkeit entschieden.
+         * die graze-Variable wird hier recycelt, um ein Identifikator dafür zu erstellen, ob es ein Volltreffer,
+         * Streifschuss oder Fehlschuss war.
+         *
          */
         if(Math.random()<graze) {
-            damage = Math.random() < 0.5 ? damage * 0.1 : 0;
+            System.out.println("Streifschuss!");
+            damage = Math.random() < 0.5 ? damage * 0.1 : 0.0;
+            if(damage == 0.0) {
+                graze = 3;
+            } else {
+                graze = 2;
+            }
+        } else {
+            graze = 1;
         }
 
+        System.out.println("Schaden nach Fehltreffer: " + damage);
+
         /* Der Schaden wird noch um +- 50% randomisiert, damit es spannend bleibt. */
-        return (int) Math.round(damage * (1+(0.5-Math.random())));
+        damage = Math.round(damage * (1+(0.5-Math.random())));
+        System.out.println("Schaden nach Randomisierung: " + damage);
+        System.out.println((int) graze + "--------------------------------");
+        return new int[]{(int) damage, (int)graze} ;
     }
 
     public int getTotalProtectionValue() {
