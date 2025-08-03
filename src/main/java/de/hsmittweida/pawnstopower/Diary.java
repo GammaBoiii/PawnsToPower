@@ -21,9 +21,9 @@ public class Diary {
      * @param s String, der im Tagebuch hinterlegt werden soll.
      */
     private static void writeDiaryEntry(String s) {
-        Text t = new Text("» \t " + s + "\n");
-        t.setFont(Game.getFont("MoonDance"));
+        Text t = new Text("» " + s + "\n");
         t.setStyle("-fx-font-size: 36px;");
+        //t.setFont(Game.getFont("MoonDance"));
         Game.getDiary().getChildren().add(t);
         saveContext();
         //System.out.println("» " + s);

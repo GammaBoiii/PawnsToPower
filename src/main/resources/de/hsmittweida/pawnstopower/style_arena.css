@@ -1,3 +1,14 @@
+#pane {
+    -fx-background-color: #1a1a1a;
+}
+
+#title {
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-family: "Cinzel Decorative";
+}
+
 #arenaBG {
     -fx-background-image: url("image/arena_background.png");
     -fx-background-position: center;
@@ -15,4 +26,50 @@
 
 .scroll-bar:vertical {
     -fx-background-color: #1a1a1a;
+}
+
+.button {
+    -fx-background-color: rgba(4,40,40,0.4);
+    -fx-text-fill: white;
+    -fx-font-size: 22;
+    -fx-font-weight: bold;
+    -fx-padding: 2 3;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #555;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease-in-out;
+    -fx-text-alignment: center;
+    -fx-font-family: "MedievalSharp";
+}
+.button:hover {
+    -fx-background-color: #555;
+    -fx-border-color: #777;
+}
+
+.button:pressed {
+    -fx-background-color: #222;
+    -fx-border-color: #444;
+}
+
+#list-view {
+    -fx-background-color: #1a1f1f;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-border-style: solid;
+}
+
+#list-view .label {
+    -fx-text-fill: white;
+    -fx-font-size: 25;
+    -fx-font-weight: bold;
+    -fx-font-family: "MedievalSharp";
+}
+
+#action-button {
+    -fx-text-fill: white;
+    -fx-border-radius: 7;
+    -fx-background-color: rgba(57, 62, 62, 0.88);
+    -fx-font-family: "Cinzel Decorative";
 }

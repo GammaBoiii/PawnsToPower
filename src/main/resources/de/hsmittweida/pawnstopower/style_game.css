@@ -19,6 +19,7 @@
     linear-gradient(to top, #B97A52 25%, transparent 25%) 0 0;
     -fx-background-size: 100px 100px;
     -fx-background-repeat: repeat;
+    -fx-font-family: "Moon Dance"
 }
 
 #side-bar #diary-header {
@@ -28,7 +29,11 @@
 }
 
 #side-bar .label {
-    /*-fx-text-fill: white;*/
+    -fx-text-fill: white;
+    -fx-font-family: "Cinzel Decorative";
+    -fx-font-style: bold;
+    -fx-font-size: 21;
+
 }
 
 #help-bar {
@@ -65,7 +70,6 @@
     -fx-text-fill: rgba(0, 0, 0, 0);
     -fx-font-size: 30;
     -fx-padding: 150 200;
-    /*-fx-transition: all 0.5s ease-in-out;*/
 }
 
 #grid-game .button:hover {
@@ -79,9 +83,6 @@
 #barracks {
     -fx-background-image: url("image/barracks.png");
     -fx-background-radius: 50;
-    /*-fx-border-radius: 50px;
-        -fx-border-color: red;
-        -fx-border-width: 3px;*/
     -fx-background-size: 100%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -90,9 +91,6 @@
 #shop {
     -fx-background-image: url("image/shop.png");
     -fx-background-radius: 50px;
-    /*-fx-border-radius: 50px;
-    -fx-border-color: red;
-    -fx-border-width: 3px;*/
     -fx-background-size: 100%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -107,45 +105,29 @@
     -fx-background-size: 100%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
-
 }
 
 #other {
     -fx-background-image: url("image/other.png");
     -fx-background-radius: 50px;
-    /*-fx-border-radius: 50px;
-    -fx-border-color: red;
-    -fx-border-width: 3px;*/
     -fx-background-size: 100%;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
 
-/*
-.button {
-    -fx-background-color: #333;
-    -fx-text-fill: white;
-    -fx-font-size: 18px;
-    -fx-padding: 10px 20px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-    -fx-border-color: #555;
-    -fx-border-width: 2px;
-    -fx-cursor: hand;
-    -fx-transition: all 0.3s ease-in-out;
-
-    -fx-min-width: 200px;
-    -fx-min-height: 50px;
+#next-day {
+    -fx-font-family: "MedievalSharp", "Dancing Script", "MoonDance";
+    -fx-background-color: #4a574e;
+    -fx-alignment: center;
     -fx-text-alignment: center;
+    -fx-font-size: 20;
+    -fx-text-fill:white;
+}
+#next-day:hover {
+    -fx-background-color: #7d827e;
 }
 
-.button:hover {
-    -fx-background-color: #555;
-    -fx-border-color: #777;
+#day-button {
+    -fx-font-size: 21;
+    -fx-font-family: "DejaVu Sans";
 }
-
-.button:pressed {
-    -fx-background-color: #222;
-    -fx-border-color: #444;
-}
-*/

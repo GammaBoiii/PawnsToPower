@@ -50,8 +50,10 @@ public class Arena {
      */
     public static Pane chooseFighter() {
         AnchorPane pane = new AnchorPane();
+        pane.setId("pane");
         Tools.addStylesheet(pane, "style_arena.css");
         Label label = new Label("Wähle deinen Pawn aus!");
+        label.setId("title");
         Button mainMenu = new Button("Hauptmenu");
         mainMenu.setOnAction(e -> {
             Game.drawSpace();
@@ -59,22 +61,27 @@ public class Arena {
         AnchorPane.setTopAnchor(mainMenu, 2.0);
         AnchorPane.setLeftAnchor(mainMenu, 2.0);
         label.setMaxWidth(Double.MAX_VALUE);
+        label.setMinHeight(50.0);
         label.setAlignment(Pos.CENTER);
         label.setTextAlignment(TextAlignment.CENTER);
         ScrollPane sp = new ScrollPane();
         sp.setFitToHeight(true);
         sp.setFitToWidth(true);
+        sp.setId("list-view");
+
         VBox fighters = new VBox();
         fighters.setMaxWidth(Double.MAX_VALUE);
         for (Pawn p : Inventory.getPawns()) {
             Label name = new Label(p.getName());
-            Region spacerR = new Region();
+            name.setId("list-item");
+            /*Region spacerR = new Region();
             HBox.setHgrow(spacerR, Priority.ALWAYS);
             spacerR.setStyle("""
                         -fx-border-color: gray transparent gray transparent;
                         -fx-border-width: 0 0 1 0;
                         -fx-translate-y: 0;
                     """);
+            */
             Button choose = new Button("Kampf!");
             if(p.hashFoughtToday()) {
                 choose.setDisable(true);
@@ -86,14 +93,18 @@ public class Arena {
                 p.setFoughtToday(true);
                 Game.setNextDayButtonDisabled(true);
             });
-            HBox fighter = new HBox(10, name, spacerR, choose);
+            HBox fighter = new HBox(10, name, choose);
+            HBox.setHgrow(name, Priority.ALWAYS);
+            name.setMaxWidth(Double.MAX_VALUE);
             fighter.setPadding(new Insets(20,0,0,0));
             fighters.getChildren().add(fighter);
         }
         sp.setContent(fighters);
+        fighters.setId("list-view");
+        fighters.setPadding(new Insets(10,15,10,15));
         AnchorPane.setLeftAnchor(sp, 20.0);
         AnchorPane.setRightAnchor(sp, 20.0);
-        AnchorPane.setTopAnchor(sp, 80.0);
+        AnchorPane.setTopAnchor(sp, 100.0);
         AnchorPane.setBottomAnchor(sp, 25.0);
         AnchorPane.setTopAnchor(label, 50.0);
         AnchorPane.setLeftAnchor(label, 25.0);
@@ -109,6 +120,7 @@ public class Arena {
      */
     public static Pane arenaFight() {
         AnchorPane pane = new AnchorPane();
+        pane.setId("pane");
         BorderPane field = new BorderPane();
         Tools.addStylesheet(pane, "style_arena.css");
         Button mainMenu = new Button("Hauptmenu");
@@ -156,6 +168,8 @@ public class Arena {
         arena.setId("arenaBG");
         attack = new Button("Angreifen");
         defense = new Button("Verteidigen");
+        attack.setId("action-button");
+        defense.setId("action-button");
         attack.setOnAction(e -> {
             inputQueue.offer("attack");
             Arena.disableActionButtons(true);
@@ -239,10 +253,10 @@ public class Arena {
         hb_enemy.progressProperty().bind(healthProgress_enemy);
         hb_fighter.progressProperty().bind(healthProgress_fighter);
         arena.getChildren().addAll(hb_fighter, hb_enemy);
-        AnchorPane.setLeftAnchor(hb_fighter, 150.0);
-        AnchorPane.setTopAnchor(hb_fighter, 450.0);
-        AnchorPane.setRightAnchor(hb_enemy, 150.0);
-        AnchorPane.setTopAnchor(hb_enemy, 450.0);
+        AnchorPane.setLeftAnchor(hb_fighter, 210.0);
+        AnchorPane.setTopAnchor(hb_fighter, 650.0);
+        AnchorPane.setRightAnchor(hb_enemy, 210.0);
+        AnchorPane.setTopAnchor(hb_enemy, 650.0);
 
         /* Name der Kämpfer */
         Label fighterlabel = new Label(choosenFighter.getName());

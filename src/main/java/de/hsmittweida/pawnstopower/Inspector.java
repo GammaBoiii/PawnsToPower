@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -48,8 +50,8 @@ public class Inspector {
         });
         navButtons.getChildren().addAll(mainMenu, barracks);
         navButtons.setSpacing(10.0);
-
-
+        navButtons.prefWidthProperty().bind(background.widthProperty());
+        navButtons.setId("stats-box");
 
         AnchorPane anchorPane = new AnchorPane();
         background.getChildren().addAll(navButtons, anchorPane);
@@ -66,9 +68,17 @@ public class Inspector {
         btnLeft = new Button("Left");
         btnRight = new Button("Right");
 
+        btnHead.setId("slot-button");
+        btnTorso.setId("slot-button");
+        btnArms.setId("slot-button");
+        btnLegs.setId("slot-button");
+        btnLeft.setId("slot-button");
+        btnRight.setId("slot-button");
+
         VBox stats = createStats();
-        AnchorPane.setLeftAnchor(stats, 7.0);
         AnchorPane.setTopAnchor(stats, 6.0);
+        stats.setPadding(new Insets(10,15,10,15));
+
 
         //Slot 0 - siehe Pawn.clothingSlotUsed
         if(p.getArmor((byte)0) != null) {
@@ -203,11 +213,11 @@ public class Inspector {
      */
     private static VBox createStats() {
         VBox box = new VBox();
-        box.setPrefWidth(250.0);
+        box.setId("stats-box");
 
         /* Name */
         HBox name = new HBox();
-        Label nameLabel = new Label("Name:");
+        Label nameLabel = new Label("Name: ");
         Label pawnName = new Label(pawn.getName());
         HBox.setHgrow(nameLabel, Priority.ALWAYS);
         nameLabel.setMaxWidth(Double.MAX_VALUE);
@@ -225,30 +235,20 @@ public class Inspector {
         HBox xpbar = new HBox();
         ProgressBar pb = new ProgressBar();
         pb.progressProperty().bind(pawn.getLevelProgress());
-        // Debug
-        Button dbg1 = new Button("Debug");
-        Button dbg2 = new Button("Debug2");
-        dbg1.setOnAction(e -> {
-            pawn.addXp(5);
-            System.out.println(pawn.getXpAsInt());
-        });
-        dbg2.setOnAction(e -> {
-            pawn.addXp(1);
-            System.out.println(pawn.getXpAsInt());
-        });
-        xpbar.getChildren().addAll(pb, dbg1, dbg2);
+        xpbar.getChildren().addAll(pb);
+        pb.prefWidthProperty().bind(box.widthProperty());
 
         /* Erfahrungspunkte */
         HBox xp = new HBox();
-        Button openSkill = new Button("+");
+        Button openSkill = new Button("» Skills «");
         openSkill.setId("skill-button");
         xp.setAlignment(Pos.CENTER);
         openSkill.setOnAction(e -> {
             new SkillInspector(pawn);
         });
-        xp.getChildren().addAll(/* pb, */ openSkill);
+        xp.getChildren().addAll(openSkill);
 
-        box.getChildren().addAll(name, level, xpbar, xp/*, debug*/);
+        box.getChildren().addAll(name, level, xpbar, xp);
         return box;
     }
 }

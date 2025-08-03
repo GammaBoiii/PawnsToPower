@@ -3,6 +3,7 @@ package de.hsmittweida.pawnstopower;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -194,6 +195,8 @@ public class Game {
         box.setId("side-bar");
 
         Label header = new Label("Tagebuch");
+        header.setPadding(new Insets(0,25,0,25));
+        box.setAlignment(Pos.CENTER);
         header.setId("diary-header");
 
         ScrollPane content = new ScrollPane();
@@ -205,14 +208,15 @@ public class Game {
         VBox textBox = new VBox();
         System.out.println("Diary created");
         textBox.getChildren().add(diary);
-        diary.setStyle("-fx-font-family: 'Dancing Script'");
         content.setContent(textBox);
-        content.setMinHeight(Tools.getScreenSize().get('h') * 0.9);
-        content.setMaxHeight(Tools.getScreenSize().get('h') * 0.9);
+        content.setMinHeight(Tools.getScreenSize().get('h') * 0.83);
+        content.setMaxHeight(Tools.getScreenSize().get('h') * 0.83);
 
         HBox entryChooser = new HBox();
-        Button prevDay = new Button("«");
-        Button nextDay = new Button("»");
+        Button prevDay = new Button("\t«\t");
+        Button nextDay = new Button("\t»\t");
+        prevDay.setId("day-button");
+        nextDay.setId("day-button");
         prevDay.setOnAction(e -> {
             diaryIndex--;
             diary.getChildren().clear();
@@ -237,7 +241,10 @@ public class Game {
         });
         prevDay.setDisable(true);
         nextDay.setDisable(true);
+        entryChooser.setAlignment(Pos.CENTER);
         entryChooser.getChildren().addAll(prevDay, nextDay);
+        entryChooser.setSpacing(10);
+        entryChooser.setPadding(new Insets(10,25,10,25));
         day.addListener((obs, oldDay, newDay) -> {
            prevDay.setDisable(false);
         });
@@ -279,6 +286,11 @@ public class Game {
         label_rep.setMaxWidth(Double.MAX_VALUE);
         label_day.setMaxWidth((Double.MAX_VALUE));
         Button nextDay = new Button("Nächster Tag");
+        nextDay.setId("next-day");
+        nextDay.setAlignment(Pos.CENTER);
+        box.setAlignment(Pos.CENTER);
+        box.setPadding(new Insets(0,25,0,8));
+
 
         /* Beim Initiieren wird einmalig ein neuer Tag gesetzt (von 0 auf 1). Dies wird so gemacht, damit die
          * Grundwerte (Gold und Kämpfer..), mit denen man das Spiel startet, nicht im Tagebuch log als neue
@@ -406,12 +418,6 @@ public class Game {
      * Spiel einmal fertig verpackt wird.
      */
     private static void loadFonts() {
-//        fonts.put("DancingScript", Font.loadFont(Game.class.getResourceAsStream("fonts/DancingScript-Regular.ttf"), 21));
-//        fonts.put("MedievalSharp", Font.loadFont(Game.class.getResourceAsStream("fonts/MedievalSharp-Regular.ttf"), 21));
-//        fonts.put("MoonDance", Font.loadFont(Game.class.getResourceAsStream("fonts/MoonDance-Regular.ttf"), 21));
-//        fonts.put("CinzelDecorative", Font.loadFont(Game.class.getResourceAsStream("fonts/CinzelDecorative-Regular.ttf"), 21));
-
-
         Font f1 = Font.loadFont(Game.class.getResourceAsStream("fonts/DancingScript-Regular.ttf"), 21);
         Font f2 = Font.loadFont(Game.class.getResourceAsStream("fonts/MedievalSharp-Regular.ttf"), 21);
         Font f3 = Font.loadFont(Game.class.getResourceAsStream("fonts/MoonDance-Regular.ttf"), 21);
