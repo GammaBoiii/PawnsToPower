@@ -9,9 +9,9 @@
 }
 
 .button {
-    -fx-background-color: #333;
+    -fx-background-color: rgba(4,40,40,0.4);
     -fx-text-fill: white;
-    -fx-font-size: 14px;
+    -fx-font-size: 22;
     -fx-font-weight: bold;
     -fx-padding: 2 3;
     -fx-border-radius: 5px;
@@ -21,6 +21,7 @@
     -fx-cursor: hand;
     -fx-transition: all 0.3s ease-in-out;
     -fx-text-alignment: center;
+    -fx-font-family: "MedievalSharp";
 }
 .button:hover {
     -fx-background-color: #555;
