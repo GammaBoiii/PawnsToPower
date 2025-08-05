@@ -93,6 +93,7 @@ public class Tools {
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(context);
+        alert.getDialogPane().getStylesheets().add(Tools.class.getResource("style_dialog.css").toExternalForm());
 
         Optional<ButtonType> res = alert.showAndWait();
         if (res.get() == yes) {
@@ -121,7 +122,6 @@ public class Tools {
 
     /**
      * Fügt einer Scene eine .css an
-     * @deprecated
      * @param s Scene, die das Stylesheet erhalten soll
      * @param name Name der .css
      */
