@@ -206,6 +206,7 @@ public class Game {
         content.setFitToWidth(true);
 
         VBox textBox = new VBox();
+        textBox.setId("diary2");
         System.out.println("Diary created");
         textBox.getChildren().add(diary);
         content.setContent(textBox);

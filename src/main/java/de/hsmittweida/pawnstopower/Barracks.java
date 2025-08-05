@@ -35,7 +35,7 @@ public class Barracks {
         sp.setFitToWidth(true);
         sp.setFitToHeight(true);
         sp.setPadding(new Insets(15, 25, 15, 25));
-        AnchorPane.setTopAnchor(sp, 35.0);
+        AnchorPane.setTopAnchor(sp, 37.0);
         AnchorPane.setLeftAnchor(sp, 0.0);
         AnchorPane.setRightAnchor(sp, 0.0);
         AnchorPane.setBottomAnchor(sp, 0.0);

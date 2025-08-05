@@ -51,7 +51,7 @@ public class Inspector {
         navButtons.getChildren().addAll(mainMenu, barracks);
         navButtons.setSpacing(10.0);
         navButtons.prefWidthProperty().bind(background.widthProperty());
-        navButtons.setId("stats-box");
+        navButtons.setId("nav-box");
 
         AnchorPane anchorPane = new AnchorPane();
         background.getChildren().addAll(navButtons, anchorPane);
@@ -214,6 +214,8 @@ public class Inspector {
     private static VBox createStats() {
         VBox box = new VBox();
         box.setId("stats-box");
+        box.setPrefWidth(400);
+        box.setMaxWidth(500);
 
         /* Name */
         HBox name = new HBox();
@@ -249,6 +251,7 @@ public class Inspector {
         xp.getChildren().addAll(openSkill);
 
         box.getChildren().addAll(name, level, xpbar, xp);
+        box.setSpacing(15);
         return box;
     }
 }

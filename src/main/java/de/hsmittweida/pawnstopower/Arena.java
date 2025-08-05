@@ -139,6 +139,7 @@ public class Arena {
 
         /* Textbereich, der als Kampf-Log dient */
         textField = new ScrollPane();
+        textField.setId("log-background");
         VBox textBox = new VBox();
         textField.setFitToHeight(true);
         textField.setFitToWidth(true);
@@ -261,14 +262,14 @@ public class Arena {
         /* Name der Kämpfer */
         Label fighterlabel = new Label(choosenFighter.getName());
         Label enemylabel = new Label(enemy.getName());
-        AnchorPane.setLeftAnchor(fighterlabel, 150.0);
-        AnchorPane.setTopAnchor(fighterlabel, 550.0);
-        AnchorPane.setRightAnchor(enemylabel, 150.0);
-        AnchorPane.setTopAnchor(enemylabel, 550.0);
+        AnchorPane.setLeftAnchor(fighterlabel, 210.0);
+        AnchorPane.setTopAnchor(fighterlabel, 625.0);
+        AnchorPane.setRightAnchor(enemylabel, 210.0);
+        AnchorPane.setTopAnchor(enemylabel, 625.0);
         arena.getChildren().addAll(fighterlabel, enemylabel);
 
         // Debug
-        Label healthlabel_fighter = new Label("");
+        /*Label healthlabel_fighter = new Label("");
         Label healthlabel_enemy = new Label("");
         healthlabel_fighter.textProperty().bind(currentHealth_fighter.asString("%.0f"));
         healthlabel_enemy.textProperty().bind(currentHealth_enemy.asString("%.0f"));
@@ -276,7 +277,7 @@ public class Arena {
         AnchorPane.setLeftAnchor(healthlabel_fighter, 150.0);
         AnchorPane.setTopAnchor(healthlabel_fighter, 430.0);
         AnchorPane.setRightAnchor(healthlabel_enemy, 150.0);
-        AnchorPane.setTopAnchor(healthlabel_enemy, 430.0);
+        AnchorPane.setTopAnchor(healthlabel_enemy, 430.0);*/
 
 
         /* Kampf Logik */

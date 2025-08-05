@@ -14,11 +14,7 @@
     -fx-border-color: #1a1a1a;
     -fx-border-width: 2;
     -fx-min-width: 150px;
-    -fx-background-color: #8B5A2B;
-    -fx-background-image: linear-gradient(to right, #B97A52 25%, transparent 25%) 0 0,
-    linear-gradient(to top, #B97A52 25%, transparent 25%) 0 0;
-    -fx-background-size: 100px 100px;
-    -fx-background-repeat: repeat;
+    -fx-background-color: #1a1f1f;
     -fx-font-family: "Moon Dance"
 }
 
@@ -28,10 +24,28 @@
     -fx-background-position: center;
 }
 
+#diary > .viewport {
+    -fx-background-image: url("image/papyrusbackground.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#diary2 {
+    -fx-background-color: rgba(255,255,255,0.0);
+}
+/*
+    -fx-background-image: url("image/papyrusbackground.png");
+    -fx-border-color: red;
+    -fx-border-width: 2;
+    -fx-borderstyle: solid;
+    -fx-background-size: cover;
+    -fx-background-position: center;
+ */
+
 #side-bar .label {
     -fx-text-fill: white;
     -fx-font-family: "Cinzel Decorative";
-    -fx-font-style: bold;
+    -fx-font-weight: bold;
     -fx-font-size: 21;
 
 }

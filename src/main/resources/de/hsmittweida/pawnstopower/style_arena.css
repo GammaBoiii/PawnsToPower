@@ -18,6 +18,12 @@
 #log {
     -fx-font-size: 25;
 }
+#log-background > .viewport {
+    -fx-background-image: url("image/papyrusbackground.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: cover;
+}
 
 .progress-bar .bar {
     -fx-progress-color: green;
