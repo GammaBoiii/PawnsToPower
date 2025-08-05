@@ -390,12 +390,12 @@ public class Pawn implements Serializable {
             System.out.println("Streifschuss!");
             damage = Math.random() < 0.5 ? damage * 0.1 : 0.0;
             if(damage == 0.0) {
-                graze = 3;
-            } else {
                 graze = 2;
+            } else {
+                graze = 1;
             }
         } else {
-            graze = 1;
+            graze = 0;
         }
 
         System.out.println("Schaden nach Fehltreffer: " + damage);

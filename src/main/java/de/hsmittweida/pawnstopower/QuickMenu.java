@@ -29,6 +29,8 @@ public class QuickMenu {
             Inventory.addItem(new Armor());
             Inventory.addItem(new Armor());
             Inventory.addItem(new Armor());
+            Inventory.getPawns().get(0).addXp(65);
+            Inventory.addReputation(15);
         });
         box.getChildren().addAll(save, load, cheat);
 

@@ -38,7 +38,9 @@ public class Turn extends Thread {
                 double rnd = Math.random();
                 if(rnd > 0.3) {
                     /* Angriff */
-                    String[] msg = Arena.getEnemyAttackMessage();
+                    int[] damageArr = pawn.calcDamage(Arena.getOther(pawn));
+                    int damage = damageArr[0];
+                    String[] msg = Arena.getEnemyAttackMessage(damageArr[1]);
                     Arena.log(msg[0], "-fx-font-style: italic;");
                     waitFor(1500);
                     Arena.log(msg[1], "-fx-font-style: italic;");
@@ -46,7 +48,6 @@ public class Turn extends Thread {
                     Arena.log(msg[2], "-fx-font-style: italic; -fx-fill: red;");
                     Arena.log("");
                     waitFor(2000);
-                    int damage = pawn.calcDamage(Arena.getOther(pawn))[0];
 
                     /* Durch das runLater() in Arena.damage werden in dem Arena-Log immer zuerst die Leben ausgegeben, und dann erst aktualisiert.
                      * Daher werden in der Ausgabe in der folgenden Zeile die Leben direkt mit abgezogen, und der eigentliche Damage
@@ -78,11 +79,13 @@ public class Turn extends Thread {
                     case "attack":
                         int damage = pawn.calcDamage(Arena.getOther(pawn))[0];
                         Arena.damage(Arena.getOther(pawn), damage);
-                        Arena.log("Du hast " + damage + " Schaden beim Gegner verursacht.");
+                        Arena.log("Du hast " + damage + " Schaden beim Gegner verursacht.\n");
                         waitFor(1500);
+                        pawn.goInDefenseMode(false);
                         break;
                     case "defense":
-
+                        pawn.goInDefenseMode(true);
+                        Arena.log("Du stellst dich defensiv auf.\n");
                         break;
 
                     default:

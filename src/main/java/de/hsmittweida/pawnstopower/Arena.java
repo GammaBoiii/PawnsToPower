@@ -328,9 +328,20 @@ public class Arena {
         /* Level generieren. Abweichung von max +- 2 Leveln */
         Random rnd = new Random();
         byte diff = (byte) rnd.nextInt(3);
-        //System.out.println("diff" + diff);
         byte level = (byte) (Math.random() < 0.5 ? diff * -1 : diff);
-        //System.out.println("level" + level);
+
+        /* Je nachdem wie viel Reputation der Spieler hat, hat er die Chance
+         * auf einfacherer Kämpfe.
+         * Ab 20 Reputation bekommt man durch jede 10 weitere erreichte Reputation 5% Chance
+         * auf einen einfacheren Gegner. */
+        if(Inventory.getReputation().get() > 20 && level >= -1) {
+            double chance = ((Inventory.getReputation().get() - 20) / 10 ) * 0.05;
+            rnd = new Random();
+            if(rnd.nextDouble() < chance) {
+                level--;
+            }
+        }
+
         if(choosenFighter.getLvl() + level < 1) level = 0;
         p.setLvl(choosenFighter.getLvl() + level);
 
@@ -528,7 +539,7 @@ public class Arena {
      * das ganze Kampfgeschehen im Arena Log etwas mehr Story hat.
      * @return Angriffsnachricht
      */
-    public static String[] getEnemyAttackMessage() {
+    public static String[] getEnemyAttackMessage(int graze) {
         String[] gegnerInitial = {
                 "Der Gegner beobachtet die Umgebung.",
                 "Der Gegner knackt mit den Fingern und grinst finster.",
@@ -573,27 +584,48 @@ public class Arena {
                 "Er tritt einen Schritt zur Seite und greift sofort an.",
                 "Der Gegner schlägt von oben herab wie ein Sturm."
         };
-        String[] gegnerFolge = {
-                "Die Waffe des Gegners saust auf dich herab.",
-                "Ein dumpfer Schlag trifft dich an der Schulter.",
-                "Ein Schnitt durchzieht die Luft, gefolgt von einem schmerzhaften Aufprall.",
-                "Der Boden unter dir erzittert leicht, als der Angriff aufprallt.",
-                "Ein harter Treffer bringt dich kurz aus dem Gleichgewicht.",
-                "Du spürst den Luftzug des Schlags an deinem Gesicht vorbeirauschen.",
-                "Ein klirrender Aufprall lässt deine Waffe erzittern.",
-                "Der Angriff trifft dein Bein – du knickst leicht ein.",
-                "Der Schlag streift deine Seite – ein brennender Schmerz bleibt zurück.",
-                "Ein knurrender Laut entweicht dem Gegner, als der Angriff sitzt.",
-                "Du stolperst rückwärts, während Funken durch die Luft fliegen.",
-                "Ein Stück deiner Kleidung wird zerrissen.",
-                "Du landest schwer auf dem Rücken.",
-                "Der Gegner nutzt den Schwung und wirbelt erneut herum.",
-                "Ein pochender Schmerz zieht durch deinen Arm.",
-                "Du taumelst einige Schritte zurück.",
-                "Der Boden splittert unter dem Einschlag.",
-                "Eine Druckwelle schleudert dich zur Seite.",
-                "Dein Atem stockt kurz – der Treffer war härter als gedacht."
-        };
+        String[] gegnerFolge = {"Platzhalter"};
+        /*  Volltreffer */
+        if(graze == 0) {
+            gegnerFolge = new String[]{
+                    "Die Waffe des Gegners saust auf dich herab.",
+                    "Ein dumpfer Schlag trifft dich an der Schulter.",
+                    "Ein Schnitt durchzieht die Luft, gefolgt von einem schmerzhaften Aufprall.",
+                    "Der Boden unter dir erzittert leicht, als der Angriff aufprallt.",
+                    "Ein harter Treffer bringt dich kurz aus dem Gleichgewicht.",
+                    "Ein klirrender Aufprall lässt deine Waffe erzittern.",
+                    "Der Angriff trifft dein Bein.. Du knickst leicht ein.",
+                    "Der Schlag streift deine Seite. Ein brennender Schmerz bleibt zurück.",
+                    "Ein knurrender Laut entweicht dem Gegner, als der Angriff sitzt.",
+                    "Du landest schwer auf dem Rücken.",
+                    "Ein pochender Schmerz zieht durch deinen Arm.",
+                    "Du taumelst einige Schritte zurück.",
+                    "Der Boden splittert unter dem Einschlag.",
+                    "Eine Druckwelle schleudert dich zur Seite.",
+                    "Dein Atem stockt kurz.. Der Treffer war härter als gedacht."
+            };
+        }
+        /* Streifschus */
+        else if(graze == 1) {
+            gegnerFolge = new String[]{
+                    "Du stolperst rückwärts, während Funken durch die Luft fliegen.",
+                    "Ein Stück deiner Kleidung wird zerrissen.",
+                    "Im letzten Moment ziehst du deine Waffe zur Abwehr hoch.",
+                    "Die Waffe des Gegners haucht dich an.",
+                    "Der Gegner rempelt dich leicht an."
+            };
+        }
+        /* Fehltreffer */
+        else if(graze == 2) {
+            gegnerFolge = new String[]{
+                    "Du spürst den Luftzug des Schlags an deinem Gesicht vorbeirauschen.",
+                    "Die Waffe des Gegners verfehlt dich knapp.",
+                    "Du konntest in letzter Sekunde ausweichen.",
+                    "Die Waffe saust nur knapp an dir vorbei.",
+                    "Du konntest der Waffe um Haaresbreite entkommen."
+            };
+        }
+
         Random rnd = new Random();
         return new String[]{gegnerInitial[rnd.nextInt(gegnerInitial.length)], gegnerAktion[rnd.nextInt(gegnerAktion.length)], gegnerFolge[rnd.nextInt(gegnerFolge.length)]};
     }
