@@ -35,8 +35,10 @@ public class Game {
     private static BorderPane panel;
     private static HBox helpBar;
     private static VBox sideBar;
+
     private static TextFlow diary;
     private static int diaryIndex;
+    private static Button prevDay, nextDay;
 
     private static HashMap<String, Font> fonts;
 
@@ -214,15 +216,17 @@ public class Game {
         content.setMaxHeight(Tools.getScreenSize().get('h') * 0.83);
 
         HBox entryChooser = new HBox();
-        Button prevDay = new Button("\t«\t");
-        Button nextDay = new Button("\t»\t");
+        prevDay = new Button("\t«\t");
+        nextDay = new Button("\t»\t");
         prevDay.setId("day-button");
         nextDay.setId("day-button");
         prevDay.setOnAction(e -> {
             diaryIndex--;
             diary.getChildren().clear();
-            for(Node n : Diary.getDiaryEntries().get(diaryIndex-1)) {
-                diary.getChildren().add(n);
+            System.out.println("Diary index: " + diaryIndex);
+            for(Text t : Diary.getDiaryEntries().get(diaryIndex-1)) {
+                diary.getChildren().add(t);
+                t.setStyle("-fx-font-size: 36px;");
             }
             nextDay.setDisable(false);
             if(diaryIndex - 1 <= 0) {
@@ -232,8 +236,9 @@ public class Game {
         nextDay.setOnAction(e -> {
             diaryIndex++;
             diary.getChildren().clear();
-            for(Node n : Diary.getDiaryEntries().get(diaryIndex-1)) {
-                diary.getChildren().add(n);
+            for(Text t : Diary.getDiaryEntries().get(diaryIndex-1)) {
+                diary.getChildren().add(t);
+                t.setStyle("-fx-font-size: 36px;");
             }
             prevDay.setDisable(false);
             if(diaryIndex + 1 > getDay()) {
@@ -360,6 +365,10 @@ public class Game {
         return day.get();
     }
 
+    public static void setDay(int d) {
+        day.set(d);
+    }
+
     /**
      * Eine Debug-Methode, die während der Entwicklung verwendet wurde.
      * @deprecated
@@ -448,6 +457,14 @@ public class Game {
             return fonts.get(name);
         }
         return null;
+    }
+
+    public static void resetDay() {
+        day.set(1);
+    }
+
+    public static void refreshDiaryIndex() {
+        diaryIndex = day.get();
     }
 
 

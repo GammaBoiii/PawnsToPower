@@ -1,6 +1,7 @@
 package de.hsmittweida.pawnstopower;
 
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -14,14 +15,14 @@ import java.util.Random;
  */
 public class Diary {
     private static int oldMoney, oldPawnNum;
-    private static HashMap<Integer, ArrayList<Node>> diaryEntries;
+    private static HashMap<Integer, ArrayList<Text>> diaryEntries;
 
     /**
      * Schreibt einen String in das Tagebuch.
      * @param s String, der im Tagebuch hinterlegt werden soll.
      */
     private static void writeDiaryEntry(String s) {
-        Text t = new Text("» " + s + "\n");
+        Text t = new Text(s + "\n");
         t.setStyle("-fx-font-size: 36px;");
         //t.setFont(Game.getFont("MoonDance"));
         Game.getDiary().getChildren().add(t);
@@ -136,11 +137,11 @@ public class Diary {
      */
     public static void saveContext(int day, TextFlow entry) {
         if (Diary.diaryEntries == null) {
-            diaryEntries = new HashMap<Integer, ArrayList<Node>>();
+            diaryEntries = new HashMap<Integer, ArrayList<Text>>();
         }
         diaryEntries.remove(day - 1);
         for (Node n : entry.getChildren()) {
-            diaryEntries.get(day - 1).add(n);
+            diaryEntries.get(day - 1).add((Text) n);
         }
         entry.getChildren().clear();
     }
@@ -152,22 +153,63 @@ public class Diary {
      */
     public static void saveContext() {
         if (diaryEntries == null) {
-            diaryEntries = new HashMap<Integer, ArrayList<Node>>();
+            diaryEntries = new HashMap<Integer, ArrayList<Text>>();
         }
         if (diaryEntries.get(Game.getDay() - 1) == null) {
-            diaryEntries.put(Game.getDay() - 1, new ArrayList<Node>());
+            diaryEntries.put(Game.getDay() - 1, new ArrayList<Text>());
         }
         diaryEntries.get(Game.getDay() - 1).clear();
         for (Node n : Game.getDiary().getChildren()) {
-            diaryEntries.get(Game.getDay() - 1).add(n);
+            diaryEntries.get(Game.getDay() - 1).add((Text) n);
         }
     }
-
     /**
      * @return HashMap, die alle Tagebucheinträge entsprechend der Tage beinhaltet.
      */
-    public static HashMap<Integer, ArrayList<Node>> getDiaryEntries() {
+    public static HashMap<Integer, ArrayList<Text>> getDiaryEntries() {
         return diaryEntries;
     }
+
+    public static HashMap<Integer, ArrayList<String>> getDiaryEntriesAsSerializable() {
+        HashMap<Integer, ArrayList<String>> entries = new HashMap<Integer, ArrayList<String>>();
+        ArrayList<String> temp;
+        for(int i = 0; i<diaryEntries.size(); i++) {
+            temp = new ArrayList<>();
+            for(int j = 0; j<diaryEntries.get(i).size(); j++) {
+                String text = ((Text) diaryEntries.get(i).get(j)).getText();
+                System.out.println("-: " + text);
+                temp.add(text);
+            }
+            entries.put(i, temp);
+        }
+        return entries;
+    }
+
+    public static void setDiaryEntriesFromSeriliazable(HashMap<Integer, ArrayList<String>> map) {
+        diaryEntries.clear();
+        Game.getDiary().getChildren().clear();
+        Game.refreshDiaryIndex();
+        for(int i = 0; i<map.size(); i++) {
+            ArrayList<String> temp = map.get(i);
+            ArrayList<Text> list = new ArrayList<>();
+            for(int j = 0; j<temp.size(); j++) {
+                list.add(new Text(temp.get(j)));
+            }
+            diaryEntries.put(i, list);
+        }
+
+        System.out.println("Diary entries: ");
+        for(int i = 0; i<diaryEntries.size(); i++) {
+            for (int j = 0; j < diaryEntries.get(i).size(); j++) {
+                System.out.println(diaryEntries.get(i).get(j).getText());
+            }
+        }
+
+        for(String s : map.get(Game.getDay() - 1)) {
+            writeDiaryEntry(s);
+        }
+    }
+
+
 
 }

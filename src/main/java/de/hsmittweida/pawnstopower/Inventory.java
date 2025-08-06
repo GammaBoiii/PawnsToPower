@@ -144,12 +144,23 @@ public class Inventory implements Serializable {
      */
     public static void addReputation(int reputation) {
         if(Inventory.reputation == null) {
-            Inventory.reputation = new SimpleIntegerProperty(0);
+            Inventory.reputation = new SimpleIntegerProperty(reputation);
+            return;
         }
         if (reputation < 0 && Math.abs(reputation) > Math.abs(Inventory.reputation.get())) {
             Inventory.reputation.set(0);
         } else {
             Inventory.reputation.set(Inventory.reputation.get() + reputation);
         }
+    }
+
+    public static void clear() {
+        weapons.clear();
+        armor.clear();
+        pawns.clear();
+        money.set(0);
+        pawnsNum.set(0);
+        reputation.set(0);
+        Game.resetDay();
     }
 }
