@@ -46,10 +46,7 @@ public class Tools {
     }
 
     public static void defaultClose(Stage stage, String ownerClass) {
-        /* Fenster nicht resizable machen */
         stage.setResizable(false);
-
-        /* Falls ein Fenster verschoben sein sollte, wird es beim nächsten Öffnen wieder an der Position geöffnet. */
 
         /* Sorgt dafür, dass überflüssige Fenster geschlossen werden */
         stage.getProperties().put("owner", ownerClass);

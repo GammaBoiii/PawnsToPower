@@ -6,6 +6,14 @@
     -fx-background-color: #1a1a1a;
 }
 
+.v-box {
+    -fx-background-color: #1a1a1a;
+}
+
+.h-box {
+    -fx-background-color: #1a1a1a;
+}
+
 .label {
     -fx-font-family: "MedievalSharp";
     -fx-font-size: 21px;

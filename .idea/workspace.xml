@@ -9,10 +9,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="changed style">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_default.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Slot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Slot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Tools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/ItemStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/ItemStats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_default.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_default.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +85,7 @@
     "project.structure.side.proportion": "0.2",
     "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font",
+    "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -124,8 +124,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.27812.49" />
-        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.27812.49" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.23892.409" />
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-IU-252.23892.409" />
       </set>
     </attachedChunks>
   </component>
@@ -214,7 +214,8 @@
       <workItem from="1753978438134" duration="3497000" />
       <workItem from="1754123840662" duration="16137000" />
       <workItem from="1754224113646" duration="11842000" />
-      <workItem from="1754410399923" duration="9251000" />
+      <workItem from="1754410399923" duration="9498000" />
+      <workItem from="1754494340326" duration="1712000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
