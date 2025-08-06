@@ -22,6 +22,7 @@ public class ItemStats {
         VBox box = new VBox();
         Scene s = new Scene(box, 400, 150);
         Tools.addStylesheet(s, "style_default.css");
+        box.setId("vbox");
 
         Label nameLabel = new Label("Name:");
         Label nameVal = new Label(w.getName());
@@ -68,6 +69,7 @@ public class ItemStats {
         VBox box = new VBox();
         Scene s = new Scene(box, 400, 150);
         Tools.addStylesheet(s, "style_default.css");
+        box.setId("vbox");
 
         Label nameLabel = new Label("Rüstung: ");
         Label nameVal = new Label(a.getName());

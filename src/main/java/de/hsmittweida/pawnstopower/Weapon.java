@@ -46,7 +46,7 @@ public class Weapon extends Item {
     }
 
     public boolean isTwoHanded() {
-        return twoHanded;
+        return wc.isTwoHanded();
     }
 
     public WeaponClass getWeaponClass() {
@@ -112,6 +112,9 @@ public class Weapon extends Item {
 
         public int basePrice;
         public double baseDamage;
+        public boolean isTwoHanded() {
+            return this == ZWH || this == HMR || this == LNS || this == GXT || this == KTN;
+        }
 
         WeaponClass(int basePrice, double baseDamage) {
             this.basePrice = basePrice;

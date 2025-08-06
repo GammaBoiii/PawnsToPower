@@ -6,16 +6,8 @@
     -fx-background-color: #1a1a1a;
 }
 
-.v-box {
-    -fx-background-color: #1a1a1a;
-}
-
-.h-box {
-    -fx-background-color: #1a1a1a;
-}
-
 .label {
-    -fx-font-family: "MedievalSharp";
+    -fx-font-family: "MedievalSharp", "Cinzel Decorative";
     -fx-font-size: 21px;
     -fx-text-fill: white;
 }
@@ -30,4 +22,15 @@
 
 .button:hover {
     -fx-background-color: #555;
+}
+
+#vbox {
+    -fx-background-color: #1a1a1a;
+    -fx-font-family: "MedievalSharp";
+}
+
+#vbox > .label {
+    -fx-text-fill: white;
+    -fx-font-size: 21px;
+    -fx-font-family: "MedievalSharp";
 }

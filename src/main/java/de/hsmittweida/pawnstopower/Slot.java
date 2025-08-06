@@ -57,7 +57,7 @@ public class Slot {
                     if (w.isEquipped()) {
                         if (p != w.getOwner()) {
                             equip.setOnAction(e -> {
-                                String res = Tools.confirmPopup("Item bereits ausgerüstet.", "Dieses Item ist bereits bei " + w.getOwner().getName() + " ausgerüstet.", "Möchtest du es bei dem aktuellen Pawn ausrüsten?");
+                                String res = Tools.confirmPopup("Item bereits ausgerüstet.", "Dieses Item ist bereits bei " + w.getOwner().getName() + " ausgerüstet.", "Möchtest du es ablegen?");
                                 if (res.equals("yes")) {
                                     for (Weapon wep : w.getOwner().weapons) {
                                         if (wep != null) System.out.println(wep.getName());
@@ -69,7 +69,7 @@ public class Slot {
 
                                     /* Dem alten Pawn entrüsten */
                                     w.getOwner().removeWeapon(w);
-                                    p.giveWeapon(reference, w, (byte) id);
+                                    //p.giveWeapon(reference, w, (byte) id);
                                     stage.close();
                                 } else if (res.equals("no")) {}
                             });
@@ -84,6 +84,25 @@ public class Slot {
                         }
                     } else {
                         equip.setOnAction(e -> {
+                            /* Prüfen, ob bereits ein Zweihänder ausgerüstet ist. */
+                            if(id == 0) {
+                                if((w.isTwoHanded() && p.getWeapon((byte)1) != null)) {
+                                    Tools.popup("Zweihänder", "Du willst ein Zweihänder ausrüsten.", "Lege dazu erst die Waffe aus der anderen Hand ab.");
+                                    return;
+                                } else if(p.getWeapon((byte)1) != null && p.getWeapon((byte)1).isTwoHanded()) {
+                                    Tools.popup("Zweihänder", "Ein Zweihänder ist bereits ausgerüstet.", "Lege diesen zunächst ab, wenn du eine neue Waffe ausrüsten willst.");
+                                    return;
+                                }
+                            } else if (id == 1) {
+                                if((w.isTwoHanded() && p.getWeapon((byte)0) != null)) {
+                                    Tools.popup("Zweihänder", "Du willst ein Zweihänder ausrüsten.", "Lege dazu erst die Waffe aus der anderen Hand ab.");
+                                    return;
+                                } else if(p.getWeapon((byte)0) != null && p.getWeapon((byte)0).isTwoHanded()) {
+                                    Tools.popup("Zweihänder", "Ein Zweihänder ist bereits ausgerüstet.", "Lege diesen zunächst ab, wenn du eine neue Waffe ausrüsten willst.");
+                                    return;
+                                }
+                            }
+
                             p.giveWeapon(reference, w, (byte) id);
                             stage.close();
                         });
