@@ -10,9 +10,10 @@ public class SoundManager {
 
     private MediaPlayer mp;
     private int index = 0;
-    ArrayList<File> playlist;
+    ArrayList<String> playlist;
     SoundManager(String name) {
-        File f = new File(this.getClass().getResource("sound/" + name).getFile());
+        //File f = new File(this.getClass().getResource("sound/" + name).getFile());
+        String f = this.getClass().getResource("sound/" + name).toExternalForm();
 
         try {
             mp = createSound(f);
@@ -25,9 +26,9 @@ public class SoundManager {
     }
 
     SoundManager(String... name) {
-        playlist = new ArrayList<File>();
+        playlist = new ArrayList<String>();
         for (String s : name) {
-            playlist.add(new File(this.getClass().getResource("sound/" + s).getFile()));
+            playlist.add(this.getClass().getResource("sound/" + s).toExternalForm());
         }
         //System.out.println(playlist.size());
         playCurrentSong();
@@ -44,7 +45,7 @@ public class SoundManager {
      * Danke hierbei an den Java Garbage-Collector.
      */
     private void playCurrentSong() {
-        File currentSong = playlist.get(index);
+        String currentSong = playlist.get(index);
         //System.out.println("Playing song: " + currentSong.getName());
         mp = createSound(currentSong);
         mp.play();
@@ -59,8 +60,8 @@ public class SoundManager {
         });
     }
 
-    private MediaPlayer createSound(File f) {
-        return new MediaPlayer(new Media(f.toURI().toString()));
+    private MediaPlayer createSound(String f) {
+        return new MediaPlayer(new Media(f));
     }
 
 }
