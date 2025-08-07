@@ -44,10 +44,10 @@ public class Turn extends Thread {
                     Arena.log(msg[0], "-fx-font-style: italic;");
                     waitFor(1500);
                     Arena.log(msg[1], "-fx-font-style: italic;");
-                    waitFor(1500);
+                    waitFor(2000);
                     Arena.log(msg[2], "-fx-font-style: italic; -fx-fill: red;");
                     Arena.log("");
-                    waitFor(2000);
+                    new SoundManager(getRandomAtkSound());
 
                     /* Durch das runLater() in Arena.damage werden in dem Arena-Log immer zuerst die Leben ausgegeben, und dann erst aktualisiert.
                      * Daher werden in der Ausgabe in der folgenden Zeile die Leben direkt mit abgezogen, und der eigentliche Damage
@@ -79,6 +79,7 @@ public class Turn extends Thread {
                     case "attack":
                         int damage = pawn.calcDamage(Arena.getOther(pawn))[0];
                         Arena.damage(Arena.getOther(pawn), damage);
+                        new SoundManager(getRandomAtkSound());
                         Arena.log("Du hast " + damage + " Schaden beim Gegner verursacht.\n");
                         waitFor(1500);
                         pawn.goInDefenseMode(false);
@@ -132,5 +133,10 @@ public class Turn extends Thread {
 
     public Thread getThread() {
         return this.thread;
+    }
+
+    private String getRandomAtkSound() {
+        String[] loc = {"sfx/atk1.mp3","sfx/atk2.mp3","sfx/atk3.mp3","sfx/atk4.mp3"};
+        return loc[(int)(Math.random()*loc.length)];
     }
 }

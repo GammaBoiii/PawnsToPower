@@ -406,7 +406,6 @@ public class Arena {
         p.giveArmor(a2, (byte) 1);
         p.giveArmor(a3, (byte) 2);
         p.giveArmor(a4, (byte) 3);
-        //System.out.println("Gegner Equippment: " +  p.getWeapon((byte) 0).getName() + " - " + p.getWeapon((byte) 0).getWeaponClass() + "| " + p.getArmor((byte) 0).getName() + " | " + p.getArmor((byte) 1).getName() +" | " + p.getArmor((byte) 2).getName() +" | " + p.getArmor((byte) 3).getName() );
 
         // Debug:
         System.out.println(String.format("""

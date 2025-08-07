@@ -24,6 +24,25 @@
     -fx-background-position: center;
 }
 
+#side-bar .button {
+    -fx-background-color: rgba(4, 40, 40, 0.4);
+    -fx-text-fill: white;
+    -fx-font-size: 22;
+    -fx-font-weight: bold;
+    -fx-padding: 2 3;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #555;
+    -fx-border-width: 2px;
+    -fx-text-alignment: center;
+    -fx-font-family: "SansSerif";
+}
+
+#side-bar .button:hover {
+    -fx-background-color: #555;
+    -fx-border-color: #777;
+}
+
 #diary > .viewport {
     -fx-background-image: url("image/papyrusbackground.png");
     -fx-background-repeat: no-repeat;
@@ -31,8 +50,9 @@
 }
 
 #diary2 {
-    -fx-background-color: rgba(255,255,255,0.0);
+    -fx-background-color: rgba(255, 255, 255, 0.0);
 }
+
 /*
     -fx-background-image: url("image/papyrusbackground.png");
     -fx-border-color: red;
@@ -135,8 +155,9 @@
     -fx-alignment: center;
     -fx-text-alignment: center;
     -fx-font-size: 20;
-    -fx-text-fill:white;
+    -fx-text-fill: white;
 }
+
 #next-day:hover {
     -fx-background-color: #7d827e;
 }

@@ -20,8 +20,6 @@
     -fx-background-radius: 5px;
     -fx-border-color: #555;
     -fx-border-width: 2px;
-    -fx-cursor: hand;
-    -fx-transition: all 0.3s ease-in-out;
     -fx-text-alignment: center;
     -fx-font-family: "MedievalSharp";
 }

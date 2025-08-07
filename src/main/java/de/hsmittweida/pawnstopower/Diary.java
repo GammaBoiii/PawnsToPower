@@ -17,6 +17,8 @@ public class Diary {
     private static int oldMoney, oldPawnNum;
     private static HashMap<Integer, ArrayList<Text>> diaryEntries;
 
+    private static boolean skipDailyGains = false;
+
     /**
      * Schreibt einen String in das Tagebuch.
      * @param s String, der im Tagebuch hinterlegt werden soll.
@@ -77,10 +79,11 @@ public class Diary {
 
         /* Da der der Spieler quasi am ersten Tag (vor Spielbeginnn) sein Inventar gefüllt bekommt,
          * darf dies nicht geloggt werden. */
-        if (Game.getDay() == 1) {
+        if (Game.getDay() == 1 || skipDailyGains) {
             msg += "\n\n";
             oldPawnNum = Inventory.getPawnsNum().getValue();
             oldMoney = Inventory.getMoney();
+            skipDailyGains = false;
             writeDiaryEntry(msg);
             return;
         }
@@ -208,6 +211,8 @@ public class Diary {
         for(String s : map.get(Game.getDay() - 1)) {
             writeDiaryEntry(s);
         }
+
+        skipDailyGains = true;
     }
 
 

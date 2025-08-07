@@ -163,7 +163,6 @@ public class Inspector {
             case GXT -> "GXT.png";
             case HMR -> "HMR.png";
             case KTN -> "KTN.png";
-            case KZG -> "KZG.png";
             case LNS -> "LNS.png";
             case SBL -> "SBL.png";
             case SPR -> "SPR.png";

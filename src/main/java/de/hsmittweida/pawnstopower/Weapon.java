@@ -101,7 +101,6 @@ public class Weapon extends Item {
         SWT(80, 8.0), //Schwert
         ZWH(120, 12.0), //Zweihänder
         KTN(110, 11.0), //Katana
-        KZG(50, 5.0), //Kurzklinge
         LNS(120, 12.0), //Langschwert
         SBL(90, 9.0), //Säbel
         DOL(35, 3.5), //Dolch
