@@ -14,22 +14,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="changed style">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/weapons/DOL.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/weapons/LNS.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/weapons/SWT.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/sound/sfx/atk1.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/sound/sfx/atk2.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/sound/sfx/atk3.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/sound/sfx/atk4.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/avatar_var1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/weapons/HMR.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/weapons/SBL.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/weapons/SPR.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Arena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Diary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Diary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Inspector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Inspector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Turn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Turn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Slot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Slot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Tools.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Weapon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/weapons/KTN.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/weapons/KTN.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_barracks.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_barracks.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_game.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_game.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/avatar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/avatar.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/weapons/AXT.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/weapons/AXT.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_inspector.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_inspector.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -95,7 +90,7 @@
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/johann/IdeaProjects/PawnsToPower/src/main/resources/de/hsmittweida/pawnstopower/sound/sfx",
+    "last_opened_file_path": "/home/johann/IdeaProjects/PawnsToPower/src/main/resources/de/hsmittweida/pawnstopower/image",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -113,9 +108,9 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/sound/sfx" />
-      <recent name="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/weapons" />
       <recent name="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image" />
+      <recent name="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/weapons" />
+      <recent name="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/sound/sfx" />
       <recent name="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/fonts" />
       <recent name="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/sound" />
     </key>
@@ -250,7 +245,8 @@
       <workItem from="1754410399923" duration="9498000" />
       <workItem from="1754494340326" duration="11071000" />
       <workItem from="1754551173463" duration="6309000" />
-      <workItem from="1754580628799" duration="4058000" />
+      <workItem from="1754580628799" duration="4166000" />
+      <workItem from="1754668259554" duration="4332000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />

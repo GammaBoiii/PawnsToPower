@@ -99,20 +99,18 @@ public class Weapon extends Item {
      */
     public enum WeaponClass {
         SWT(80, 8.0), //Schwert
-        ZWH(120, 12.0), //Zweihänder
         KTN(110, 11.0), //Katana
         LNS(120, 12.0), //Langschwert
         SBL(90, 9.0), //Säbel
         DOL(35, 3.5), //Dolch
         SPR(95, 9.5), //Speer
         HMR(130, 13.0), //Hammer
-        AXT(100, 10.0),//Axt
-        GXT(125, 12.5);//Groß-Axt
+        AXT(100, 10.0);//Axt
 
         public int basePrice;
         public double baseDamage;
         public boolean isTwoHanded() {
-            return this == ZWH || this == HMR || this == LNS || this == GXT || this == KTN;
+            return this == LNS || this == KTN;
         }
 
         WeaponClass(int basePrice, double baseDamage) {

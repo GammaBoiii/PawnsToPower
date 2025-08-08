@@ -77,7 +77,9 @@ public class Slot {
                         } else {
                             equip.setText("Unequip");
                             equip.setOnAction(e -> {
+                                System.out.println("Unequip");
                                 w.getOwner().removeWeapon(w);
+                                Inspector.refreshImages();
                                 stage.close();
                             });
 

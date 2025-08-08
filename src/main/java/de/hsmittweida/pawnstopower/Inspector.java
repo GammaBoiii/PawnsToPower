@@ -54,6 +54,7 @@ public class Inspector {
         navButtons.setId("nav-box");
 
         AnchorPane anchorPane = new AnchorPane();
+        Tools.getMouseClickedPosOnNode(anchorPane);
         background.getChildren().addAll(navButtons, anchorPane);
         anchorPane.setId("anchorPane");
         AnchorPane.setTopAnchor(anchorPane, 30.0);
@@ -129,9 +130,9 @@ public class Inspector {
         if(p.getWeapon((byte)0) != null) {
             setImage(btnRight, p.getWeapon((byte)0).getWeaponClass());
         }
-        AnchorPane.setRightAnchor(btnRight, 7.0);
-        AnchorPane.setTopAnchor(btnRight, 195.0);
-        btnRight.setPrefWidth(65);
+        AnchorPane.setRightAnchor(btnRight, 415.0);
+        AnchorPane.setTopAnchor(btnRight, 375.0);
+        btnRight.setPrefWidth(200);
         btnRight.setPrefHeight(200);
         btnRight.setOnAction(e -> new Slot(btnRight, p, "weapon", 0, "Rechte Handwaffe"));
 
@@ -139,9 +140,9 @@ public class Inspector {
         if(p.getWeapon((byte)1) != null) {
             setImage(btnLeft, p.getWeapon((byte)1).getWeaponClass());
         }
-        AnchorPane.setLeftAnchor(btnLeft, 7.0);
-        AnchorPane.setTopAnchor(btnLeft, 195.0);
-        btnLeft.setPrefWidth(65);
+        AnchorPane.setLeftAnchor(btnLeft, 415.0);
+        AnchorPane.setTopAnchor(btnLeft, 375.0);
+        btnLeft.setPrefWidth(200);
         btnLeft.setPrefHeight(200);
         btnLeft.setOnAction(e -> new Slot(btnLeft, p, "weapon", 1, "Linke Handwaffe"));
 
@@ -160,17 +161,17 @@ public class Inspector {
         String picName = switch (wc) {
             case AXT -> "AXT.png";
             case DOL -> "DOL.png";
-            case GXT -> "GXT.png";
             case HMR -> "HMR.png";
             case KTN -> "KTN.png";
             case LNS -> "LNS.png";
             case SBL -> "SBL.png";
             case SPR -> "SPR.png";
             case SWT -> "SWT.png";
-            case ZWH -> "ZWH.png";
         };
+        System.out.println(picName);
         String location = Inspector.class.getResource("image/weapons/"+picName).toExternalForm();
-        ref.setStyle("-fx-background-image: url('" + location + "');");
+        System.out.println(location);
+        ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: center; -fx-background-size: cover;");
     }
 
     /**
@@ -252,5 +253,20 @@ public class Inspector {
         box.getChildren().addAll(name, level, xpbar, xp);
         box.setSpacing(15);
         return box;
+    }
+
+    /**
+     * Aktualisiert die Bilder bei den Ausrüstungsknöpfen, sodass die ausgerüsteten Items
+     * richtig dargestellt werden.
+     */
+    public static void refreshImages() {
+        if (pawn != null) {
+            if(pawn.getWeapon((byte)0) == null) {
+                clearImage(btnRight);
+            }
+            if(pawn.getWeapon((byte)1) == null) {
+                clearImage(btnLeft);
+            }
+        }
     }
 }

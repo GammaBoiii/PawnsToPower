@@ -6,6 +6,7 @@ import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.*;
@@ -196,5 +197,11 @@ public class Tools {
         } catch (InterruptedException e) {
             System.out.println("Interrupted while break");
         }
+    }
+
+    public static void getMouseClickedPosOnNode(Node node) {
+        node.setOnMouseClicked(event -> {
+            System.out.println(event.getX() + " " + event.getY());
+        });
     }
 }
