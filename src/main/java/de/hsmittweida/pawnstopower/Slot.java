@@ -57,6 +57,9 @@ public class Slot {
                     if (w.isEquipped()) {
                         if (p != w.getOwner()) {
                             equip.setOnAction(e -> {
+                                System.out.println(w.getOwner());
+                                System.out.println(p);
+
                                 String res = Tools.confirmPopup("Item bereits ausgerüstet.", "Dieses Item ist bereits bei " + w.getOwner().getName() + " ausgerüstet.", "Möchtest du es ablegen?");
                                 if (res.equals("yes")) {
                                     for (Weapon wep : w.getOwner().weapons) {
@@ -175,8 +178,13 @@ public class Slot {
                         }
                     } else {
                         equip.setOnAction(e -> {
+                            if(p.getArmor((byte)id) != null) {
+                                p.removeArmor(p.getArmor((byte)id));
+                            }
+
                             p.giveArmor( reference, a, (byte) id);
 
+                            Inspector.refreshImages();
                             stage.close();
                         });
                     }

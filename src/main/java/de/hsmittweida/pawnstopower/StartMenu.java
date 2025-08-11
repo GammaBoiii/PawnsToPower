@@ -35,17 +35,11 @@ public class StartMenu {
 			});
 
 			loadGame.setOnAction(e-> {
-				/*TextInputDialog dialog = new TextInputDialog();
-				dialog.setTitle("Spiel laden");
-				dialog.setHeaderText("Gib den Pfad an!");
-				dialog.setContentText("Es sollte eine \\\".ptpfile\\\" sein.");
-				dialog.getDialogPane().getStylesheets().add(Game.class.getResource("style_dialog.css").toExternalForm());
-				String res = "";
-				try {
-					res = dialog.showAndWait().get();
-				} catch (NoSuchElementException nsex) {}*/
-				String res = Tools.inputPopup("Spiel laden", "Gib den Pfad an!", "Es sollte eine \".ptpfile\" sein.");
-			});
+				String res = Tools.inputPopup("Spiel laden", "Gib den Pfad an!", "Es sollte eine \".p2p\" sein.");
+                stage.close();
+                Game.Game_view();
+                Save.loadAll(res);
+            });
 
 			exit.setOnAction(e -> {
 				stage.close();

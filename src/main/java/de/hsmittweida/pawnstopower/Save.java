@@ -24,6 +24,16 @@ public class Save {
         ArrayList<Integer> pawnXP = new ArrayList<Integer>();
         for(Pawn p : Inventory.getPawns()) {
             pawnXP.add(p.getXpAsInt());
+
+            /* Da ein Pawn nach dem Laden nicht mehr das selbe Objekt wie vorher ist (Objektrefernz),
+             * müssen alle Waffen und RÜstungen entrüstet werden, da die getOwner() Methode jedes
+             * dieser Items, die alte Pawn-Referenz zurückgibt. */
+            p.removeWeapon(p.getWeapon((byte) 0));
+            p.removeWeapon(p.getWeapon((byte) 1));
+            p.removeArmor(p.getArmor((byte) 0));
+            p.removeArmor(p.getArmor((byte) 1));
+            p.removeArmor(p.getArmor((byte) 2));
+            p.removeArmor(p.getArmor((byte) 3));
         }
 
         PrintWriter writer = null;

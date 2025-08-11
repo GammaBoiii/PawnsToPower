@@ -82,9 +82,6 @@ public class Inspector {
 
 
         //Slot 0 - siehe Pawn.clothingSlotUsed
-        if(p.getArmor((byte)0) != null) {
-
-        }
         AnchorPane.setLeftAnchor(btnHead, 710.0);
         AnchorPane.setRightAnchor(btnHead, 710.0);
         AnchorPane.setTopAnchor(btnHead, 190.0);
@@ -93,9 +90,6 @@ public class Inspector {
         btnHead.setOnAction(e -> new Slot( btnHead, p, "clothing", 0, "Kopfschutz"));
 
         //Slot 1
-        if(p.getArmor((byte)1) != null) {
-
-        }
         AnchorPane.setLeftAnchor(btnTorso, 710.0);
         AnchorPane.setRightAnchor(btnTorso, 710.0);
         AnchorPane.setTopAnchor(btnTorso, 300.0);
@@ -104,9 +98,6 @@ public class Inspector {
         btnTorso.setOnAction(e -> new Slot( btnTorso, p, "clothing", 1, "Torsoschutz"));
 
         //Slot 2
-        if(p.getArmor((byte)2) != null) {
-
-        }
         AnchorPane.setLeftAnchor(btnArms, 655.0);
         AnchorPane.setRightAnchor(btnArms, 655.0);
         AnchorPane.setTopAnchor(btnArms, 300.0);
@@ -115,9 +106,6 @@ public class Inspector {
         btnArms.setOnAction(e -> new Slot(btnArms, p, "clothing", 2, "Armschutz"));
 
         //Slot 3
-        if(p.getArmor((byte)3) != null) {
-
-        }
         AnchorPane.setRightAnchor(btnLegs, 710.0);
         AnchorPane.setLeftAnchor(btnLegs, 710.0);
         AnchorPane.setTopAnchor(btnLegs, 535.0);
@@ -128,6 +116,7 @@ public class Inspector {
 
         //Slot 0 - siehe Pawn.weaponSlotUsed
         if(p.getWeapon((byte)0) != null) {
+            System.out.println("weapon in rigght hand");
             setImage(btnRight, p.getWeapon((byte)0).getWeaponClass());
         }
         AnchorPane.setRightAnchor(btnRight, 415.0);
@@ -138,6 +127,7 @@ public class Inspector {
 
         //Slot 1
         if(p.getWeapon((byte)1) != null) {
+            System.out.println("weapon in left thand");
             setImage(btnLeft, p.getWeapon((byte)1).getWeaponClass());
         }
         AnchorPane.setLeftAnchor(btnLeft, 415.0);
@@ -148,6 +138,7 @@ public class Inspector {
 
 
         anchorPane.getChildren().addAll(btnHead, btnArms, btnTorso, btnLegs, btnLeft, btnRight, stats);
+        refreshImages();
         return background;
     }
 
@@ -168,9 +159,7 @@ public class Inspector {
             case SPR -> "SPR.png";
             case SWT -> "SWT.png";
         };
-        System.out.println(picName);
         String location = Inspector.class.getResource("image/weapons/"+picName).toExternalForm();
-        System.out.println(location);
         ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: center; -fx-background-size: cover;");
     }
 
@@ -263,9 +252,34 @@ public class Inspector {
         if (pawn != null) {
             if(pawn.getWeapon((byte)0) == null) {
                 clearImage(btnRight);
+            } else {
+                setImage(btnRight, pawn.getWeapon((byte) 0).getWeaponClass());
             }
             if(pawn.getWeapon((byte)1) == null) {
                 clearImage(btnLeft);
+            } else {
+                setImage(btnLeft, pawn.getWeapon((byte) 1).getWeaponClass());
+            }
+
+            if(pawn.getArmor((byte)0) == null) {
+                clearImage(btnHead);
+            } else {
+                setImage(btnHead, pawn.getArmor((byte) 0).getArmorClass(), (byte) 0);
+            }
+            if(pawn.getArmor((byte)1) == null) {
+                clearImage(btnTorso);
+            } else {
+                setImage(btnTorso, pawn.getArmor((byte) 1).getArmorClass(), (byte) 1);
+            }
+            if(pawn.getArmor((byte)2) == null) {
+                clearImage(btnArms);
+            } else {
+                setImage(btnArms, pawn.getArmor((byte) 2).getArmorClass(), (byte) 2);
+            }
+            if(pawn.getArmor((byte)3) == null) {
+                clearImage(btnLegs);
+            } else {
+                setImage(btnLegs, pawn.getArmor((byte) 3).getArmorClass(), (byte) 3);
             }
         }
     }

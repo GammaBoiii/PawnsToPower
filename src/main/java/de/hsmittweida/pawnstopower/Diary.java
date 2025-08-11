@@ -127,6 +127,17 @@ public class Diary {
         msg += "\n\n";
         oldPawnNum = Inventory.getPawnsNum().getValue();
         oldMoney = Inventory.getMoney();
+
+        /* Falls man Tage nur sinnlos überspringt, geht Reputation verloren.
+         * die {@code msg.length < 30} ist nur eine Schätzung, in diesem Fall kam
+         * wahscheinlich nur die Nachricht, dass ein neuer Tag angebrochen ist,
+         * und nicht, dass irgendwas errungen wurde; ergo der Spieler hat nichts gemacht. */
+        if(msg.length() < 30) {
+            int minusRep = (int) (Math.ceil(Inventory.getReputation().get() * -0.1));
+            Inventory.addReputation(minusRep);
+            msg += "Wir haben am letzten Tag nichts erreicht und daher " + Math.abs(minusRep) + " Reputation verloren.\n\n";
+        }
+
         writeDiaryEntry(msg);
     }
 
@@ -201,10 +212,10 @@ public class Diary {
             diaryEntries.put(i, list);
         }
 
-        System.out.println("Diary entries: ");
+        //System.out.println("Diary entries: ");
         for(int i = 0; i<diaryEntries.size(); i++) {
             for (int j = 0; j < diaryEntries.get(i).size(); j++) {
-                System.out.println(diaryEntries.get(i).get(j).getText());
+                //System.out.println(diaryEntries.get(i).get(j).getText());
             }
         }
 

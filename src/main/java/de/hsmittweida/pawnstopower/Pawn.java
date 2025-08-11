@@ -88,9 +88,9 @@ public class Pawn implements Serializable {
      * Gibt dem Bauer eine Waffe. Jeder Bauer hat 2 Hände, in die er 2
      * verschiedene Waffen legen kann, oder eine große Waffe in beiden Händen tragen kann.
      *
-     * @param ref    - Referenz für den entsprechenden Button, der das aktualisierte Bild erhalten soll.
-     * @param weapon - Die Waffe, die ausgerüstet werden soll.
-     * @param slot   - Der Waffenslot, an dem die Waffe ausgerüstet werden soll.
+     * @param ref Referenz für den entsprechenden Button, der das aktualisierte Bild erhalten soll.
+     * @param weapon Die Waffe, die ausgerüstet werden soll.
+     * @param slot Der Waffenslot, an dem die Waffe ausgerüstet werden soll.
      * @return {@code true}, wenn die Waffe erfolgreich ausgerüstet wurde, {@code false}, wenn der Slot bereits belegt ist.
      */
     public boolean giveWeapon(Button ref, Weapon weapon, byte slot) {
@@ -371,7 +371,7 @@ public class Pawn implements Serializable {
         System.out.println("Schadenswert mit Waffe: " + damage + " \tmit Waffenschaden:  " + weapondamage1 + " + " + weapondamage2);
         damage -= enemy.getTotalProtectionValue();
         damage = Math.max(damage, 0);
-        System.out.println("Schadenswert abzüglich der Gegnerischen Rüstung: " + damage);
+        System.out.println("Schadenswert abzüglich der Gegnerischen Rüstung: " + damage + " Mit einr Rüstungsstärrke von: " + enemy.getTotalProtectionValue());
         damage /= enemy.getSkills().get(2).getSkillValue() / 100 +1;
         System.out.println("Schadenswert mit Widerstand des Gegners " + damage);
 
