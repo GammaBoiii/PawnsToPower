@@ -17,10 +17,13 @@ public class ArenaWinScreen {
      */
     public static Pane winscreen(boolean playerWins) {
         BorderPane pane = new BorderPane();
+        Tools.addStylesheet(pane, "style_winscreen.css");
+        pane.setId("pane");
         Label header = new Label("Die Spiele sind vorbei!");
         pane.setTop(header);
 
         VBox stats = new VBox();
+        stats.setId("stats");
         Label msg;
         if (playerWins) {
             String s = String.format("""

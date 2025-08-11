@@ -663,8 +663,9 @@ public class Arena {
     private static void fightOver(boolean playerWins) {
         new Thread(() -> {
             try {
-                Thread.sleep(2000);
                 if(!turn.getThread().isInterrupted()) {
+                    turn.kill();
+                    Thread.sleep(2000);
                     Platform.runLater(() -> {
                         Game.drawSpace(ArenaWinScreen.winscreen(playerWins));
                     });

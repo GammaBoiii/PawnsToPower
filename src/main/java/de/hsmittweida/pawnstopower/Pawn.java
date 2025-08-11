@@ -369,7 +369,7 @@ public class Pawn implements Serializable {
         System.out.println("Schadenswert des Angreifers: " + damage);
         damage += weapondamage1 + weapondamage2;
         System.out.println("Schadenswert mit Waffe: " + damage + " \tmit Waffenschaden:  " + weapondamage1 + " + " + weapondamage2);
-        damage -= enemy.getTotalProtectionValue();
+        damage -= enemy.getTotalProtectionValue() * 0.1;
         damage = Math.max(damage, 0);
         System.out.println("Schadenswert abzüglich der Gegnerischen Rüstung: " + damage + " Mit einr Rüstungsstärrke von: " + enemy.getTotalProtectionValue());
         damage /= enemy.getSkills().get(2).getSkillValue() / 100 +1;

@@ -109,12 +109,11 @@ public class Tools {
         dialog.setContentText(context);
         dialog.getDialogPane().getStylesheets().add(Tools.class.getResource("style_dialog.css").toExternalForm());
 
-        String res = "";
-        try {
-            res = dialog.showAndWait().get();
-        } catch (NoSuchElementException nsex) {
-        }
-        return res;
+        Optional<String> r = dialog.showAndWait();
+        System.out.println(r.toString());
+        if(r.isEmpty()) return "empty";
+        else return r.get();
+
 
     }
 

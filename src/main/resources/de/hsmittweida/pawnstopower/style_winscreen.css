@@ -1,0 +1,30 @@
+#pane {
+    -fx-background-color: #1a1a1a;
+}
+#stats {
+    -fx-background-color: #1a1a1a;
+}
+.label {
+    -fx-text-fill: white;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Cinzel Decorative";
+}
+
+.button {
+    -fx-background-color: rgba(4,40,40,0.4);
+    -fx-text-fill: white;
+    -fx-font-size: 22;
+    -fx-font-weight: bold;
+    -fx-padding: 2 3;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #555;
+    -fx-border-width: 2px;
+    -fx-text-alignment: center;
+    -fx-font-family: "MedievalSharp";
+}
+.button:hover {
+    -fx-background-color: #555;
+    -fx-border-color: #777;
+}

@@ -36,9 +36,16 @@ public class StartMenu {
 
 			loadGame.setOnAction(e-> {
 				String res = Tools.inputPopup("Spiel laden", "Gib den Pfad an!", "Es sollte eine \".p2p\" sein.");
-                stage.close();
-                Game.Game_view();
-                Save.loadAll(res);
+                System.out.println(res);
+                if(res.equals("empty")) {
+
+                } else {
+                    Game.Game_view();
+                    if(Save.loadAll(res)) stage.close();
+                    else {
+                        Game.close();
+                    }
+                }
             });
 
 			exit.setOnAction(e -> {

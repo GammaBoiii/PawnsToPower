@@ -56,7 +56,8 @@ public class Save {
 
     }
 
-    public static void loadAll(String path) {
+    public static boolean loadAll(String path) {
+        boolean errorTemp = false;
         Inventory.clear();
 
         ArrayList<Pawn> pawns = null;
@@ -92,8 +93,11 @@ public class Save {
 
         } catch (IOException e) {
             e.printStackTrace();
+            Tools.popup("Fehler beim Laden des Spielstands!", "Fehler", "Das Spiel kann nicht gestartet werden.");
+            errorTemp = true;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            errorTemp = true;
         }
         finally {
             if(reader != null) {
@@ -104,6 +108,7 @@ public class Save {
                 }
             }
         }
+        if(errorTemp) return false;
 
         /* Alles in das Spiel hineinladen */
         if(pawns != null && !pawns.isEmpty()) {
@@ -140,6 +145,7 @@ public class Save {
         System.out.println("Pawns: " + (pawns != null ? pawns.size() : 0));
         System.out.println("Weapons: " + (weapons != null ? weapons.size() : 0));
         System.out.println("Amors: " + (armors != null ? armors.size() : 0));
+        return true;
     }
 
     public static String serialize(Object obj) throws IOException {

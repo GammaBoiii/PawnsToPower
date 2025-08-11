@@ -17,6 +17,7 @@ public class SkillInspector {
         Stage stage = new Stage();
         VBox box = new VBox();
         Scene s = new Scene(box,400.0, 250.0);
+        Tools.addStylesheet(s, "style_default.css");
 
         Label skillPointLabel = new Label("Skillpunkte verfügbar: " + pawn.getSkillPoints());
 

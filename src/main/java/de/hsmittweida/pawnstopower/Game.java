@@ -467,6 +467,8 @@ public class Game {
         diaryIndex = day.get();
     }
 
-
+    public static void close() {
+        stage.close();
+    }
 
 }
