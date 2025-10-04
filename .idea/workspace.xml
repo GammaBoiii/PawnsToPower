@@ -14,15 +14,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="changed style">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_winscreen.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/Installationshinweise/Hinweis" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Arena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/ArenaWinScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/ArenaWinScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Save.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Save.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/SkillInspector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/SkillInspector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/StartMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/StartMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Tools.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +71,8 @@
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Application.RunMain.executor&quot;: &quot;Run&quot;,
     &quot;Maven.PawnsToPower [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.PawnsToPower [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.PawnsToPower [deploy].executor&quot;: &quot;Run&quot;,
     &quot;Maven.PawnsToPower [install].executor&quot;: &quot;Run&quot;,
     &quot;Maven.PawnsToPower [package].executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -94,7 +89,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
@@ -149,8 +144,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.23892.409" />
-        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-IU-252.23892.409" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.26830.84" />
       </set>
     </attachedChunks>
   </component>
@@ -244,7 +239,9 @@
       <workItem from="1754551173463" duration="6309000" />
       <workItem from="1754580628799" duration="4166000" />
       <workItem from="1754668259554" duration="4610000" />
-      <workItem from="1754917713685" duration="9556000" />
+      <workItem from="1754917713685" duration="9934000" />
+      <workItem from="1759580531424" duration="6455000" />
+      <workItem from="1759587233564" duration="100000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -545,6 +542,17 @@
     <MESSAGE value="danksagung an java garbage collector" />
     <MESSAGE value="changed style" />
     <option name="LAST_COMMIT_MESSAGE" value="changed style" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/RunMain.java</url>
+          <line>4</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
