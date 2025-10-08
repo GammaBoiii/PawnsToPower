@@ -16,7 +16,7 @@ public class StartMenu {
 			stage.setScene(scene);
 
 			/* Musik im Startmeu */
-			SoundManager startmenusound = new SoundManager("StartMenuTheme.mp3");
+			SoundManager startmenusound = new SoundManager("StartMenuTheme.wav");
 			stage.setOnHiding(e -> {
 				startmenusound.getMediaPlayer().stop();
 			});

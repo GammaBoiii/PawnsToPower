@@ -67,7 +67,7 @@ public class Game {
         // Debug();
 
         /* Musik */
-        SoundManager mainmenutheme = new SoundManager("GameDefaultMusic_1.mp3", "GameDefaultMusic_2.mp3", "GameDefaultMusic_3.mp3", "GameDefaultMusic_4.mp3");
+        SoundManager mainmenutheme = new SoundManager("GameDefaultMusic_1.wav", "GameDefaultMusic_2.wav", "GameDefaultMusic_3.wav", "GameDefaultMusic_4.wav");
         stage.setOnHiding(e -> {
             mainmenutheme.getMediaPlayer().stop();
         });
