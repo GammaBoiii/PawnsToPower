@@ -34,3 +34,7 @@
     -fx-font-size: 21px;
     -fx-font-family: "MedievalSharp";
 }
+
+#skillinspectorbox {
+    -fx-background-color: #1a1a1a;
+}

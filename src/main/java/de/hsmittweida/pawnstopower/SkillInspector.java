@@ -16,6 +16,7 @@ public class SkillInspector {
     public SkillInspector(Pawn pawn) {
         Stage stage = new Stage();
         VBox box = new VBox();
+        box.setId("skillinspectorbox");
         Scene s = new Scene(box,400.0, 250.0);
         Tools.addStylesheet(s, "style_default.css");
 
@@ -24,7 +25,6 @@ public class SkillInspector {
         for(Skill skill : pawn.getSkills()) {
             System.out.println(skill.getName() + " " + skill.getSkillValue());
             HBox hbox = new HBox();
-            hbox.setStyle("-fx-text-fill: black;");
             hbox.setAlignment(Pos.CENTER);
 
             Label label = new Label(skill.getName());

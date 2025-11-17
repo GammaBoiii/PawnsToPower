@@ -14,12 +14,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="changed style">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Arena.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Save.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Save.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Skill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Skill.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/SkillInspector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/SkillInspector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Turn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Turn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_default.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_default.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,7 +245,7 @@
       <workItem from="1759587233564" duration="1104000" />
       <workItem from="1759930107996" duration="2085000" />
       <workItem from="1760364053742" duration="785000" />
-      <workItem from="1763377541718" duration="2377000" />
+      <workItem from="1763377541718" duration="3236000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
