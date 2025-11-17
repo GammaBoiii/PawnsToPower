@@ -348,14 +348,14 @@ public class Arena {
         /* Skills zuweisen. 1 Level = 1 SkillPunkt. Diese müssen noch zufällig auf
          * alle Skills verteilt werden. */
         System.out.println("Pawn wird mit " + p.getSkillPoints() + " Skillpunkten generiert.");
-        System.out.println("Diese werden investiert in:");
+        /*System.out.println("Diese werden investiert in:");
         while(p.getSkillPoints() > 0) {
             Random rand = new Random();
             int id = rand.nextInt(p.getSkills().size());
             System.out.println(p.getSkills().get(id).getName());
             p.getSkills().get(id).addSkillLevel();
             p.addSkillPoints(-1);
-        }
+        }*/
 
         //Debug
         for(Skill s : p.getSkills()) {

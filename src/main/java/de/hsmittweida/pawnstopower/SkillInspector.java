@@ -22,7 +22,9 @@ public class SkillInspector {
         Label skillPointLabel = new Label("Skillpunkte verfügbar: " + pawn.getSkillPoints());
 
         for(Skill skill : pawn.getSkills()) {
+            System.out.println(skill.getName() + " " + skill.getSkillValue());
             HBox hbox = new HBox();
+            hbox.setStyle("-fx-text-fill: black;");
             hbox.setAlignment(Pos.CENTER);
 
             Label label = new Label(skill.getName());

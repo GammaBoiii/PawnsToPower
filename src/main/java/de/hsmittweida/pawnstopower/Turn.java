@@ -136,7 +136,7 @@ public class Turn extends Thread {
     }
 
     private String getRandomAtkSound() {
-        String[] loc = {"sfx/atk1.mp3","sfx/atk2.mp3","sfx/atk3.mp3","sfx/atk4.mp3"};
+        String[] loc = {"sfx/atk1.wav","sfx/atk2.wav","sfx/atk3.wav","sfx/atk4.wav"};
         return loc[(int)(Math.random()*loc.length)];
     }
 }

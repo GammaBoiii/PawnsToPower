@@ -8,9 +8,9 @@ import java.util.HashMap;
 /**
  * Diese Klasse dient zum Speichern des Spielfortschrittes.
  * Was gespeichert wird:
- * - Pawns, deren Fortschritt und Ausrüstung,
+ * - Pawns,
  * - Inventar
- * - Gold, Reputation und sonstige Spielerwerte
+ * - Gold, Reputation und sonstige Spielerwerte, inkl. Tagebuch.
  */
 public class Save {
     /**
