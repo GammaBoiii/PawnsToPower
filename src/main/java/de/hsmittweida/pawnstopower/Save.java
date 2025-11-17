@@ -18,7 +18,8 @@ public class Save {
      *
      * @param path Wo die Datei mit dem Spielstand gespeichert werden soll.
      */
-    public static void saveAll(String path) {
+    public static boolean saveAll(String path) {
+        boolean errorTemp = false;
         /* Da die XP der Pawns mit SimpleInt gespeichert werden, sind diese nicht serialisierbar
          * und müssen daher manuell als int (serialisierbar) abgespeichert werden. */
         ArrayList<Integer> pawnXP = new ArrayList<Integer>();
@@ -49,11 +50,13 @@ public class Save {
             writer.println("TAG=" + Game.getDay());
         } catch (IOException e) {
             e.printStackTrace();
+            Tools.popup("Fehler beim Speichern des Spielstands!", "Fehler", "Das Spiel kann nicht gespeichert werden.\nPrüfe die Eingaben!");
+            errorTemp = true;
         }
         finally {
             if(writer != null) writer.close();
         }
-
+        return !errorTemp;
     }
 
     public static boolean loadAll(String path) {
@@ -93,10 +96,11 @@ public class Save {
 
         } catch (IOException e) {
             e.printStackTrace();
-            Tools.popup("Fehler beim Laden des Spielstands!", "Fehler", "Das Spiel kann nicht gestartet werden.");
+            Tools.popup("Fehler beim Laden des Spielstands!", "Fehler", "Das Spiel kann nicht gestartet werden.\nPrüfe die Eingaben!");
             errorTemp = true;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            Tools.popup("Fehler beim Laden des Spielstands!", "Fehler", "Das Spiel kann nicht gestartet werden.\nDer Spielstand scheint korrupt zu sein.");
             errorTemp = true;
         }
         finally {

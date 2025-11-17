@@ -471,4 +471,12 @@ public class Game {
         stage.close();
     }
 
+    public static Stage getStage() {
+        return stage;
+    }
+
+    public static void setFullscreen(boolean fullscreen) {
+        stage.setFullScreen(fullscreen);
+    }
+
 }

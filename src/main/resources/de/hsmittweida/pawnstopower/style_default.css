@@ -18,6 +18,21 @@
     -fx-text-fill: white;
     -fx-background-color: rgba(4,40,40,0.4);
     -fx-font-family: "MedievalSharp";
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #555;
+    -fx-border-width: 2px;
+}
+
+.toggle-button {
+    -fx-font-size: 17px;
+    -fx-text-fill: white;
+    -fx-background-color: rgba(4,40,40,0.4);
+    -fx-font-family: "MedievalSharp";
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #555;
+    -fx-border-width: 2px;
 }
 
 .button:hover {
@@ -27,6 +42,7 @@
 #vbox {
     -fx-background-color: #1a1a1a;
     -fx-font-family: "MedievalSharp";
+
 }
 
 #vbox > .label {
@@ -37,4 +53,21 @@
 
 #skillinspectorbox {
     -fx-background-color: #1a1a1a;
+}
+
+#quickmenubox {
+    -fx-background-color: #1a1a1a;
+}
+
+#quickmenubox > .button {
+    -fx-background-color: #4a574e;
+    -fx-border-color: #white;
+}
+#quickmenubox > .button:hover {
+    -fx-background-color: #555;
+    -fx-border-color: #777;
+}
+
+#quickmenubox > .toggle-button {
+    -fx-background-color: #4a574e;
 }

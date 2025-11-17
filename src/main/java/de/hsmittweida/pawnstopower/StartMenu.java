@@ -37,13 +37,18 @@ public class StartMenu {
 			loadGame.setOnAction(e-> {
 				String res = Tools.inputPopup("Spiel laden", "Gib den Pfad an!", "Es sollte eine \".p2p\" sein.");
                 System.out.println(res);
-                if(res.equals("empty")) {
-
+                String str = "";
+                if(res.endsWith("/")) {
+                    str = "savegame.p2p";
+                    if(Save.loadAll(res + str)) {
+                        Tools.popup("Laden", "Datei wird geladen!", "Der Pfad wurde festgelegt auf: " + res + str);
+                        stage.close();
+                    }
                 } else {
-                    Game.Game_view();
-                    if(Save.loadAll(res)) stage.close();
-                    else {
-                        Game.close();
+                    str = "/savegame.p2p";
+                    if(Save.loadAll(res + str)) {
+                        Tools.popup("Laden", "Datei wird geladen!", "Der Pfad wurde festgelegt auf: " + res + str);
+                        stage.close();
                     }
                 }
             });
