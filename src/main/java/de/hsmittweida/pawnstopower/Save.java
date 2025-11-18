@@ -49,7 +49,7 @@ public class Save {
             writer.println("REP=" + Inventory.getReputation().get());
             writer.println("TAG=" + Game.getDay());
         } catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
             Tools.popup("Fehler beim Speichern des Spielstands!", "Fehler", "Das Spiel kann nicht gespeichert werden.\nPrüfe die Eingaben!");
             errorTemp = true;
         }
@@ -61,7 +61,13 @@ public class Save {
 
     public static boolean loadAll(String path) {
         boolean errorTemp = false;
-        Inventory.clear();
+
+        if(Inventory.isInitialized()) {
+            Inventory.clear();
+        } else {
+            Inventory.setup();
+        }
+
 
         ArrayList<Pawn> pawns = null;
         ArrayList<Integer> pawnXP = null;
@@ -95,11 +101,11 @@ public class Save {
                 day = Integer.parseInt(tagLine.substring(4));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
             Tools.popup("Fehler beim Laden des Spielstands!", "Fehler", "Das Spiel kann nicht gestartet werden.\nPrüfe die Eingaben!");
             errorTemp = true;
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
             Tools.popup("Fehler beim Laden des Spielstands!", "Fehler", "Das Spiel kann nicht gestartet werden.\nDer Spielstand scheint korrupt zu sein.");
             errorTemp = true;
         }

@@ -21,6 +21,8 @@ public class Inventory implements Serializable {
 
     private static IntegerProperty reputation;
 
+    private static boolean initialized = false;
+
     /**
      * Die {@code setup()} Methode wird zu Beginn eines neuen Spieles aufgerufen und
      * initialisiert das Inventar.
@@ -37,6 +39,8 @@ public class Inventory implements Serializable {
         Inventory.addPawn(new Pawn());
         Inventory.addMoney(250);
         Inventory.addReputation(15);
+
+        initialized = true;
     }
 
     /**
@@ -152,6 +156,10 @@ public class Inventory implements Serializable {
         } else {
             Inventory.reputation.set(Inventory.reputation.get() + reputation);
         }
+    }
+
+    public static boolean isInitialized() {
+        return initialized;
     }
 
     public static void clear() {
