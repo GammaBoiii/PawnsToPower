@@ -61,7 +61,7 @@
 
 #quickmenubox > .button {
     -fx-background-color: #4a574e;
-    -fx-border-color: #white;
+    -fx-border-color: white;
 }
 #quickmenubox > .button:hover {
     -fx-background-color: #555;

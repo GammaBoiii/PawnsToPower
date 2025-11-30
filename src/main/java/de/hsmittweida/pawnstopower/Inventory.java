@@ -59,6 +59,14 @@ public class Inventory implements Serializable {
     }
 
     /**
+     * Entfernt eine Waffe aus dem Inventar.
+     * @param w Waffe, die entfernt werden soll.
+     */
+    private static void removeWeapon(Weapon w) {
+        weapons.remove(w);
+    }
+
+    /**
      * @return {@code ArrayList<Armor>}, mit den Rüstungen, die der Spieler besitzt.
      */
     public static ArrayList<Armor> getArmor() {
@@ -73,6 +81,10 @@ public class Inventory implements Serializable {
         armor.add(a);
     }
 
+    private static void removeArmor(Armor a) {
+        armor.remove(a);
+    }
+
     /**
      * Alternative Methode, um dem Spieler ein neues Item in das Inventar abzulegen.
      * @param item
@@ -82,6 +94,14 @@ public class Inventory implements Serializable {
             addWeapon((Weapon) item);
         } else if (item.getItemType().equals("Armor")) {
             addArmor((Armor) item);
+        }
+    }
+
+    public static void removeItem(Item item) {
+        if(item.getItemType().equals("Weapon")) {
+            removeWeapon((Weapon) item);
+        } else if(item.getItemType().equals("Armor")) {
+            removeArmor((Armor) item);
         }
     }
 

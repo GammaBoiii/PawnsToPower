@@ -50,6 +50,7 @@ public class Slot {
                     HBox hbox = new HBox();
                     Label name = new Label(w.getName());
                     Button details = new Button("Details");
+                    Button sell = new Button("Verkauf");
                     Button equip = new Button("Equip");
 
                     /* Falls das Item bereits ausgerüstet ist, wird ein Hinweis ausgegeben, dass der Pawn, der das Item ausgerüstet hat, nicht mehr besitzen wird.
@@ -85,7 +86,6 @@ public class Slot {
                                 Inspector.refreshImages();
                                 stage.close();
                             });
-
                         }
                     } else {
                         equip.setOnAction(e -> {
@@ -113,6 +113,25 @@ public class Slot {
                         });
                     }
 
+                    sell.setOnAction(e -> {
+                        if(w.getOwner() != null) {
+                            String res = Tools.confirmPopup("Item bereits ausgerüstet.", "Dieses Item ist bei " + w.getOwner().getName() + " ausgerüstet.", "Möchtest du es verkaufen?");
+                            if (res.equals("yes")) {
+                                w.getOwner().removeWeapon(w);
+                                Inventory.addMoney((int) (w.getWeaponClass().basePrice * 0.65));
+                                Inventory.removeItem(w);
+                                stage.close();
+                            }
+                        } else {
+                            String res = Tools.confirmPopup("Verkauf", "Dieses Item ist zum Verkauf ausgewählt.", "Möchtest du es verkaufen?");
+                            if (res.equals("yes")) {
+                                Inventory.addMoney((int) (w.getWeaponClass().basePrice * 0.65));
+                                Inventory.removeItem(w);
+                                stage.close();
+                            }
+                        }
+                    });
+
                     details.setOnAction(e -> {
                         new ItemStats(w);
                     });
@@ -121,9 +140,10 @@ public class Slot {
                     box.setPadding(new Insets(0, 0, 15, 0));
                     HBox.setHgrow(name, Priority.ALWAYS);
                     HBox.setHgrow(details, Priority.ALWAYS);
+                    HBox.setHgrow(sell, Priority.ALWAYS);
                     HBox.setHgrow(equip, Priority.ALWAYS);
                     name.setMaxWidth(Double.MAX_VALUE);
-                    hbox.getChildren().addAll(name, details, equip);
+                    hbox.getChildren().addAll(name, details, sell, equip);
                     box.getChildren().add(hbox);
                 }
                 break;
@@ -145,6 +165,7 @@ public class Slot {
                     HBox hbox = new HBox();
                     Label name = new Label(a.getName());
                     Button details = new Button("Details");
+                    Button sell = new Button("Verkauf");
                     Button equip = new Button("Equip");
 
                     /* Falls das Item bereits ausgerüstet ist, wird ein Hinweis ausgegeben, dass der Pawn, der das Item ausgerüstet hat, nicht mehr besitzen wird.
@@ -174,7 +195,6 @@ public class Slot {
                                 a.getOwner().removeArmor(a);
                                 stage.close();
                             });
-
                         }
                     } else {
                         equip.setOnAction(e -> {
@@ -189,6 +209,25 @@ public class Slot {
                         });
                     }
 
+                    sell.setOnAction(e -> {
+                        if(a.getOwner() != null) {
+                            String res = Tools.confirmPopup("Item bereits ausgerüstet.", "Dieses Item ist bei " + a.getOwner().getName() + " ausgerüstet.", "Möchtest du es verkaufen?");
+                            if (res.equals("yes")) {
+                                a.getOwner().removeArmor(a);
+                                Inventory.addMoney((int) (a.getBasePrice() * 0.65));
+                                Inventory.removeItem(a);
+                                stage.close();
+                            }
+                        } else {
+                            String res = Tools.confirmPopup("Verkauf", "Dieses Item ist zum Verkauf ausgewählt.", "Möchtest du es verkaufen?");
+                            if (res.equals("yes")) {
+                                Inventory.addMoney((int) (a.getBasePrice() * 0.65));
+                                Inventory.removeItem(a);
+                                stage.close();
+                            }
+                        }
+                    });
+
                     details.setOnAction(e -> {
                         new ItemStats(a);
                     });
@@ -197,10 +236,16 @@ public class Slot {
                     box.setPadding(new Insets(0, 0, 15, 0));
                     HBox.setHgrow(name, Priority.ALWAYS);
                     HBox.setHgrow(details, Priority.ALWAYS);
+                    HBox.setHgrow(sell, Priority.ALWAYS);
                     HBox.setHgrow(equip, Priority.ALWAYS);
                     name.setMaxWidth(Double.MAX_VALUE);
-                    hbox.getChildren().addAll(name, details, equip);
+                    hbox.getChildren().addAll(name, details, sell,  equip);
                     box.getChildren().add(hbox);
+                }
+
+                if(box.getChildren().size() == 0) {
+                    Tools.popup("Inventar", "Es wurden keine Kleidungsstücke im Inventar gefunden.", "Besuche den Shop, um Items zu kaufen!");
+                    return;
                 }
 
                 break;
