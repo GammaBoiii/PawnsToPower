@@ -2,17 +2,15 @@ package de.hsmittweida.pawnstopower;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
 
 /**
  * Die Barracks-Klasse dient dem Anzeigen der Kämpfer im Besitz des Spielers.
- * Eine schnelle Übersicht gibt hinweis auf Name und Level eines jeden Kämpfers
+ * Eine schnelle Übersicht gibt Hinweis auf Name und Level eines jeden Kämpfers
  * im Inventar des Spielers.
  */
 public class Barracks {
