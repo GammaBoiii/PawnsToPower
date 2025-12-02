@@ -37,7 +37,7 @@ public class ArenaWinScreen {
                     Arena.getPrice()[1]);
 
             /* Wird der Spieler den besiegten Pawn gewinnen? Mit 10% Chance */
-            if(Math.random() < 1.0) { //Debug 100%
+            if(Math.random() < 0.1) { //Debug 100%
                 Pawn p = Arena.getCombatans()[1];
                 for(Armor a : p.armors) {
                     p.removeArmor(a);
@@ -64,6 +64,8 @@ public class ArenaWinScreen {
                     Arena.getCombatans()[1].getName(), Math.round(Arena.getPrice()[0] * 0.25), Math.round(Arena.getPrice()[1] * 0.4));
             msg = new Label(s);
             Inventory.addMoney(-1 * (int) Math.round(Arena.getPrice()[0] * 0.25));
+
+            /* Spieler bekommt trotzdem ein Trostpreis: */
             Arena.getCombatans()[0].addXp((int) Math.round(Arena.getPrice()[1] * 0.4));
         }
         stats.getChildren().add(msg);
@@ -74,8 +76,6 @@ public class ArenaWinScreen {
             Game.drawSpace();
         });
         pane.setBottom(backtomenu);
-
-
         return pane;
     }
 }
