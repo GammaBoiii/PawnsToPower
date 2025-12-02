@@ -4,15 +4,17 @@ import java.util.Random;
 
 /**
  * Armor Klasse, die die Logik für die Rüstung bereit stellt.
+ * @see Item#getItemType()
  */
 public class Armor extends Item  {
     private final ArmorClass ac;
     private int baseProtection;
     private boolean equipped;
-    private byte slot;// = -1; //Erste Setzung ist hier notwendig, da die super() sonst standardmäßig 0 erkennt.
+    private byte slot;
     private Pawn owner;
 
     /**
+     * Erstellt ein neues Armor Objekt mit vorgegebener Armor Klasse und Slot.
      * @param cls Rüstungsklasse, also welches Material (siehe enum {@code ArmorClass})
      * @param Slot Für welches Körperteil die Rüstung ist.
      * @param p Pawn, der direkt als Besitzer gesetzt werden soll.
@@ -24,7 +26,8 @@ public class Armor extends Item  {
         super.setName();
     }
 
-    /** Generiert eine Rüstung mit zufälliger Rüstungsklasse.
+    /**
+     * Generiert eine Rüstung mit zufälliger Rüstungsklasse.
      * @param p Pawn, der direkt als Besitzer gesetzt werden soll.
      * @param slot Für welches Körperteil die Rüstung ist.
      */
@@ -96,7 +99,7 @@ public class Armor extends Item  {
     }
 
     /**
-     * @return Einen zufälligen Slot (als byte-Wert; entsprechend der 4 Körperregionen).
+     * @return Einen zufälligen Slot <p> <em>als byte-Wert, entsprechend der 4 Körperregionen.
      */
     private byte setRandomSlotType() {
         Random rnd = new Random();
@@ -104,15 +107,16 @@ public class Armor extends Item  {
     }
 
     /**
-     * @return Den Item-Typ: Rüstung.
+     * @return Den Item-Typ <strong><em>Armor.
      */
     public String getItemType() {
         return "Armor";
     }
 
     /**
-     * @return Den Basispreis den das Rüstungsteil aufgrund der Schutzklasse
-     * und Körperregion zum Ausrüsten hat.
+     * Errechnet den Basispreis der Rüstung, basierend auf dem
+     * Ausrüstungsslot und dem Material.
+     * @return Basispreis
      */
     public int getBasePrice() {
         int price = switch (this.getSlotType()) {
@@ -156,10 +160,12 @@ public class Armor extends Item  {
     /**
      * Der Enumerator für die Rüstungsklasse:
      *
-     * <p>FAB = Fabric / Stoff</p>
-     * <p>LTH = Leather / Leder</p>
-     * <p>IRN = Iron / Eisen</p>
-     * <p>STL = Steel / Stahl</p>
+     * <ul>
+     * <li>FAB = Fabric / Stoff</li>
+     * <li>LTH = Leather / Leder</li>
+     * <li>IRN = Iron / Eisen</li>
+     * <li>STL = Steel / Stahl</li>
+     * </ul>
      */
     public enum ArmorClass {
         FAB(0.6, "Stoff"),

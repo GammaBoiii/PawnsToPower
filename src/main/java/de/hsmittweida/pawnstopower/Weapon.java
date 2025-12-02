@@ -2,12 +2,11 @@ package de.hsmittweida.pawnstopower;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+/**
+ * Weapon Klasse, die die Logik für Waffen bereit stellt.
+ * @see Item#getItemType()
+ */
 public class Weapon extends Item {
-    /**
-     * Schwert, Zweihander, Katana, Kurzklinge, Langschwert, Säbel, Dolch, Speer, Hammer, Axt, Groß-Axt
-     */
-//    String weaponClass;
     private final WeaponClass wc;
     private final ArrayList<Double> damageModifier;
     private boolean twoHanded;
@@ -26,7 +25,7 @@ public class Weapon extends Item {
 
     /**
      * Erstellt ein neues, komplett zufälliges Weapon Objekt.
-     * @param p
+     * @param p Pawn, der direkt als Besitzer gesetzt werden soll.
      */
     Weapon(Pawn p) {
         super(p);
@@ -45,14 +44,23 @@ public class Weapon extends Item {
         super.setName();
     }
 
+    /**
+     * @return {@code true}, wenn Waffe ein Zweihänder ist und somit zwei Waffenplätze belegt.
+     */
     public boolean isTwoHanded() {
         return wc.isTwoHanded();
     }
 
+    /**
+     * @return {@code WeaponClass}, also die Art der Waffe.
+     */
     public WeaponClass getWeaponClass() {
         return this.wc;
     }
 
+    /**
+     * @return Liste der Damage-Modifiers.
+     */
     private ArrayList<Double> getDamageModifier() {
         return this.damageModifier;
     }
@@ -95,7 +103,7 @@ public class Weapon extends Item {
 
     /**
      * Beinhaltet die Klasse der Waffe.
-     * <small><br><br>Wenn hier etwas geänderd wird, dann auch in {@code Inspector.setImage} nachtragen!
+     * <small><br><br>Wenn hier etwas geänderd wird, dann auch in {@code Inspector.setImage()} nachtragen!
      */
     public enum WeaponClass {
         SWT(80, 8.0), //Schwert
@@ -113,6 +121,11 @@ public class Weapon extends Item {
             return this == LNS || this == KTN;
         }
 
+        /**
+         * Initiiert die Klasse.
+         * @param basePrice Standardpreis der Waffe, für Shop und Verkauf.
+         * @param baseDamage Standardschaden der Waffe.
+         */
         WeaponClass(int basePrice, double baseDamage) {
             this.basePrice = basePrice;
             this.baseDamage = baseDamage;
@@ -127,6 +140,9 @@ public class Weapon extends Item {
         return WeaponClass.values()[rnd.nextInt(WeaponClass.values().length)];
     }
 
+    /**
+     * @return Den Item-Typ <strong><em>Weapon.
+     */
     public String getItemType() {
         return "Weapon";
     }
