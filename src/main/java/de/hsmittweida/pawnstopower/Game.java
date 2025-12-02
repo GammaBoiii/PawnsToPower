@@ -24,7 +24,7 @@ import java.util.HashMap;
  * Die Hauptklasse des Spiels.
  * Dient der Anzeige sämtlicher UI im Spielvordergrund.
  * Zählt Tage.
- * Lädt Mechaniken wie Fonts.
+ * Lädt Mechaniken wie Bilder, Fonts, etc..
  */
 public class Game {
     private static ArrayList<Pawn> pawns;
@@ -100,10 +100,9 @@ public class Game {
 
         /* Da es bei zu vielen geöffneten Fenstern schnell unüberischltich oder eventuell zu ungewollten Fehlern kommt, sollen Fenster möglichs
          * effizient gesclossen werden. Der 1. Schritt dafür ist es, alle Fenster zu schließen, sobald das Hauptfenster geöffnet wird.
-         * Ein weiteres Verfahren schließt alle doppelten geöffneten Fenster. Dies ist jedoch für jede Fenster-Klasse selbst definiert. */
+         * Ein weiteres Verfahren schließt alle doppelten geöffneten Fenster. Dies ist jedoch für jede Fenster-Klasse selbst definiert (siehe Tools.java und "view"-Methoden der Klassen) */
         stage.focusedProperty().addListener((obs, wasFocused, isFocused) -> {
             if (isFocused) {
-
                 /* Da in der Schleife Window.getWindows() eine ObservableList returned, kann man die Fenster
                  * nicht direkt während dem Schleifendurchgang schließen, da es sonst zu einem ArrayOutofBounds Exception kommt.
                  * Die Fenster werden dann in der 2. Schleife entgültig geschlossen. */
@@ -113,6 +112,7 @@ public class Game {
                         tempWindows.add(window);
                     }
                 }
+                /* Besagte 2. Schleife, die die Fenster entgültig schließt. */
                 for (Window w : tempWindows) {
                     w.hide();
                 }
@@ -365,6 +365,10 @@ public class Game {
         return day.get();
     }
 
+    /**
+     * Setzt den Spieltag
+     * @param d Tag, der gesetzt werden soll.
+     */
     public static void setDay(int d) {
         day.set(d);
     }
@@ -386,12 +390,12 @@ public class Game {
 
     /**
      * Zeichnet ein Pane in die zentrale Szene des Spiels.
+     * Kann benutzt werden, um andere Menüs/Szene in das Hauptfenster zu laden.
      * @param pane Pane, welches geladen werden soll.
      */
     public static void drawSpace(Pane pane) {
         Game.gameSpace = pane;
         panel.setCenter(gameSpace);
-
     }
 
     /**
@@ -415,8 +419,8 @@ public class Game {
     }
 
     /**
-     * Erlaubt das deaktivieren des "Nächster Tag"-Buttons, während bestimmten Zeitpunkten des
-     * Spiels
+     * Erlaubt das Deaktivieren des "Nächster Tag"-Buttons, während bestimmten Zeitpunkten des
+     * Spiels.
      * @param disabled {@code true} = deaktiviert; {@code false} = aktiviert
      */
     public static void setNextDayButtonDisabled(boolean disabled) {
@@ -445,8 +449,6 @@ public class Game {
         System.out.println("MoonDance name: " + f3.getName());
         System.out.println("CinzelDecorative name: " + f4.getName());
         System.out.println("CinzelDecorativeBold name: " + f5.getName());
-
-
     }
 
     /**
@@ -459,22 +461,39 @@ public class Game {
         return null;
     }
 
+    /**
+     * Setzt den Tag auf 1 zurück.
+     */
     public static void resetDay() {
         day.set(1);
     }
 
+    /**
+     * Aktualisiert den Index des aktuellen Tages im Tagebuch.
+     */
     public static void refreshDiaryIndex() {
         diaryIndex = day.get();
     }
 
+    /**
+     * Schließt die Szene
+     * @deprecated
+     */
     public static void close() {
         stage.close();
     }
 
+    /**
+     * @return die aktuelle stage
+     */
     public static Stage getStage() {
         return stage;
     }
 
+    /**
+     * Erlaubt das aktivieren/deaktivieren des Fullscreen-Modus.
+     * @param fullscreen {@code true} = aktiviert; {@code false} = deaktiviert
+     */
     public static void setFullscreen(boolean fullscreen) {
         stage.setFullScreen(fullscreen);
     }
