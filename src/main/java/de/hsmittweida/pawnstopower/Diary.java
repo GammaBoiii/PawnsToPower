@@ -14,9 +14,8 @@ import java.util.Random;
  * rechten Seite.
  */
 public class Diary {
-    private static int oldMoney, oldPawnNum;
+    private static int oldMoney, oldPawnNum, oldReputation;
     private static HashMap<Integer, ArrayList<Text>> diaryEntries;
-
     private static boolean skipDailyGains = false;
 
     /**
@@ -26,10 +25,8 @@ public class Diary {
     private static void writeDiaryEntry(String s) {
         Text t = new Text(s + "\n");
         t.setStyle("-fx-font-size: 36px;");
-        //t.setFont(Game.getFont("MoonDance"));
         Game.getDiary().getChildren().add(t);
         saveContext();
-        //System.out.println("» " + s);
     }
 
     // Implementierung ausstehend
@@ -90,11 +87,10 @@ public class Diary {
 
         /* Geld dazuverdient oder verloren */
         if (Math.abs(Inventory.getMoney() - oldMoney) != 0) {
-            if (Inventory.getMoney() > oldMoney) {
-                msg += "Wir haben am letzten Tag " + (Inventory.getMoney() - oldMoney) + " Gold verdient.\n\n";
-            } else {
-                msg += "Wir haben am letzten Tag " + (oldMoney - Inventory.getMoney()) + " Gold verloren.\n\n";
-            }
+            String m1 = "Wir haben am letzten Tag " + (Inventory.getMoney() - oldMoney) + " Gold verdient.\n\n";
+            String m2 = "Wir haben am letzten Tag " + (oldMoney - Inventory.getMoney()) + " Gold verloren.\n\n";
+
+            msg += Inventory.getMoney() > oldMoney ? m1 : m2;
         }
 
         /* Neue Kämpfer dazugewonnen */
@@ -122,14 +118,20 @@ public class Diary {
         }
 
         /* Reputation/Ehre gewonnen oder verloren*/
+        if (Math.abs(Inventory.getReputation().get() - oldReputation) != 0) {
+            String m1 = "Wir haben am letzten Tag " + (oldMoney - Inventory.getMoney()) + " Gold verloren.\n\n";
+            String m2 = "Wir haben am letzten Tag " + (oldMoney - Inventory.getMoney()) + " Gold verloren.\n\n";
 
+            msg += Inventory.getMoney() > oldMoney ? m1 : m2;
+        }
 
         msg += "\n\n";
         oldPawnNum = Inventory.getPawnsNum().getValue();
         oldMoney = Inventory.getMoney();
+        oldReputation = Inventory.getReputation().get();
 
         /* Falls man Tage nur sinnlos überspringt, geht Reputation verloren.
-         * die {@code msg.length < 30} ist nur eine Schätzung, in diesem Fall kam
+         * Der Ausdruck {@code msg.length < 30} ist nur eine Schätzung; in diesem Fall kam
          * wahscheinlich nur die Nachricht, dass ein neuer Tag angebrochen ist,
          * und nicht, dass irgendwas errungen wurde; ergo der Spieler hat nichts gemacht. */
         if(msg.length() < 30) {
@@ -166,6 +168,7 @@ public class Diary {
      * Erlaubt dem Spieler also die Einträge der vergangenen Tage zu sehen.
      */
     public static void saveContext() {
+        /* Initialisierung, um NullPointerExceptions zu vermeiden. */
         if (diaryEntries == null) {
             diaryEntries = new HashMap<Integer, ArrayList<Text>>();
         }
@@ -184,6 +187,14 @@ public class Diary {
         return diaryEntries;
     }
 
+
+    /**
+     * Da die Tagebucheinträge gespeichert werden sollen, müssen diese in die passende Form
+     * gebracht werden. Dazu werden zunächst die Text-Objekte in String Objekte umgewandelt, da
+     * Strngs sich besser serialisieren lassen.
+     * @see Diary#setDiaryEntriesFromSeriliazable(HashMap)
+     * @return HashMap mit den Tagebucheinträgen, serialisierbar
+     */
     public static HashMap<Integer, ArrayList<String>> getDiaryEntriesAsSerializable() {
         HashMap<Integer, ArrayList<String>> entries = new HashMap<Integer, ArrayList<String>>();
         ArrayList<String> temp;
@@ -199,6 +210,11 @@ public class Diary {
         return entries;
     }
 
+    /**
+     * Wenn die Tagebucheinträge wieder geladen werden sollen, müssen diese wieder in Text-Objekte umgewandelt werden.
+     * @see Diary#getDiaryEntriesAsSerializable()
+     * @param map HashMap mit den Tagebucheinträgen in String-Form.
+     */
     public static void setDiaryEntriesFromSeriliazable(HashMap<Integer, ArrayList<String>> map) {
         diaryEntries.clear();
         Game.getDiary().getChildren().clear();
@@ -212,20 +228,10 @@ public class Diary {
             diaryEntries.put(i, list);
         }
 
-        //System.out.println("Diary entries: ");
-        for(int i = 0; i<diaryEntries.size(); i++) {
-            for (int j = 0; j < diaryEntries.get(i).size(); j++) {
-                //System.out.println(diaryEntries.get(i).get(j).getText());
-            }
-        }
-
         for(String s : map.get(Game.getDay() - 1)) {
             writeDiaryEntry(s);
         }
 
         skipDailyGains = true;
     }
-
-
-
 }
