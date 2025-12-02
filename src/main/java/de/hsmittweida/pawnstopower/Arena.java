@@ -74,14 +74,6 @@ public class Arena {
         for (Pawn p : Inventory.getPawns()) {
             Label name = new Label(p.getName());
             name.setId("list-item");
-            /*Region spacerR = new Region();
-            HBox.setHgrow(spacerR, Priority.ALWAYS);
-            spacerR.setStyle("""
-                        -fx-border-color: gray transparent gray transparent;
-                        -fx-border-width: 0 0 1 0;
-                        -fx-translate-y: 0;
-                    """);
-            */
             Button choose = new Button("Kampf!");
             if(p.hashFoughtToday()) {
                 choose.setDisable(true);
@@ -268,18 +260,6 @@ public class Arena {
         AnchorPane.setTopAnchor(enemylabel, 625.0);
         arena.getChildren().addAll(fighterlabel, enemylabel);
 
-        // Debug
-        /*Label healthlabel_fighter = new Label("");
-        Label healthlabel_enemy = new Label("");
-        healthlabel_fighter.textProperty().bind(currentHealth_fighter.asString("%.0f"));
-        healthlabel_enemy.textProperty().bind(currentHealth_enemy.asString("%.0f"));
-        arena.getChildren().addAll(healthlabel_enemy, healthlabel_fighter);
-        AnchorPane.setLeftAnchor(healthlabel_fighter, 150.0);
-        AnchorPane.setTopAnchor(healthlabel_fighter, 430.0);
-        AnchorPane.setRightAnchor(healthlabel_enemy, 150.0);
-        AnchorPane.setTopAnchor(healthlabel_enemy, 430.0);*/
-
-
         /* Kampf Logik */
         /*Wer beginnt */
         nextTurn = Math.random() < 0.5 ? enemy : choosenFighter;
@@ -290,31 +270,6 @@ public class Arena {
         }
 
         turn = new Turn(nextTurn);
-
-
-        // Debuggin Boxes:
-        textField.setStyle("-fx-border-color: green; -fx-border-width: 3");
-        //field.setStyle("-fx-border-color: red; -fx-border-width: 1");
-        //arena.setStyle("-fx-border-color: blue; -fx-border-width: 1");
-        Button add10 = new Button("+"), add50 = new Button("-"), add150 = new Button("150");
-        add10.setOnAction(e-> {
-            currentHealth_fighter.set(currentHealth_fighter.get() + 10.0);
-            currentHealth_enemy.set(currentHealth_enemy.get() + 10.0);
-            //System.out.println(currentHealth_fighter.get() / choosenFighter.getSkills().get(0).getSkillValue());
-        });
-        add50.setOnAction(e-> {
-            currentHealth_fighter.set(currentHealth_fighter.get() - 10.0);
-            currentHealth_enemy.set(currentHealth_enemy.get() - 10.0);
-            //System.out.println(currentHealth_fighter.get() / choosenFighter.getSkills().get(0).getSkillValue());
-
-        });
-        add150.setOnAction(e-> {
-            //System.out.println(choosenFighter.addXp(150).get());
-        });
-        AnchorPane.setTopAnchor(add10, 20.0);
-        AnchorPane.setTopAnchor(add50, 50.0);
-        AnchorPane.setTopAnchor(add150, 70.0);
-        arena.getChildren().addAll(add10,add50,add150);
 
         return pane;
     }
@@ -348,23 +303,6 @@ public class Arena {
         /* Skills zuweisen. 1 Level = 1 SkillPunkt. Diese müssen noch zufällig auf
          * alle Skills verteilt werden. */
         System.out.println("Pawn wird mit " + p.getSkillPoints() + " Skillpunkten generiert.");
-        /*System.out.println("Diese werden investiert in:");
-        while(p.getSkillPoints() > 0) {
-            Random rand = new Random();
-            int id = rand.nextInt(p.getSkills().size());
-            System.out.println(p.getSkills().get(id).getName());
-            p.getSkills().get(id).addSkillLevel();
-            p.addSkillPoints(-1);
-        }*/
-
-        //Debug
-        for(Skill s : p.getSkills()) {
-           // System.out.println(s.getName() + ": " + s.getSkillLevel() + " -> " + s.getSkillValue());
-        }
-        //System.out.println("---------------");
-        for(Skill s : choosenFighter.getSkills()) {
-            // System.out.println(s.getName() + ": " + s.getSkillLevel() + " -> " + s.getSkillValue());
-        }
 
         /* Damit das ganze im Kampf-Log auch eine Bedeutung bekommt:
         * (Das doppelte "leicht" und "schwer" ist nur ein Workaround für die Zuweisung von "difficult", da sonst evtl ein ArrayOutOfBounds Exception geworfen wird.
@@ -389,7 +327,6 @@ public class Arena {
             baseMult = 0.0;
         }
         baseMult += (0.5 - Math.random()) * 0.1; /* Noch etwas RNG mit reinbringen.. */
-        //System.out.println("BaseMult: " + (1+baseMult));
         baseXPreward = (int)(baseXPreward *  (1+baseMult));
         baseMoneyreward = (int)(baseMoneyreward * (1+baseMult));
         price = new int[]{baseMoneyreward, baseXPreward};
@@ -675,21 +612,6 @@ public class Arena {
             }
 
         }).start();
-        /*
-        if(playerWins) {
-            Tools.popup("Die Spiele sind vorbei!", "Du hast den Gegner geschlagen", """
-                    Deine Belohnung ist:
-                        Güldmünzen
-                        Erfahrungspunkte
-                    """ );
-        } else {
-            Tools.popup("Die Spiele sind vorbei!", "Du hast den Kampf verloren", """
-                    Dein Kämpfer verliert:
-                        Goldmünzen
-                        Erfahrungspunkte
-                    """);
-        }
-         */
     }
 
     /**
