@@ -63,11 +63,11 @@ public class Slot {
 
                                 String res = Tools.confirmPopup("Item bereits ausgerüstet.", "Dieses Item ist bereits bei " + w.getOwner().getName() + " ausgerüstet.", "Möchtest du es ablegen?");
                                 if (res.equals("yes")) {
-                                    for (Weapon wep : w.getOwner().weapons) {
+                                    for (Weapon wep : w.getOwner().getWeapons()) {
                                         if (wep != null) System.out.println(wep.getName());
                                     }
 
-                                    for (Weapon wep : p.weapons) {
+                                    for (Weapon wep : p.getWeapons()) {
                                         if (wep != null) System.out.println(wep.getName());
                                     }
 
@@ -174,11 +174,11 @@ public class Slot {
                         if (p != a.getOwner()) {
                             equip.setOnAction(e -> {
                                 String res = Tools.confirmPopup("Item bereits ausgerüstet.", "Dieses Item ist bereits bei " + a.getOwner().getName() + " ausgerüstet.", "Möchtest du es bei dem aktuellen Pawn ausrüsten?");
-                                if (res.equals("yes")) { for (Armor arm : a.getOwner().armors) {
+                                if (res.equals("yes")) { for (Armor arm : a.getOwner().getArmors()) {
                                         if (arm != null) System.out.println(arm.getName());
                                     }
 
-                                    for (Armor arm : p.armors) {
+                                    for (Armor arm : p.getArmors()) {
                                         if (arm != null) System.out.println(arm.getName());
                                     }
 

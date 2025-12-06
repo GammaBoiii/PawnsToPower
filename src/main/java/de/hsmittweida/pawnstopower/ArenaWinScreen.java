@@ -39,10 +39,10 @@ public class ArenaWinScreen {
             /* Wird der Spieler den besiegten Pawn gewinnen? Mit 10% Chance */
             if(Math.random() < 0.1) { //Debug 100%
                 Pawn p = Arena.getCombatans()[1];
-                for(Armor a : p.armors) {
+                for(Armor a : p.getArmors()) {
                     p.removeArmor(a);
                 }
-                for(Weapon w : p.weapons) {
+                for(Weapon w : p.getWeapons()) {
                     p.removeWeapon(w);
                 }
                 Inventory.addPawn(p);
