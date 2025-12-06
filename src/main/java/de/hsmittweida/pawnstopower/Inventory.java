@@ -33,7 +33,7 @@ public class Inventory implements Serializable {
         pawnsNum = new SimpleIntegerProperty();
         pawnsNum.set(0);
 
-        Inventory.addPawn(new Pawn());
+        Inventory.addPawn(new Pawn(true));
         Inventory.addMoney(250);
         Inventory.addReputation(15);
 
@@ -197,5 +197,12 @@ public class Inventory implements Serializable {
         pawnsNum.set(0);
         reputation.set(0);
         Game.resetDay();
+    }
+
+    /**
+     * @return {@code int} - ID des letzten Pawns im Inventar, bzw -1, wenn kein Pawn im Inv ist.
+     */
+    public static int getLastPawnId() {
+        return pawns.get(pawns.size()-1) == null ? -1 : pawns.get(pawns.size()-1).getId();
     }
 }

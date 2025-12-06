@@ -240,7 +240,13 @@ public class Inspector {
         });
         xp.getChildren().addAll(openSkill);
 
-        box.getChildren().addAll(name, level, xpbar, xp);
+        /* ID */
+        HBox id = new HBox();
+        Label idLabel = new Label("ID:" + pawn.getId());
+        id.getChildren().add(idLabel);
+        id.setAlignment(Pos.CENTER);
+
+        box.getChildren().addAll(name, level, xpbar, xp, id);
         box.setSpacing(15);
         return box;
     }

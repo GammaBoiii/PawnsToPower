@@ -6,11 +6,14 @@ import java.util.Base64;
 import java.util.HashMap;
 
 /**
- * Diese Klasse dient zum Speichern des Spielfortschrittes.
+ * Diese Klasse dient zum Speichern und Laden des Spielfortschrittes.
  * Was gespeichert wird:
- * - Pawns,
- * - Inventar
- * - Gold, Reputation und sonstige Spielerwerte, inkl. Tagebuch.
+ * <ul>
+ * <li>Pawns,
+ * <li>Inventar
+ * <li>Gold, Reputation und sonstige Spielerwerte
+ * <li>Tagebuch
+ * </ul>
  */
 public class Save {
     /**
@@ -20,6 +23,7 @@ public class Save {
      */
     public static boolean saveAll(String path) {
         boolean errorTemp = false;
+
         /* Da die XP der Pawns mit SimpleInt gespeichert werden, sind diese nicht serialisierbar
          * und müssen daher manuell als int (serialisierbar) abgespeichert werden. */
         ArrayList<Integer> pawnXP = new ArrayList<Integer>();

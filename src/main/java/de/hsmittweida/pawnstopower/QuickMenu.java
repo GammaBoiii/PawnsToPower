@@ -12,8 +12,15 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Quickmenu ist ein kleines Popup, verschieden Einstellungen anzeigt, die Möglichkeit
+ * gibt, das Spiel zu speichern oder zu laden und einen Cheat zu aktivieren.
+ */
 public class QuickMenu {
 
+    /**
+     * Konstruktor, der das Pop-Up Fenster erstellt.
+     */
     public QuickMenu() {
         Stage stage = new Stage();
         VBox box = new VBox();
@@ -33,6 +40,7 @@ public class QuickMenu {
         });
         fullscreen.getChildren().addAll(fullscreen_label, fullscreen_button);
 
+        /* Speichern des Spiels */
         VBox save = new VBox();
         save.setSpacing(10);
         save.setPadding(new Insets(0,25,15,25));
@@ -60,6 +68,7 @@ public class QuickMenu {
         });
         save.getChildren().addAll(save_label, save_pathinput, save_button);
 
+        /* Laden eines Spielstandes */
         VBox load = new VBox();
         load.setSpacing(10);
         load.setPadding(new Insets(0,25,15,25));
@@ -87,6 +96,7 @@ public class QuickMenu {
         });
         load.getChildren().addAll(load_label, load_pathinput, load_button);
 
+        /* Cheat Aktivierung */
         VBox cheat = new VBox();
         Button cheat_button = new Button("Cheat");
         cheat_button.setOnAction(e -> {
@@ -94,7 +104,7 @@ public class QuickMenu {
             if(in != null && in.equals("helloworld")) {
                 Tools.popup("Erfolgreich.", "Passwort erraten!", "Cheat aktiviert.");
                 Inventory.addMoney(424);
-                Inventory.addPawn(new Pawn());
+                Inventory.addPawn(new Pawn(true));
                 Inventory.addItem(new Armor());
                 Inventory.addItem(new Armor());
                 Inventory.addItem(new Armor());

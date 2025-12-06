@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.UUID;
 
 public class Pawn implements Serializable {
     private final String name;
@@ -24,10 +25,12 @@ public class Pawn implements Serializable {
 
     private boolean foughtToday = false;
 
+    private int id;
+
     /**
      * Initialisiert alle Variablen des Pawns.
      */
-    Pawn() {
+    Pawn(boolean generateInPlayerInv) {
         for (Weapon w : this.getWeapons()) {
             w = null;
         }
@@ -49,6 +52,10 @@ public class Pawn implements Serializable {
         skills.add(speed);
 
         initVars();
+
+        if(generateInPlayerInv) {
+            this.setId();
+        }
     }
 
     /**
@@ -493,5 +500,13 @@ public class Pawn implements Serializable {
      */
     public void setFoughtToday(boolean foughtToday) {
         this.foughtToday = foughtToday;
+    }
+
+    public void setId() {
+        this.id = Inventory.getLastPawnId() + 1;
+    }
+
+    public int getId() {
+        return this.id;
     }
 }

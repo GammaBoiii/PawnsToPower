@@ -278,7 +278,7 @@ public class Arena {
      * Generiert basierend auf dem eigenen Kämpfer einen Gegner, der per Zufall in einem gewissen Bereiches ungefähr so stark ist.
      */
     private static Pawn generateEnemy() {
-        Pawn p = new Pawn();
+        Pawn p = new Pawn(false);
 
         /* Level generieren. Abweichung von max +- 2 Leveln */
         Random rnd = new Random();
