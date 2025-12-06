@@ -9,12 +9,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * Diese Klasse beinhaltet Methoden um die Stats für ein Item anzuzeigen.
+ * Diese Klasse beinhaltet Methoden, um die Stats für ein Item anzuzeigen.
  */
 public class ItemStats {
 
     /**
      * Öffnet ein Popup für eine Waffe zur Inspektion.
+     * <br>
+     * Zeigt Name, Klasse und Schaden der Waffe an, ebenso, ob es sich um ein Zweihänder handelt oder nicht.
      * @param w Die Waffe, die isnpiziert werden soll.
      */
     ItemStats(Weapon w) {
@@ -61,7 +63,9 @@ public class ItemStats {
     }
 
     /**
-     * Öffnet ein Popup für eine Waffe zur Inspektion.
+     * Öffnet ein Popup für ein Rüstungsteil zur Inspektion.
+     * <br>
+     * Zeigt Name, Ausrüstungsslot, Klasse und Rüstungswert an.
      * @param a Das Rüstungsteil, das inspiziert werden soll.
      */
     ItemStats(Armor a) {
@@ -104,15 +108,15 @@ public class ItemStats {
         aClass.getChildren().addAll(aClassLabel, aClassVal);
         aClass.setPadding(new Insets(0, 0, 15.0, 0));
 
-        Label damageLabel = new Label("Rüstungswert:");
-        Label damageVal = new Label(String.valueOf(a.getTotalProtection()));
-        HBox damage = new HBox();
-        HBox.setHgrow(damageLabel, Priority.ALWAYS);
-        damageLabel.setMaxWidth(Double.MAX_VALUE);
-        damage.getChildren().addAll(damageLabel, damageVal);
-        damage.setPadding(new Insets(0.0, 0, 15.0, 0));
+        Label protectionLabel = new Label("Rüstungswert:");
+        Label protectionVal = new Label(String.valueOf(a.getTotalProtection()));
+        HBox protection = new HBox();
+        HBox.setHgrow(protectionLabel, Priority.ALWAYS);
+        protectionLabel.setMaxWidth(Double.MAX_VALUE);
+        protection.getChildren().addAll(protectionLabel, protectionVal);
+        protection.setPadding(new Insets(0.0, 0, 15.0, 0));
 
-        box.getChildren().addAll(name, region, aClass, damage);
+        box.getChildren().addAll(name, region, aClass, protection);
 
         Tools.addStylesheet(s, "style_itemstats.css");
         stage.setScene(s);

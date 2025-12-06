@@ -15,12 +15,9 @@ public class Inventory implements Serializable {
     private static ArrayList<Weapon> weapons;
     private static ArrayList<Armor> armor;
     private static ArrayList<Pawn> pawns;
-
     private static IntegerProperty money;
     private static IntegerProperty pawnsNum;
-
     private static IntegerProperty reputation;
-
     private static boolean initialized = false;
 
     /**
@@ -97,6 +94,10 @@ public class Inventory implements Serializable {
         }
     }
 
+    /**
+     * Entfernt ein Item aus dem Inventar.
+     * @param item Item, welches entfernt werden soll.
+     */
     public static void removeItem(Item item) {
         if(item.getItemType().equals("Weapon")) {
             removeWeapon((Weapon) item);
@@ -178,10 +179,16 @@ public class Inventory implements Serializable {
         }
     }
 
+    /**
+     * @return {@code true}, wenn das Inventar nach einem Spielstart oder Laden eines Spielstandes initialisiert wurde.
+     */
     public static boolean isInitialized() {
         return initialized;
     }
 
+    /**
+     * Leert das Inventar komplett und setzt Resourcen und Tage zurück.
+     */
     public static void clear() {
         weapons.clear();
         armor.clear();

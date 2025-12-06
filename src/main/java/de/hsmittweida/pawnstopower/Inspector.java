@@ -18,6 +18,7 @@ import java.awt.*;
 
 /**
  * Die Inspektor-Klasse dient dem detailierten Anzeigen eines Kämpfers.
+ * Der Spieler erhält eine Übersicht über Ausrüstung, Name, Level, Erfahrungspunkte und Skills.
  */
 public class Inspector {
     private static Button btnHead;
@@ -81,7 +82,7 @@ public class Inspector {
         stats.setPadding(new Insets(10,15,10,15));
 
 
-        //Slot 0 - siehe Pawn.clothingSlotUsed
+        /* Slot 0 - siehe Pawn.clothingSlotUsed */
         AnchorPane.setLeftAnchor(btnHead, 710.0);
         AnchorPane.setRightAnchor(btnHead, 710.0);
         AnchorPane.setTopAnchor(btnHead, 190.0);
@@ -89,7 +90,7 @@ public class Inspector {
         btnHead.setPrefHeight(90);
         btnHead.setOnAction(e -> new Slot( btnHead, p, "clothing", 0, "Kopfschutz"));
 
-        //Slot 1
+        /* Slot 1 */
         AnchorPane.setLeftAnchor(btnTorso, 710.0);
         AnchorPane.setRightAnchor(btnTorso, 710.0);
         AnchorPane.setTopAnchor(btnTorso, 300.0);
@@ -97,7 +98,7 @@ public class Inspector {
         btnTorso.setPrefWidth(50);
         btnTorso.setOnAction(e -> new Slot( btnTorso, p, "clothing", 1, "Torsoschutz"));
 
-        //Slot 2
+        /* Slot 2 */
         AnchorPane.setLeftAnchor(btnArms, 655.0);
         AnchorPane.setRightAnchor(btnArms, 655.0);
         AnchorPane.setTopAnchor(btnArms, 300.0);
@@ -105,7 +106,7 @@ public class Inspector {
         btnArms.setPrefWidth(150);
         btnArms.setOnAction(e -> new Slot(btnArms, p, "clothing", 2, "Armschutz"));
 
-        //Slot 3
+        /* Slot 3 */
         AnchorPane.setRightAnchor(btnLegs, 710.0);
         AnchorPane.setLeftAnchor(btnLegs, 710.0);
         AnchorPane.setTopAnchor(btnLegs, 535.0);
@@ -114,7 +115,7 @@ public class Inspector {
         btnLegs.setOnAction(e -> new Slot(btnLegs, p, "clothing", 3, "Beinschutz"));
 
 
-        //Slot 0 - siehe Pawn.weaponSlotUsed
+        /* Slot 0 - siehe Pawn.weaponSlotUsed */
         if(p.getWeapon((byte)0) != null) {
             System.out.println("weapon in rigght hand");
             setImage(btnRight, p.getWeapon((byte)0).getWeaponClass());
@@ -125,7 +126,7 @@ public class Inspector {
         btnRight.setPrefHeight(200);
         btnRight.setOnAction(e -> new Slot(btnRight, p, "weapon", 0, "Rechte Handwaffe"));
 
-        //Slot 1
+        /* Slot 1 */
         if(p.getWeapon((byte)1) != null) {
             System.out.println("weapon in left thand");
             setImage(btnLeft, p.getWeapon((byte)1).getWeaponClass());

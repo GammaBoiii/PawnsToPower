@@ -5,6 +5,8 @@ import java.util.Random;
 
 /**
  * Elternklasse der Items (Rüstung und Waffen).
+ * <br>
+ * Handhabt die Grundeigenschaften eines Items, wie Besitzer, Name, Ausgerüstet-Status und Item-Typ.
  */
 public class Item implements Serializable {
     private String name;
@@ -110,11 +112,14 @@ public class Item implements Serializable {
      * @return Den generierten Name.
      */
     protected String randomName(Item item) {
+
+        /* Namensgenerierung für Waffen: */
         if (item.getItemType().equals("Weapon")) {
             String[] mysticalWeaponNames = {"Excalibur", "Durandal", "Anduril", "Joyeuse", "Mjolnir", "Hrunting", "Kusanagi", "Zulfiqar", "Arondight", "Caliburn", "Obsidian", "Eternity", "Infinity", "Celestia", "Elysium", "Oracle", "Destiny", "Legacy", "Revelation", "Ascendant", "Radiance", "Nebula", "Nova", "Zenith", "Apex", "Vanguard", "Sovereign", "Empyrean", "Genesis", "Redemption", "Eclipse", "Requiem", "Mirage", "Mythos", "Empyreal", "Tempest", "Vortex", "Serenity", "Phantom", "Specter", "Arcadia", "Odyssey", "Inferno", "Chimera", "Mythica", "Mystic", "Eon", "Quantum", "Radiant", "Revere", "Solstice", "Equinox", "Aether", "Vesper", "Omen", "Nebulous", "Elysian", "Aurora", "Twilight", "Celestial", "Dominion", "Eminence", "Arcanum", "Enigma", "Singularity", "Nexus", "Reverence", "Ascension", "Solara", "Evanescence", "Majesty", "Celestium", "Oblivion", "Fate", "Reverie", "Paradigm", "Sovereignty", "Eternum", "Abyss", "Spectral", "Vigil", "Horizon", "Arcane", "Rapture", "Lumina", "Seraphim", "Valor", "Phantasm", "Nocturne", "Starlight", "Wraith", "Hallowed", "Sacred", "Mysteria", "Empyre", "Requital", "Veneration", "Ascendancy", "Transcendence", "Illumina"};
             Random rnd = new Random();
             return mysticalWeaponNames[rnd.nextInt(mysticalWeaponNames.length)];
-        } else if (item.getItemType().equals("Armor")) {
+        } /* Namensgenerierung für Rüstung. Diese basieren nur auf Material und Rüstungsslot. */
+        else if (item.getItemType().equals("Armor")) {
             String name;
             Armor armor = (Armor) item;
             name = switch (armor.getSlotType()) {
@@ -140,8 +145,8 @@ public class Item implements Serializable {
     }
 
     /**
-     * Platzhalter der Super Klasse. Wird von den Kindklassen entsprechend {@Override} überschrieben.
-     * @return Item Typ.
+     * Platzhalter der Super Klasse. Wird von den Kindklassen entsprechend mit {@code Override} überschrieben.
+     * @return Item-Typ
      */
     protected String getItemType() {
         return "Item";
