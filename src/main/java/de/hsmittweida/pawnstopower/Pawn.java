@@ -76,8 +76,11 @@ public class Pawn implements Serializable {
      * @return {@code true}, wenn die Rüstung erfolgreich ausgerüstet wurde, {@code false}, wenn der Slot bereits belegt ist
      */
     public boolean giveArmor(Armor armor, byte slot) {
+        System.out.println(armor.getName());
         if (!clothingSlotUsed(slot)) {
             this.getArmors()[slot] = armor;
+            armor.equip(this);
+            System.out.println("giveArmor: " + armor.getOwner());
             return true;
         }
         return false;

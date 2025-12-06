@@ -27,25 +27,31 @@ public class Save {
         /* Da die XP der Pawns mit SimpleInt gespeichert werden, sind diese nicht serialisierbar
          * und müssen daher manuell als int (serialisierbar) abgespeichert werden. */
         ArrayList<Integer> pawnXP = new ArrayList<Integer>();
-//        for(Pawn p : Inventory.getPawns()) {
-//            pawnXP.add(p.getXpAsInt());
-//
-//            /* Da ein Pawn nach dem Laden nicht mehr das selbe Objekt wie vorher ist (Objektrefernz),
-//             * müssen alle Waffen und RÜstungen entrüstet werden, da die getOwner() Methode jedes
-//             * dieser Items, die alte Pawn-Referenz zurückgibt. */
+        for(Pawn p : Inventory.getPawns()) {
+            pawnXP.add(p.getXpAsInt());
+
+            /* Da ein Pawn nach dem Laden nicht mehr das selbe Objekt wie vorher ist (Objektrefernz),
+             * müssen alle Waffen und RÜstungen entrüstet werden, da die getOwner() Methode jedes
+             * dieser Items, die alte Pawn-Referenz zurückgibt. */
 //            p.removeWeapon(p.getWeapon((byte) 0));
 //            p.removeWeapon(p.getWeapon((byte) 1));
 //            p.removeArmor(p.getArmor((byte) 0));
 //            p.removeArmor(p.getArmor((byte) 1));
 //            p.removeArmor(p.getArmor((byte) 2));
 //            p.removeArmor(p.getArmor((byte) 3));
-//        }
+        }
 
         for(Weapon w : Inventory.getWeapons()) {
-            if(w.getOwner() != null) w.generateEquipLocation(w.getOwner().getId(), Item.getSlotOfItem(w));
+            if(w.getOwner() != null) {
+                w.generateEquipLocation(w.getOwner().getId(), Item.getSlotOfItem(w));
+                w.getOwner().removeWeapon(w);
+            }
         }
         for(Armor a : Inventory.getArmor()) {
-            if(a.getOwner() != null) a.generateEquipLocation(a.getOwner().getId(), Item.getSlotOfItem(a));
+            if(a.getOwner() != null) {
+                a.generateEquipLocation(a.getOwner().getId(), Item.getSlotOfItem(a));
+                a.getOwner().removeArmor(a);
+            }
         }
 
 
@@ -137,20 +143,29 @@ public class Save {
             for(int i = 0; i < pawns.size(); i++) {
                 Inventory.addPawn(pawns.get(i));
                 pawns.get(i).addXp(pawnXP.get(i));
+                System.out.println("pawn hier: " + pawns.get(i).getName() + " hash: " + pawns.get(i));
             }
         }
 
         if(weapons != null && !weapons.isEmpty()) {
             for(Weapon w : weapons) {
                 Inventory.addItem(w);
-                if(w.getEquipLocation() != null) w.pushEquipLocation(w);
+                if(w.getEquipLocation() != null) {
+//                    System.out.println("firstowner:" + w.getOwner());
+                    w.pushEquipLocation(w);
+//                    System.out.println("Name of weapon: " + w.getName() + " Owner: " + w.getOwner());
+                }
             }
         }
 
         if(armors != null && !armors.isEmpty()) {
             for(Armor a : armors) {
                 Inventory.addItem(a);
-                if(a.getEquipLocation() != null) a.pushEquipLocation(a);
+                if(a.getEquipLocation() != null) {
+                    System.out.println("firstowner:" + a.getOwner());
+                    a.pushEquipLocation(a);
+                    System.out.println("Name of weapon: " + a.getName() + " Owner: " + a.getOwner());
+                }
             }
         }
 

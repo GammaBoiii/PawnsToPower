@@ -162,10 +162,12 @@ public class Item implements Serializable {
     }
 
     public void pushEquipLocation(Item item) {
-        if(item.getItemType() == "weapon") {
+        if(item.getItemType().equals("Weapon")) {
             Inventory.getPawnById(equipLocation[0]).giveWeapon((Weapon) item, (byte) equipLocation[1]);
-        } else if(item.getItemType() == "armor") {
+        } else if(item.getItemType().equals("Armor")) {
             Inventory.getPawnById(equipLocation[0]).giveArmor((Armor) item, (byte) equipLocation[1]);
+            System.out.println("Amor pot Owner: " + Inventory.getPawnById(equipLocation[0]));
+            System.out.println("Was hat der Kollege an: " + Inventory.getPawnById(equipLocation[0]).getArmors()[equipLocation[1]]);
         } else {
             System.out.println("Konnte Item nicht anlegen");
         }

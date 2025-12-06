@@ -57,6 +57,8 @@ public class Slot {
                      * Der Hinweis erfolgt nur, wenn es sich bei dem aktuellen Pawn nicht um den handelt, der das Item ausgerüstet hat! */
                     if (w.isEquipped()) {
                         if (p != w.getOwner()) {
+                            System.out.println("!!!" + w.getOwner().getName());
+                            System.out.println(w.getOwner() +" .. "+ p);
                             equip.setOnAction(e -> {
                                 System.out.println(w.getOwner());
                                 System.out.println(p);
