@@ -12,6 +12,7 @@ public class Item implements Serializable {
     private String name;
     private Pawn owner;
     private boolean equipped;
+    private int[] equipLocation;
 
     /**
      * Legt den Besitzer fest.
@@ -150,5 +151,24 @@ public class Item implements Serializable {
      */
     protected String getItemType() {
         return "Item";
+    }
+
+    public int[] getEquipLocation() {
+        return equipLocation;
+    }
+
+    public void generateEquipLocation(int pawnid, int slotid) {
+        equipLocation = new int[] {pawnid, slotid};
+    }
+
+    public void pushEquipLocation(Item item) {
+        if(item.getItemType() == "weapon") {
+            Inventory.getPawnById(equipLocation[0]).giveWeapon((Weapon) item, (byte) equipLocation[1]);
+        } else if(item.getItemType() == "armor") {
+            Inventory.getPawnById(equipLocation[0]).giveArmor((Armor) item, (byte) equipLocation[1]);
+        } else {
+            System.out.println("Konnte Item nicht anlegen");
+        }
+
     }
 }

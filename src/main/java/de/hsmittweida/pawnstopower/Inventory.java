@@ -203,6 +203,20 @@ public class Inventory implements Serializable {
      * @return {@code int} - ID des letzten Pawns im Inventar, bzw -1, wenn kein Pawn im Inv ist.
      */
     public static int getLastPawnId() {
-        return pawns.get(pawns.size()-1) == null ? -1 : pawns.get(pawns.size()-1).getId();
+        return pawns.size() == 0 ? -1 : pawns.get(pawns.size()-1).getId();
+    }
+
+    /**
+     * Gibt einen Pawn basierend auf dessen Id zurück. Für besondere Fälle, in denen
+     * die Pawn Id von dem Index des Pawns im Inventar abweichen sollte.
+     * @return {@code Pawn} mit der entsprechenden Id
+     */
+    public static Pawn getPawnById(int id) {
+        for(Pawn p : pawns) {
+            if(p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
     }
 }

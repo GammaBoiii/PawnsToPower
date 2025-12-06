@@ -27,19 +27,27 @@ public class Save {
         /* Da die XP der Pawns mit SimpleInt gespeichert werden, sind diese nicht serialisierbar
          * und müssen daher manuell als int (serialisierbar) abgespeichert werden. */
         ArrayList<Integer> pawnXP = new ArrayList<Integer>();
-        for(Pawn p : Inventory.getPawns()) {
-            pawnXP.add(p.getXpAsInt());
+//        for(Pawn p : Inventory.getPawns()) {
+//            pawnXP.add(p.getXpAsInt());
+//
+//            /* Da ein Pawn nach dem Laden nicht mehr das selbe Objekt wie vorher ist (Objektrefernz),
+//             * müssen alle Waffen und RÜstungen entrüstet werden, da die getOwner() Methode jedes
+//             * dieser Items, die alte Pawn-Referenz zurückgibt. */
+//            p.removeWeapon(p.getWeapon((byte) 0));
+//            p.removeWeapon(p.getWeapon((byte) 1));
+//            p.removeArmor(p.getArmor((byte) 0));
+//            p.removeArmor(p.getArmor((byte) 1));
+//            p.removeArmor(p.getArmor((byte) 2));
+//            p.removeArmor(p.getArmor((byte) 3));
+//        }
 
-            /* Da ein Pawn nach dem Laden nicht mehr das selbe Objekt wie vorher ist (Objektrefernz),
-             * müssen alle Waffen und RÜstungen entrüstet werden, da die getOwner() Methode jedes
-             * dieser Items, die alte Pawn-Referenz zurückgibt. */
-            p.removeWeapon(p.getWeapon((byte) 0));
-            p.removeWeapon(p.getWeapon((byte) 1));
-            p.removeArmor(p.getArmor((byte) 0));
-            p.removeArmor(p.getArmor((byte) 1));
-            p.removeArmor(p.getArmor((byte) 2));
-            p.removeArmor(p.getArmor((byte) 3));
+        for(Weapon w : Inventory.getWeapons()) {
+            if(w.getOwner() != null) w.generateEquipLocation(w.getOwner().getId(), Item.getSlotOfItem(w));
         }
+        for(Armor a : Inventory.getArmor()) {
+            if(a.getOwner() != null) a.generateEquipLocation(a.getOwner().getId(), Item.getSlotOfItem(a));
+        }
+
 
         PrintWriter writer = null;
         try {
@@ -135,12 +143,14 @@ public class Save {
         if(weapons != null && !weapons.isEmpty()) {
             for(Weapon w : weapons) {
                 Inventory.addItem(w);
+                if(w.getEquipLocation() != null) w.pushEquipLocation(w);
             }
         }
 
         if(armors != null && !armors.isEmpty()) {
-            for(Armor r : armors) {
-                Inventory.addItem(r);
+            for(Armor a : armors) {
+                Inventory.addItem(a);
+                if(a.getEquipLocation() != null) a.pushEquipLocation(a);
             }
         }
 
