@@ -20,6 +20,7 @@ public class Save {
      * Speichert alle notwendigen Daten
      *
      * @param path Wo die Datei mit dem Spielstand gespeichert werden soll.
+     * @return {@code true}, wenn alles fehlerfrei gespeichert wurde.
      */
     public static boolean saveAll(String path) {
         boolean errorTemp = false;
@@ -41,6 +42,13 @@ public class Save {
 //            p.removeArmor(p.getArmor((byte) 3));
         }
 
+        /* Die folgenden zwei Schleifen generieren eine Vorlage für ausgerüstete Items,
+        * sodass diese später beim Laden korrekt an die passenden Pawns gegeben werden können.
+        * Siehe dazu auch Item.pushEquipLocation() und Item.generateEquipLocation().
+        * In einem weiteren Schritt werden die jeweiligen Items aber zunächst noch entfernt,
+        * da sich herausgestellt hat, dass die Pawns dann beim Laden teilweise noch die Referenz zu
+        * den "alten" Items haben, welche dann nicht korrekt geladen werden können.
+        * */
         for(Weapon w : Inventory.getWeapons()) {
             if(w.getOwner() != null) {
                 w.generateEquipLocation(w.getOwner().getId(), Item.getSlotOfItem(w));
@@ -55,6 +63,12 @@ public class Save {
         }
 
 
+        /* Nutzung des PrintWriter Objects, mit Hilfe der serialize() Methode.
+        * Erlaubt einfaches schreiben in eine Datei, sofern die einzelnen Objekte
+        * ersteinmal serialisiert sind.
+        * Einzelne Werte, Gold, Reputation und Tage, werden mit einem Präfix gespeichert,
+        * damit diese später einfacher ausgelesen werden können.
+        * */
         PrintWriter writer = null;
         try {
             writer = new PrintWriter(path);
@@ -77,9 +91,17 @@ public class Save {
         return !errorTemp;
     }
 
+    /**
+     * Lädt alle Daten aus der Datei aus dem Path.
+     * @param path Pfad, an dem die Datei liegen soll. Nur der Pfad in den Ordner der Datei.
+     * @return {@code true}, wenn alles fehlerfrei geladen wurde.
+     */
     public static boolean loadAll(String path) {
         boolean errorTemp = false;
 
+        /* Falls noch nicht vorhanden, wird zunächst ein frisches
+        * Inventar initiiert.
+        * */
         if(Inventory.isInitialized()) {
             Inventory.clear();
         } else {
@@ -96,6 +118,12 @@ public class Save {
         int rep = 0;
         int day = 0;
 
+        /* Mithilfe eines BufferedReaders werdn die Serialisierungen der Objekte aus der Datei gelesen
+        * und anschließend mit der deserialize Methode wieder in ihre entsprechenden Objekte umgewandelt.
+        * Die einzelnen Werte des Goldes, der Reputation und der Taganzahl können mithilfe
+        * der Präfixe einfach ausgelesen werden. Der Rest wird per Reihenfolge (jeweils ein Objekt pro Zeile)
+        * ausgelesen.
+        * */
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader(path));
@@ -147,6 +175,10 @@ public class Save {
             }
         }
 
+        /* Die Items, insbesondere die, die beim Speichern an einem Pawn ausgerüstet waren,
+        * werden mit den folgenden Anweisungsblöcken an ihren entsprechenden Pawns zurück
+        * ausgerüstet.
+        * */
         if(weapons != null && !weapons.isEmpty()) {
             for(Weapon w : weapons) {
                 Inventory.addItem(w);
@@ -169,13 +201,11 @@ public class Save {
             }
         }
 
-
+        /* Einzelne Werte hinzufügen */
         Inventory.addMoney(gold);
         Inventory.addReputation(rep);
         Game.setDay(day);
         Diary.setDiaryEntriesFromSeriliazable(diaryEntries);
-        // Es fehlt noch: Tag, Tagebuch...
-
 
         /* Test-Ausgabe */
         System.out.println("Gold: " + gold);
@@ -187,6 +217,13 @@ public class Save {
         return true;
     }
 
+    /**
+     * Methode zum Serialisieren eines Objekts.
+     * Nutzt ein Base64 Enkodierer auf den ObjectOutputStream.
+     * @param obj Objekt, welches serialisiert werden soll.
+     * @return {@code String} - Serialisierte String-Version des Objekts.
+     * @throws IOException, wenn etwas beim Serialisieren schiefgeht.
+     */
     public static String serialize(Object obj) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream out = new ObjectOutputStream(bos);
@@ -196,6 +233,14 @@ public class Save {
         return Base64.getEncoder().encodeToString(bos.toByteArray());
     }
 
+    /**
+     * Methode zum Deserialisieren eines Objekts.
+     * Umgekehrtes Verfahren zur Serialisierung, hier mit ObjectInputStream.
+     * @param code Serialisierte String-Version des Objekts.
+     * @return {@code Object} - Deserialisierte Version des Objekts.
+     * @throws IOException, wenn etwas beim Deserialisieren schiefgeht.
+     * @throws ClassNotFoundException, wenn das Objekt nicht gefunden werden konnte.
+     */
     public static Object deserialze(String code) throws IOException, ClassNotFoundException {
         byte[] data = Base64.getDecoder().decode(code);
         ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(data));
