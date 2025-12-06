@@ -452,7 +452,7 @@ public class Game {
     }
 
     /**
-     * Gibt eine Font zurück, die an einen UI-Text geheftet werden kann.
+     * @return Eine Font
      */
     public static Font getFont(String name) {
         if(fonts.containsKey(name)) {
@@ -484,7 +484,7 @@ public class Game {
     }
 
     /**
-     * @return die aktuelle stage
+     * @return Stage, die aktuelle stage
      */
     public static Stage getStage() {
         return stage;
