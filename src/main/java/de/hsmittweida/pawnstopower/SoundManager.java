@@ -6,13 +6,22 @@ import javafx.scene.media.MediaPlayer;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * Diese Klasse ist das Herzstück der Soundverwaltung.
+ * Hier werden die Sounds registriert und verwaltet.
+ */
 public class SoundManager {
 
     private MediaPlayer mp;
     private int index = 0;
     ArrayList<String> playlist;
+
+    /**
+     * Registriert einen Sound aus einem Namen und spielt diesen ab.
+     * Gut nutzbar für einzelne, kurze Sounds.
+     * @param name Name der Sounddatei.
+     */
     SoundManager(String name) {
-        //File f = new File(this.getClass().getResource("sound/" + name).getFile());
         String f = this.getClass().getResource("sound/" + name).toExternalForm();
 
         try {
@@ -25,16 +34,24 @@ public class SoundManager {
 
     }
 
+    /**
+     * Registriert mehrere Sounds aus einem Array und spielt diese ab.
+     * Gut nutzbar für Hintergrundmusik, da hier wie aus einer Playlist alles
+     * abgespielt wird.
+     * @param name Varaible Menge an Namen der Sounddateien.
+     */
     SoundManager(String... name) {
         playlist = new ArrayList<String>();
         for (String s : name) {
             playlist.add(this.getClass().getResource("sound/" + s).toExternalForm());
         }
-        //System.out.println(playlist.size());
         playCurrentSong();
 
     }
 
+    /**
+     * @return {@coode MediaPlayer} MediaPlayer, der von einem Sound verwendet wird.
+     */
     public MediaPlayer getMediaPlayer() {
         return mp;
     }
@@ -60,6 +77,11 @@ public class SoundManager {
         });
     }
 
+    /**
+     * Erstellt den eigentlichen MediaPlayer für eine Sounddatei.
+     * @param f Pfad zur Datei.
+     * @return {@code MediaPlayer} MediaPlayer, der für eine Datei erstellt wurde.
+     */
     private MediaPlayer createSound(String f) {
         return new MediaPlayer(new Media(f));
     }

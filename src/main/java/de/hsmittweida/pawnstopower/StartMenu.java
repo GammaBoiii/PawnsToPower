@@ -7,11 +7,22 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Das Startmenu ist das erste, was der Spieler nach Programmstart sieht.
+ * Dabei kann zwischen dem Start eines neuen Spielstands und dem Laden eines
+ * bestehenden gewählt werden.
+ * Alternativ hat der Spieler die Möglichkeit, das Programm an der Stelle
+ * zu beenden.
+ */
 public class StartMenu {
+
+	/**
+	 * Konstruktor der StartMenu Klasse.
+	 * @param stage primaryStage
+	 */
 	StartMenu(Stage stage) {
 			VBox root = new VBox(15);
 			Scene scene = new Scene(root,400,500);
-			//scene.getStylesheets().add(getClass().getResource("style_mainmenu.css").toExternalForm());
 			Tools.addStylesheet(scene, "style_mainmenu.css");
 			stage.setScene(scene);
 
@@ -24,16 +35,20 @@ public class StartMenu {
 			Label title = new Label("Pawn to Power");
 			Button newGame = new Button("Neues Spiel");
 			Button loadGame = new Button("Spiel laden");
-			Button setup = new Button("Setup");
+			Button setup = new Button("Setup"); //@Deprecated
 			Button exit = new Button ("Exit");
 
-			Tools.addButtonSfx(newGame,loadGame,setup,exit);
+			Tools.addButtonSfx(newGame,loadGame,exit);
 			
 			newGame.setOnAction(e -> {
                 Game.Game_view();
 				stage.close();
 			});
 
+			/* Hier kann der Spieler einen Pfad angeben, um ein bestehenden Spielstand
+			* zu laden. Dabei wird nur nach dem Pfad in den Ordner, in dem der
+			* Spielstand liegt, gefragt!
+			* */
 			loadGame.setOnAction(e-> {
 				String res = Tools.inputPopup("Spiel laden", "Gib den Pfad an!", "Es sollte eine \"savegame.p2p\" Datei enthalten sein.");
                 System.out.println(res);

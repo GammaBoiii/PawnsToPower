@@ -27,7 +27,18 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+/**
+ * Die Tool-Klasse bietet eine große Sammlung an Methoden, die in dem Projekt
+ * mehrfach von verschiedensten Objekten verwendet werden. Daher eignete es
+ * sich, diese Methode in dieser Zentralen klasse, statisch bereitzustellen.
+ */
 public class Tools {
+
+    /**
+     * Gibt die Auflösung des Bildschirms zurück.
+     * @return {@code HashMap<Character, Integer>} Map, die die Höhe und Breite des Bildschirms
+     * beinhaltet.
+     */
     public static HashMap<Character, Integer> getScreenSize() {
         HashMap<Character, Integer> dimensions = new HashMap<Character, Integer>();
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -40,12 +51,27 @@ public class Tools {
         return dimensions;
     }
 
+    /**
+     * Setzt ein Hintergrund auf einen Button
+     * @param value Buttonelement, auf das das Hintergrundbild angewendet werden soll.
+     * @param radius radius des Bildes.
+     * @param path Pfad zum Bild.
+     * @deprecated
+     */
     public static void setBackground(Button value, int radius, String path){
         Image i = new Image(path);
         BackgroundFill f = new BackgroundFill(new ImagePattern(i), new CornerRadii(radius), new Insets(0));
         value.setBackground(new Background(f));
     }
 
+    /**
+     * Schließt Nebenfenster automatisch, sobald das Hauptfenster im Vordergrund ist.
+     * Verhindert somit, dass viele Fenster offen sind, und somit auch, dass 2 Fenster
+     * vom selben Objekt gleichzeitig offen sind.
+     * @param stage stage des Fensters, das geprüft und ggf. geschlossen werden soll.
+     * @param ownerClass Eine einzigartige Bezeichnung für das Fenster, um das Öffnen
+     *                   von mehreren Fenstern des selben Objekts zu verhindern.
+     */
     public static void defaultClose(Stage stage, String ownerClass) {
         stage.setResizable(false);
 
@@ -75,6 +101,13 @@ public class Tools {
         });*/
     }
 
+    /**
+     * Erstelle ein PopUp Fenster.
+     * Dient nur zur Informationsanzeige. Erwartet kein User-Input.
+     * @param title Titel des Popups
+     * @param header Kopfzeile
+     * @param context Kontext
+     */
     public static void popup(String title, String header, String context) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -84,6 +117,14 @@ public class Tools {
         alert.show();
     }
 
+    /**
+     * Erstellt ein PopUp-Fenster, das nach einem einfach "Ja/Nein"
+     * als Input fragt, und das entsprechende Ergebnis zurückgibt.
+     * @param title Titel des Popups
+     * @param header Kopfzeile
+     * @param context Kontext
+     * @return {@code String} mit der gewählten Option.
+     */
     public static String confirmPopup(String title, String header, String context) {
         ButtonType yes = new ButtonType("Ja", ButtonBar.ButtonData.YES);
         ButtonType no = new ButtonType("Nein", ButtonBar.ButtonData.NO);
@@ -102,6 +143,15 @@ public class Tools {
         return "no";
     }
 
+    /**
+     * Erstellt ein PopUp-Fenster, das den User nach einem TextInput fragt,
+     * und diesen anschließend zurückgibt.
+     * @param title Titel des Popups
+     * @param header Kopfzeile
+     * @param context Kontext
+     * @return {@code String} mit den eingegebenen Text, oder <i>"empty"</i>, falls
+     * kein Input erfolgte.
+     */
     public static String inputPopup(String title, String header, String context) {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle(title);
@@ -126,18 +176,25 @@ public class Tools {
         s.getStylesheets().add(Tools.class.getResource(name).toExternalForm());
     }
 
+    /**
+     * Fügt einem Pane eine .css an.
+     * @param pane Pane, das das Stylesheet erhalten soll.
+     * @param name Name der .css.
+     */
     public static void addStylesheet(Pane pane, String name) {
-        pane.getStylesheets().add(Barracks.class.getResource(name).toExternalForm());
+        pane.getStylesheets().add(Tools.class.getResource(name).toExternalForm());
     }
 
     /**
      * Ersetzt das -fx-transition aus .css
-     *
      * @param b Der Button, der animiert werden soll.
      * @param millis Transitionszeit in Millisek.
      * @param fac Der Faktor um wie viel vergrößert wird.
      */
     public static void addHoverEffect(Button b, int millis, double fac, boolean glowEffect) {
+        /* Definiert zunächst zwei ScaleTransitions, jeweils zur Vergrößerung
+        * und zur Verkleinerung des Buttons.
+        * */
         ScaleTransition scaleIn = new ScaleTransition(Duration.millis(millis), b);
         scaleIn.setToX(fac);
         scaleIn.setToY(fac);
@@ -146,10 +203,13 @@ public class Tools {
         scaleOut.setToX(1);
         scaleOut.setToY(1);
 
-        /* Glow-Effekt für Button */
+        /* Glow-Effekt mittel Dropshadow für Button */
         DropShadow shadow = new DropShadow(0, new Color(0.871, 0.714, 0.718, 1.0));
         b.setEffect(shadow);
 
+        /* TimeLine, um da Glow-Animation des Buttons zu steuern.
+        * Zwei TimeLines für das Erscheinen und Verschiwnden der Glow-Animation des Buttons.
+        * */
         Timeline glowIn = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(shadow.radiusProperty(), 0)),
                 new KeyFrame(Duration.millis(millis), new KeyValue(shadow.radiusProperty(), 20))
@@ -160,8 +220,9 @@ public class Tools {
                 new KeyFrame(Duration.millis(millis), new KeyValue(shadow.radiusProperty(), 0))
         );
 
-        /*b.setOnMouseEntered(e -> scaleIn.playFromStart());
-        b.setOnMouseExited(e -> scaleOut.playFromStart());*/
+        /* Spielt die entsprechende Animation jeweils beim Eintritt
+        * und Austritt der Maus ab.
+        * */
         b.setOnMouseEntered(e -> {
             glowIn.playFromStart();
             if (glowEffect) scaleIn.playFromStart();
@@ -172,12 +233,15 @@ public class Tools {
         });
     }
 
+    /**
+     * Fügt einer Liste von Buttons den SoundEffekt hinzu.
+     * @param buttons Buttons, welche den Soundeffekt bekommen sollen.
+     */
     public static void addButtonSfx(Button... buttons) {
         for(Button b : buttons) {
 
             /* Hier addEventHandler, da setOnAction() bereits bei den Buttons benutzt wird,
-             * und es daher zu überschreibungen kommen würde */
-
+             * und es daher zu Überschreibungen kommen würde */
             b.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
 //                System.out.println("drag entered");
                 SoundManager hoversound = new SoundManager("sfx/hover.wav");
@@ -190,14 +254,24 @@ public class Tools {
         }
     }
 
-    public static void pauseGame(int time) {
+    /**
+     * Pausiert den Thread des Spiels.
+     * @param time in ms, die der Haupt-Thread des Spiels pausiert werden soll.
+     * @deprecated, aus offensichtlichen Gründen...
+     */
+    public static void pauseGame(long time) {
         try {
-            Thread.sleep((long) time);
+            Thread.sleep(time);
         } catch (InterruptedException e) {
             System.out.println("Interrupted while break");
         }
     }
 
+    /**
+     * Diente zum Debuggen und zum Finden bestimmter Koordinaten auf einem Node.
+     * Vereinfachte die Positionierung von UI-Elementen mit Platzierung durch Koordinaten.
+     * @param node Node, von dem die Koordinaten ausgelesen werden sollen.
+     */
     public static void getMouseClickedPosOnNode(Node node) {
         node.setOnMouseClicked(event -> {
             System.out.println(event.getX() + " " + event.getY());

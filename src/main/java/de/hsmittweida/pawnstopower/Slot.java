@@ -15,16 +15,15 @@ import javafx.stage.Stage;
  */
 public class Slot {
     /**
-     * Diese Klasse erstellt ein neues Fenster zum Ausrüsten der Items.
+     * Dieser Konstruktor erstellt ein neues Fenster zum Ausrüsten der Items.
      *
-     * @param reference - Knopf, der mit zur Referenz übergeben wird. Hierbei handelt es sich um das "Körperteil" das der Spieler anklickt, um an der Stelle etwas auszurüsten
-     *                  Siehe dazu auch die Slotverteilung in Pawn.clothingSlotUsed bzw. Pawn.weaponSlotUsed.
-     * @param p         - Der Pawn, der aktuell ausgerüstet wird.
-     * @param type      - Waffe oder Kleidungsstück (Rüstung).
-     * @param id        - Die ID des Slots, an dem die Ausrüstung ausgerüstet werden soll. Unterschieden wird bei den Slots gemäß {@code @param type}.
+     * @param reference Knopf, der mit zur Referenz übergeben wird. Hierbei handelt es sich um das "Körperteil" das der Spieler anklickt, um an der Stelle etwas auszurüsten
+     * Siehe dazu auch die Slotverteilung in Pawn.clothingSlotUsed bzw. Pawn.weaponSlotUsed.
+     * @param p Der Pawn, der aktuell ausgerüstet wird.
+     * @param type Waffe oder Kleidungsstück (Rüstung).
+     * @param id Die ID des Slots, an dem die Ausrüstung ausgerüstet werden soll. Unterschieden wird bei den Slots gemäß {@code @param type}.
      */
     Slot(Button reference, Pawn p, String type, int id, String title) {
-        /* Das Fenster wird ganz normal aufgesetzt und bestückt. */
         Stage stage = new Stage();
         ScrollPane sp = new ScrollPane();
         sp.setFitToWidth(true);
@@ -46,7 +45,6 @@ public class Slot {
                 /* Entsprechend für jede Waffe wird ein Eintrag in der Liste erstellt, die dem Spieler dann als Auswahl vorliegt, was er ausrüsten möchte.
                  * Des Weiteren existiert ein Knopf, der ein paar Informationen zu einem Item anzeigt. */
                 for (Weapon w : Inventory.getWeapons()) {
-
                     HBox hbox = new HBox();
                     Label name = new Label(w.getName());
                     Button details = new Button("Details");
@@ -75,7 +73,6 @@ public class Slot {
 
                                     /* Dem alten Pawn entrüsten */
                                     w.getOwner().removeWeapon(w);
-                                    //p.giveWeapon(reference, w, (byte) id);
                                     stage.close();
                                 } else if (res.equals("no")) {}
                             });
@@ -152,13 +149,11 @@ public class Slot {
             case "clothing":
 
                 if (Inventory.getArmor().isEmpty()) {
-
                     Tools.popup("Inventar", "Es wurden keine Kleidungsstücke im Inventar gefunden.", "Besuche den Shop, um Items zu kaufen!");
                     return;
                 }
 
                 for (Armor a : Inventory.getArmor()) {
-
                     /* Kurzer Check, dass auch nur Kleidungsstücke angezeigt werden, die auch an dem bestimmten Slot ausgerüstet werden können. */
                     if(!(a.getSlotType() == id)) {
                         continue;

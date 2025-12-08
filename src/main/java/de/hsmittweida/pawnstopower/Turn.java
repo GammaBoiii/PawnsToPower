@@ -9,6 +9,11 @@ public class Turn extends Thread {
     private Pawn pawn;
     private final Turn thread;
 
+    /**
+     * Konstruktor der Turn Klasse.
+     * Startet einen neuen thread.
+     * @param p
+     */
     public Turn(Pawn p) {
         this.pawn = p;
         thread = this;
@@ -16,11 +21,9 @@ public class Turn extends Thread {
     }
 
     /**
-     * Jeder Turn wird in run() in maximal 3 Phasen aufgeteilt:
-     * - Zug begonnen
-     * - Angriff oder Verteidigung; Bei Angriff wird dem Gegner schaden hinzugefügt, bei Verteidigung erhöht sich die
-     * Verteidigung des Pawns der gerade am Zug ist für die nächste Runde.
-     * - Zug abschließen
+     * Die Eigentliche Laufumgebung des Threads.
+     * Beinhaltet die Logik für Angriff und Verteidigung.
+     * Jeweilige Fallunterscheidung für Spieler- und Gegner-Züge
      */
     @Override
     public void run() {
@@ -28,7 +31,6 @@ public class Turn extends Thread {
         while (!Thread.currentThread().isInterrupted()) {
             /* Zug für den Gegner */
             if (!pawn.ownedByPlayer()) {
-                /* Zug begonnen */
                 Arena.disableActionButtons(true);
                 Arena.log("Der Gegner ist nun am Zug.");
                 waitFor(2500);
@@ -66,7 +68,6 @@ public class Turn extends Thread {
             }
             /* Zug für Spieler selbst */
             else {
-                /* Zug begonnen */
                 Arena.log("Du bist am Zug");
                 Arena.disableActionButtons(false);
                 String in = "";
@@ -93,24 +94,14 @@ public class Turn extends Thread {
                         break;
                 }
             }
-
-            /*
-            waitFor(250);
-            String in;
-            try {
-                 in = Arena.getBlockingQeue().take();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            System.out.println("aaaa");
-            System.out.println(in);
-*/
-
             pawn = Arena.getOther(pawn);
         }
         //System.out.println("Thread1 " + Thread.currentThread().getName() + " wurde beendet.");
     }
 
+    /**
+     * Beendet den Turn-Thread.
+     */
     public void kill() {
         System.out.println("Thread2 " + thread.getName() + " wurde beendet.");
         thread.interrupt();
@@ -119,7 +110,6 @@ public class Turn extends Thread {
     /**
      * Dient zum schnellen "warten" im Thread, da ansonsten jedesmal in run() die Exception mit berücksichtigt werden müsste,
      * oder der try-catch-Block die ganze Methode ausfüllen würde, was nicht gut aussieht.
-     *
      * @param ms Milisekunden, die gewartet werden
      * @throws InterruptedException InterruptedException
      */
@@ -131,10 +121,20 @@ public class Turn extends Thread {
         }
     }
 
+
+    /**
+     * Gibt den Thread als Objekt zurück
+     * @return {@code Thread}
+     */
     public Thread getThread() {
         return this.thread;
     }
 
+    /**
+     * Spielt während dem Angreifen einen zurälligen Angriffsound ab.
+     * Für ein mehr belebtes Gameplay.
+     * @return {@code String} mit dem Namen der Sounddatei.
+     */
     private String getRandomAtkSound() {
         String[] loc = {"sfx/atk1.wav","sfx/atk2.wav","sfx/atk3.wav","sfx/atk4.wav"};
         return loc[(int)(Math.random()*loc.length)];
