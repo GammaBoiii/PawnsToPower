@@ -26,10 +26,7 @@ public class Shop {
      * @return Pane, welches dann im {@link Game#drawSpace()}} angezeigt wird.
      */
     public static Pane Shop_view() {
-        due_amount = new SimpleIntegerProperty(0);
-        weapon_offer = new ArrayList<Weapon>();
-        armor_offer = new ArrayList<Armor>();
-        shopping_cart = new ArrayList<Item>();
+        initVars();
 
         // refreshShop(); //DEBUG
 
@@ -186,6 +183,10 @@ public class Shop {
      * Erneuert das Angebot im Shop.
      */
     public static void refreshShop() {
+        initVars();
+
+        weapon_offer.clear();
+        armor_offer.clear();
         for(int i = 0; i<12; i++) {
             weapon_offer.add(new Weapon());
             armor_offer.add(new Armor());
@@ -208,5 +209,15 @@ public class Shop {
             }
         }
         return false;
+    }
+
+    /**
+     * Initialisiert die Shopvariablen.
+     */
+    private static void initVars() {
+        if (due_amount == null) due_amount = new SimpleIntegerProperty(0);
+        if (weapon_offer == null) weapon_offer = new ArrayList<Weapon>();
+        if (armor_offer == null) armor_offer = new ArrayList<Armor>();
+        if (shopping_cart == null) shopping_cart = new ArrayList<Item>();
     }
 }

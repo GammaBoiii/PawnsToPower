@@ -6,6 +6,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+import java.util.Random;
+
 /**
  * Die ArenaWinScreen Klasse beinhaltet die Oberfläche, die angezeigt wird,
  * wenn der Kampf in der Arena vorrüber ist.
@@ -71,11 +73,32 @@ public class ArenaWinScreen {
         stats.getChildren().add(msg);
         pane.setCenter(stats);
 
+        Diary.writeDiaryEntry(generateArenaDiaryMsg(playerWins));
+
         Button backtomenu = new Button("Rückkehr");
         backtomenu.setOnAction(e -> {
             Game.drawSpace();
         });
         pane.setBottom(backtomenu);
         return pane;
+    }
+
+    /**
+     * Generiert ein Eintrag ins Tagebuch nach einem Arena-Kampf.
+     * @param won {@code true}, wenn der Spieler gewonnen hat.
+     * @return {@code String} mit der Nachricht.
+     */
+    public static String generateArenaDiaryMsg(boolean won) {
+        String[] msg = new String[3];
+        if(won) {
+            msg[0] = Arena.getCombatans()[0].getName() + " besiegt den Gegner.\n";
+            msg[1] = Arena.getCombatans()[1].getName() + " wurde von uns geschlagen.\n";
+            msg[2] = "Wir haben den Kampf mit " + Arena.getCombatans()[0].getName() + " an unserer Seite gewonnen.\n";
+        } else {
+            msg[0] = Arena.getCombatans()[0].getName() + " wurde vom Gegner besiegt.\n";
+            msg[1] = Arena.getCombatans()[1].getName() + " hat uns in der Arena geschlagen.\n";
+            msg[2] = "Wir haben den Kampf mit " + Arena.getCombatans()[0].getName() + " an unserer Seite nicht für uns entscheiden können. \n";
+        }
+        return msg[new Random().nextInt(msg.length)];
     }
 }

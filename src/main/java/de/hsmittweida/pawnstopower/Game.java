@@ -349,6 +349,8 @@ public class Game {
         Diary.newDay();
         diaryIndex = day.get();
 
+        Shop.refreshShop();
+
         /* Pawn Kämpfe zurücksetzen */
         for(Pawn p : Inventory.getPawns()) {
             p.setFoughtToday(false);

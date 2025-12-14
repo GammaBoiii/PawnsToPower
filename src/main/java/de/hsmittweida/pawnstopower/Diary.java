@@ -22,7 +22,7 @@ public class Diary {
      * Schreibt einen String in das Tagebuch.
      * @param s String, der im Tagebuch hinterlegt werden soll.
      */
-    private static void writeDiaryEntry(String s) {
+    public static void writeDiaryEntry(String s) {
         Text t = new Text(s + "\n");
         t.setStyle("-fx-font-size: 36px;");
         Game.getDiary().getChildren().add(t);
@@ -72,6 +72,8 @@ public class Diary {
      * Diese Methode wird immer ausgeführt, wenn das Spiel einen Tag vorranschreitet.
      */
     public static void newDay() {
+        /* Countervariable, die letztendlich prüfen soll, ob am Ende des Tages etwas passiert ist oder nicht. */
+        byte counter = 0;
         String msg = "Ein neuer Tag (" + Game.getDay() + ") beginnt.";
 
         /* Da der der Spieler quasi am ersten Tag (vor Spielbeginnn) sein Inventar gefüllt bekommt,
@@ -91,12 +93,14 @@ public class Diary {
             String m2 = "Wir haben am letzten Tag " + (oldMoney - Inventory.getMoney()) + " Gold verloren.\n\n";
 
             msg += Inventory.getMoney() > oldMoney ? m1 : m2;
+            counter++;
         }
 
         /* Neue Kämpfer dazugewonnen */
         if (Math.abs(Inventory.getPawnsNum().getValue() - oldPawnNum) == 1) {
             msg += "Ein neuer Krieger begleitet uns: \n\t";
             msg += Inventory.getPawns().get(Inventory.getPawns().size() - 1).getName() + ".\n";
+            counter++;
         } else if (Math.abs(Inventory.getPawnsNum().getValue() - oldPawnNum) == 2) {
             msg += "Zwei neue Krieger begleiten uns: \n\t";
             for (int i = 1; i <= (Inventory.getPawnsNum().getValue() - oldPawnNum); i++) {
@@ -105,6 +109,7 @@ public class Diary {
                 }
                 msg += Inventory.getPawns().get(Inventory.getPawns().size() - i).getName();
             }
+            counter++;
         } else if (Math.abs(Inventory.getPawnsNum().getValue() - oldPawnNum) > 2) {
             msg += (Inventory.getPawnsNum().getValue() - oldPawnNum) + " neue Krieger begleiten uns: \n\t";
             for (int i = 1; i <= (Inventory.getPawnsNum().getValue() - oldPawnNum); i++) {
@@ -115,12 +120,19 @@ public class Diary {
                 msg += Inventory.getPawns().get(Inventory.getPawns().size() - i).getName() + ", ";
 
             }
+            counter++;
         }
 
-        /* Reputation/Ehre gewonnen oder verloren*/
-        if (Math.abs(Inventory.getReputation().get() - oldReputation) != 0) {
-            String m1 = "Wir haben am letzten Tag " + (oldMoney - Inventory.getMoney()) + " Gold verloren.\n\n";
-            String m2 = "Wir haben am letzten Tag " + (oldMoney - Inventory.getMoney()) + " Gold verloren.\n\n";
+        /* Reputation/Ehre gewonnen oder verloren
+        * Erklärung der extra Überprüfungen:
+        *   day:        Geprüft werden soll erst nach dem ersten Tageswechsel, da sonst falsche Informationen
+        *               durch die ursprüngliche Initialisierung geprinted werden.
+        *   counter:    Es soll nicht diese Nachricht und die Nachricht des "Nichts-Tun's" (letztes if
+        *               dieser Methode) gleichzeitig im Tagebuch erscheinen, da es sonst nicht schön aussieht.
+         */
+        if (Math.abs(Inventory.getReputation().get() - oldReputation) != 0 && Game.getDay() != 2 && counter > 0) {
+            String m1 = "Wir haben am letzten Tag " + (Inventory.getReputation().get() - oldReputation) + " Reputation erhalten.\n\n";
+            String m2 = "Wir haben am letzten Tag " + (oldReputation - Inventory.getReputation().get()) + " Reputation verloren.\n\n";
 
             msg += Inventory.getMoney() > oldMoney ? m1 : m2;
         }
@@ -130,11 +142,8 @@ public class Diary {
         oldMoney = Inventory.getMoney();
         oldReputation = Inventory.getReputation().get();
 
-        /* Falls man Tage nur sinnlos überspringt, geht Reputation verloren.
-         * Der Ausdruck {@code msg.length < 30} ist nur eine Schätzung; in diesem Fall kam
-         * wahscheinlich nur die Nachricht, dass ein neuer Tag angebrochen ist,
-         * und nicht, dass irgendwas errungen wurde; ergo der Spieler hat nichts gemacht. */
-        if(msg.length() < 30) {
+        /* Falls man Tage nur sinnlos überspringt, geht Reputation verloren. */
+        if(counter <= 0) {
             int minusRep = (int) (Math.ceil(Inventory.getReputation().get() * -0.1));
             Inventory.addReputation(minusRep);
             msg += "Wir haben am letzten Tag nichts erreicht und daher " + Math.abs(minusRep) + " Reputation verloren.\n\n";
