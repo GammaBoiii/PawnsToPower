@@ -14,16 +14,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="changed style">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/clothing/eisen_brustplatte.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/clothing/eisen_helm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/clothing/leder_brustplatte.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/clothing/leder_helm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/clothing/stahl_brustplatte.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/clothing/stahl_helm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/clothing/stoff_brustplatte.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/clothing/stoff_helm.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/ArenaWinScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/ArenaWinScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Diary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Diary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Inspector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Inspector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="108" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -58,6 +67,10 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -79,6 +92,7 @@
     "Maven.PawnsToPower [install].executor": "Run",
     "Maven.PawnsToPower [package].executor": "Run",
     "Maven.PawnsToPower [verify].executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -88,7 +102,7 @@
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/johann/IdeaProjects/PawnsToPower/src/main/resources/de/hsmittweida/pawnstopower/image",
+    "last_opened_file_path": "/home/johann/IdeaProjects/PawnsToPower/src/main/resources/de/hsmittweida/pawnstopower/image/clothing",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -106,11 +120,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/clothing" />
       <recent name="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image" />
       <recent name="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/image/weapons" />
       <recent name="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/sound/sfx" />
       <recent name="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/fonts" />
-      <recent name="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/sound" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower" />
@@ -150,8 +164,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-cffe25b9f5b3-intellij.indexing.shared.core-IU-253.28294.334" />
-        <option value="bundled-js-predefined-d6986cc7102b-c7e53b3be11b-JavaScript-IU-253.28294.334" />
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.138" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.138" />
       </set>
     </attachedChunks>
   </component>
@@ -259,7 +273,8 @@
       <workItem from="1765019521136" duration="12021000" />
       <workItem from="1765044031145" duration="1729000" />
       <workItem from="1765202072205" duration="6866000" />
-      <workItem from="1765722819688" duration="4422000" />
+      <workItem from="1765722819688" duration="4594000" />
+      <workItem from="1767361288192" duration="2247000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />

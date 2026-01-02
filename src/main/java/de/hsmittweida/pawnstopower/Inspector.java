@@ -91,8 +91,8 @@ public class Inspector {
         btnHead.setOnAction(e -> new Slot( btnHead, p, "clothing", 0, "Kopfschutz"));
 
         /* Slot 1 */
-        AnchorPane.setLeftAnchor(btnTorso, 710.0);
-        AnchorPane.setRightAnchor(btnTorso, 710.0);
+        AnchorPane.setLeftAnchor(btnTorso, 690.0);
+        AnchorPane.setRightAnchor(btnTorso, 690.0);
         AnchorPane.setTopAnchor(btnTorso, 300.0);
         btnTorso.setPrefHeight(235);
         btnTorso.setPrefWidth(50);
@@ -174,7 +174,7 @@ public class Inspector {
     public static void setImage(Button ref, Armor.ArmorClass ac, byte slot) {
         String path = "";
         path = switch (slot) {
-            case 0 -> "haube.png";
+            case 0 -> "helm.png";
             case 1 -> "brustplatte.png";
             case 2 -> "beinschutz.png";
             case 3 -> "armschutz.png";
@@ -186,6 +186,10 @@ public class Inspector {
             case IRN -> "eisen_" + path;
             case STL -> "stahl_" + path;
         };
+
+        String location = Inspector.class.getResource("image/clothing/"+picName).toExternalForm();
+        ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: center; -fx-background-repeat:no-repeat; -fx-background-size: contain;");
+
     }
 
     /**
