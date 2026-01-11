@@ -1,5 +1,6 @@
 package de.hsmittweida.pawnstopower;
 
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
@@ -27,6 +28,12 @@ public class Inspector {
     private static Button btnLegs;
     private static Button btnLeft;
     private static Button btnRight;
+    private static StackPane headPane;
+    private static StackPane torsoPane;
+    private static StackPane armPane;
+    private static StackPane legPane;
+    private static StackPane paneRight;
+    private static StackPane paneLeft;
     private static Pawn pawn;
 
     /**
@@ -83,63 +90,138 @@ public class Inspector {
 
 
         /* Slot 0 - siehe Pawn.clothingSlotUsed */
+        headPane = new StackPane();
+        AnchorPane.setLeftAnchor(headPane, 710.0);
+        AnchorPane.setRightAnchor(headPane, 710.0);
+        AnchorPane.setTopAnchor(headPane, 190.0);
         AnchorPane.setLeftAnchor(btnHead, 710.0);
         AnchorPane.setRightAnchor(btnHead, 710.0);
         AnchorPane.setTopAnchor(btnHead, 190.0);
+        headPane.setPrefWidth(70);
+        headPane.setPrefHeight(90);
+        headPane.setMaxWidth(70);
+        headPane.setMaxHeight(90);
+        headPane.setMinWidth(70);
+        headPane.setMinHeight(90);
         btnHead.setPrefWidth(70);
         btnHead.setPrefHeight(90);
-        btnHead.setOnAction(e -> new Slot( btnHead, p, "clothing", 0, "Kopfschutz"));
+        btnHead.setMaxWidth(70);
+        btnHead.setMaxHeight(90);
+        btnHead.setMinWidth(70);
+        btnHead.setMinHeight(90);
+        btnHead.setOnAction(e -> new Slot(headPane, p, "clothing", 0, "Kopfschutz"));
+
 
         /* Slot 1 */
+        torsoPane = new StackPane();
+        AnchorPane.setLeftAnchor(torsoPane, 690.0);
+        AnchorPane.setRightAnchor(torsoPane, 690.0);
+        AnchorPane.setTopAnchor(torsoPane, 300.0);
         AnchorPane.setLeftAnchor(btnTorso, 690.0);
         AnchorPane.setRightAnchor(btnTorso, 690.0);
         AnchorPane.setTopAnchor(btnTorso, 300.0);
+        torsoPane.setPrefHeight(235);
+        torsoPane.setPrefWidth(50);
+        torsoPane.setMaxHeight(235);
+        torsoPane.setMaxWidth(50);
+        torsoPane.setMinHeight(235);
+        torsoPane.setMinWidth(50);
         btnTorso.setPrefHeight(235);
         btnTorso.setPrefWidth(50);
-        btnTorso.setOnAction(e -> new Slot( btnTorso, p, "clothing", 1, "Torsoschutz"));
+        btnTorso.setMaxHeight(235);
+        btnTorso.setMaxWidth(50);
+        btnTorso.setMinHeight(235);
+        btnTorso.setMinWidth(50);
+        btnTorso.setOnAction(e -> new Slot(torsoPane, p, "clothing", 1, "Torsoschutz"));
+        torsoPane.setId("torso-pane");
+
 
         /* Slot 2 */
+        armPane = new StackPane();
+        AnchorPane.setLeftAnchor(armPane, 655.0);
+        AnchorPane.setRightAnchor(armPane, 655.0);
+        AnchorPane.setTopAnchor(armPane, 300.0);
         AnchorPane.setLeftAnchor(btnArms, 655.0);
         AnchorPane.setRightAnchor(btnArms, 655.0);
         AnchorPane.setTopAnchor(btnArms, 300.0);
+        armPane.setPrefHeight(250);
+        armPane.setPrefWidth(150);
+        armPane.setMaxHeight(250);
+        armPane.setMaxWidth(150);
+        armPane.setMinHeight(250);
+        armPane.setMinWidth(150);
         btnArms.setPrefHeight(250);
         btnArms.setPrefWidth(150);
-        btnArms.setOnAction(e -> new Slot(btnArms, p, "clothing", 2, "Armschutz"));
+        btnArms.setMaxHeight(250);
+        btnArms.setMaxWidth(150);
+        btnArms.setMinHeight(250);
+        btnArms.setMinWidth(150);
+        btnArms.setOnAction(e -> new Slot(armPane, p, "clothing", 2, "Armschutz"));
+
 
         /* Slot 3 */
+        legPane = new StackPane();
+        AnchorPane.setRightAnchor(legPane, 710.0);
+        AnchorPane.setLeftAnchor(legPane, 710.0);
+        AnchorPane.setTopAnchor(legPane, 535.0);
         AnchorPane.setRightAnchor(btnLegs, 710.0);
         AnchorPane.setLeftAnchor(btnLegs, 710.0);
         AnchorPane.setTopAnchor(btnLegs, 535.0);
+        legPane.setPrefHeight(260);
+        legPane.setPrefWidth(50);
+        legPane.setMaxHeight(260);
+        legPane.setMaxWidth(50);
+        legPane.setMinHeight(260);
+        legPane.setMinWidth(50);
         btnLegs.setPrefHeight(260);
         btnLegs.setPrefWidth(50);
-        btnLegs.setOnAction(e -> new Slot(btnLegs, p, "clothing", 3, "Beinschutz"));
+        btnLegs.setMaxHeight(260);
+        btnLegs.setMaxWidth(50);
+        btnLegs.setMinHeight(260);
+        btnLegs.setMinWidth(50);
+        btnLegs.setOnAction(e -> new Slot(legPane, p, "clothing", 3, "Beinschutz"));
 
 
         /* Slot 0 - siehe Pawn.weaponSlotUsed */
+        paneRight = new StackPane();
+        AnchorPane.setRightAnchor(paneRight, 415.0);
+        AnchorPane.setTopAnchor(paneRight, 375.0);
+        paneRight.setPrefWidth(200);
+        paneRight.setPrefHeight(200);
         if(p.getWeapon((byte)0) != null) {
             System.out.println("weapon in rigght hand");
-            setImage(btnRight, p.getWeapon((byte)0).getWeaponClass());
+            setImage(paneRight, p.getWeapon((byte)0).getWeaponClass());
         }
         AnchorPane.setRightAnchor(btnRight, 415.0);
         AnchorPane.setTopAnchor(btnRight, 375.0);
         btnRight.setPrefWidth(200);
         btnRight.setPrefHeight(200);
-        btnRight.setOnAction(e -> new Slot(btnRight, p, "weapon", 0, "Rechte Handwaffe"));
+        btnRight.setOnAction(e -> new Slot(paneRight, p, "weapon", 0, "Rechte Handwaffe"));
 
         /* Slot 1 */
+        paneLeft = new StackPane();
+        AnchorPane.setLeftAnchor(paneLeft, 415.0);
+        AnchorPane.setTopAnchor(paneLeft, 375.0);
+        paneLeft.setPrefWidth(200);
+        paneLeft.setPrefHeight(200);
         if(p.getWeapon((byte)1) != null) {
             System.out.println("weapon in left thand");
-            setImage(btnLeft, p.getWeapon((byte)1).getWeaponClass());
+            setImage(paneLeft, p.getWeapon((byte)1).getWeaponClass());
         }
         AnchorPane.setLeftAnchor(btnLeft, 415.0);
         AnchorPane.setTopAnchor(btnLeft, 375.0);
         btnLeft.setPrefWidth(200);
         btnLeft.setPrefHeight(200);
-        btnLeft.setOnAction(e -> new Slot(btnLeft, p, "weapon", 1, "Linke Handwaffe"));
+        btnLeft.setOnAction(e -> new Slot(paneLeft, p, "weapon", 1, "Linke Handwaffe"));
 
-
-        anchorPane.getChildren().addAll(btnHead, btnArms, btnTorso, btnLegs, btnLeft, btnRight, stats);
-        refreshImages();
+        Button debug = new Button("Fix img");
+        AnchorPane.setBottomAnchor(debug, 10.0);
+        debug.setOnAction(e -> {refreshImages();});
+        anchorPane.getChildren().addAll(headPane, armPane, legPane, torsoPane, paneRight, paneLeft, btnHead, btnArms, btnTorso, btnLegs, btnLeft, btnRight, stats, debug);
+        Inspector.refreshImages();
+        Platform.runLater(() -> {
+            refreshImages();
+        });
         return background;
     }
 
@@ -149,7 +231,7 @@ public class Inspector {
      * @param ref Button, auf den das Bild gelegt werden soll.
      * @param wc Waffenklasse, die als Referenz für das richtige Bild dient.
      */
-    public static void setImage(Button ref, Weapon.WeaponClass wc) {
+    public static void setImage(StackPane ref, Weapon.WeaponClass wc) {
         String picName = switch (wc) {
             case AXT -> "AXT.png";
             case DOL -> "DOL.png";
@@ -161,7 +243,12 @@ public class Inspector {
             case SWT -> "SWT.png";
         };
         String location = Inspector.class.getResource("image/weapons/"+picName).toExternalForm();
-        ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: center; -fx-background-size: cover;");
+//        ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: center; -fx-background-size: cover;");
+        Image img = new Image(location);
+        ImageView iv = new ImageView(img);
+        iv.setFitWidth(ref.getWidth());
+        iv.setFitHeight(ref.getHeight());
+        ref.getChildren().add(iv);
     }
 
     /**
@@ -171,13 +258,13 @@ public class Inspector {
      * @param ac Rüstungsklasse, die zur Auswahl des richtigen Bildes dient.
      * @param slot Körperregion, an der das Rüstungsstück ausgerüstet werden soll.
      */
-    public static void setImage(Button ref, Armor.ArmorClass ac, byte slot) {
+    public static void setImage(StackPane ref, Armor.ArmorClass ac, byte slot) {
         String path = "";
         path = switch (slot) {
             case 0 -> "helm.png";
             case 1 -> "brustplatte.png";
-            case 2 -> "beinschutz.png";
-            case 3 -> "armschutz.png";
+            case 2 -> "armschutz.png";
+            case 3 -> "beinschutz.png";
             default -> "";
         };
         String picName = switch(ac) {
@@ -188,7 +275,34 @@ public class Inspector {
         };
 
         String location = Inspector.class.getResource("image/clothing/"+picName).toExternalForm();
-        ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: center; -fx-background-repeat:no-repeat; -fx-background-size: contain;");
+        Image img = new Image(location);
+        ImageView iv = new ImageView(img);
+
+        iv.fitWidthProperty().bind(ref.widthProperty());
+        iv.fitHeightProperty().bind(ref.heightProperty());
+
+        /* Je nach Rüstungsslot müssen die Bilder entsprechend gehandelt werden: */
+        if (path.equals("helm.png")) {
+//            ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: bottom; -fx-background-repeat:no-repeat; -fx-background-size: contain;");
+
+        } else if (path.equals("beinschutz.png")) {
+//            ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: bottom; -fx-background-repeat:no-repeat; -fx-background-size: contain;");
+//            iv.setScaleX(1.2);
+//            iv.setScaleY(1.05);
+        } else if (path.equals("armschutz.png")) {
+//            ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: bottom; -fx-background-repeat:no-repeat; -fx-background-size: contain;");
+        } else if (path.equals("brustplatte.png")) {
+//            ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: bottom; -fx-background-repeat:no-repeat; -fx-background-size: contain;");
+            iv.setScaleX(1.25);
+            iv.setScaleY(1.05);
+
+        }
+
+
+//        ref.setGraphic(iv);
+        ref.getChildren().add(iv);
+
+//        ref.setStyle("-fx-border-color: red; -fx-border-style: solid; -fx-border-width: 2px;");
 
     }
 
@@ -196,8 +310,21 @@ public class Inspector {
      * Entfernt ein Bild aus einem Knopf, wenn ein Item abgelegt wird.
      * @param ref Button, von dem das Bild entfernt werden soll.
      */
-    public static void clearImage(Button ref) {
+    public static void clearImage(StackPane ref) {
         ref.setStyle(("-fx-background-image: none"));
+        ref.getChildren().clear();
+    }
+
+    /**
+     * Entfernt alle Bilder von jedem Slot
+     */
+    public static void clearAllImages() {
+        headPane.getChildren().clear();
+        torsoPane.getChildren().clear();
+        legPane.getChildren().clear();
+        armPane.getChildren().clear();
+        paneRight.getChildren().clear();
+        paneLeft.getChildren().clear();
     }
 
     /**
@@ -260,37 +387,37 @@ public class Inspector {
      * richtig dargestellt werden.
      */
     public static void refreshImages() {
+        clearAllImages();
         if (pawn != null) {
             if(pawn.getWeapon((byte)0) == null) {
-                clearImage(btnRight);
+                clearImage(paneRight);
             } else {
-                setImage(btnRight, pawn.getWeapon((byte) 0).getWeaponClass());
+                setImage(paneRight, pawn.getWeapon((byte) 0).getWeaponClass());
             }
             if(pawn.getWeapon((byte)1) == null) {
-                clearImage(btnLeft);
+                clearImage(paneLeft);
             } else {
-                setImage(btnLeft, pawn.getWeapon((byte) 1).getWeaponClass());
+                setImage(paneLeft, pawn.getWeapon((byte) 1).getWeaponClass());
             }
-
             if(pawn.getArmor((byte)0) == null) {
-                clearImage(btnHead);
+                clearImage(headPane);
             } else {
-                setImage(btnHead, pawn.getArmor((byte) 0).getArmorClass(), (byte) 0);
+                setImage(headPane, pawn.getArmor((byte) 0).getArmorClass(), (byte) 0);
             }
             if(pawn.getArmor((byte)1) == null) {
-                clearImage(btnTorso);
+                clearImage(torsoPane);
             } else {
-                setImage(btnTorso, pawn.getArmor((byte) 1).getArmorClass(), (byte) 1);
+                setImage(torsoPane, pawn.getArmor((byte) 1).getArmorClass(), (byte) 1);
             }
             if(pawn.getArmor((byte)2) == null) {
-                clearImage(btnArms);
+                clearImage(armPane);
             } else {
-                setImage(btnArms, pawn.getArmor((byte) 2).getArmorClass(), (byte) 2);
+                setImage(armPane, pawn.getArmor((byte) 2).getArmorClass(), (byte) 2);
             }
             if(pawn.getArmor((byte)3) == null) {
-                clearImage(btnLegs);
+                clearImage(legPane);
             } else {
-                setImage(btnLegs, pawn.getArmor((byte) 3).getArmorClass(), (byte) 3);
+                setImage(legPane, pawn.getArmor((byte) 3).getArmorClass(), (byte) 3);
             }
         }
     }

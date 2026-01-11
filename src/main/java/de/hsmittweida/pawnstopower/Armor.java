@@ -35,7 +35,7 @@ public class Armor extends Item  {
         super(p);
         ac = getRandomArmorClass();
         setSlotType(slot);
-        super.setName();
+        super.setName(); // muss erneut aufgerufen werden, da super() beim Initialisieren den Slot noch nicht kennt!
     }
 
     /**
@@ -47,6 +47,17 @@ public class Armor extends Item  {
         ac = getRandomArmorClass();
         setSlotType(this.setRandomSlotType());
         super.setName(); // muss erneut aufgerufen werden, da super() beim Initialisieren den Slot noch nicht kennt!
+    }
+
+    /**
+     * Generiert eine Rüstung mit angegebener Rüstungsklasse ohne Besitzer und zufälliger Rüstungsklasse.
+     * @param slot Für welches Körperteil die Rüstung ist.
+     */
+    Armor(byte slot) {
+      super(null);
+      ac = getRandomArmorClass();
+      setSlotType(slot);
+      super.setName(); // muss erneut aufgerufen werden, da super() beim Initialisieren den Slot noch nicht kennt!
     }
 
     /**

@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -23,7 +24,7 @@ public class Slot {
      * @param type Waffe oder Kleidungsstück (Rüstung).
      * @param id Die ID des Slots, an dem die Ausrüstung ausgerüstet werden soll. Unterschieden wird bei den Slots gemäß {@code @param type}.
      */
-    Slot(Button reference, Pawn p, String type, int id, String title) {
+    Slot(StackPane reference, Pawn p, String type, int id, String title) {
         Stage stage = new Stage();
         ScrollPane sp = new ScrollPane();
         sp.setFitToWidth(true);
@@ -80,7 +81,6 @@ public class Slot {
                         } else {
                             equip.setText("Unequip");
                             equip.setOnAction(e -> {
-                                System.out.println("Unequip");
                                 w.getOwner().removeWeapon(w);
                                 Inspector.refreshImages();
                                 stage.close();
@@ -190,6 +190,7 @@ public class Slot {
                             equip.setText("Unequip");
                             equip.setOnAction(e -> {
                                 a.getOwner().removeArmor(a);
+                                Inspector.refreshImages();
                                 stage.close();
                             });
                         }

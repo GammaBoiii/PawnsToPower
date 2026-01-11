@@ -6,6 +6,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -93,7 +94,7 @@ public class Pawn implements Serializable {
      * @param slot Slot, an dem {@code armor} angelegt werden soll.
      * @return {@code true}, wenn die Rüstung erfolgreich ausgerüstet wurde, {@code false}, wenn der Slot bereits belegt ist
      */
-    public boolean giveArmor(Button ref, Armor armor, byte slot) {
+    public boolean giveArmor(StackPane ref, Armor armor, byte slot) {
         if (!clothingSlotUsed(slot)) {
             this.getArmors()[slot] = armor;
             Inspector.setImage(ref, armor.getArmorClass(), slot);
@@ -112,7 +113,7 @@ public class Pawn implements Serializable {
      * @param slot Der Waffenslot, an dem {@code weapon} ausgerüstet werden soll.
      * @return {@code true}, wenn die Waffe erfolgreich ausgerüstet wurde, {@code false}, wenn der Slot bereits belegt ist.
      */
-    public boolean giveWeapon(Button ref, Weapon weapon, byte slot) {
+    public boolean giveWeapon(StackPane ref, Weapon weapon, byte slot) {
         if (!weaponSlotUsed(slot)) {
             this.getWeapons()[slot] = weapon;
             Inspector.setImage(ref, weapon.getWeaponClass());

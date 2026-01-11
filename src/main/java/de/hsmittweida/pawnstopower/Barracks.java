@@ -59,6 +59,7 @@ public class Barracks {
 
             inspect.setOnAction(e -> {
                 Game.drawSpace(Inspector.Inspector_view(p));
+                Inspector.refreshImages();
             });
 
             list.getChildren().add(box);

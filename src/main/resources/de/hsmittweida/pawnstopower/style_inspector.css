@@ -16,21 +16,21 @@
     -fx-font-size: 22;
     -fx-font-weight: bold;
     -fx-padding: 2 3;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-    -fx-border-color: #555;
-    -fx-border-width: 2px;
+    /*-fx-border-radius: 5px;*/
+    /*-fx-background-radius: 5px;*/
+    /*-fx-border-color: #555;*/
+    /*-fx-border-width: 2px;*/
     -fx-text-alignment: center;
     -fx-font-family: "MedievalSharp";
 }
 .button:hover {
     -fx-background-color: #555;
-    -fx-border-color: #777;
+    -fx-border-color: rgba(14,14,14,0.25);
 }
 
 .button:pressed {
     -fx-background-color: #222;
-    -fx-border-color: #444;
+    -fx-border-color: rgba(7,7,7,0.25);
 }
 
 #skill-button {
@@ -48,12 +48,18 @@
 
 #slot-button {
     -fx-opacity: 1.0;
-    -fx-border-style: solid;
-    -fx-border-width: 2;
-    -fx-border-color: red;
+    /*-fx-border-style: solid;*/
+    /*-fx-border-width: 2;*/
+    /*-fx-border-color: red;*/
     -fx-background-color: rgba(255, 0, 0, 0.0);
     -fx-text-fill: rgba(0,0,0,0.0);
 
+}
+
+#torso-pane {
+    -fx-border-style: solid;
+    -fx-border-color: red;
+    -fx-border-width: 2;
 }
 
 /* #slot-button:hover {

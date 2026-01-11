@@ -64,7 +64,7 @@ public class Game {
         diary = new TextFlow();
         Inventory.setup();
         CreateWindow();
-        // Debug();
+        Debug();
 
         /* Musik */
         SoundManager mainmenutheme = new SoundManager("GameDefaultMusic_1.wav", "GameDefaultMusic_2.wav", "GameDefaultMusic_3.wav", "GameDefaultMusic_4.wav");
@@ -380,14 +380,28 @@ public class Game {
      * @deprecated
      */
     private static void Debug() {
-        // Inventory.getPawns().get(0).setLevel((byte) 10);
-        Inventory.getPawns().get(0).setLvl(10);
-        Inventory.getPawns().get(0).addSkillPoints(4);
+//        Inventory.getPawns().get(0).setLevel((byte) 10);
+//        Inventory.getPawns().get(0).setLvl(10);
+//        Inventory.getPawns().get(0).addSkillPoints(4);
 
         Inventory.addItem(new Weapon(Weapon.WeaponClass.AXT, null));
         Inventory.addItem(new Weapon(Weapon.WeaponClass.KTN, null));
         Inventory.addItem(new Armor());
         Inventory.addItem(new Armor());
+        Inventory.addItem(new Armor((byte)0));
+        Inventory.addItem(new Armor((byte)1));
+        Inventory.addItem(new Armor((byte)2));
+        Inventory.addItem(new Armor((byte)2));
+        Inventory.addItem(new Armor((byte)2));
+        Inventory.addItem(new Armor((byte)2));
+        Inventory.addItem(new Armor((byte)2));
+        Inventory.addItem(new Armor((byte)2));
+        Inventory.addItem(new Armor((byte)2));
+        Inventory.addItem(new Armor((byte)2));
+        Inventory.addItem(new Armor((byte)2));
+        Inventory.addItem(new Armor((byte)2));
+        Inventory.addItem(new Armor((byte)2));
+        Inventory.addItem(new Armor((byte)3));
     }
 
     /**
