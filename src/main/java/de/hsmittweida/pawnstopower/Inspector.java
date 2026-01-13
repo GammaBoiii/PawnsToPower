@@ -284,16 +284,18 @@ public class Inspector {
         /* Je nach Rüstungsslot müssen die Bilder entsprechend gehandelt werden: */
         if (path.equals("helm.png")) {
 //            ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: bottom; -fx-background-repeat:no-repeat; -fx-background-size: contain;");
-
+            iv.setScaleY(1.125);
         } else if (path.equals("beinschutz.png")) {
 //            ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: bottom; -fx-background-repeat:no-repeat; -fx-background-size: contain;");
-//            iv.setScaleX(1.2);
-//            iv.setScaleY(1.05);
+            iv.setScaleX(1.2);
+            iv.setScaleY(1.05);
         } else if (path.equals("armschutz.png")) {
 //            ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: bottom; -fx-background-repeat:no-repeat; -fx-background-size: contain;");
+            iv.setScaleX(1.15);
+            iv.setScaleY(1.05);
         } else if (path.equals("brustplatte.png")) {
 //            ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: bottom; -fx-background-repeat:no-repeat; -fx-background-size: contain;");
-            iv.setScaleX(1.25);
+            iv.setScaleX(1.325);
             iv.setScaleY(1.05);
 
         }
