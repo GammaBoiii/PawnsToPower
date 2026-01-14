@@ -97,17 +97,17 @@ public class Inspector {
         AnchorPane.setLeftAnchor(btnHead, 710.0);
         AnchorPane.setRightAnchor(btnHead, 710.0);
         AnchorPane.setTopAnchor(btnHead, 190.0);
-        headPane.setPrefWidth(70);
+        headPane.setPrefWidth(90);
         headPane.setPrefHeight(90);
-        headPane.setMaxWidth(70);
+        headPane.setMaxWidth(90);
         headPane.setMaxHeight(90);
-        headPane.setMinWidth(70);
+        headPane.setMinWidth(90);
         headPane.setMinHeight(90);
-        btnHead.setPrefWidth(70);
+        btnHead.setPrefWidth(90);
         btnHead.setPrefHeight(90);
-        btnHead.setMaxWidth(70);
+        btnHead.setMaxWidth(90);
         btnHead.setMaxHeight(90);
-        btnHead.setMinWidth(70);
+        btnHead.setMinWidth(90);
         btnHead.setMinHeight(90);
         btnHead.setOnAction(e -> new Slot(headPane, p, "clothing", 0, "Kopfschutz"));
 
@@ -140,10 +140,10 @@ public class Inspector {
         armPane = new StackPane();
         AnchorPane.setLeftAnchor(armPane, 655.0);
         AnchorPane.setRightAnchor(armPane, 655.0);
-        AnchorPane.setTopAnchor(armPane, 300.0);
+        AnchorPane.setTopAnchor(armPane, 310.0);
         AnchorPane.setLeftAnchor(btnArms, 655.0);
         AnchorPane.setRightAnchor(btnArms, 655.0);
-        AnchorPane.setTopAnchor(btnArms, 300.0);
+        AnchorPane.setTopAnchor(btnArms, 310.0);
         armPane.setPrefHeight(250);
         armPane.setPrefWidth(150);
         armPane.setMaxHeight(250);
@@ -184,34 +184,42 @@ public class Inspector {
 
         /* Slot 0 - siehe Pawn.weaponSlotUsed */
         paneRight = new StackPane();
-        AnchorPane.setRightAnchor(paneRight, 415.0);
-        AnchorPane.setTopAnchor(paneRight, 375.0);
-        paneRight.setPrefWidth(200);
-        paneRight.setPrefHeight(200);
+        AnchorPane.setRightAnchor(paneRight, 456.0);
+        AnchorPane.setTopAnchor(paneRight, 370.0);
+        paneRight.setPrefWidth(175);
+        paneRight.setPrefHeight(175);
+        paneRight.setMaxWidth(175);
+        paneRight.setMaxHeight(175);
+        paneRight.setMinWidth(175);
+        paneRight.setMinHeight(175);
         if(p.getWeapon((byte)0) != null) {
             System.out.println("weapon in rigght hand");
             setImage(paneRight, p.getWeapon((byte)0).getWeaponClass());
         }
-        AnchorPane.setRightAnchor(btnRight, 415.0);
-        AnchorPane.setTopAnchor(btnRight, 375.0);
-        btnRight.setPrefWidth(200);
-        btnRight.setPrefHeight(200);
+        AnchorPane.setRightAnchor(btnRight, 456.0);
+        AnchorPane.setTopAnchor(btnRight, 370.0);
+        btnRight.setPrefWidth(175);
+        btnRight.setPrefHeight(175);
         btnRight.setOnAction(e -> new Slot(paneRight, p, "weapon", 0, "Rechte Handwaffe"));
 
         /* Slot 1 */
         paneLeft = new StackPane();
-        AnchorPane.setLeftAnchor(paneLeft, 415.0);
-        AnchorPane.setTopAnchor(paneLeft, 375.0);
-        paneLeft.setPrefWidth(200);
-        paneLeft.setPrefHeight(200);
+        AnchorPane.setLeftAnchor(paneLeft, 456.0);
+        AnchorPane.setTopAnchor(paneLeft, 370.0);
+        paneLeft.setPrefWidth(175);
+        paneLeft.setPrefHeight(175);
+        paneLeft.setMaxWidth(175);
+        paneLeft.setMaxHeight(175);
+        paneLeft.setMinWidth(175);
+        paneLeft.setMinHeight(175);
         if(p.getWeapon((byte)1) != null) {
             System.out.println("weapon in left thand");
             setImage(paneLeft, p.getWeapon((byte)1).getWeaponClass());
         }
-        AnchorPane.setLeftAnchor(btnLeft, 415.0);
-        AnchorPane.setTopAnchor(btnLeft, 375.0);
-        btnLeft.setPrefWidth(200);
-        btnLeft.setPrefHeight(200);
+        AnchorPane.setLeftAnchor(btnLeft, 456.0);
+        AnchorPane.setTopAnchor(btnLeft, 370.0);
+        btnLeft.setPrefWidth(175);
+        btnLeft.setPrefHeight(175);
         btnLeft.setOnAction(e -> new Slot(paneLeft, p, "weapon", 1, "Linke Handwaffe"));
 
         Button debug = new Button("Fix img");
@@ -243,11 +251,12 @@ public class Inspector {
             case SWT -> "SWT.png";
         };
         String location = Inspector.class.getResource("image/weapons/"+picName).toExternalForm();
-//        ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: center; -fx-background-size: cover;");
         Image img = new Image(location);
         ImageView iv = new ImageView(img);
-        iv.setFitWidth(ref.getWidth());
-        iv.setFitHeight(ref.getHeight());
+
+        iv.fitWidthProperty().bind(ref.widthProperty());
+        iv.fitHeightProperty().bind(ref.heightProperty());
+
         ref.getChildren().add(iv);
     }
 
@@ -281,31 +290,21 @@ public class Inspector {
         iv.fitWidthProperty().bind(ref.widthProperty());
         iv.fitHeightProperty().bind(ref.heightProperty());
 
-        /* Je nach Rüstungsslot müssen die Bilder entsprechend gehandelt werden: */
+        /* Je nach Rüstungsslot müssen die Bilder entsprechend skaliert werden: */
         if (path.equals("helm.png")) {
-//            ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: bottom; -fx-background-repeat:no-repeat; -fx-background-size: contain;");
             iv.setScaleY(1.125);
         } else if (path.equals("beinschutz.png")) {
-//            ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: bottom; -fx-background-repeat:no-repeat; -fx-background-size: contain;");
-            iv.setScaleX(1.2);
-            iv.setScaleY(1.05);
+            iv.setScaleX(1.3);
+            iv.setScaleY(1.166);
         } else if (path.equals("armschutz.png")) {
-//            ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: bottom; -fx-background-repeat:no-repeat; -fx-background-size: contain;");
             iv.setScaleX(1.15);
-            iv.setScaleY(1.05);
+            iv.setScaleY(1.15);
         } else if (path.equals("brustplatte.png")) {
-//            ref.setStyle("-fx-background-image: url('" + location + "'); -fx-background-position: bottom; -fx-background-repeat:no-repeat; -fx-background-size: contain;");
             iv.setScaleX(1.325);
             iv.setScaleY(1.05);
-
         }
 
-
-//        ref.setGraphic(iv);
         ref.getChildren().add(iv);
-
-//        ref.setStyle("-fx-border-color: red; -fx-border-style: solid; -fx-border-width: 2px;");
-
     }
 
     /**
