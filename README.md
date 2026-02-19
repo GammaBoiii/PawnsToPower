@@ -1,6 +1,6 @@
-#Pawns to Power
+# Pawns to Power
 
-##Ein JavaFX-Projekt
+## Ein JavaFX-Projekt
 
 Dieses Projekt entstand im Rahmen des Java Programmierbelegs an der Hochschule Mittweida
 
