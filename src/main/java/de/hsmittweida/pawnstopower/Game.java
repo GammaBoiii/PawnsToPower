@@ -64,7 +64,6 @@ public class Game {
         diary = new TextFlow();
         Inventory.setup();
         CreateWindow();
-        Debug();
 
         /* Musik */
         SoundManager mainmenutheme = new SoundManager("GameDefaultMusic_1.wav", "GameDefaultMusic_2.wav", "GameDefaultMusic_3.wav", "GameDefaultMusic_4.wav");

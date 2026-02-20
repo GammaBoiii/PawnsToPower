@@ -25,7 +25,7 @@ public class QuickMenu {
         Stage stage = new Stage();
         VBox box = new VBox();
         box.setId("quickmenubox");
-        Scene s = new Scene(box, 500,450);
+        Scene s = new Scene(box, 500,550);
         Tools.addStylesheet(s, "style_default.css");
 
         /* Vollbild toggle Button */
@@ -97,9 +97,8 @@ public class QuickMenu {
         load.getChildren().addAll(load_label, load_pathinput, load_button);
 
         /* Cheat Aktivierung */
-        VBox cheat = new VBox();
-        Button cheat_button = new Button("Cheat");
-        cheat_button.setOnAction(e -> {
+        Button cheat = new Button("Cheat");
+        cheat.setOnAction(e -> {
             String in = Tools.inputPopup("Cheat-Aktivierung!", "Top SECRET Passwort erforderlich!", "Passwort eingeben:");
             if(in != null && in.equals("helloworld")) {
                 Tools.popup("Erfolgreich.", "Passwort erraten!", "Cheat aktiviert.");
@@ -116,9 +115,11 @@ public class QuickMenu {
                 Tools.popup("Fehler.", "Passwort falsch!", ":(");
             }
         });
-        cheat.getChildren().addAll(cheat_button);
 
-        box.getChildren().addAll(new VBox(),fullscreen, save, load, cheat_button,new VBox());
+        Button quit = new Button("Spiel Beenden");
+        quit.setOnAction(e -> {System.exit(0);});
+
+        box.getChildren().addAll(new VBox(),fullscreen, save, load, cheat, quit, new VBox());
 
         for(Node n: box.getChildren()) {
             VBox.setVgrow(n, Priority.ALWAYS);
