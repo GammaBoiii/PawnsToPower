@@ -22,7 +22,7 @@ public class SkillInspector {
 
     /**
      * Konstruktor der SkillInspector Klasse.
-     *
+     * Erzeugt gleichzeitig das Popup, indem neue Skilpunkte verwiesen werden können.
      * @param pawn Pawn, dessen Skills angezeigt werden sollen.
      */
     public SkillInspector(Pawn pawn) {

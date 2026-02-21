@@ -12,12 +12,30 @@ import java.io.Serializable;
  * Skill Class, die das Fundament für das Skillbasierende Kämpfen bereitstellt.
  */
 public class Skill implements Serializable {
+    /**
+     * Id des Skills als {@code String}
+     */
     private final String id;
+    /**
+     * Name des Skills
+     */
     private final String name;
+    /**
+     * Level des Skills
+     */
     private byte level;
+    /**
+     * Basiswert des Skills. (StarterLevel)
+     */
     private int baseVal; //transient final IntegerProperty baseVal;
+    /**
+     * Multiplikator auf den Skillwert.
+     */
     private double multiplier;
-    Pawn pawn;
+    /**
+     * Pawn, dem das Skill zugeordnet ist.
+     */
+    private Pawn pawn;
 
     /**
      * Konstruktor der Skill Klasse.
@@ -38,7 +56,7 @@ public class Skill implements Serializable {
 
     /**
      * Berechnet den Wert des Skills anhand aller Modifikatoren.
-     * @return
+     * @return {@code double}
      */
     public double getSkillValue() {
         double bV = baseVal;//.get();
@@ -56,16 +74,16 @@ public class Skill implements Serializable {
     }
 
     /**
-     * Gibt den Wert des Skills basierend auf dessen Level zurück
-     * @return Skilllevel-Faktor
+     * Gibt den Wert des Skills basierend auf dessen Level zurück.
+     * @return {@code double}
      */
     private double getFactor() {
         return 1.0 + (this.level * 0.05);
     }
 
     /**
-     *
-     * @return {@code int} - Level des Skills.
+     * Gibt den Level des Skills zurück.
+     * @return {@code int}
      */
     public int getSkillLevel() {
         return this.level;
@@ -79,14 +97,16 @@ public class Skill implements Serializable {
     }
 
     /**
-     * @return {@code String} - ID des Skills.
+     * Gibt die Id des Skills zurück.
+     * @return {@code String}
      */
     public String getId() {
         return this.id;
     }
 
     /**
-     * @return {@code String} - Name des Skills.
+     * Gibt den Namen des Skill zurück.
+     * @return {@code String}
      */
     public String getName() {
         return name;

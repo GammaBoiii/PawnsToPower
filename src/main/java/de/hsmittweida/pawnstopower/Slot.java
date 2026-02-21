@@ -55,6 +55,7 @@ public class Slot {
                     /* Falls das Item bereits ausgerüstet ist, wird ein Hinweis ausgegeben, dass der Pawn, der das Item ausgerüstet hat, nicht mehr besitzen wird.
                      * Der Hinweis erfolgt nur, wenn es sich bei dem aktuellen Pawn nicht um den handelt, der das Item ausgerüstet hat! */
                     if (w.isEquipped()) {
+                        /* Pawn ist nicht Besitzer */
                         if (p != w.getOwner()) {
                             System.out.println("!!!" + w.getOwner().getName());
                             System.out.println(w.getOwner() +" .. "+ p);
@@ -77,7 +78,7 @@ public class Slot {
                                     stage.close();
                                 } else if (res.equals("no")) {}
                             });
-
+                        /* Pawn ist Besitzer */
                         } else {
                             equip.setText("Unequip");
                             equip.setOnAction(e -> {
@@ -86,6 +87,7 @@ public class Slot {
                                 stage.close();
                             });
                         }
+                    /* Waffe noch nicht ausgerüstet */
                     } else {
                         equip.setOnAction(e -> {
                             /* Prüfen, ob bereits ein Zweihänder ausgerüstet ist. */
@@ -168,6 +170,7 @@ public class Slot {
                     /* Falls das Item bereits ausgerüstet ist, wird ein Hinweis ausgegeben, dass der Pawn, der das Item ausgerüstet hat, nicht mehr besitzen wird.
                      * Der Hinweis erfolgt nur, wenn es sich bei dem aktuellen Pawn nicht um den handelt, der das Item ausgerüstet hat! */
                     if (a.isEquipped()) {
+                        /* Pawn ist nicht Besitzer */
                         if (p != a.getOwner()) {
                             equip.setOnAction(e -> {
                                 String res = Tools.confirmPopup("Item bereits ausgerüstet.", "Dieses Item ist bereits bei " + a.getOwner().getName() + " ausgerüstet.", "Möchtest du es bei dem aktuellen Pawn ausrüsten?");
@@ -185,7 +188,7 @@ public class Slot {
                                     stage.close();
                                 } else if (res.equals("no")) {}
                             });
-
+                        /* Pawn ist Besitzer */
                         } else {
                             equip.setText("Unequip");
                             equip.setOnAction(e -> {
@@ -194,6 +197,7 @@ public class Slot {
                                 stage.close();
                             });
                         }
+                    /* Armor noch nicht ausgerüstet */
                     } else {
                         equip.setOnAction(e -> {
                             if(p.getArmor((byte)id) != null) {
