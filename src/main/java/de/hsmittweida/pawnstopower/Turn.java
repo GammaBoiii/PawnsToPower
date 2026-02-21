@@ -3,7 +3,8 @@ package de.hsmittweida.pawnstopower;
 import javafx.application.Platform;
 
 /**
- * Diese Klasse dient der Ausführung eines Zuges in der Arena
+ * Diese Klasse dient der Ausführung eines Zuges in der Arena.
+ * Beinhaltet extra Thread.
  */
 public class Turn extends Thread {
     private Pawn pawn;
@@ -29,6 +30,7 @@ public class Turn extends Thread {
     public void run() {
         System.out.println("Thread1 " + Thread.currentThread().getName() + " wurde gestartet.");
         while (!Thread.currentThread().isInterrupted()) {
+
             /* Zug für den Gegner */
             if (!pawn.ownedByPlayer()) {
                 Arena.disableActionButtons(true);
@@ -66,6 +68,7 @@ public class Turn extends Thread {
                     waitFor(3500);
                 }
             }
+
             /* Zug für Spieler selbst */
             else {
                 Arena.log("Du bist am Zug");

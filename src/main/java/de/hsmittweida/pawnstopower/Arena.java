@@ -456,7 +456,7 @@ public class Arena {
 
     /**
      * Logt einen Text mit einem CSS Style in den Log der Arena.
-     * Weitere Erklärung zur Methode sind in {@code Arena.log(String text)} zu finden
+     * Weitere Erklärung zur Methode sind in {@link Arena#log(String text)} zu finden
      * @param text Der Text, der im Arena Log ausgegeben werden soll.
      * @param style Der CSS Style, der auf den {@code text} angewendet werden soll.
      */

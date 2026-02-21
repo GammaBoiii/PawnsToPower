@@ -36,14 +36,19 @@ public class Tools {
 
     /**
      * Gibt die Auflösung des Bildschirms zurück.
-     * @return {@code HashMap<Character, Integer>} Map, die die Höhe und Breite des Bildschirms
-     * beinhaltet.
+     * <br>
+     * {@code HashMap<Character, Integer>} enthält:
+     * <ul>
+     *     <li> 'w' ~ width </li>
+     *     <li> 'h' ~ height </li>
+     * </ul>
+     * @return {@code HashMap<Character, Integer>}
      */
     public static HashMap<Character, Integer> getScreenSize() {
         HashMap<Character, Integer> dimensions = new HashMap<Character, Integer>();
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
 
         /* Hole die Bildschirmgröße */
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
         int screenWidth = toolkit.getScreenSize().width;
         int screenHeight = toolkit.getScreenSize().height;
         dimensions.put('h', screenHeight);
@@ -90,15 +95,6 @@ public class Tools {
                 }
             }
         });
-
-      /*  stage.getScene().setOnDragDetected(e -> {
-            System.out.println(e.toString());
-        });
-        stage.focusedProperty().addListener((a, b, c) -> {
-            if (!c) { // c → boolean, ob das Fenster nun fokussiert ist oder nicht
-				stage.close();
-            }
-        });*/
     }
 
     /**
@@ -257,7 +253,8 @@ public class Tools {
     /**
      * Pausiert den Thread des Spiels.
      * @param time in ms, die der Haupt-Thread des Spiels pausiert werden soll.
-     * @deprecated, aus offensichtlichen Gründen...
+     * @deprecated, aus offensichtlichen Gründen... (blockiert das ganze Spiel,
+     * bleibt hier nur als Museums-Stück stehen)
      */
     public static void pauseGame(long time) {
         try {
@@ -271,6 +268,7 @@ public class Tools {
      * Diente zum Debuggen und zum Finden bestimmter Koordinaten auf einem Node.
      * Vereinfachte die Positionierung von UI-Elementen mit Platzierung durch Koordinaten.
      * @param node Node, von dem die Koordinaten ausgelesen werden sollen.
+     * @deprecated, da das Programm soweit abgabefertig ist.
      */
     public static void getMouseClickedPosOnNode(Node node) {
         node.setOnMouseClicked(event -> {

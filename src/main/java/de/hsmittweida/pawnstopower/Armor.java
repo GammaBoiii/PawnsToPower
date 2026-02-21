@@ -30,7 +30,7 @@ public class Armor extends Item  {
 
     /**
      * Erstellt ein neues Armor Objekt mit vorgegebener Armor Klasse und Slot.
-     * @param cls Rüstungsklasse, also welches Material (siehe enum {@code ArmorClass})
+     * @param cls Rüstungsklasse, also welches Material (siehe {@link ArmorClass})
      * @param Slot Für welches Körperteil die Rüstung ist.
      * @param p Pawn, der direkt als Besitzer gesetzt werden soll.
      */

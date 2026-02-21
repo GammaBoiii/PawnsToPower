@@ -102,7 +102,7 @@ public class Inspector {
         navButtons.setId("nav-box");
 
         AnchorPane anchorPane = new AnchorPane();
-        Tools.getMouseClickedPosOnNode(anchorPane);
+        // Tools.getMouseClickedPosOnNode(anchorPane); /* deprecated */
         background.getChildren().addAll(navButtons, anchorPane);
         anchorPane.setId("anchorPane");
         AnchorPane.setTopAnchor(anchorPane, 30.0);

@@ -42,7 +42,7 @@ public class Inventory implements Serializable {
     private static boolean initialized = false;
 
     /**
-     * Die {@code setup()} Methode wird zu Beginn eines neuen Spieles aufgerufen und
+     * Diese Methode wird zu Beginn eines neuen Spieles aufgerufen und
      * initialisiert das Inventar.
      */
     public static void setup() {

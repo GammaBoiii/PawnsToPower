@@ -11,14 +11,25 @@ import java.util.ArrayList;
  * Hier werden die Sounds registriert und verwaltet.
  */
 public class SoundManager {
-
+    /**
+     * Der MediaPlayer, der den Sound wiedergibt.
+     */
     private MediaPlayer mp;
+    /**
+     * Index eines Songs aus einer Playlist, der gerade abgespielt wird
+     * @see SoundManager#playCurrentSong()
+     */
     private int index = 0;
+    /**
+     * Playlist, die mehrere Lieder beinhaltet, die alle hintereinander automatisch abgespielt werrden
+     * sollen.
+     * @see SoundManager#playCurrentSong()
+     */
     ArrayList<String> playlist;
 
     /**
      * Registriert einen Sound aus einem Namen und spielt diesen ab.
-     * Gut nutzbar für einzelne, kurze Sounds.
+     * Gut nutzbar für einzelne, kurze Sounds/Soundeffekte.
      * @param name Name der Sounddatei.
      */
     SoundManager(String name) {
@@ -31,7 +42,6 @@ public class SoundManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -42,15 +52,16 @@ public class SoundManager {
      */
     SoundManager(String... name) {
         playlist = new ArrayList<String>();
+
         for (String s : name) {
             playlist.add(this.getClass().getResource("sound/" + s).toExternalForm());
         }
         playCurrentSong();
-
     }
 
     /**
-     * @return {@coode MediaPlayer} MediaPlayer, der von einem Sound verwendet wird.
+     * Gibt den MediaPlayer zurück, der von einem Sound verwendet wird.
+     * @return {@coode MediaPlayer}
      */
     public MediaPlayer getMediaPlayer() {
         return mp;
@@ -59,7 +70,7 @@ public class SoundManager {
     /**
      * Hilft beim Abspielen eines Songs aus einer Playlist. Nach jedem Ende eines Tracks wird automatisch der nächste ausgewählt.
      * Ist die Liste einmal durchgespielt, fangen die Tracks wieder von vorne an.
-     * Danke hierbei an den Java Garbage-Collector.
+     * Danke hierbei auch an den Java Garbage-Collector, der nach jedem Song automatisch aufräumt.
      */
     private void playCurrentSong() {
         String currentSong = playlist.get(index);
@@ -78,9 +89,10 @@ public class SoundManager {
     }
 
     /**
-     * Erstellt den eigentlichen MediaPlayer für eine Sounddatei.
+     * Erstellt den eigentlichen MediaPlayer für eine Sounddatei. <br>
+     * Gibt den MediaPlayer für einen Sound zurück.
      * @param f Pfad zur Datei.
-     * @return {@code MediaPlayer} MediaPlayer, der für eine Datei erstellt wurde.
+     * @return {@code MediaPlayer}
      */
     private MediaPlayer createSound(String f) {
         return new MediaPlayer(new Media(f));

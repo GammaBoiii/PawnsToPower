@@ -80,7 +80,7 @@ public class Item implements Serializable {
     /**
      * Entfernt ein Item von einem Kämpfer.
      * <br>
-     * Sollte nur mit der {@code Pawn.removeArmor() / Pawn.removeWeapon} verwendet werden,
+     * Sollte nur mit der {@link Pawn#removeArmor(Armor)} / {@link Pawn#removeWeapon(Weapon)} verwendet werden,
      * da hier die Itemreferenz beim Pawn nicht entfernt wird.
      */
     protected void unequip() {

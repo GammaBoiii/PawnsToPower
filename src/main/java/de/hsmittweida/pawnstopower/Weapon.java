@@ -1,5 +1,7 @@
 package de.hsmittweida.pawnstopower;
 
+import javafx.scene.layout.StackPane;
+
 import java.util.ArrayList;
 import java.util.Random;
 /**
@@ -7,8 +9,18 @@ import java.util.Random;
  * @see Item#getItemType()
  */
 public class Weapon extends Item {
+    /**
+     * Waffenklasse
+     */
     private final WeaponClass wc;
+    /**
+     * Modifier für die Waffe
+     */
     private final ArrayList<Double> damageModifier;
+    /**
+     * Ist Waffe Zweihänder?
+     * {@code true}, wenn Waffe Zweihänder ist.
+     */
     private boolean twoHanded;
 
     /**
@@ -45,21 +57,24 @@ public class Weapon extends Item {
     }
 
     /**
-     * @return {@code true}, wenn Waffe ein Zweihänder ist und somit zwei Waffenplätze belegt.
+     * Prüft, ob Waff eine Zweihänder ist, und entsprechend zwei Waffenplätze belegt
+     * @return {@code true}, wenn Waffe ein Zweihänder ist.
      */
     public boolean isTwoHanded() {
         return wc.isTwoHanded();
     }
 
     /**
-     * @return {@code WeaponClass}, also die Art der Waffe.
+     * Gibt die Klasse/Art der Waffe zurück.
+     * @return {@code WeaponClass}
      */
     public WeaponClass getWeaponClass() {
         return this.wc;
     }
 
     /**
-     * @return Liste der Damage-Modifiers.
+     * Gibt die Damage-Modifier der Waffe zurück.
+     * @return {@code ArrayList<Double>}
      */
     private ArrayList<Double> getDamageModifier() {
         return this.damageModifier;
@@ -90,8 +105,8 @@ public class Weapon extends Item {
     }
 
     /**
-     * Berechnet den gesamten Schaden einer Waffe, inkl. der Modifier.
-     * @return Totalen Schaden der Waffe.
+     * Berechnet den gesamten Schaden einer Waffe, inkl. der Modifier, und gibt diesen zurück.
+     * @return {@code double}
      */
     public double getTotalDamage() {
         double damage = wc.baseDamage;
@@ -103,20 +118,55 @@ public class Weapon extends Item {
 
     /**
      * Beinhaltet die Klasse der Waffe.
-     * <small><br><br>Wenn hier etwas geänderd wird, dann auch in {@code Inspector.setImage()} nachtragen!
+     * <small><br><br>Wenn hier etwas geänderd wird, dann auch in {@link Inspector#setImage(StackPane, WeaponClass)} nachtragen!
      */
     public enum WeaponClass {
-        SWT(80, 8.0), //Schwert
-        KTN(110, 11.0), //Katana
-        LNS(120, 12.0), //Langschwert
-        SBL(90, 9.0), //Säbel
-        DOL(35, 3.5), //Dolch
-        SPR(95, 9.5), //Speer
-        HMR(130, 13.0), //Hammer
-        AXT(100, 10.0);//Axt
+        /**
+         * Schwert-Klasse
+         */
+        SWT(80, 8.0),
+        /**
+         * Katana-Klasse
+         */
+        KTN(110, 11.0),
+        /**
+         * Langschwert-Klasse
+         */
+        LNS(120, 12.0),
+        /**
+         * Säbel-Klasse
+         */
+        SBL(90, 9.0),
+        /**
+         * Dolch-Klasse
+         */
+        DOL(35, 3.5),
+        /**
+         * Speer-Klasse
+         */
+        SPR(95, 9.5),
+        /**
+         * Hammer-Klasse
+         */
+        HMR(130, 13.0),
+        /**
+         * Axt-Klasse
+         */
+        AXT(100, 10.0);
 
+        /**
+         * Basispreis der Waffe
+         */
         public int basePrice;
+        /**
+         * Basisschaden der Waffe
+         */
         public double baseDamage;
+
+        /**
+         * Prüft. ob die Waffe ein Zweihänder ist.
+         * @return {@code true}, wenn die Waffe ein Zweihänder ist.
+         */
         public boolean isTwoHanded() {
             return this == LNS || this == KTN;
         }
@@ -133,7 +183,8 @@ public class Weapon extends Item {
     }
 
     /**
-     * @return Eine zufällige Waffenklasse.
+     * Gibt eine zufällige Waffenklase zurück
+     * @return {@code WeaponClass}
      */
     private WeaponClass getRandomWeaponClass() {
         Random rnd = new Random();
@@ -141,7 +192,8 @@ public class Weapon extends Item {
     }
 
     /**
-     * @return Den Item-Typ <strong><em>Weapon.
+     * Gibt den Item Typ zurück.
+     * @return {@code String} ~ "Weapon"
      */
     public String getItemType() {
         return "Weapon";

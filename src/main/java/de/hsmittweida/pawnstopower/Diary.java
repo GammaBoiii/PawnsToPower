@@ -34,7 +34,7 @@ public class Diary {
      * siegreich war oder nicht, gibt es einen anderen, zufälligen Text.
      * @param won {@code true}, wenn der Spieler den Arena-Kampf gewonnen hat.
      * @param params Parameter für den Text
-     * @deprecated Ersetzt durch {@code ArenaWinScreen.generateArenaDiaryMsg(boolean won)}. Weiterhin
+     * @deprecated Ersetzt durch {@link ArenaWinScreen#generateArenaDiaryMsg(boolean)}. Weiterhin
      *              enthalten für Erweiterungszwecke.
      * @see ArenaWinScreen#generateArenaDiaryMsg(boolean)
      */
