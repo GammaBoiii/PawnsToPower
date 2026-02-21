@@ -22,24 +22,64 @@ import java.awt.*;
  * Der Spieler erhält eine Übersicht über Ausrüstung, Name, Level, Erfahrungspunkte und Skills.
  */
 public class Inspector {
+    /**
+     * Referenzknopf für Kopfausrüstung
+     */
     private static Button btnHead;
+    /**
+     * Referenzknopf für Torsoausrüstung
+     */
     private static Button btnTorso;
+    /**
+     * Referenzknopf für Armausrüstung
+     */
     private static Button btnArms;
+    /**
+     * Referenzknopf für Beinausrüstung
+     */
     private static Button btnLegs;
+    /**
+     * Referenzknopf für den Linken Arm (Waffen)
+     */
     private static Button btnLeft;
+    /**
+     * Referenzknopf für den Rechten Arm (Waffen)
+     */
     private static Button btnRight;
+    /**
+     * Pane für den Kopf
+     */
     private static StackPane headPane;
+    /**
+     * Pane für den Torso
+     */
     private static StackPane torsoPane;
+    /**
+     * Pane für die Arme
+     */
     private static StackPane armPane;
+    /**
+     * Pane für die Beine
+     */
     private static StackPane legPane;
+    /**
+     * Pane für den rechten Arm
+     */
     private static StackPane paneRight;
+    /**
+     * Pane für den linken Arm
+     */
     private static StackPane paneLeft;
+    /**
+     * Referenzvariable für den {@code Pawn}, der gerade inspiziert wird.
+     */
     private static Pawn pawn;
 
     /**
      * Die Anzeige, die einen Kämpfer detailliert anzeigt.
+     * Gibt das Pane zurück, welches dann in {@code Game.drawSpace()} angezeigt wird.
      * @param p Pawn, der inspiziert werden soll.
-     * @return Pane, welches dann in {@code Game.drawSpace()} angezeigt wird.
+     * @return {@code Pane}
      */
     public static Pane Inspector_view(Pawn p) {
         pawn = p;
@@ -234,9 +274,9 @@ public class Inspector {
     }
 
     /**
-     * Setzt ein Bild auf einen Knopf. Die Knöpfe sind hier die Körperregionen des Kämpfers.
+     * Setzt ein Bild auf ein Stackpane. Die StackPanes sind hier die Körperregionen des Kämpfers.
      * Dadurch wird mehr Interaktivität mit dem Kämpfer geboten.
-     * @param ref Button, auf den das Bild gelegt werden soll.
+     * @param ref StackPane, auf den das Bild gelegt werden soll.
      * @param wc Waffenklasse, die als Referenz für das richtige Bild dient.
      */
     public static void setImage(StackPane ref, Weapon.WeaponClass wc) {
@@ -261,9 +301,9 @@ public class Inspector {
     }
 
     /**
-     * Setzt ein Bild auf einen Knopf. Die Knöpfe sind hier die Körperregionen des Kämpfers.
+     * Setzt ein Bild auf einen StackPane. Die StackPanes sind hier die Körperregionen des Kämpfers.
      * Dadurch wird mehr Interaktivität mit dem Kämpfer geboten.
-     * @param ref Button, auf den das Bild gelegt werden soll.
+     * @param ref StackPane, auf den das Bild gelegt werden soll.
      * @param ac Rüstungsklasse, die zur Auswahl des richtigen Bildes dient.
      * @param slot Körperregion, an der das Rüstungsstück ausgerüstet werden soll.
      */
@@ -308,7 +348,7 @@ public class Inspector {
     }
 
     /**
-     * Entfernt ein Bild aus einem Knopf, wenn ein Item abgelegt wird.
+     * Entfernt ein Bild aus einem StackPane, wenn ein Item abgelegt wird.
      * @param ref Button, von dem das Bild entfernt werden soll.
      */
     public static void clearImage(StackPane ref) {
@@ -331,7 +371,8 @@ public class Inspector {
     /**
      * Erstellt in dem Inspector ein kleines Übersichtsfenster zu dem ausgewählten Kämpfer.
      * Abzulesen sind Level, Name und ein weitere Button für das SkillMenu.
-     * @return VBox, welche oben links im Inspector dargestellt wird.
+     * Gibt eine VBox zurück, welche oben Links im Inspector dargestellt wird.
+     * @return {@code VBox} mit den Stats
      */
     private static VBox createStats() {
         VBox box = new VBox();

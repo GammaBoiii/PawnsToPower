@@ -12,12 +12,33 @@ import java.util.ArrayList;
  * Dazu zählen Kämpfer, Waffen, Kleidung und sonstige Gegenstände
  */
 public class Inventory implements Serializable {
+    /**
+     * ArrayList für die Waffen
+     */
     private static ArrayList<Weapon> weapons;
+    /**
+     * ArrayList für Rüstungen
+     */
     private static ArrayList<Armor> armor;
+    /**
+     * ArrayList für Pawns
+     */
     private static ArrayList<Pawn> pawns;
+    /**
+     * Geldwert vom Spieler
+     */
     private static IntegerProperty money;
+    /**
+     * Anzahl der Pawns im Spielerinventar
+     */
     private static IntegerProperty pawnsNum;
+    /**
+     * Reputation des Spielers
+     */
     private static IntegerProperty reputation;
+    /**
+     * {@code true}, wenn das Inventar nach einem Spielstart initialisiert wurde.
+     */
     private static boolean initialized = false;
 
     /**
@@ -41,7 +62,8 @@ public class Inventory implements Serializable {
     }
 
     /**
-     * @return {@code ArrayList<Weapons>}, mit den Waffen, die der Spieler besitzt.
+     * Gibt die Waffen des Spielers zurück.
+     * @return {@code ArrayList<Weapons>}
      */
     public static ArrayList<Weapon> getWeapons() {
         return weapons;
@@ -50,6 +72,7 @@ public class Inventory implements Serializable {
     /**
      * Fügt dem Inventar eine neue Waffe hinzu.
      * @param w Waffe, die dem Inventar hinzugefügt werden soll.
+     * @see Inventory#addItem(Item)
      */
     private static void addWeapon(Weapon w) {
         weapons.add(w);
@@ -58,13 +81,15 @@ public class Inventory implements Serializable {
     /**
      * Entfernt eine Waffe aus dem Inventar.
      * @param w Waffe, die entfernt werden soll.
+     * @see Inventory#removeItem(Item)
      */
     private static void removeWeapon(Weapon w) {
         weapons.remove(w);
     }
 
     /**
-     * @return {@code ArrayList<Armor>}, mit den Rüstungen, die der Spieler besitzt.
+     * Gibt die Rüstungen des Spielers zurück.
+     * @return {@code ArrayList<Armor>}
      */
     public static ArrayList<Armor> getArmor() {
         return armor;
@@ -73,11 +98,17 @@ public class Inventory implements Serializable {
     /**
      * Fügt dem Inventar eine neue Waffe hinzu.
      * @param a Rüstungsstück, das dem Inventar hinzugefügt werden soll.
+     * @see Inventory#addItem(Item)
      */
     private static void addArmor(Armor a) {
         armor.add(a);
     }
 
+    /**
+     * Entfernt eine Rüstung aus dem Inventar.
+     * @param a Rüstungsstück, das entfernt werden soll.
+     * @see Inventory#removeItem(Item)
+     */
     private static void removeArmor(Armor a) {
         armor.remove(a);
     }
@@ -107,7 +138,8 @@ public class Inventory implements Serializable {
     }
 
     /**
-     * @return {@code ArrayList<Pawn>}, mit den Kämpfern/Pawns, die der Spieler besitzt.
+     * Gibt die Pawns zurück, die der Spieler besitzt.
+     * @return {@code ArrayList<Pawn>}
      */
     public static ArrayList<Pawn> getPawns() {
         return pawns;
@@ -123,28 +155,31 @@ public class Inventory implements Serializable {
     }
 
     /**
-     * @return Anzahl der Pawns im Spielerinventar.
+     * Gibt die Anzahl der Pawns im Spielerinventar zurück
+     * @return {@code IntegerProperty}
      */
     public static IntegerProperty getPawnsNum() {
         return pawnsNum;
     }
 
     /**
-     * @return Geld/Gold im Spielerinventar.
+     * Gibt das Geld/Gold im Spielerinventar zurück.
+     * @return {@code int}
      */
     public static int getMoney() {
         return money.get();
     }
 
     /**
-     * @return Geld/Gold im Spielerinventar. Als Integer-Wert.
+     * Gibt das Geld/Gold im Spielerinventar zurück.
+     * @return {@code IntegerProperty}
      */
     public static IntegerProperty getMoneyAsSimpleInt() {
         return money;
     }
 
     /**
-     * Fügt dem Inventar Geld/Gold hinnzu.
+     * Fügt dem Inventar Geld/Gold hinzu.
      * @param money
      */
     public static void addMoney(int money) {
@@ -152,7 +187,8 @@ public class Inventory implements Serializable {
     }
 
     /**
-     * @return Reputation, die der Spieler besitzt.
+     * Gibt die Reputation zurück, die der Spieler besitzt.
+     * @return {@code IntegerProperty}
      */
     public static IntegerProperty getReputation() {
         if(Inventory.reputation == null) {
@@ -180,6 +216,7 @@ public class Inventory implements Serializable {
     }
 
     /**
+     * Gibt an, ob das Inventar nach einem Spielstart initialisiert wurde.
      * @return {@code true}, wenn das Inventar nach einem Spielstart oder Laden eines Spielstandes initialisiert wurde.
      */
     public static boolean isInitialized() {
@@ -200,6 +237,7 @@ public class Inventory implements Serializable {
     }
 
     /**
+     * Gibt die ID des letzten Pawns im Inventar zurück
      * @return {@code int} - ID des letzten Pawns im Inventar, bzw -1, wenn kein Pawn im Inv ist.
      */
     public static int getLastPawnId() {

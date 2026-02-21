@@ -9,9 +9,26 @@ import java.util.Random;
  * Handhabt die Grundeigenschaften eines Items, wie Besitzer, Name, Ausgerüstet-Status und Item-Typ.
  */
 public class Item implements Serializable {
+    /**
+     * Name des Items
+     */
     private String name;
+    /**
+     * Besitzer des Items. Kann null sein.
+     */
     private Pawn owner;
+    /**
+     * Ist Item ausgerüstet?
+     * {@code true}, wenn Item ausgerüstet ist
+     */
     private boolean equipped;
+    /**
+     * Kombination aus Pawn Id und Ausrüstungsslot. <br> <br>
+     * Wird dringend benötigt, um Items nach dem Laden eines gespeicherten Spielstandes korrekt anzulegen.
+     * Sonst kann es zum Fehler kommen, dass die Items noch den "alten" Ownern (Java-Objekt-Referenz)
+     * aus dem alten Spielstand zugewiesen sind und daher nachd dem Laden nicht bei dem "neuen" Pawn-Objekt
+     * angelegt sind.
+     */
     private int[] equipLocation;
 
     /**
@@ -25,9 +42,9 @@ public class Item implements Serializable {
     }
 
     /**
-     * Findet den Slot, an dem das Item ausgerüstet ist, falls es einen Besitzer hat.
+     * Findet den Slot, an dem das Item ausgerüstet ist, falls es einen Besitzer hat und gibt diesen Slot zurück.
      * @param item Item, welches gesucht werden soll.
-     * @return Slot von dem Item; -1, wenn das Item nicht ausgerüstet ist.
+     * @return {@code byte} SlotID
      */
     public static byte getSlotOfItem(Item item) {
         if (item.getItemType().equals("Weapon")) {
@@ -72,6 +89,7 @@ public class Item implements Serializable {
     }
 
     /**
+     * Gibt an, ob ein Item ausgerüstet ist.
      * @return {@code true}, wenn das Item ausgerüstet ist.
      */
     protected boolean isEquipped() {
@@ -79,14 +97,16 @@ public class Item implements Serializable {
     }
 
     /**
-     * @return Pawn, der das Item besitzt, bzw. ausgerüstet hat.
+     * Gibt den Pawn zurück, der das Item besitzt.
+     * @return {@code Pawn}
      */
     protected Pawn getOwner() {
         return owner;
     }
 
     /**
-     * @return Name des Items.
+     * Gibt den Namen des Items zurück.
+     * @return {@code String}
      */
     protected String getName() {
         return name;
@@ -110,7 +130,7 @@ public class Item implements Serializable {
     /**
      * Generiert einen Namen, basierend auf dem Item Typ.
      * @param item Das Item, für welches ein Namen generiert werden soll.
-     * @return Den generierten Name.
+     * @return {@code String} Name
      */
     protected String randomName(Item item) {
 
@@ -147,27 +167,41 @@ public class Item implements Serializable {
 
     /**
      * Platzhalter der Super Klasse. Wird von den Kindklassen entsprechend mit {@code Override} überschrieben.
-     * @return Item-Typ
+     * @return {@code String} Item-Typ
      */
     protected String getItemType() {
         return "Item";
     }
 
+    /**
+     * Gibt die EquipLocation eines Pawns an
+     * @return {@code int[]}
+     */
     public int[] getEquipLocation() {
         return equipLocation;
     }
 
+    /**
+     * Generiert die Equip-Location.
+     * @param pawnid Id des Pawns für den die Location generiert werden soll.
+     * @param slotid Id des Slots.
+     */
     public void generateEquipLocation(int pawnid, int slotid) {
         equipLocation = new int[] {pawnid, slotid};
     }
 
+    /**
+     * Setzt das Item an eine Location im Equipement.
+     * Dient der korrekten Ausrüstung von Items nach dem Laden eines gespeicherten Spielstandes
+     * @param item
+     */
     public void pushEquipLocation(Item item) {
         if(item.getItemType().equals("Weapon")) {
             Inventory.getPawnById(equipLocation[0]).giveWeapon((Weapon) item, (byte) equipLocation[1]);
         } else if(item.getItemType().equals("Armor")) {
             Inventory.getPawnById(equipLocation[0]).giveArmor((Armor) item, (byte) equipLocation[1]);
-            System.out.println("Amor pot Owner: " + Inventory.getPawnById(equipLocation[0]));
-            System.out.println("Was hat der Kollege an: " + Inventory.getPawnById(equipLocation[0]).getArmors()[equipLocation[1]]);
+            //System.out.println("Amor pot Owner: " + Inventory.getPawnById(equipLocation[0]));
+            //System.out.println("Was hat der Kollege an: " + Inventory.getPawnById(equipLocation[0]).getArmors()[equipLocation[1]]);
         } else {
             System.out.println("Konnte Item nicht anlegen");
         }
