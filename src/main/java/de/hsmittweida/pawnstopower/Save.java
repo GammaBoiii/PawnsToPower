@@ -214,7 +214,7 @@ public class Save {
      * Nutzt ein Base64 Enkodierer auf den ObjectOutputStream.
      * @param obj Objekt, welches serialisiert werden soll.
      * @return {@code String} - Serialisierte String-Version des Objekts.
-     * @throws IOException, wenn etwas beim Serialisieren schiefgeht.
+     * @throws IOException wenn etwas beim Serialisieren schiefgeht.
      */
     public static String serialize(Object obj) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -230,8 +230,8 @@ public class Save {
      * Umgekehrtes Verfahren zur Serialisierung, hier mit ObjectInputStream.
      * @param code Serialisierte String-Version des Objekts.
      * @return {@code Object} - Deserialisierte Version des Objekts.
-     * @throws IOException, wenn etwas beim Deserialisieren schiefgeht.
-     * @throws ClassNotFoundException, wenn das Objekt nicht gefunden werden konnte.
+     * @throws IOException wenn etwas beim Deserialisieren schiefgeht.
+     * @throws ClassNotFoundException wenn das Objekt nicht gefunden werden konnte.
      */
     public static Object deserialze(String code) throws IOException, ClassNotFoundException {
         byte[] data = Base64.getDecoder().decode(code);

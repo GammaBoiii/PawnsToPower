@@ -1,3 +1,6 @@
+/**
+ * Module-Info für das Projekt
+ */
 module de.hsmittweida.pawnstopower {
     requires javafx.controls;
     requires java.desktop;
