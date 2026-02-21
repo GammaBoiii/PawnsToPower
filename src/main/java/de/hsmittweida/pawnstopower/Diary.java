@@ -89,8 +89,8 @@ public class Diary {
 
         /* Geld dazuverdient oder verloren */
         if (Math.abs(Inventory.getMoney() - oldMoney) != 0) {
-            String m1 = "Wir haben am letzten Tag " + (Inventory.getMoney() - oldMoney) + " Gold verdient.\n\n";
-            String m2 = "Wir haben am letzten Tag " + (oldMoney - Inventory.getMoney()) + " Gold verloren.\n\n";
+            String m1 = "Wir haben am letzten Tag " + (Inventory.getMoney() - oldMoney) + " Gold eingenommen.\n\n";
+            String m2 = "Wir haben am letzten Tag " + (oldMoney - Inventory.getMoney()) + " Gold aus der Schatzkammer verbraucht.\n\n";
 
             msg += Inventory.getMoney() > oldMoney ? m1 : m2;
             counter++;

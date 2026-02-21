@@ -30,17 +30,68 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class Arena {
 
+    /**
+     * Kämpfer, den der Spieler ausgewählt hat.
+     */
     private static Pawn choosenFighter;
+    /**
+     * Kämpfer, der generiert wurde und gegen den Spieler antritt.
+     */
     private static Pawn enemy;
+    /**
+     * Boolean Variable, die den Zusatand des Kampfes beinhaltet.
+     */
     private static boolean fightFinished = false;
+    /**
+     * Log, der in der Arena den Kampfverlauf anzeigt.
+     */
     private static TextFlow log;
-    private static ScrollPane textField; /* Wird hier definiert, damit es den anderen Methoden sichtbar ist. */
-    private static DoubleProperty currentHealth_enemy, currentHealth_fighter;
+    /**
+     * {@code textField}, welches den Log enthält
+     * Wird hier definiert, damit es den anderen Methoden sichtbar ist.
+     */
+    private static ScrollPane textField;
+    /**
+     * Lebensanzeige für den Gegner.
+     */
+    private static DoubleProperty currentHealth_enemy;
+    /**
+     * Lebensanzeige für den gewählten Kämpfer.
+     */
+    private static DoubleProperty currentHealth_fighter;
+    /**
+     * Der Pawn, der als nächstes am Zug ist.
+     */
     private static Pawn nextTurn;
-    private static Button attack, defense;
-    private static final BlockingQueue<String> inputQueue = new LinkedBlockingQueue<>(); /* Wird benötigt, um Events zwischen Arena.java und Turn.java zu erwarten (versch. Threads)" */
+    /**
+     * {@code Button}, um einen Angriff auszuführen.
+     */
+    private static Button attack;
+    /**
+     * {@code Button} um in die Verteidigung zu gehen.
+     */
+    private static Button defense;
+    /**
+     * Queues, die Angriffs/Verteidigungs Events mit dem eigentlichen Thread in Turn "auszuatuschen"
+     * Wird benötigt, um Events zwischen Arena.java und Turn.java zu erwarten (versch. Threads)
+     */
+    private static final BlockingQueue<String> inputQueue = new LinkedBlockingQueue<>();
+    /**
+     * Turn Objekt, was den aktuellen Thread für den Kampf in der Arena beinhaltet.
+     */
     private static Turn turn;
+    /**
+     * Pawn, der die Runde in der Arena gewonnen hat.
+     */
     private static Pawn winner;
+    /**
+     * Preis, den der Spieler enthält.
+     * <br>
+     * <br>
+     * {@code price[0]} ~ Geldanteil
+     * <br>
+     * {@code price[1]} ~ XP-Anteil
+     */
     private static int[] price;
 
     /**
@@ -108,7 +159,7 @@ public class Arena {
     /**
      * Dient zum Anzeigen der Arena und zum Initiieren des Kampfes.
      * Beinhaltet hauptsächlich UI handling.
-     * @return FX-Element (Pane), welches dann im Spiel mittels {@code Game.drawSpace} angezeigt wird.
+     * @return {@code Pane}, welches dann im Spiel mittels {@code Game.drawSpace} angezeigt wird.
      */
     public static Pane arenaFight() {
         AnchorPane pane = new AnchorPane();
@@ -276,6 +327,7 @@ public class Arena {
 
     /**
      * Generiert basierend auf dem eigenen Kämpfer einen Gegner, der per Zufall in einem gewissen Bereiches ungefähr so stark ist.
+     * @return {@code Pawn}, der gegen den Spieler antritt.
      */
     private static Pawn generateEnemy() {
         Pawn p = new Pawn(false);
@@ -382,7 +434,7 @@ public class Arena {
      * vornimmt, und wirft daher standarmäßig einen Fehler. Verwendet wird dies zum Beispiel in der Turn-Klasse, welche einen
      * eigenen Thread erstellt. Die dort aufgefürhten "sleep" Befehle lassen sich aber auch nicht in dem FX-Thread verwenden,
      * da sonst das ganze UI eingefroren wird, und sind daher nicht für diese Anwendung geeignet.
-     * @param text Der Text, der im Arena Log ausgegeben werden soll.
+     * @param text Der Text als {@code String}, der im Arena Log ausgegeben werden soll.
      */
     public static void log(String text) {
         /* Da zu diesem Zeitpunkt die Grafik Elemente noch nicht gerendert sind, müssen Anpassungen
@@ -391,6 +443,8 @@ public class Arena {
          */
         Platform.runLater(() -> {
             Text newText = new Text("\n"+text);
+            newText.setFont(Game.getFont("MedievalSharp"));
+            newText.setStyle("-fx-font-size: 32;");
             newText.wrappingWidthProperty().bind(textField.widthProperty());
             log.getChildren().add(newText);
         });
@@ -405,8 +459,10 @@ public class Arena {
     public static void log(String text, String style) {
         Platform.runLater(() -> {
             Text newText = new Text("\n"+text);
+            newText.setFont(Game.getFont("MedievalSharp"));
+            String style2 = style + "; -fx-font-size: 32;";
             newText.wrappingWidthProperty().bind(textField.widthProperty()); // ?
-            newText.setStyle(style);
+            newText.setStyle(style2);
             log.getChildren().add(newText);
         });
     }
@@ -428,8 +484,9 @@ public class Arena {
     }
 
     /**
+     * Returned die Lebenspunkte von {@code Pawn}
      * @param p Pawn, von dem die Lebenspunkte zurückgegeben werden sollen.
-     * @return Die Lebenspunkte des angegebenen Pawns
+     * @return Lebenspunkte als {@code double}
      */
     public static double getLife(Pawn p) {
             if(p.equals(choosenFighter)) return Math.round(currentHealth_fighter.get());
@@ -441,7 +498,7 @@ public class Arena {
      * Einfache Methode, die den Pawn zurückgibt, der gerade nicht am Zug ist. Da nur 2 gegeneinander Kämpfen, kann es entweder der Kämpfer sein, der
      * dem Spieler gehört oder nicht.
      * @param pawn Pawn, der gerade am Zug ist und dessen Gegner returned werden soll.
-     * @return Der Pawn, der gerade nicht am Zug ist.
+     * @return Der {@code Pawn}, der gerade nicht am Zug ist.
      */
     public static Pawn getOther(Pawn pawn) {
         if(pawn.ownedByPlayer()) {
@@ -464,7 +521,9 @@ public class Arena {
     }
 
     /**
-     * @return inputQeue, an die der "Trigger" gesendet werden soll.
+     * Returned die BLockingqueue, die den Austausch von "Events" zwischen der Arenaklasse
+     * und der Turnklasse (eigentlicher Thread)möglich macht.
+     * @return {@code BlockingQueue<String>}, Queue an die der "Trigger" gesendet werden soll.
      */
     public static BlockingQueue<String> getBlockingQeue() {
         return inputQueue;
@@ -473,7 +532,7 @@ public class Arena {
     /**
      * Eine einfache Methode, die bei jedem Zug des Gegners eine automatische Nachricht generiert, damit
      * das ganze Kampfgeschehen im Arena Log etwas mehr Story hat.
-     * @return Angriffsnachricht
+     * @return {@code String[]} Angriffsnachricht
      */
     public static String[] getEnemyAttackMessage(int graze) {
         String[] gegnerInitial = {
@@ -568,7 +627,7 @@ public class Arena {
 
     /**
      * Ähnlich wie {@code getEnemyAttackMessage()}, nur wenn der Gegner in die Verteidigung geht, anstatt in den Angriff.
-     * @return Verteidigungsnachricht
+     * @return {@code String} Verteidigungsnachricht
      */
     public static String getEnemyDefenseMessage() {
         String[] gegnerVerteidigung = {
@@ -615,14 +674,19 @@ public class Arena {
     }
 
     /**
-     * @return den Preis, der in der Arena vefügbar ist, wenn der Spieler gewinnt.
+     * Returned den Preis
+     * @return {@code int[]} mit dem Preis
      */
     public static int[] getPrice() {
         return price;
     }
 
     /**
-     * @return den Kämpfer des Spielers und den generierten Feind; in einem Array.
+     * Returned die beiden Pawns, die gegeneinander antreteten.
+     *
+     * @return {@code Pawn[]}<br>
+     *          {@code [0]} ~ Kämpfer des Spielers
+     *          {@code [1]} ~ Gegnerischer Kämpfer
      */
     public static Pawn[] getCombatans( ){
         return new Pawn[] {choosenFighter, enemy};

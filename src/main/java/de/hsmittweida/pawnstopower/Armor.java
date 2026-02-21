@@ -139,10 +139,10 @@ public class Armor extends Item  {
         };
 
         price = switch (this.getArmorClass()) {
-            case FAB -> (int) (price * 0.6);
-            case LTH -> (int) (price * 0.8);
-            case IRN -> (int) (price * 1.0);
-            case STL -> (int) (price * 1.25);
+            case FAB -> (int) (price * 0.85);
+            case LTH -> (int) (price * 1.0);
+            case IRN -> (int) (price * 1.625);
+            case STL -> (int) (price * 3.25);
         };
         return price;
     }

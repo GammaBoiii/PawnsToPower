@@ -66,6 +66,9 @@ public class ArenaWinScreen {
                     Arena.getCombatans()[1].getName(), Math.round(Arena.getPrice()[0] * 0.25), Math.round(Arena.getPrice()[1] * 0.4));
             msg = new Label(s);
             Inventory.addMoney(-1 * (int) Math.round(Arena.getPrice()[0] * 0.25));
+            if(Inventory.getMoney() < 0) {
+                Inventory.addMoney(Inventory.getMoney() * -1);
+            }
 
             /* Spieler bekommt trotzdem ein Trostpreis: */
             Arena.getCombatans()[0].addXp((int) Math.round(Arena.getPrice()[1] * 0.4));

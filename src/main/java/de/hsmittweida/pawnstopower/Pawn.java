@@ -222,27 +222,6 @@ public class Pawn implements Serializable {
     }
 
     /**
-     * Gibt die (finalen) Stats des Pawns an, inkl. des Levelbonus und des Skill-Bonus.
-     * <br> <br>
-     * Funktioniert, indem zuerst jedes Level ab level 2 um den Factor 0.1 erhöht wird <em>(Level 2 -> *1.1,
-     * Level 3 -> *1.2, Level 4 -> *1.3,...)</em>, dann der Skillfactor damit multipliziert wird (aus {@code skillFactor})
-     * und dann auf den Basiswert addiert wird.
-     * <p>
-     * param skill Der abzufragende Skill ({@code health, damage, resistance} oder {@code speed})
-     * return Den totalen Skill-Wert
-     * @deprecated und bis auf Weiteres auskommentiert (Variablen-Error)
-     */
-    /*public double getSkillValue(String skill) {
-        return switch (skill) {
-            case "health" -> ((9.0+this.getLevel()) / 10.0) * skillFactor.get("health") + baseHealth;
-            case "damage" -> ((9.0+this.getLevel()) / 10.0) * skillFactor.get("damage") + baseDamage;
-            case "resistance" -> ((9.0+this.getLevel()) / 10.0) * skillFactor.get("resistance") + baseResistance;
-            case "speed" -> ((9.0+this.getLevel()) / 10.0) * skillFactor.get("speed") + baseSpeed;
-            default -> 0.0;
-        };
-    }*/
-
-    /**
      * @return Skills: <br> <blockquote> 0 = health <br> 1 = damage <br> 2 = resistance <br> 3 = speed</blockquote>
      */
     public ArrayList<Skill> getSkills() {

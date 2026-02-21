@@ -16,7 +16,7 @@
 }
 
 #log {
-    -fx-font-size: 25;
+    -fx-font-size: 37;
 }
 #log-background > .viewport {
     -fx-background-image: url("image/papyrusbackground.png");
