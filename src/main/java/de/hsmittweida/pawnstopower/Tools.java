@@ -186,6 +186,7 @@ public class Tools {
      * @param b Der Button, der animiert werden soll.
      * @param millis Transitionszeit in Millisek.
      * @param fac Der Faktor um wie viel vergrößert wird.
+     * @param glowEffect Wendet Glow-Effekt (Vergrößerung) an, wenn {@code true}
      */
     public static void addHoverEffect(Button b, int millis, double fac, boolean glowEffect) {
         /* Definiert zunächst zwei ScaleTransitions, jeweils zur Vergrößerung

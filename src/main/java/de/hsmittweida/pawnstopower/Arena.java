@@ -538,6 +538,7 @@ public class Arena {
      * Eine einfache Methode, die bei jedem Zug des Gegners eine automatische Nachricht generiert, damit
      * das ganze Kampfgeschehen im Arena Log etwas mehr Story hat.
      * @return {@code String[]} Angriffsnachricht
+     * @param graze Treffer-Variable
      */
     public static String[] getEnemyAttackMessage(int graze) {
         String[] gegnerInitial = {

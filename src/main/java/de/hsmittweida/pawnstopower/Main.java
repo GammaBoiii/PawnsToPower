@@ -21,7 +21,7 @@ public class Main extends Application {
 
     /**
      * Startmethode für Startmenu.
-     * @param primaryStage
+     * @param primaryStage Primary Stage für den Start
      */
     public void start(Stage primaryStage) {
         new StartMenu(primaryStage);

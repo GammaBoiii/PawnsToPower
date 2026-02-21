@@ -61,7 +61,7 @@ public class SoundManager {
 
     /**
      * Gibt den MediaPlayer zurück, der von einem Sound verwendet wird.
-     * @return {@coode MediaPlayer}
+     * @return {@code MediaPlayer}
      */
     public MediaPlayer getMediaPlayer() {
         return mp;

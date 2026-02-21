@@ -115,7 +115,7 @@ public class Inventory implements Serializable {
 
     /**
      * Alternative Methode, um dem Spieler ein neues Item in das Inventar abzulegen.
-     * @param item
+     * @param item Item, das hinnzugefügt werden soll.
      */
     public static void addItem(Item item) {
         if (item.getItemType().equals("Weapon")) {
@@ -180,7 +180,7 @@ public class Inventory implements Serializable {
 
     /**
      * Fügt dem Inventar Geld/Gold hinzu.
-     * @param money
+     * @param money Betrag, der als Geld hinnzugefügt werden soll.
      */
     public static void addMoney(int money) {
         Inventory.money.set(Inventory.money.get() + money);
@@ -248,6 +248,7 @@ public class Inventory implements Serializable {
      * Gibt einen Pawn basierend auf dessen Id zurück. Für besondere Fälle, in denen
      * die Pawn Id von dem Index des Pawns im Inventar abweichen sollte.
      * @return {@code Pawn} mit der entsprechenden Id
+     * @param id Id von dem zu holenden Pawn.
      */
     public static Pawn getPawnById(int id) {
         for(Pawn p : pawns) {

@@ -35,7 +35,7 @@ public class Item implements Serializable {
      * Legt den Besitzer fest.
      * <br>
      * Kann null sein.
-     * @param owner
+     * @param owner Owner von dem Item
      */
     protected Item(Pawn owner) {
         this.owner = owner;
@@ -193,7 +193,7 @@ public class Item implements Serializable {
     /**
      * Setzt das Item an eine Location im Equipement.
      * Dient der korrekten Ausrüstung von Items nach dem Laden eines gespeicherten Spielstandes
-     * @param item
+     * @param item Item, welches gepusht werden soll.
      */
     public void pushEquipLocation(Item item) {
         if(item.getItemType().equals("Weapon")) {

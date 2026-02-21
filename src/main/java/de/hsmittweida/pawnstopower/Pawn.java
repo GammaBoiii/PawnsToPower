@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
+/**
+ * Die Pawn Klasse beinhaltet die Logik zur Erstellung und Verwaltung der einzelen Kämpfer (Pawns)
+ */
 public class Pawn implements Serializable {
     /**
      * Name des Pawns.
@@ -159,7 +162,6 @@ public class Pawn implements Serializable {
      *
      * @param weapon Die Waffe, die ausgerüstet werden soll.
      * @param slot Der Waffenslot, an dem {@code weapon} ausgerüstet werden soll.
-     * @return {@code true}, wenn die Waffe erfolgreich ausgerüstet wurde, {@code false}, wenn der Slot bereits belegt ist.
      */
     public void giveWeapon(Weapon weapon, byte slot) {
         this.getWeapons()[slot] = weapon;
@@ -348,9 +350,9 @@ public class Pawn implements Serializable {
     /**
      * Errechnet den Schaden, der ein Pawn einem anderen, gegnerischen Pawn hinzufügt.
      *
-     * <p></pr>Berücksicht dabei:
+     * <p>Berücksicht dabei:
      *  <ul>
-     *  <li>den Schaden, die Waffe und Geschwindigkeit des Angreifers ("{@code this}"-Pawn)</p>
+     *  <li>den Schaden, die Waffe und Geschwindigkeit des Angreifers ("{@code this}"-Pawn)
      *  <li>die Leben, Rüstung, Verteidigung (inkl. Verteidigungsaktion in der Arena) und Geschwindigkeit des angegriffenen Pawns "{@code enemy}"
      *  </ul>
      * @param enemy {@code Pawn}, der angegriffen wird.

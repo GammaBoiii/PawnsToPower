@@ -10,7 +10,7 @@ package de.hsmittweida.pawnstopower;
 public class RunMain {
     /**
      * Startet die eigentliche Main-Klasse, mit JavaFX.
-     * @param args
+     * @param args Arguments
      */
     public static void main(String[] args) {
         Main.main(args);

@@ -13,7 +13,7 @@ public class Turn extends Thread {
     /**
      * Konstruktor der Turn Klasse.
      * Startet einen neuen thread.
-     * @param p
+     * @param p Pawn, der am Turn ist
      */
     public Turn(Pawn p) {
         this.pawn = p;

@@ -15,10 +15,21 @@ import java.util.ArrayList;
  * Diese können jeweils nur einmalig gekauft werden.
  */
 public class Shop {
+    /**
+     * Angebote für Waffen
+     */
     private static ArrayList<Weapon> weapon_offer;
+    /**
+     * Angebote für Rüstungen
+     */
     private static ArrayList<Armor> armor_offer;
-
+    /**
+     * Zu zahlender Betrag
+     */
     private static IntegerProperty due_amount;
+    /**
+     * Warenkorb
+     */
     private static ArrayList<Item> shopping_cart;
 
     /**

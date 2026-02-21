@@ -121,7 +121,7 @@ public class Armor extends Item  {
      * <p> 2 - Arme </p>
      * <p> 3 - Beine </p>
      *
-     * @param slot
+     * @param slot SlotType, der der Rüstung gegeben werden soll
      */
     public void setSlotType(byte slot) {
         this.slot = slot;

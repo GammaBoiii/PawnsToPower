@@ -118,7 +118,7 @@ public class Weapon extends Item {
 
     /**
      * Beinhaltet die Klasse der Waffe.
-     * <small><br><br>Wenn hier etwas geänderd wird, dann auch in {@link Inspector#setImage(StackPane, WeaponClass)} nachtragen!
+     * <small><br><br>Wenn hier etwas geänderd wird, dann auch in {@link Inspector#setImage(StackPane, WeaponClass)} nachtragen!</small>
      */
     public enum WeaponClass {
         /**

@@ -448,7 +448,7 @@ public class Game {
     }
 
     /**
-     * Wird verwendet, um Tagebucheinträge mittels {@¢ode Diary} zu speichern.
+     * Wird verwendet, um Tagebucheinträge mittels {@link Diary} zu speichern.
      * Returned den Tagebucheintrag des Tages.
      * @return {@code TextFlow}
      */
@@ -495,6 +495,7 @@ public class Game {
     /**
      * Gibt eine Font entsprechend dem Namen zurück
      * @return {@code Font}
+     * @param name Name der Font, welche geladen werden soll.
      */
     public static Font getFont(String name) {
         if(fonts.containsKey(name)) {
