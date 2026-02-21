@@ -116,18 +116,19 @@ public class QuickMenu {
             }
         });
 
+        /* Spiel beenden Button */
         Button quit = new Button("Spiel Beenden");
         quit.setOnAction(e -> {Game.close();});
 
         box.getChildren().addAll(new VBox(),fullscreen, save, load, cheat, quit, new VBox());
 
+        /* Auf alle Elemente die growth-Prio setzen */
         for(Node n: box.getChildren()) {
             VBox.setVgrow(n, Priority.ALWAYS);
         }
 
         box.setAlignment(Pos.CENTER);
         box.setSpacing(15);
-
 
         Tools.defaultClose(stage, "quickmenu" );
         stage.setScene(s);

@@ -77,7 +77,7 @@ public class Inspector {
 
     /**
      * Die Anzeige, die einen Kämpfer detailliert anzeigt.
-     * Gibt das Pane zurück, welches dann in {@code Game.drawSpace()} angezeigt wird.
+     * Gibt das Pane zurück, welches dann in {@link Game#drawSpace()} angezeigt wird.
      * @param p Pawn, der inspiziert werden soll.
      * @return {@code Pane}
      */

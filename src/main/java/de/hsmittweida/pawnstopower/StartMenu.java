@@ -78,7 +78,7 @@ public class StartMenu {
 			});
 			
 			setup.setOnAction(e -> {
-				System.out.println("lol");
+				new SetupMenu();
 			});
 			
 			root.setId("main-menu");

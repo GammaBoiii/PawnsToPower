@@ -97,7 +97,8 @@ public class Arena {
     /**
      * Erstellt die Oberfläche, bei der der Spieler sich einen seiner Kämpfer aussucht, mit dem
      * er in die Arena geht.
-     * @return Pane, welches dann in {@code Game.drawSpace()} angezeigt wird.
+     * Gibt das Pane zurück, welches dann in {@link Game#drawSpace(Pane)} angezeigt wird
+     * @return {@code Pane}
      */
     public static Pane chooseFighter() {
         AnchorPane pane = new AnchorPane();
@@ -159,7 +160,8 @@ public class Arena {
     /**
      * Dient zum Anzeigen der Arena und zum Initiieren des Kampfes.
      * Beinhaltet hauptsächlich UI handling.
-     * @return {@code Pane}, welches dann im Spiel mittels {@code Game.drawSpace} angezeigt wird.
+     * Gibt das Pane zurück, welches dann in {@link Game#drawSpace(Pane)} angezeigt wird.
+     * @return {@code Pane}
      */
     public static Pane arenaFight() {
         AnchorPane pane = new AnchorPane();
@@ -326,8 +328,10 @@ public class Arena {
     }
 
     /**
-     * Generiert basierend auf dem eigenen Kämpfer einen Gegner, der per Zufall in einem gewissen Bereiches ungefähr so stark ist.
-     * @return {@code Pawn}, der gegen den Spieler antritt.
+     * Generiert basierend auf dem eigenen Kämpfer einen Gegner,
+     * der per Zufall in einem gewissen Bereiches ungefähr so stark ist.
+     * Gibt den Pawn zurück, gegen den der Spieler dann antritt.
+     * @return {@code Pawn}
      */
     private static Pawn generateEnemy() {
         Pawn p = new Pawn(false);
@@ -486,7 +490,7 @@ public class Arena {
     /**
      * Returned die Lebenspunkte von {@code Pawn}
      * @param p Pawn, von dem die Lebenspunkte zurückgegeben werden sollen.
-     * @return Lebenspunkte als {@code double}
+     * @return {@code double}
      */
     public static double getLife(Pawn p) {
             if(p.equals(choosenFighter)) return Math.round(currentHealth_fighter.get());
@@ -495,10 +499,11 @@ public class Arena {
     }
 
     /**
-     * Einfache Methode, die den Pawn zurückgibt, der gerade nicht am Zug ist. Da nur 2 gegeneinander Kämpfen, kann es entweder der Kämpfer sein, der
+     * Gibt den Pawn zurück, der gerade nicht am Zug ist.
+     * Da nur 2 gegeneinander Kämpfen, kann es entweder der Kämpfer sein, der
      * dem Spieler gehört oder nicht.
      * @param pawn Pawn, der gerade am Zug ist und dessen Gegner returned werden soll.
-     * @return Der {@code Pawn}, der gerade nicht am Zug ist.
+     * @return {@code Pawn}
      */
     public static Pawn getOther(Pawn pawn) {
         if(pawn.ownedByPlayer()) {
@@ -626,7 +631,8 @@ public class Arena {
     }
 
     /**
-     * Ähnlich wie {@code getEnemyAttackMessage()}, nur wenn der Gegner in die Verteidigung geht, anstatt in den Angriff.
+     * Ähnlich wie {@code getEnemyAttackMessage()}, nur wenn der Gegner
+     * in die Verteidigung geht, anstatt in den Angriff.
      * @return {@code String} Verteidigungsnachricht
      */
     public static String getEnemyDefenseMessage() {
@@ -674,8 +680,8 @@ public class Arena {
     }
 
     /**
-     * Returned den Preis
-     * @return {@code int[]} mit dem Preis
+     * Returned den Preis zurück, den es zu gewinnen gilt.
+     * @return {@code int[]}
      */
     public static int[] getPrice() {
         return price;

@@ -14,21 +14,50 @@ import java.util.Random;
 import java.util.UUID;
 
 public class Pawn implements Serializable {
+    /**
+     * Name des Pawns.
+     */
     private final String name;
+    /**
+     * Rüstung, die der Pawn angelegt hat.
+     */
     private Armor[] armors = new Armor[4];
+    /**
+     * Waffen, die der Pawn angelegt hat.
+     */
     private Weapon[] weapons = new Weapon[2];
+    /**
+     * Skills des Pawns.
+     */
     private final ArrayList<Skill> skills;
+    /**
+     * Verfügbare Skillpunkte des Pawns.
+     */
     private int skillPoints;
-
+    /**
+     * Fortschritt zum nächsten Level.
+     */
     private transient DoubleProperty progress;
+    /**
+     * Akutelle Erfahrungspunkte des Pawns.
+     */
     private transient IntegerProperty xp;
+    /**
+     * Binding für das Level des Pawns.
+     */
     private transient IntegerBinding lvl;
-
+    /**
+     * Boolean, ob der Pawn am aktuellen Tag bereits in der Arena gekämpft hat.
+     * {@code true} ~ Pawn hat an dem Tag bereits gekämpft
+     */
     private boolean foughtToday = false;
-
+    /**
+     * ID des Pawns im Inventar des Spielers
+     */
     private int id;
 
     /**
+     * Konstruktor
      * Initialisiert alle Variablen des Pawns.
      */
     Pawn(boolean generateInPlayerInv) {
@@ -60,7 +89,8 @@ public class Pawn implements Serializable {
     }
 
     /**
-     * @return {@code String} - Einen zufälligen Namen aus dem Array
+     * Generiert per Zufalle einen Namen für den Pawn.
+     * @return {@code String}
      */
     private static String getRandomName() {
         String[] vornamen = {"Hans", "Peter", "Klaus", "Heinrich", "Wilhelm", "Hermann", "Konrad", "Friedrich", "Ludwig", "Otto", "Walter", "Dietrich", "Ulrich", "Berthold", "Gerhard", "Arnold", "Eberhard", "Rüdiger", "Wolfgang", "Hartmut", "Werner", "Bruno", "Erich", "Kurt", "Herbert", "Günter", "Helmut", "Horst", "Jürgen", "Wolf", "Fritz", "Karl", "Paul", "Willi", "Richard", "Robert", "Theodor", "Viktor", "Albert", "Alfred", "Egon", "Ernst", "Franz", "Georg", "Gustav", "Hugo", "Jakob", "Johann", "Josef", "Julius", "Karlheinz", "Kaspar", "Kilian", "Konstantin", "Leonhard", "Lorenz", "Magnus", "Martin", "Matthias", "Maximilian", "Nikolaus", "Oskar", "Raimund", "Reinhard", "Roland", "Sebastian", "Sigmund", "Silvester", "Simon", "Stefan", "Valentin", "Veit", "Vinzenz", "Wenzel", "Wendelin", "Wigbert", "Winfried", "Wulf", "Zeno", "Zoltan", "Adalbert", "Adolf", "Albert", "Alexander", "Alfons", "Alois", "Andreas", "Anton", "August", "Baldur", "Bartholomäus", "Benedikt", "Benjamin", "Bernhard", "Bertram", "Blasius", "Burkhard", "Clemens", "Dagobert", "Dankwart", "Detlev", "Dominik", "Eckart", "Edgar", "Eduard", "Edwin", "Egon", "Einhard", "Engelbert", "Erasmus", "Erhard", "Ernst", "Eugen", "Falk", "Felix", "Ferdinand", "Florian", "Frank", "Franz", "Friedemann", "Gabriel", "Gebhard", "Gerd", "Gernot", "Gottfried", "Gregor", "Gunther", "Guntram", "Hartwig", "Hartmut", "Heiko", "Heimo", "Helge", "Helmuth", "Henning", "Herbert", "Heribert", "Hermann", "Hilmar", "Hubert", "Hugo", "Huldreich", "Humbert", "Ingo", "Ingolf", "Irmin", "Ivo", "Jens", "Joachim", "Jörg", "Justus", "Kajetan", "Kalle", "Kanzian", "Karl", "Karsten", "Kasimir", "Kilian", "Klemens", "Konrad", "Korbinian", "Kuno", "Kurt", "Lander", "Lars", "Laurentius", "Leander", "Leo", "Leon", "Leonhard", "Lorenz", "Lothar", "Lucas", "Ludger", "Magnus", "Malte", "Manfred", "Markus", "Martin", "Matthias", "Max", "Maximilian", "Meinolf", "Melchior", "Moritz", "Nikolaus", "Norbert", "Olaf", "Oscar", "Oswald", "Ottmar", "Otto", "Pankraz", "Pascual", "Patrick", "Paul", "Peter", "Philipp", "Quirin", "Raban", "Raffael", "Raimund", "Ralf", "Randolf", "Reinhard", "Reinhold", "Remigius", "René", "Richard", "Robert", "Rochus", "Roland", "Roman", "Rüdiger", "Rupert", "Ruprecht", "Sander", "Sascha", "Sebastian", "Severin", "Sigismund", "Sigmund", "Silas", "Silvester", "Simon", "Stefan", "Steffen", "Sten", "Sven", "Thaddäus", "Theobald", "Theodor", "Thilo", "Thomas", "Thorsten", "Till", "Tim", "Timo", "Titus", "Tobias", "Torben", "Traugott", "Tristan", "Udo", "Ulrich", "Urban", "Valentin", "Valerius", "Veit", "Viktor", "Vinzenz", "Volker", "Walter", "Walther", "Wenzel", "Werner", "Wickbert", "Wigbert", "Wilfried", "Wilhelm", "Willibald", "Willi", "Winfried", "Wolf", "Wolfgang", "Wulf", "Wunibald", "Xaver", "Yannic", "Yannick", "Yuri", "Yves", "Zeno", "Zoltan"};
@@ -137,6 +167,7 @@ public class Pawn implements Serializable {
     }
 
     /**
+     * Gibt eine Waffe an einem Slot zurück
      * @param slot Slot, von dem die Waffe returned werden soll.
      * @return {@code Weapon} - Waffe, die am Slot angebracht wurde.
      */
@@ -177,22 +208,16 @@ public class Pawn implements Serializable {
     }
 
     /**
+     * Gibt ein Rüstungsteil an einem Slot zurück.
      * @param slot Slot, von dem das Rüstungsteil returned werden soll.
      * @return {@code Armor} - Rüstungsteil, das am Slot angebracht wurde.
      */
     public Armor getArmor(byte slot) {
         return this.getArmors()[slot];
     }
-/*
-    public Armor[] getAllArmor() {
-        return this.getArmors();
-    }
 
-    public Weapon[] getAllWeapons() {
-        return this.getWeapons();
-    }
-*/
     /**
+     * Prüft, ob ein Slot mit einer Rüstung belegt ist.
      * @param slotId Die ID des Slots, der geprüft werden soll:
      *               0 - Kopf
      *               1 - Torso
@@ -205,6 +230,7 @@ public class Pawn implements Serializable {
     }
 
     /**
+     * Prüft, ob ein Slot mit einer Waffe belegt ist.
      * @param slotId Die ID des Slots, der geprüft werden soll:
      *               0 - Hand rechts
      *               1 - Hand links
@@ -215,21 +241,25 @@ public class Pawn implements Serializable {
     }
 
     /**
-     * @return {@code String} - Name des Pawns.
+     * Gibt den Namen des Pawns zurück.
+     * @return {@code String}
      */
     public String getName() {
         return this.name;
     }
 
-    /**
-     * @return Skills: <br> <blockquote> 0 = health <br> 1 = damage <br> 2 = resistance <br> 3 = speed</blockquote>
+    /** Gibt die Skill des Pawns zurück
+     * <br><br>
+     * Skills: <br> <blockquote> 0 = health <br> 1 = damage <br> 2 = resistance <br> 3 = speed</blockquote>
+     * @return {@code ArrayList<Skill>}
      */
     public ArrayList<Skill> getSkills() {
         return this.skills;
     }
 
     /**
-     * @return {@code int} - Skillpunkte des Pawn
+     * Gibt die Skillpunkte des Pawns zurück
+     * @return {@code int}
      */
     public int getSkillPoints() {
         return this.skillPoints;
@@ -257,7 +287,8 @@ public class Pawn implements Serializable {
     }
 
     /**
-     * @return {@code int} - Level des Pawns.
+     * Gibt das Level des Pawns zurück.
+     * @return {@code int}
      */
     public int getLvl() {
         if(this.lvl == null) {
@@ -267,13 +298,16 @@ public class Pawn implements Serializable {
     }
 
     /**
-     * @return {@code int} - Erfahrungspunkte des Pawns.
+     * Gibt der Erfahrungspunkte des Pawns zurück.
+     * @return {@code int}
      */
     public int getXpAsInt() {
         return this.xp.get();
     }
 
     /**
+     * Setzt das Level des Pawns
+     * <br><br>
      * Da das Level nun ein IntegerBinding ist, der an den xp "hängt", kann man das level nicht ohne weiteres einfach setzen.
      * Daher muss man mit den Erfahrungspunkten (xp) direkt arbeiten. Hierfür muss man also das Level erst in die benötigten
      * xp "umrechnen" und die xp selbst updaten. Das Level aktualisiert sich automatisch.
@@ -292,14 +326,16 @@ public class Pawn implements Serializable {
     }
 
     /**
-     * @return {@code DoubleProperty} - Level-Progress, der den Fortschritt des Levels anzeigt.
+     * Gibt den Fortschritt zum nächsten Level zurück
+     * @return {@code DoubleProperty}
      */
     public DoubleProperty getLevelProgress() {
         return progress;
     }
 
     /**
-     * @return {@code true}, wenn der Pawn im Inventar des Spielers enthalten ist,
+     * Prüft, ob eine Pawn dem Spieler gehört.
+     * @return {@code true}, wenn der Pawn im Inventar des Spielers enthalten ist, <br>
      * {@code false}, wenn es sich um einen Gegner handelt.
      */
     public boolean ownedByPlayer() {
@@ -387,7 +423,8 @@ public class Pawn implements Serializable {
     }
 
     /**
-     * @return {@code int} - Gesamter Schutzwert des Pawns
+     * Gibt den gesamten Schutzwert eines Pawns zurück.
+     * @return {@code int}
      */
     public int getTotalProtectionValue() {
         int val = 0;
@@ -458,20 +495,23 @@ public class Pawn implements Serializable {
     }
 
     /**
-     * @return {@code Armor[]} - Rüstungsteile des Pawns.
+     * Gibt die (angelegten) Rüstungen des Pawns zurück
+     * @return {@code Armor[]}
      */
     public Armor[] getArmors() {
         return this.armors;
     }
 
     /**
-     * @return {@code Weapon[]} - Waffen des Pawns.
+     * Gibt die (angelegten) Waffen des Pawns zurück.
+     * @return {@code Weapon[]}
      */
     public Weapon[] getWeapons() {
         return this.weapons;
     }
 
     /**
+     * Prüft, ob der Pawn am aktellen Tag bereits gekämpft hat.
      * @return {@code true}, wenn der Pawn an dem aktuellen Spieltag bereits in der Arena gekämpft hat.
      */
     public boolean hashFoughtToday() {
@@ -479,16 +519,25 @@ public class Pawn implements Serializable {
     }
 
     /**
-     * @param foughtToday Ob der Pawn schon an dem Spieltag in der Arena gekämpt hat oder nicht.
+     * Setzt die Variable, dass der Pawn am aktuellen Tag bereits gekämpft hat.
+     * @param foughtToday Ob der Pawn schon an dem Spieltag in der Arena gekämpt hat {@code true}
+     *                    oder nicht {@code false}.
      */
     public void setFoughtToday(boolean foughtToday) {
         this.foughtToday = foughtToday;
     }
 
+    /**
+     * Setzt die Id des Pawns, basierend auf der Id des letzten Pawns.
+     */
     public void setId() {
         this.id = Inventory.getLastPawnId() + 1;
     }
 
+    /**
+     * Gibt die ID des Pawns zurück.
+     * @return {@code int}
+     */
     public int getId() {
         return this.id;
     }

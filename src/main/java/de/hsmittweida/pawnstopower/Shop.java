@@ -23,7 +23,8 @@ public class Shop {
 
     /**
      * Das Pane, welches das Shopfenster darstellt.
-     * @return Pane, welches dann im {@link Game#drawSpace()}} angezeigt wird.
+     * Gibt das Pane zurück, welches dann in {@link Game#drawSpace()} angezeigt wird.
+     * @return {@code Pane}
      */
     public static Pane Shop_view() {
         initVars();
@@ -80,6 +81,7 @@ public class Shop {
             HBox hbox = new HBox();
             CheckBox cb = new CheckBox();
 
+            /* Angekreuzte Items sind im Warenkorb */
             cb.setOnAction(e -> {
                 if (cb.isSelected()) {
                     purchased.add(cb);
@@ -108,6 +110,7 @@ public class Shop {
             HBox hbox = new HBox();
             CheckBox cb = new CheckBox();
 
+            /* angekreuzte Items sind im Warenkorb */
             cb.setOnAction(e -> {
                 if (cb.isSelected()) {
                     purchased.add(cb);

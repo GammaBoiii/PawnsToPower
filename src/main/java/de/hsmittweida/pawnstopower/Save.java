@@ -17,7 +17,8 @@ import java.util.HashMap;
  */
 public class Save {
     /**
-     * Speichert alle notwendigen Daten
+     * Speichert alle notwendigen Daten.<br>
+     * Gibt {@code true} zurück, wenn alles ohne Fehler gespeichert wurde.
      *
      * @param path Wo die Datei mit dem Spielstand gespeichert werden soll.
      * @return {@code true}, wenn alles fehlerfrei gespeichert wurde.
@@ -30,16 +31,6 @@ public class Save {
         ArrayList<Integer> pawnXP = new ArrayList<Integer>();
         for(Pawn p : Inventory.getPawns()) {
             pawnXP.add(p.getXpAsInt());
-
-            /* Da ein Pawn nach dem Laden nicht mehr das selbe Objekt wie vorher ist (Objektrefernz),
-             * müssen alle Waffen und RÜstungen entrüstet werden, da die getOwner() Methode jedes
-             * dieser Items, die alte Pawn-Referenz zurückgibt. */
-//            p.removeWeapon(p.getWeapon((byte) 0));
-//            p.removeWeapon(p.getWeapon((byte) 1));
-//            p.removeArmor(p.getArmor((byte) 0));
-//            p.removeArmor(p.getArmor((byte) 1));
-//            p.removeArmor(p.getArmor((byte) 2));
-//            p.removeArmor(p.getArmor((byte) 3));
         }
 
         /* Die folgenden zwei Schleifen generieren eine Vorlage für ausgerüstete Items,
@@ -93,6 +84,8 @@ public class Save {
 
     /**
      * Lädt alle Daten aus der Datei aus dem Path.
+     * Gibt {@code true} zurück, wenn alles ohne Fehler geladen wurde.
+     *
      * @param path Pfad, an dem die Datei liegen soll. Nur der Pfad in den Ordner der Datei.
      * @return {@code true}, wenn alles fehlerfrei geladen wurde.
      */
@@ -107,7 +100,6 @@ public class Save {
         } else {
             Inventory.setup();
         }
-
 
         ArrayList<Pawn> pawns = null;
         ArrayList<Integer> pawnXP = null;
