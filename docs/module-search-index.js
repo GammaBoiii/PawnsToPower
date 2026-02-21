@@ -1,0 +1,1 @@
+moduleSearchIndex = [{"l":"de.hsmittweida.pawnstopower"}];updateSearchResults();
