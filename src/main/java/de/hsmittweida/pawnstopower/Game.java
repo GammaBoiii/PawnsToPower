@@ -27,26 +27,50 @@ import java.util.HashMap;
  * Lädt Mechaniken wie Bilder, Fonts, etc..
  */
 public class Game {
-    private static ArrayList<Pawn> pawns;
-    private static Stage stage;
-    private static IntegerProperty day;
-
-    private static Pane gameSpace;
-    private static BorderPane panel;
-    private static HBox helpBar;
-    private static VBox sideBar;
-
-    private static TextFlow diary;
-    private static int diaryIndex;
-    private static Button prevDay, nextDay;
-
-    private static HashMap<String, Font> fonts;
-
     /**
-     * @deprecated
+     * Enthält die Stage für das Hauptfenster.
      */
-    Game() {
-    }
+    private static Stage stage;
+    /**
+     * Variable , die den aktuellen Tag darstellt.
+     */
+    private static IntegerProperty day;
+    /**
+     * {@code Pane}, welche den Bereich für das eigentliche Spielgeschehen enhtält.
+     */
+    private static Pane gameSpace;
+    /**
+     * Panel für die Spielübersicht
+     */
+    private static BorderPane panel;
+    /**
+     * Gibt Auskunft über den aktuellen Tag und Spielerresourcen an.
+     */
+    private static HBox helpBar;
+    /**
+     * Beinhaltet das Tagebuch.
+     */
+    private static VBox sideBar;
+    /**
+     * Referenzvariable für den Tagebucheintrag des Tages.
+     */
+    private static TextFlow diary;
+    /**
+     * Referenzvariable für den aktuellen Tag im Tagebuch.
+     */
+    private static int diaryIndex;
+    /**
+     * {@code Button} um im Tagebuch ein Tag vorzuscrollen.
+     */
+    private static Button prevDay;
+    /**
+     * {@code Button}, um im Tagebuch ein Tag zurückzuscrollen.
+     */
+    private static Button nextDay;
+    /**
+     * Beinhaltet alle Fonts, die extra ins Spiel eingefügt wurden.
+     */
+    private static HashMap<String, Font> fonts;
 
     /**
      * Diese Methode lädt die Standardoberfläche in die Szene.
@@ -74,7 +98,7 @@ public class Game {
 
     /**
      * Methode, die sämtliche Erstellungen der Oberflächen zusammenfasst.
-     * Beinhaltet das {@code panel}, als zentrale Oberfläche, die die
+     * Beinhaltet {@code panel}, als zentrale Oberfläche, die die
      * weiteren Oberflächen zusammenfasst.
      */
     public static void CreateWindow() {
@@ -123,7 +147,7 @@ public class Game {
      * Lädt das "Standard" Fenster in die Szene.
      * Szene ist hier das Hauptfenster, in dem das meiste Geschehen und die meisten
      * User-Interaktionen stattfinden.
-     * @return Vbox, als zentrales Element.
+     * @return {@code VBox}
      */
     private static VBox createGameView() {
         VBox box = new VBox();
@@ -188,7 +212,7 @@ public class Game {
 
     /**
      * Erstellt die Sidebar, die im Großen und Ganzen nur das Tagebuch beinhaltet.
-     * @return VBox, als zentrales Element.
+     * @return {@code VBox}
      */
     private static VBox createSideBar() {
         VBox box = new VBox();
@@ -260,7 +284,7 @@ public class Game {
 
     /**
      * Enthält die HelpBar, die die Kernwerte wie Gold, Kämpferanzahl, Reputation und vergangene Tage anzeigt.
-     * @return VBox, als zentrales Element.
+     * @return {@code VBox}
      */
     private static HBox createHelpBar() {
         HBox box = new HBox();
@@ -360,7 +384,8 @@ public class Game {
     }
 
     /**
-     * @return Den aktuellen Tag als Integer.
+     * Gibt den aktuellen Tag zurück
+     * @return {@code int}
      */
     public static int getDay() {
         return day.get();
@@ -424,7 +449,8 @@ public class Game {
 
     /**
      * Wird verwendet, um Tagebucheinträge mittels {@¢ode Diary} zu speichern.
-     * @return Den Tagebucheintrag des Tages.
+     * Returned den Tagebucheintrag des Tages.
+     * @return {@code TextFlow}
      */
     public static TextFlow getDiary() {
         if(diary == null) {
@@ -467,7 +493,8 @@ public class Game {
     }
 
     /**
-     * @return Eine Font
+     * Gibt eine Font entsprechend dem Namen zurück
+     * @return {@code Font}
      */
     public static Font getFont(String name) {
         if(fonts.containsKey(name)) {
@@ -492,14 +519,14 @@ public class Game {
 
     /**
      * Schließt die Szene
-     * @deprecated
      */
     public static void close() {
         stage.close();
     }
 
     /**
-     * @return Stage, die aktuelle stage
+     * Returned die aktuele Stage
+     * @return {@code Stage}
      */
     public static Stage getStage() {
         return stage;

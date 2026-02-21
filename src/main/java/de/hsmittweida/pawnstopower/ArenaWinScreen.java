@@ -14,8 +14,9 @@ import java.util.Random;
  */
 public class ArenaWinScreen {
     /**
-     * @param playerWins true, wenn der Spieler gewonnen hat. Sonst false.
-     * @return Pane, welches dann in {@code Game.drawSpace()} angezeigt wird.
+     * Gibt ein Pane zurück, welches dann in {@code Game.drawSpace()} angezeigt wird.
+     * @param playerWins {@code true}, wenn der Spieler gewonnen hat. Sonst {@code false}.
+     * @return {@code Pane}
      */
     public static Pane winscreen(boolean playerWins) {
         BorderPane pane = new BorderPane();

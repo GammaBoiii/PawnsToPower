@@ -7,10 +7,25 @@ import java.util.Random;
  * @see Item#getItemType()
  */
 public class Armor extends Item  {
+    /**
+     * {@code ArmorClass} des Armor-Objektes.
+     */
     private final ArmorClass ac;
+    /**
+     * Basis Wert des Schutzes.
+     */
     private int baseProtection;
+    /**
+     * {@code true}, wenn das Teil ausgerüstet ist, sonst {@code false}..
+     */
     private boolean equipped;
+    /**
+     * Slot ID, an dem das Teil ausgerüstet ist.
+     */
     private byte slot;
+    /**
+     * {@code Pawn} Besitzer des Teils.
+     */
     private Pawn owner;
 
     /**
@@ -71,14 +86,16 @@ public class Armor extends Item  {
     }
 
     /**
-     * @return Die Rüstungsklasse der Rüstung.
+     * Gibt die Rüstungsklasse der Rüstung zurück.
+     * @return {@code ArmorClass}
      */
     public ArmorClass getArmorClass() {
         return ac;
     }
 
     /**
-     * @return Den Standardwert des Schutzes, den die Rüstung gibt.
+     * Gibt den Standardwert des Schutzes der Ausrüstung zurück
+     * @return {@code int}
      * @deprecated
      */
     public int getBaseProtection() {
@@ -86,7 +103,8 @@ public class Armor extends Item  {
     }
 
     /**
-     * @return Slot des Rüstungsstückes.
+     * Gibt den Slot zurück, an dem das Rüstungstück angebracht werden kann.
+     * @return {@code byte} Slot ID
      */
     public byte getSlotType() {
         if(this.slot == -1) {
@@ -110,7 +128,8 @@ public class Armor extends Item  {
     }
 
     /**
-     * @return Einen zufälligen Slot <p> <em>als byte-Wert, entsprechend der 4 Körperregionen.
+     * Returned einen zufälligen Slot als byte-Wert, entsprechend der 4 Körperregionen.
+     * @return {@code byte}
      */
     private byte setRandomSlotType() {
         Random rnd = new Random();
@@ -118,7 +137,8 @@ public class Armor extends Item  {
     }
 
     /**
-     * @return Den Item-Typ <strong><em>Armor.
+     * Returend den Item-Typ <strong>Armor</strong>.
+     * @return {@code String} ~ "Amor"
      */
     public String getItemType() {
         return "Armor";
@@ -126,8 +146,8 @@ public class Armor extends Item  {
 
     /**
      * Errechnet den Basispreis der Rüstung, basierend auf dem
-     * Ausrüstungsslot und dem Material.
-     * @return Basispreis
+     * Ausrüstungsslot und dem Material und gibt diesen zurück.
+     * @return {@code int}
      */
     public int getBasePrice() {
         int price = switch (this.getSlotType()) {
@@ -148,7 +168,8 @@ public class Armor extends Item  {
     }
 
     /**
-     * @return Eine zufällige Rüstunsklasse.
+     * Returned eine zufällige Rüstungsklasse.
+     * @return {@code ArmorClass}
      */
     private ArmorClass getRandomArmorClass() {
         Random rnd = new Random();
@@ -156,8 +177,9 @@ public class Armor extends Item  {
     }
 
     /**
-     * @return Den gesamten Schutz, den die Rüstung entsprechend ihrer Ausrüstungsregion und
+     * Returned den gesamten Schutz, den die Rüstung entsprechend ihrere Ausüstungsregion und
      * Rüstungsklasse liefert.
+     * @return {@code double}
      */
     public double getTotalProtection() {
         int baseProtection = switch(this.getSlotType()) {
@@ -179,13 +201,37 @@ public class Armor extends Item  {
      * </ul>
      */
     public enum ArmorClass {
+        /**
+         * Fabric - Stoff
+         */
         FAB(0.6, "Stoff"),
+        /**
+         * Leather - Leder
+         */
         LTH(0.8, "Leder"),
+        /**
+         * Iron - Eisen
+         */
         IRN(1.0, "Eisen"),
+        /**
+         * Steel - Stahl
+         */
         STL(1.25, "Stahl");
 
+        /**
+         * Modifier Wert, der auf die Rüstung angewendet wird.
+         */
         public double modifier;
+        /**
+         * Name der Rüstung
+         */
         public String name;
+
+        /**
+         * Konstruktur für den Enumerator.
+         * @param modifier der Modifier für die Rüstung.
+         * @param name der Name der Rüstung.
+         */
         ArmorClass(double modifier, String name) {
             this.modifier =  modifier;
             this.name = name;

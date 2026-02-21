@@ -117,7 +117,7 @@ public class QuickMenu {
         });
 
         Button quit = new Button("Spiel Beenden");
-        quit.setOnAction(e -> {System.exit(0);});
+        quit.setOnAction(e -> {Game.close();});
 
         box.getChildren().addAll(new VBox(),fullscreen, save, load, cheat, quit, new VBox());
 

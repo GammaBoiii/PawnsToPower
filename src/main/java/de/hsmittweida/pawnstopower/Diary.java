@@ -29,12 +29,14 @@ public class Diary {
         saveContext();
     }
 
-    // Implementierung ausstehend
     /**
      * Gibt einen kurzen Log zum letzten Arena-Kampf aus. Je nachdem, ob der Spieler
      * siegreich war oder nicht, gibt es einen anderen, zufälligen Text.
      * @param won {@code true}, wenn der Spieler den Arena-Kampf gewonnen hat.
-     * @param params
+     * @param params Parameter für den Text
+     * @deprecated Ersetzt durch {@code ArenaWinScreen.generateArenaDiaryMsg(boolean won)}. Weiterhin
+     *              enthalten für Erweiterungszwecke.
+     * @see ArenaWinScreen#generateArenaDiaryMsg(boolean)
      */
     public static void logArenaFight(boolean won, String... params) {
         String[] msg;
@@ -190,7 +192,8 @@ public class Diary {
         }
     }
     /**
-     * @return HashMap, die alle Tagebucheinträge entsprechend der Tage beinhaltet.
+     * Returned eine HashMap, die alle Tagebucheinträge entsprechend der Tage beinhaltet.
+     * @return {@code HashMap<Integer, ArrayList<Text>>}
      */
     public static HashMap<Integer, ArrayList<Text>> getDiaryEntries() {
         return diaryEntries;
@@ -200,9 +203,10 @@ public class Diary {
     /**
      * Da die Tagebucheinträge gespeichert werden sollen, müssen diese in die passende Form
      * gebracht werden. Dazu werden zunächst die Text-Objekte in String Objekte umgewandelt, da
-     * Strngs sich besser serialisieren lassen.
+     * Strings sich besser serialisieren lassen.
+     * Returned eine HashMap mit den Tagebucheinträgen, die serialisierbar sind.
      * @see Diary#setDiaryEntriesFromSeriliazable(HashMap)
-     * @return HashMap mit den Tagebucheinträgen, serialisierbar
+     * @return {@code HashMap<Integer, ArrayList<String>>}
      */
     public static HashMap<Integer, ArrayList<String>> getDiaryEntriesAsSerializable() {
         HashMap<Integer, ArrayList<String>> entries = new HashMap<Integer, ArrayList<String>>();
@@ -221,8 +225,9 @@ public class Diary {
 
     /**
      * Wenn die Tagebucheinträge wieder geladen werden sollen, müssen diese wieder in Text-Objekte umgewandelt werden.
+     * Diese Aufgabe wird von der folgenden Methode übernommen.
      * @see Diary#getDiaryEntriesAsSerializable()
-     * @param map HashMap mit den Tagebucheinträgen in String-Form.
+     * @param map {@code HashMap<Integer, ArrayList<String>>}  mit den Tagebucheinträgen in String-Form.
      */
     public static void setDiaryEntriesFromSeriliazable(HashMap<Integer, ArrayList<String>> map) {
         diaryEntries.clear();
