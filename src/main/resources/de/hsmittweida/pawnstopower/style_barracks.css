@@ -1,15 +1,17 @@
 #pawns-list {
     -fx-background-color: #1a1a1a;
 }
+
 #background {
     -fx-background-color: #1a1a1a;
 }
+
 #pane {
     -fx-background-color: #1a1a1a;
 }
 
 .button {
-    -fx-background-color: rgba(4,40,40,0.4);
+    -fx-background-color: rgba(4, 40, 40, 0.4);
     -fx-text-fill: white;
     -fx-font-size: 22;
     -fx-font-weight: bold;
@@ -22,6 +24,7 @@
     -fx-text-alignment: center;
     -fx-font-family: "MedievalSharp";
 }
+
 .button:hover {
     -fx-background-color: #555;
     -fx-border-color: #777;

@@ -29,12 +29,13 @@
     -fx-border-width: 2px;
     -fx-cursor: hand;
     -fx-transition: all 0.3s ease-in-out;
-    
+
     /* Einheitliche Breite für alle Buttons */
     -fx-min-width: 200px;
     -fx-min-height: 50px;
     -fx-text-alignment: center;
 }
+
 .button:hover {
     -fx-background-color: #555;
     -fx-border-color: #777;

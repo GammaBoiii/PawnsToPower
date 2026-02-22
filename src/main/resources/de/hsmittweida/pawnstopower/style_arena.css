@@ -18,6 +18,7 @@
 #log {
     -fx-font-size: 37;
 }
+
 #log-background > .viewport {
     -fx-background-image: url("image/papyrusbackground.png");
     -fx-background-repeat: no-repeat;
@@ -35,7 +36,7 @@
 }
 
 .button {
-    -fx-background-color: rgba(4,40,40,0.4);
+    -fx-background-color: rgba(4, 40, 40, 0.4);
     -fx-text-fill: white;
     -fx-font-size: 22;
     -fx-font-weight: bold;
@@ -49,6 +50,7 @@
     -fx-text-alignment: center;
     -fx-font-family: "MedievalSharp";
 }
+
 .button:hover {
     -fx-background-color: #555;
     -fx-border-color: #777;

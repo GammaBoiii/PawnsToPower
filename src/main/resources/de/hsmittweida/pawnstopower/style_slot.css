@@ -21,6 +21,7 @@
     -fx-transition: all 0.3s ease-in-out;
     -fx-text-alignment: center;
 }
+
 .button:hover {
     -fx-background-color: #555;
     -fx-border-color: #777;

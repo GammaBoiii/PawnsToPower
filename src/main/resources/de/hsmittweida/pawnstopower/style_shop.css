@@ -4,8 +4,9 @@
     -fx-background-position: top;
     -fx-background-size: cover;
 }
+
 #pane {
-    -fx-background-color: rgba(255,255,255,0.0);
+    -fx-background-color: rgba(255, 255, 255, 0.0);
     -fx-alignment: center;
     /*
     -fx-background-image: url("image/wall_texture.png");
@@ -14,7 +15,7 @@
 }
 
 .button {
-    -fx-background-color: rgba(4,40,40,0.4);
+    -fx-background-color: rgba(4, 40, 40, 0.4);
     -fx-text-fill: white;
     -fx-font-size: 22;
     -fx-font-weight: bold;
@@ -28,6 +29,7 @@
     -fx-text-alignment: center;
     -fx-font-family: "MedievalSharp";
 }
+
 .button:hover {
     -fx-background-color: #555;
     -fx-border-color: #777;
@@ -42,7 +44,7 @@
     -fx-text-fill: white;
     -fx-font-size: 28px;
     -fx-font-weight: bold;
-    -fx-font-family: "Cinzel Decorative","Book Antiqua";
+    -fx-font-family: "Cinzel Decorative", "Book Antiqua";
 }
 
 #list {
@@ -61,6 +63,7 @@
     -fx-border-color: white;
     -fx-border-width: 2px;
 }
+
 .check-box:selected .mark {
     -fx-background-color: white;
 }

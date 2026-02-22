@@ -1,70 +1,73 @@
 /* styles.css */
 
-.dialog-pane{
-	-fx-background-color: #2e2e2e;
+.dialog-pane {
+    -fx-background-color: #2e2e2e;
 }
-.dialog-pane > *.button-bar > *.container{
-	-fx-background-color: #2e2e2e;
+
+.dialog-pane > *.button-bar > *.container {
+    -fx-background-color: #2e2e2e;
 }
-.dialog-pane > .content .label{
-	-fx-font-size: 15px;
-	-fx-font-weight: bold;
-	-fx-text-fill: white;
+
+.dialog-pane > .content .label {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
 }
- .header-panel{
-	-fx-background-color: #1f1f1f;
+
+.header-panel {
+    -fx-background-color: #1f1f1f;
 }
-.header-panel .label{
-	-fx-font-size: 18.0px;
-	-fx-font-style: italic;
+
+.header-panel .label {
+    -fx-font-size: 18.0px;
+    -fx-font-style: italic;
 }
 
 .button {
-	-fx-background-color: #333;
-	-fx-text-fill: white;
-	-fx-font-size: 14px;
-	-fx-padding: 8px 16px;
-	-fx-border-radius: 5px;
-	-fx-background-radius: 5px;
-	-fx-border-color: #555;
-	-fx-border-width: 2px;
-	-fx-cursor: hand;
-	-fx-transition: all 0.3s ease-in-out;
+    -fx-background-color: #333;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-border-color: #555;
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease-in-out;
 
-	/* Einheitliche Breite für alle Buttons */
-	-fx-min-width: 140px;
-	-fx-min-height: 40px;
-	-fx-text-alignment: center;
+    /* Einheitliche Breite für alle Buttons */
+    -fx-min-width: 140px;
+    -fx-min-height: 40px;
+    -fx-text-alignment: center;
 }
+
 .button:hover {
-	-fx-background-color: #555;
-	-fx-border-color: #777;
+    -fx-background-color: #555;
+    -fx-border-color: #777;
 }
 
 .button:pressed {
-	-fx-background-color: #222;
-	-fx-border-color: #444;
+    -fx-background-color: #222;
+    -fx-border-color: #444;
 }
-
 
 .label {
-	-fx-text-fill: white;
+    -fx-text-fill: white;
 }
 
-
 .combo-box {
-	-fx-background-color: #155331;
-	-fx-font-weight: bold;
-}	
+    -fx-background-color: #155331;
+    -fx-font-weight: bold;
+}
 
 .combo-box > .list-cell {
-	-fx-text-fill: white;
+    -fx-text-fill: white;
 }
 
 .combo-box-popup > .list-view {
-	-fx-background-color:black;
+    -fx-background-color: black;
 }
 
-.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet >  .list-cell {
-	-fx-background: black;
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
+    -fx-background: black;
 }
