@@ -14,13 +14,66 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="changed style">
-      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_arena.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_arena.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_barracks.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_barracks.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_default.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_default.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_dialog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_dialog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_inspector.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_inspector.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_mainmenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_mainmenu.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_shop.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/hsmittweida/pawnstopower/style_shop.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/allclasses-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/allpackages-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Arena.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Arena.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/ArenaWinScreen.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/ArenaWinScreen.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Armor.ArmorClass.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Armor.ArmorClass.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Armor.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Armor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Barracks.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Barracks.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Diary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Diary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Game.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Game.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Inspector.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Inspector.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Inventory.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Inventory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Item.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Item.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/ItemStats.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/ItemStats.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Pawn.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Pawn.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/QuickMenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/QuickMenu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/RunMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/RunMain.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Save.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Save.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/SetupMenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/SetupMenu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Shop.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Skill.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Skill.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/SkillInspector.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/SkillInspector.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Slot.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Slot.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/SoundManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/SoundManager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/StartMenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/StartMenu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Tools.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Tools.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Turn.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Turn.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Weapon.WeaponClass.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Weapon.WeaponClass.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Weapon.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/Weapon.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/de/hsmittweida/pawnstopower/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/module-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/de.hsmittweida.pawnstopower/module-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/deprecated-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/deprecated-list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/help-doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-10.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-11.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-12.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-13.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-14.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-14.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-15.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-15.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-16.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-16.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-17.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-17.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-18.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-18.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-19.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-19.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-20.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-20.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-21.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-21.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-22.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-22.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-8.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index-files/index-9.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/member-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/overview-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/serialized-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/serialized-form.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -283,7 +336,7 @@
       <workItem from="1771584838130" duration="13797000" />
       <workItem from="1771695821058" duration="6339000" />
       <workItem from="1771753173397" duration="1810000" />
-      <workItem from="1771755251531" duration="2498000" />
+      <workItem from="1771755251531" duration="2825000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
