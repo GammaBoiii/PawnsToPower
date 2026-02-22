@@ -410,7 +410,7 @@ public class Inspector {
         xpbar.getChildren().addAll(pb);
         pb.prefWidthProperty().bind(box.widthProperty());
 
-        /* Erfahrungspunkte */
+        /* Skills */
         HBox xp = new HBox();
         Button openSkill = new Button("» Skills «");
         openSkill.setId("skill-button");
