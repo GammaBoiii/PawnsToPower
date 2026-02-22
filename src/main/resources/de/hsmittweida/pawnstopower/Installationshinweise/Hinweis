@@ -1,8 +1,1 @@
--egal ob windows oder Linux: Bildschirmskalierung muss 100% sein,
-    ansonsten kommt es zu starken visuellen beeinträchtigungen
--entwickelt wurde mit 1080p (FullHD), keine Möglichkeit zu Testung auf anderen Auflösungen
-    -> bei Problemen auf 1080p umstellen
-
--Falls Sound nicht läuft (unter Linux):
-
--eventuell downgrade auf java 17.0.9: /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+(siehe schriftliche Ausarbeitung)
