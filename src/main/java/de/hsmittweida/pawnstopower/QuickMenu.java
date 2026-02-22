@@ -25,13 +25,13 @@ public class QuickMenu {
         Stage stage = new Stage();
         VBox box = new VBox();
         box.setId("quickmenubox");
-        Scene s = new Scene(box, 500,550);
+        Scene s = new Scene(box, 500, 550);
         Tools.addStylesheet(s, "style_default.css");
 
         /* Vollbild toggle Button */
         VBox fullscreen = new VBox();
         fullscreen.setSpacing(10);
-        fullscreen.setPadding(new Insets(0,25,15,25));
+        fullscreen.setPadding(new Insets(0, 25, 15, 25));
         Label fullscreen_label = new Label("Vollbild umschalten:");
         ToggleButton fullscreen_button = new ToggleButton("Vollbild");
         fullscreen_button.setSelected(Game.getStage().isFullScreen());
@@ -43,7 +43,7 @@ public class QuickMenu {
         /* Speichern des Spiels */
         VBox save = new VBox();
         save.setSpacing(10);
-        save.setPadding(new Insets(0,25,15,25));
+        save.setPadding(new Insets(0, 25, 15, 25));
         Label save_label = new Label("Spiel speichern (Nur Pfad):");
         TextField save_pathinput = new TextField();
         Button save_button = new Button("Speichern");
@@ -51,16 +51,16 @@ public class QuickMenu {
         save_button.setOnAction(e -> {
             //Save.saveAll("/home/johann/Documents/p2p/newsavetypelol.p2p");
             String str = "";
-            if(save_pathinput.getText().endsWith("/")) {
+            if (save_pathinput.getText().endsWith("/")) {
                 //save_pathinput.setText(save_pathinput.getText() + "savegame.p2p");
                 str = "savegame.p2p";
-                if(Save.saveAll(save_pathinput.getText() + str)) {
+                if (Save.saveAll(save_pathinput.getText() + str)) {
                     Tools.popup("Speichern", "Datei wird gespeichert!", "Der Pfad wurde festgelegt auf: " + save_pathinput.getText() + str);
                 }
             } else {
                 //save_pathinput.setText(save_pathinput.getText() + "/savegame.p2p");
                 str = "/savegame.p2p";
-                if(Save.saveAll(save_pathinput.getText() + str)) {
+                if (Save.saveAll(save_pathinput.getText() + str)) {
                     Tools.popup("Speichern", "Datei wird gespeichert!", "Der Pfad wurde festgelegt auf: " + save_pathinput.getText() + str);
                 }
             }
@@ -71,7 +71,7 @@ public class QuickMenu {
         /* Laden eines Spielstandes */
         VBox load = new VBox();
         load.setSpacing(10);
-        load.setPadding(new Insets(0,25,15,25));
+        load.setPadding(new Insets(0, 25, 15, 25));
         Label load_label = new Label("Spiel laden (Nur Pfad):");
         TextField load_pathinput = new TextField();
         Button load_button = new Button("Laden");
@@ -79,15 +79,15 @@ public class QuickMenu {
         load_button.setOnAction(e -> {
             //Save.loadAll("/home/johann/Documents/p2p/newsavetypelol.p2p");
             String str = "";
-            if(load_pathinput.getText().endsWith("/")) {
+            if (load_pathinput.getText().endsWith("/")) {
                 str = "savegame.p2p";
-                if(Save.loadAll(load_pathinput.getText() + str)) {
+                if (Save.loadAll(load_pathinput.getText() + str)) {
                     Tools.popup("Laden", "Datei wird geladen!", "Der Pfad wurde festgelegt auf: " + load_pathinput.getText() + str);
                     stage.close();
                 }
             } else {
                 str = "/savegame.p2p";
-                if(Save.loadAll(load_pathinput.getText() + str)) {
+                if (Save.loadAll(load_pathinput.getText() + str)) {
                     Tools.popup("Laden", "Datei wird geladen!", "Der Pfad wurde festgelegt auf: " + load_pathinput.getText() + str);
                     stage.close();
                 }
@@ -100,7 +100,7 @@ public class QuickMenu {
         Button cheat = new Button("Cheat");
         cheat.setOnAction(e -> {
             String in = Tools.inputPopup("Cheat-Aktivierung!", "Top SECRET Passwort erforderlich!", "Passwort eingeben:");
-            if(in != null && in.equals("helloworld")) {
+            if (in != null && in.equals("helloworld")) {
                 Tools.popup("Erfolgreich.", "Passwort erraten!", "Cheat aktiviert.");
                 Inventory.addMoney(424);
                 Inventory.addPawn(new Pawn(true));
@@ -123,17 +123,17 @@ public class QuickMenu {
             stage.close();
         });
 
-        box.getChildren().addAll(new VBox(),fullscreen, save, load, cheat, quit, new VBox());
+        box.getChildren().addAll(new VBox(), fullscreen, save, load, cheat, quit, new VBox());
 
         /* Auf alle Elemente die growth-Prio setzen */
-        for(Node n: box.getChildren()) {
+        for (Node n : box.getChildren()) {
             VBox.setVgrow(n, Priority.ALWAYS);
         }
 
         box.setAlignment(Pos.CENTER);
         box.setSpacing(15);
 
-        Tools.defaultClose(stage, "quickmenu" );
+        Tools.defaultClose(stage, "quickmenu");
         stage.setScene(s);
         stage.show();
     }

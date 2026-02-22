@@ -17,6 +17,7 @@ public class ItemStats {
      * Öffnet ein Popup für eine Waffe zur Inspektion.
      * <br>
      * Zeigt Name, Klasse und Schaden der Waffe an, ebenso, ob es sich um ein Zweihänder handelt oder nicht.
+     *
      * @param w Die Waffe, die isnpiziert werden soll.
      */
     ItemStats(Weapon w) {
@@ -36,7 +37,7 @@ public class ItemStats {
 
         Label wClassLabel = new Label("Klasse:");
         Label wClassVal = new Label(w.getWeaponClass().toString());
-        wClassVal.setOnMousePressed(e-> {
+        wClassVal.setOnMousePressed(e -> {
             System.out.print("Das ist eine Waffe. DEBUG!");
         });
         HBox wClass = new HBox();
@@ -66,6 +67,7 @@ public class ItemStats {
      * Öffnet ein Popup für ein Rüstungsteil zur Inspektion.
      * <br>
      * Zeigt Name, Ausrüstungsslot, Klasse und Rüstungswert an.
+     *
      * @param a Das Rüstungsteil, das inspiziert werden soll.
      */
     ItemStats(Armor a) {
@@ -100,7 +102,7 @@ public class ItemStats {
 
         Label aClassLabel = new Label("Klasse:");
         Label aClassVal = new Label(a.getArmorClass().name);
-        aClassVal.setOnMousePressed(e-> {
+        aClassVal.setOnMousePressed(e -> {
         });
         HBox aClass = new HBox();
         HBox.setHgrow(aClassLabel, Priority.ALWAYS);

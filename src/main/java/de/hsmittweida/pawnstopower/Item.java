@@ -35,6 +35,7 @@ public class Item implements Serializable {
      * Legt den Besitzer fest.
      * <br>
      * Kann null sein.
+     *
      * @param owner Owner von dem Item
      */
     protected Item(Pawn owner) {
@@ -43,6 +44,7 @@ public class Item implements Serializable {
 
     /**
      * Findet den Slot, an dem das Item ausgerüstet ist, falls es einen Besitzer hat und gibt diesen Slot zurück.
+     *
      * @param item Item, welches gesucht werden soll.
      * @return {@code byte} SlotID
      */
@@ -65,6 +67,7 @@ public class Item implements Serializable {
 
     /**
      * Legt einem Kämpfer ein Item an.
+     *
      * @param p Pawn, der das Item bekommen soll.
      */
     protected void equip(Pawn p) {
@@ -90,6 +93,7 @@ public class Item implements Serializable {
 
     /**
      * Gibt an, ob ein Item ausgerüstet ist.
+     *
      * @return {@code true}, wenn das Item ausgerüstet ist.
      */
     protected boolean isEquipped() {
@@ -98,6 +102,7 @@ public class Item implements Serializable {
 
     /**
      * Gibt den Pawn zurück, der das Item besitzt.
+     *
      * @return {@code Pawn}
      */
     protected Pawn getOwner() {
@@ -106,6 +111,7 @@ public class Item implements Serializable {
 
     /**
      * Gibt den Namen des Items zurück.
+     *
      * @return {@code String}
      */
     protected String getName() {
@@ -114,6 +120,7 @@ public class Item implements Serializable {
 
     /**
      * Gibt dem Item einen Namen.
+     *
      * @param s Name, den das Item bekommen soll.
      */
     protected void setName(String s) {
@@ -123,12 +130,13 @@ public class Item implements Serializable {
     /**
      * Gibt dem Item einen zufällig generierten Namen.
      */
-    protected void setName(){
+    protected void setName() {
         this.name = randomName(this);
     }
 
     /**
      * Generiert einen Namen, basierend auf dem Item Typ.
+     *
      * @param item Das Item, für welches ein Namen generiert werden soll.
      * @return {@code String} Name
      */
@@ -167,6 +175,7 @@ public class Item implements Serializable {
 
     /**
      * Platzhalter der Super Klasse. Wird von den Kindklassen entsprechend mit {@code Override} überschrieben.
+     *
      * @return {@code String} Item-Typ
      */
     protected String getItemType() {
@@ -175,6 +184,7 @@ public class Item implements Serializable {
 
     /**
      * Gibt die EquipLocation eines Pawns an
+     *
      * @return {@code int[]}
      */
     public int[] getEquipLocation() {
@@ -183,22 +193,24 @@ public class Item implements Serializable {
 
     /**
      * Generiert die Equip-Location.
+     *
      * @param pawnid Id des Pawns für den die Location generiert werden soll.
      * @param slotid Id des Slots.
      */
     public void generateEquipLocation(int pawnid, int slotid) {
-        equipLocation = new int[] {pawnid, slotid};
+        equipLocation = new int[]{pawnid, slotid};
     }
 
     /**
      * Setzt das Item an eine Location im Equipement.
      * Dient der korrekten Ausrüstung von Items nach dem Laden eines gespeicherten Spielstandes
+     *
      * @param item Item, welches gepusht werden soll.
      */
     public void pushEquipLocation(Item item) {
-        if(item.getItemType().equals("Weapon")) {
+        if (item.getItemType().equals("Weapon")) {
             Inventory.getPawnById(equipLocation[0]).giveWeapon((Weapon) item, (byte) equipLocation[1]);
-        } else if(item.getItemType().equals("Armor")) {
+        } else if (item.getItemType().equals("Armor")) {
             Inventory.getPawnById(equipLocation[0]).giveArmor((Armor) item, (byte) equipLocation[1]);
         } else {
             System.out.println("Konnte Item nicht anlegen");

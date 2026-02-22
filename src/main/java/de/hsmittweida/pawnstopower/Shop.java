@@ -35,6 +35,7 @@ public class Shop {
     /**
      * Das Pane, welches das Shopfenster darstellt.
      * Gibt das Pane zurück, welches dann in {@link Game#drawSpace()} angezeigt wird.
+     *
      * @return {@code Pane}
      */
     public static Pane Shop_view() {
@@ -54,7 +55,7 @@ public class Shop {
         AnchorPane.setRightAnchor(pane, 55.0);
         pane.setMaxWidth(Double.MAX_VALUE);
         pane.setMaxWidth(Double.MAX_VALUE);
-        pane.setPadding(new Insets(90,0.0,0.0,0.0));
+        pane.setPadding(new Insets(90, 0.0, 0.0, 0.0));
 
         Button mainMenu = new Button("Hauptmenu");
         mainMenu.setOnAction(e -> {
@@ -70,8 +71,8 @@ public class Shop {
         ScrollPane armor = new ScrollPane();
 
         /* Wird verwendet, um bereits gekaufte Gegenstände später im Shop
-        * zu sperren (nur einmaliger Kauf möglich).
-        * */
+         * zu sperren (nur einmaliger Kauf möglich).
+         * */
         ArrayList<CheckBox> purchased = new ArrayList<CheckBox>();
 
         weapons.vbarPolicyProperty().set(ScrollPane.ScrollBarPolicy.NEVER);
@@ -112,7 +113,7 @@ public class Shop {
             name.setMaxWidth(Double.MAX_VALUE);
             price.setPadding(new Insets(0, 15, 0, 0));
             cb.setPadding(new Insets(9, 15, 11, 15));
-            hbox.setPadding(new Insets(15,0,0,0));
+            hbox.setPadding(new Insets(15, 0, 0, 0));
             cb.setAlignment(Pos.CENTER_LEFT);
             hbox.getChildren().addAll(cb, name, price);
             weapon_list.getChildren().add(hbox);
@@ -141,9 +142,9 @@ public class Shop {
             name.setMaxWidth(Double.MAX_VALUE);
             price.setPadding(new Insets(0, 15, 0, 0));
             cb.setPadding(new Insets(9, 15, 11, 15));
-            hbox.setPadding(new Insets(15,0,0,0));
+            hbox.setPadding(new Insets(15, 0, 0, 0));
             cb.setAlignment(Pos.CENTER_LEFT);
-            hbox.getChildren().addAll(cb, name,  price);
+            hbox.getChildren().addAll(cb, name, price);
             armor_list.getChildren().add(hbox);
         }
 
@@ -164,7 +165,7 @@ public class Shop {
                 for (Item x : shopping_cart) {
                     Inventory.addItem(x);
                 }
-                for(CheckBox cb : purchased) {
+                for (CheckBox cb : purchased) {
                     cb.setDisable(true);
                     cb.lookup(".box").setStyle("-fx-background-color: darkred");
                     cb.setSelected(false);
@@ -201,7 +202,7 @@ public class Shop {
 
         weapon_offer.clear();
         armor_offer.clear();
-        for(int i = 0; i<12; i++) {
+        for (int i = 0; i < 12; i++) {
             weapon_offer.add(new Weapon());
             armor_offer.add(new Armor());
         }
@@ -209,16 +210,17 @@ public class Shop {
 
     /**
      * Prüft, ob ein Item bereits gekauft wurde.
+     *
      * @param list liste, aus der geprüft werden soll.
-     * @param cb Checkbox, an der das zu prüfende Item "hängt".
+     * @param cb   Checkbox, an der das zu prüfende Item "hängt".
      * @return {@code true}, wenn bereits gekauft, sonst {@code false}.
      * @deprecated
      */
     private static boolean isPurchased(ArrayList<CheckBox> list, CheckBox cb) {
         System.out.println("Checking " + cb + " against " + list);
-        for(CheckBox x : list) {
+        for (CheckBox x : list) {
             System.out.println(x + " | " + cb);
-            if(x.equals(cb)) {
+            if (x.equals(cb)) {
                 return true;
             }
         }

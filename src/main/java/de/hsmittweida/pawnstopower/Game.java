@@ -78,7 +78,7 @@ public class Game {
      */
     public static void Game_view() {
         /* Fonts laden */
-        if(fonts == null) {
+        if (fonts == null) {
             fonts = new HashMap<String, Font>();
         }
         loadFonts();
@@ -147,6 +147,7 @@ public class Game {
      * Lädt das "Standard" Fenster in die Szene.
      * Szene ist hier das Hauptfenster, in dem das meiste Geschehen und die meisten
      * User-Interaktionen stattfinden.
+     *
      * @return {@code VBox}
      */
     private static VBox createGameView() {
@@ -162,7 +163,7 @@ public class Game {
         house3 = new Button("Arena");
         house4 = new Button("Sonstiges");
 
-        Tools.addButtonSfx(house1,house2,house3,house4);
+        Tools.addButtonSfx(house1, house2, house3, house4);
 
         ArrayList<Button> buttons = new ArrayList<>();
         buttons.add(house1);
@@ -170,7 +171,7 @@ public class Game {
         buttons.add(house3);
         buttons.add(house4);
 
-        for(Button button : buttons) {
+        for (Button button : buttons) {
             Tools.addHoverEffect(button, 100, 1.02, true);
         }
 
@@ -188,7 +189,7 @@ public class Game {
         field.setHgap(200);
         field.setVgap(125);
 
-        for(Button button : buttons) {
+        for (Button button : buttons) {
             button.setMaxWidth(Double.MAX_VALUE);
             button.setMaxHeight(Double.MAX_VALUE);
         }
@@ -212,6 +213,7 @@ public class Game {
 
     /**
      * Erstellt die Sidebar, die im Großen und Ganzen nur das Tagebuch beinhaltet.
+     *
      * @return {@code VBox}
      */
     private static VBox createSideBar() {
@@ -220,7 +222,7 @@ public class Game {
         box.setId("side-bar");
 
         Label header = new Label("Tagebuch");
-        header.setPadding(new Insets(0,25,0,25));
+        header.setPadding(new Insets(0, 25, 0, 25));
         box.setAlignment(Pos.CENTER);
         header.setId("diary-header");
 
@@ -250,7 +252,7 @@ public class Game {
             diary.getChildren().clear();
             System.out.println("Diary index: " + diaryIndex);
             /* Inseriert alle Elemente von dem Tag */
-            for(Text t : Diary.getDiaryEntries().get(diaryIndex-1)) {
+            for (Text t : Diary.getDiaryEntries().get(diaryIndex - 1)) {
                 diary.getChildren().add(t);
                 t.setStyle("-fx-font-size: 36px;");
             }
@@ -258,7 +260,7 @@ public class Game {
              * Nur, wenn der DiaryIndex noch nicht am Anfang ist, kann man auch weiterhin einen Tag zurück
              * */
             nextDay.setDisable(false);
-            if(diaryIndex - 1 <= 0) {
+            if (diaryIndex - 1 <= 0) {
                 prevDay.setDisable(true);
             }
         });
@@ -268,7 +270,7 @@ public class Game {
             diaryIndex++;
             diary.getChildren().clear();
             /* Inseriert alle Elemente von dem Tag */
-            for(Text t : Diary.getDiaryEntries().get(diaryIndex-1)) {
+            for (Text t : Diary.getDiaryEntries().get(diaryIndex - 1)) {
                 diary.getChildren().add(t);
                 t.setStyle("-fx-font-size: 36px;");
             }
@@ -276,7 +278,7 @@ public class Game {
              * Nur, wenn der DiaryIndex noch nicht am Ende (aktuellster Tag) ist, kann man weiterhin ein Tag vor.
              */
             prevDay.setDisable(false);
-            if(diaryIndex + 1 > getDay()) {
+            if (diaryIndex + 1 > getDay()) {
                 nextDay.setDisable(true);
             }
         });
@@ -286,9 +288,9 @@ public class Game {
         entryChooser.setAlignment(Pos.CENTER);
         entryChooser.getChildren().addAll(prevDay, nextDay);
         entryChooser.setSpacing(10);
-        entryChooser.setPadding(new Insets(10,25,10,25));
+        entryChooser.setPadding(new Insets(10, 25, 10, 25));
         day.addListener((obs, oldDay, newDay) -> {
-           prevDay.setDisable(false);
+            prevDay.setDisable(false);
         });
 
         box.getChildren().addAll(header, content, entryChooser);
@@ -297,6 +299,7 @@ public class Game {
 
     /**
      * Enthält die HelpBar, die die Kernwerte wie Gold, Kämpferanzahl, Reputation und vergangene Tage anzeigt.
+     *
      * @return {@code VBox}
      */
     private static HBox createHelpBar() {
@@ -331,7 +334,7 @@ public class Game {
         nextDay.setId("next-day");
         nextDay.setAlignment(Pos.CENTER);
         box.setAlignment(Pos.CENTER);
-        box.setPadding(new Insets(0,25,0,8));
+        box.setPadding(new Insets(0, 25, 0, 8));
 
 
         /* Beim Initiieren wird einmalig ein neuer Tag gesetzt (von 0 auf 1). Dies wird so gemacht, damit die
@@ -350,7 +353,7 @@ public class Game {
     /**
      * Extra Methode für die Action vom Barracks-Button.
      */
-    private static  void barracks() {
+    private static void barracks() {
         Game.drawSpace(Barracks.Barrack_view());
     }
 
@@ -364,7 +367,7 @@ public class Game {
     /**
      * Extra Methode für die Action vom Arena-Button.
      */
-    private static  void arena() {
+    private static void arena() {
         Game.drawSpace(Arena.chooseFighter());
     }
 
@@ -389,7 +392,7 @@ public class Game {
         Shop.refreshShop();
 
         /* Pawn Kämpfe zurücksetzen */
-        for(Pawn p : Inventory.getPawns()) {
+        for (Pawn p : Inventory.getPawns()) {
             p.setFoughtToday(false);
         }
 
@@ -399,6 +402,7 @@ public class Game {
 
     /**
      * Gibt den aktuellen Tag zurück
+     *
      * @return {@code int}
      */
     public static int getDay() {
@@ -407,6 +411,7 @@ public class Game {
 
     /**
      * Setzt den Spieltag
+     *
      * @param d Tag, der gesetzt werden soll.
      */
     public static void setDay(int d) {
@@ -415,6 +420,7 @@ public class Game {
 
     /**
      * Eine Debug-Methode, die während der Entwicklung verwendet wurde.
+     *
      * @deprecated
      */
     private static void Debug() {
@@ -426,25 +432,26 @@ public class Game {
         Inventory.addItem(new Weapon(Weapon.WeaponClass.KTN, null));
         Inventory.addItem(new Armor());
         Inventory.addItem(new Armor());
-        Inventory.addItem(new Armor((byte)0));
-        Inventory.addItem(new Armor((byte)1));
-        Inventory.addItem(new Armor((byte)2));
-        Inventory.addItem(new Armor((byte)2));
-        Inventory.addItem(new Armor((byte)2));
-        Inventory.addItem(new Armor((byte)2));
-        Inventory.addItem(new Armor((byte)2));
-        Inventory.addItem(new Armor((byte)2));
-        Inventory.addItem(new Armor((byte)2));
-        Inventory.addItem(new Armor((byte)2));
-        Inventory.addItem(new Armor((byte)2));
-        Inventory.addItem(new Armor((byte)2));
-        Inventory.addItem(new Armor((byte)2));
-        Inventory.addItem(new Armor((byte)3));
+        Inventory.addItem(new Armor((byte) 0));
+        Inventory.addItem(new Armor((byte) 1));
+        Inventory.addItem(new Armor((byte) 2));
+        Inventory.addItem(new Armor((byte) 2));
+        Inventory.addItem(new Armor((byte) 2));
+        Inventory.addItem(new Armor((byte) 2));
+        Inventory.addItem(new Armor((byte) 2));
+        Inventory.addItem(new Armor((byte) 2));
+        Inventory.addItem(new Armor((byte) 2));
+        Inventory.addItem(new Armor((byte) 2));
+        Inventory.addItem(new Armor((byte) 2));
+        Inventory.addItem(new Armor((byte) 2));
+        Inventory.addItem(new Armor((byte) 2));
+        Inventory.addItem(new Armor((byte) 3));
     }
 
     /**
      * Zeichnet ein Pane in die zentrale Szene des Spiels.
      * Kann benutzt werden, um andere Menüs/Szene in das Hauptfenster zu laden.
+     *
      * @param pane Pane, welches geladen werden soll.
      */
     public static void drawSpace(Pane pane) {
@@ -464,10 +471,11 @@ public class Game {
     /**
      * Wird verwendet, um Tagebucheinträge mittels {@link Diary} zu speichern.
      * Returned den Tagebucheintrag des Tages.
+     *
      * @return {@code TextFlow}
      */
     public static TextFlow getDiary() {
-        if(diary == null) {
+        if (diary == null) {
             diary = new TextFlow();
         }
         return diary;
@@ -476,10 +484,11 @@ public class Game {
     /**
      * Erlaubt das Deaktivieren des "Nächster Tag"-Buttons, während bestimmten Zeitpunkten des
      * Spiels.
+     *
      * @param disabled {@code true} = deaktiviert; {@code false} = aktiviert
      */
     public static void setNextDayButtonDisabled(boolean disabled) {
-        if(helpBar != null)helpBar.getChildren().get(helpBar.getChildren().size()-1).setDisable(disabled);
+        if (helpBar != null) helpBar.getChildren().get(helpBar.getChildren().size() - 1).setDisable(disabled);
     }
 
     /**
@@ -512,11 +521,12 @@ public class Game {
 
     /**
      * Gibt eine Font entsprechend dem Namen zurück
-     * @return {@code Font}
+     *
      * @param name Name der Font, welche geladen werden soll.
+     * @return {@code Font}
      */
     public static Font getFont(String name) {
-        if(fonts.containsKey(name)) {
+        if (fonts.containsKey(name)) {
             return fonts.get(name);
         }
         return null;
@@ -545,6 +555,7 @@ public class Game {
 
     /**
      * Returned die aktuele Stage
+     *
      * @return {@code Stage}
      */
     public static Stage getStage() {
@@ -553,6 +564,7 @@ public class Game {
 
     /**
      * Erlaubt das aktivieren/deaktivieren des Fullscreen-Modus.
+     *
      * @param fullscreen {@code true} = aktiviert; {@code false} = deaktiviert
      */
     public static void setFullscreen(boolean fullscreen) {

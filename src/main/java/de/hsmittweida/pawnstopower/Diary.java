@@ -38,6 +38,7 @@ public class Diary {
 
     /**
      * Schreibt einen String in das Tagebuch.
+     *
      * @param s String, der im Tagebuch hinterlegt werden soll.
      */
     public static void writeDiaryEntry(String s) {
@@ -50,11 +51,12 @@ public class Diary {
     /**
      * Gibt einen kurzen Log zum letzten Arena-Kampf aus. Je nachdem, ob der Spieler
      * siegreich war oder nicht, gibt es einen anderen, zufälligen Text.
-     * @param won {@code true}, wenn der Spieler den Arena-Kampf gewonnen hat.
+     *
+     * @param won    {@code true}, wenn der Spieler den Arena-Kampf gewonnen hat.
      * @param params Parameter für den Text
-     * @deprecated Ersetzt durch {@link ArenaWinScreen#generateArenaDiaryMsg(boolean)}. Weiterhin
-     *              enthalten für Erweiterungszwecke.
      * @see ArenaWinScreen#generateArenaDiaryMsg(boolean)
+     * @deprecated Ersetzt durch {@link ArenaWinScreen#generateArenaDiaryMsg(boolean)}. Weiterhin
+     * enthalten für Erweiterungszwecke.
      */
     public static void logArenaFight(boolean won, String... params) {
         String[] msg;
@@ -144,11 +146,11 @@ public class Diary {
         }
 
         /* Reputation/Ehre gewonnen oder verloren
-        * Erklärung der extra Überprüfungen:
-        *   day:        Geprüft werden soll erst nach dem ersten Tageswechsel, da sonst falsche Informationen
-        *               durch die ursprüngliche Initialisierung geprinted werden.
-        *   counter:    Es soll nicht diese Nachricht und die Nachricht des "Nichts-Tun's" (letztes if
-        *               dieser Methode) gleichzeitig im Tagebuch erscheinen, da es sonst nicht schön aussieht.
+         * Erklärung der extra Überprüfungen:
+         *   day:        Geprüft werden soll erst nach dem ersten Tageswechsel, da sonst falsche Informationen
+         *               durch die ursprüngliche Initialisierung geprinted werden.
+         *   counter:    Es soll nicht diese Nachricht und die Nachricht des "Nichts-Tun's" (letztes if
+         *               dieser Methode) gleichzeitig im Tagebuch erscheinen, da es sonst nicht schön aussieht.
          */
         if (Math.abs(Inventory.getReputation().get() - oldReputation) != 0 && Game.getDay() != 2 && counter > 0) {
             String m1 = "Wir haben am letzten Tag " + (Inventory.getReputation().get() - oldReputation) + " Reputation erhalten.\n\n";
@@ -163,7 +165,7 @@ public class Diary {
         oldReputation = Inventory.getReputation().get();
 
         /* Falls man Tage nur sinnlos überspringt, geht Reputation verloren. */
-        if(counter <= 0) {
+        if (counter <= 0) {
             int minusRep = (int) (Math.ceil(Inventory.getReputation().get() * -0.1));
             Inventory.addReputation(minusRep);
             msg += "Wir haben am letzten Tag nichts erreicht und daher " + Math.abs(minusRep) + " Reputation verloren.\n\n";
@@ -176,7 +178,8 @@ public class Diary {
      * Speichert alle Tagebucheinträge, entsprechend der Tage ab,
      * sodass diese immer durchlaufen werden können.
      * Erlaubt dem Spieler also die Einträge der vergangenen Tage zu sehen.
-     * @param day Tag, an dem ein Eintrag abgespeichert werden soll.
+     *
+     * @param day   Tag, an dem ein Eintrag abgespeichert werden soll.
      * @param entry Der Eintrag, der an dem Tag abgespeichert werden soll.
      * @deprecated
      */
@@ -209,8 +212,10 @@ public class Diary {
             diaryEntries.get(Game.getDay() - 1).add((Text) n);
         }
     }
+
     /**
      * Returned eine HashMap, die alle Tagebucheinträge entsprechend der Tage beinhaltet.
+     *
      * @return {@code HashMap<Integer, ArrayList<Text>>}
      */
     public static HashMap<Integer, ArrayList<Text>> getDiaryEntries() {
@@ -223,15 +228,16 @@ public class Diary {
      * gebracht werden. Dazu werden zunächst die Text-Objekte in String Objekte umgewandelt, da
      * Strings sich besser serialisieren lassen.
      * Returned eine HashMap mit den Tagebucheinträgen, die serialisierbar sind.
-     * @see Diary#setDiaryEntriesFromSeriliazable(HashMap)
+     *
      * @return {@code HashMap<Integer, ArrayList<String>>}
+     * @see Diary#setDiaryEntriesFromSeriliazable(HashMap)
      */
     public static HashMap<Integer, ArrayList<String>> getDiaryEntriesAsSerializable() {
         HashMap<Integer, ArrayList<String>> entries = new HashMap<Integer, ArrayList<String>>();
         ArrayList<String> temp;
-        for(int i = 0; i<diaryEntries.size(); i++) {
+        for (int i = 0; i < diaryEntries.size(); i++) {
             temp = new ArrayList<>();
-            for(int j = 0; j<diaryEntries.get(i).size(); j++) {
+            for (int j = 0; j < diaryEntries.get(i).size(); j++) {
                 String text = ((Text) diaryEntries.get(i).get(j)).getText();
                 System.out.println("-: " + text);
                 temp.add(text);
@@ -244,23 +250,24 @@ public class Diary {
     /**
      * Wenn die Tagebucheinträge wieder geladen werden sollen, müssen diese wieder in Text-Objekte umgewandelt werden.
      * Diese Aufgabe wird von der folgenden Methode übernommen.
-     * @see Diary#getDiaryEntriesAsSerializable()
+     *
      * @param map {@code HashMap<Integer, ArrayList<String>>}  mit den Tagebucheinträgen in String-Form.
+     * @see Diary#getDiaryEntriesAsSerializable()
      */
     public static void setDiaryEntriesFromSeriliazable(HashMap<Integer, ArrayList<String>> map) {
         diaryEntries.clear();
         Game.getDiary().getChildren().clear();
         Game.refreshDiaryIndex();
-        for(int i = 0; i<map.size(); i++) {
+        for (int i = 0; i < map.size(); i++) {
             ArrayList<String> temp = map.get(i);
             ArrayList<Text> list = new ArrayList<>();
-            for(int j = 0; j<temp.size(); j++) {
+            for (int j = 0; j < temp.size(); j++) {
                 list.add(new Text(temp.get(j)));
             }
             diaryEntries.put(i, list);
         }
 
-        for(String s : map.get(Game.getDay() - 1)) {
+        for (String s : map.get(Game.getDay() - 1)) {
             writeDiaryEntry(s);
         }
 

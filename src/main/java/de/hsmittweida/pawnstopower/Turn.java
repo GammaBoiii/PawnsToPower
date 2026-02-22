@@ -8,17 +8,18 @@ import javafx.application.Platform;
  */
 public class Turn extends Thread {
     /**
-     * Der Pawn aus dem aktuellen Kontext (am Zug)
-     */
-    private Pawn pawn;
-    /**
      * Der aktuelle Kampf-Thread aus der Arena.
      */
     private final Turn thread;
+    /**
+     * Der Pawn aus dem aktuellen Kontext (am Zug)
+     */
+    private Pawn pawn;
 
     /**
      * Konstruktor der Turn Klasse.
      * Startet einen neuen thread.
+     *
      * @param p Pawn, der am Turn ist
      */
     public Turn(Pawn p) {
@@ -46,7 +47,7 @@ public class Turn extends Thread {
                 /* Angriff/Verteidigung */
                 /* Der Gegner geht zu 70% in Angriff und zu 30% in Verteidigung über */
                 double rnd = Math.random();
-                if(rnd > 0.3) {
+                if (rnd > 0.3) {
                     /* Angriff */
                     int[] damageArr = pawn.calcDamage(Arena.getOther(pawn));
                     int damage = damageArr[0];
@@ -62,7 +63,7 @@ public class Turn extends Thread {
                     /* Durch das runLater() in Arena.damage werden in dem Arena-Log immer zuerst die Leben ausgegeben, und dann erst aktualisiert.
                      * Daher werden in der Ausgabe in der folgenden Zeile die Leben direkt mit abgezogen, und der eigentliche Damage
                      * (backend) kann erst danach ausgeführt werden. */
-                    Arena.log("Du verlierst " + damage + " Lebenspunkte. Dir verbleiben noch " + (int) (Arena.getLife(Arena.getOther(pawn)) -damage) + "\n");
+                    Arena.log("Du verlierst " + damage + " Lebenspunkte. Dir verbleiben noch " + (int) (Arena.getLife(Arena.getOther(pawn)) - damage) + "\n");
                     Arena.damage(Arena.getOther(pawn), damage);
                     pawn.goInDefenseMode(false);
                 } else {
@@ -119,6 +120,7 @@ public class Turn extends Thread {
     /**
      * Dient zum schnellen "warten" im Thread, da ansonsten jedesmal in run() die Exception mit berücksichtigt werden müsste,
      * oder der try-catch-Block die ganze Methode ausfüllen würde, was nicht gut aussieht.
+     *
      * @param ms Milisekunden, die gewartet werden
      * @throws InterruptedException InterruptedException
      */
@@ -133,6 +135,7 @@ public class Turn extends Thread {
 
     /**
      * Gibt den Thread als Objekt zurück
+     *
      * @return {@code Thread}
      */
     public Thread getThread() {
@@ -142,10 +145,11 @@ public class Turn extends Thread {
     /**
      * Spielt während dem Angreifen einen zurälligen Angriffsound ab.
      * Für ein mehr belebtes Gameplay.
+     *
      * @return {@code String} mit dem Namen der Sounddatei.
      */
     private String getRandomAtkSound() {
-        String[] loc = {"sfx/atk1.wav","sfx/atk2.wav","sfx/atk3.wav","sfx/atk4.wav"};
-        return loc[(int)(Math.random()*loc.length)];
+        String[] loc = {"sfx/atk1.wav", "sfx/atk2.wav", "sfx/atk3.wav", "sfx/atk4.wav"};
+        return loc[(int) (Math.random() * loc.length)];
     }
 }

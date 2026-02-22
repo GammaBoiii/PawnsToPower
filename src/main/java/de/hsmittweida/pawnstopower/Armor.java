@@ -4,9 +4,10 @@ import java.util.Random;
 
 /**
  * Armor Klasse, die die Logik für die Rüstung bereit stellt.
+ *
  * @see Item#getItemType()
  */
-public class Armor extends Item  {
+public class Armor extends Item {
     /**
      * {@code ArmorClass} des Armor-Objektes.
      */
@@ -30,9 +31,10 @@ public class Armor extends Item  {
 
     /**
      * Erstellt ein neues Armor Objekt mit vorgegebener Armor Klasse und Slot.
-     * @param cls Rüstungsklasse, also welches Material (siehe {@link ArmorClass})
+     *
+     * @param cls  Rüstungsklasse, also welches Material (siehe {@link ArmorClass})
      * @param Slot Für welches Körperteil die Rüstung ist.
-     * @param p Pawn, der direkt als Besitzer gesetzt werden soll.
+     * @param p    Pawn, der direkt als Besitzer gesetzt werden soll.
      */
     Armor(ArmorClass cls, byte Slot, Pawn p) {
         super(p);
@@ -43,7 +45,8 @@ public class Armor extends Item  {
 
     /**
      * Generiert eine Rüstung mit zufälliger Rüstungsklasse.
-     * @param p Pawn, der direkt als Besitzer gesetzt werden soll.
+     *
+     * @param p    Pawn, der direkt als Besitzer gesetzt werden soll.
      * @param slot Für welches Körperteil die Rüstung ist.
      */
     Armor(Pawn p, byte slot) {
@@ -55,6 +58,7 @@ public class Armor extends Item  {
 
     /**
      * Generiert eine Rüstung mit zufälliger Rüstungsklasse und zufälligem Slot.
+     *
      * @param p Pawn, der direkt als Besitzer gesetzt werden soll.
      */
     Armor(Pawn p) {
@@ -66,13 +70,14 @@ public class Armor extends Item  {
 
     /**
      * Generiert eine Rüstung mit angegebener Rüstungsklasse ohne Besitzer und zufälliger Rüstungsklasse.
+     *
      * @param slot Für welches Körperteil die Rüstung ist.
      */
     Armor(byte slot) {
-      super(null);
-      ac = getRandomArmorClass();
-      setSlotType(slot);
-      super.setName(); // muss erneut aufgerufen werden, da super() beim Initialisieren den Slot noch nicht kennt!
+        super(null);
+        ac = getRandomArmorClass();
+        setSlotType(slot);
+        super.setName(); // muss erneut aufgerufen werden, da super() beim Initialisieren den Slot noch nicht kennt!
     }
 
     /**
@@ -87,6 +92,7 @@ public class Armor extends Item  {
 
     /**
      * Gibt die Rüstungsklasse der Rüstung zurück.
+     *
      * @return {@code ArmorClass}
      */
     public ArmorClass getArmorClass() {
@@ -95,6 +101,7 @@ public class Armor extends Item  {
 
     /**
      * Gibt den Standardwert des Schutzes der Ausrüstung zurück
+     *
      * @return {@code int}
      * @deprecated
      */
@@ -104,10 +111,11 @@ public class Armor extends Item  {
 
     /**
      * Gibt den Slot zurück, an dem das Rüstungstück angebracht werden kann.
+     *
      * @return {@code byte} Slot ID
      */
     public byte getSlotType() {
-        if(this.slot == -1) {
+        if (this.slot == -1) {
             this.slot = setRandomSlotType();
         }
         return this.slot;
@@ -129,6 +137,7 @@ public class Armor extends Item  {
 
     /**
      * Returned einen zufälligen Slot als byte-Wert, entsprechend der 4 Körperregionen.
+     *
      * @return {@code byte}
      */
     private byte setRandomSlotType() {
@@ -138,6 +147,7 @@ public class Armor extends Item  {
 
     /**
      * Returend den Item-Typ <strong>Armor</strong>.
+     *
      * @return {@code String} ~ "Amor"
      */
     public String getItemType() {
@@ -147,6 +157,7 @@ public class Armor extends Item  {
     /**
      * Errechnet den Basispreis der Rüstung, basierend auf dem
      * Ausrüstungsslot und dem Material und gibt diesen zurück.
+     *
      * @return {@code int}
      */
     public int getBasePrice() {
@@ -169,6 +180,7 @@ public class Armor extends Item  {
 
     /**
      * Returned eine zufällige Rüstungsklasse.
+     *
      * @return {@code ArmorClass}
      */
     private ArmorClass getRandomArmorClass() {
@@ -179,10 +191,11 @@ public class Armor extends Item  {
     /**
      * Returned den gesamten Schutz, den die Rüstung entsprechend ihrere Ausüstungsregion und
      * Rüstungsklasse liefert.
+     *
      * @return {@code double}
      */
     public double getTotalProtection() {
-        int baseProtection = switch(this.getSlotType()) {
+        int baseProtection = switch (this.getSlotType()) {
             case 0 -> 15;
             case 1 -> 35;
             default -> 20; // Zählt für Arm- und Beinschutz
@@ -229,11 +242,12 @@ public class Armor extends Item  {
 
         /**
          * Konstruktur für den Enumerator.
+         *
          * @param modifier der Modifier für die Rüstung.
-         * @param name der Name der Rüstung.
+         * @param name     der Name der Rüstung.
          */
         ArmorClass(double modifier, String name) {
-            this.modifier =  modifier;
+            this.modifier = modifier;
             this.name = name;
         }
     }

@@ -4,8 +4,10 @@ import javafx.scene.layout.StackPane;
 
 import java.util.ArrayList;
 import java.util.Random;
+
 /**
- * Weapon Klasse, die die Logik für Waffen bereit stellt.
+ * Weapon Klasse, die die Logik für Waffen bereitstellt.
+ *
  * @see Item#getItemType()
  */
 public class Weapon extends Item {
@@ -25,8 +27,9 @@ public class Weapon extends Item {
 
     /**
      * Erstellt ein neues Weapon Objekt mit vorgegebener Weapon-Class
+     *
      * @param cls Die vorgegebene Weapon-Class
-     * @param p Der Besitzer der Waffe. Häufig {@code null}
+     * @param p   Der Besitzer der Waffe. Häufig {@code null}
      */
     Weapon(WeaponClass cls, Pawn p) {
         super(p);
@@ -37,6 +40,7 @@ public class Weapon extends Item {
 
     /**
      * Erstellt ein neues, komplett zufälliges Weapon Objekt.
+     *
      * @param p Pawn, der direkt als Besitzer gesetzt werden soll.
      */
     Weapon(Pawn p) {
@@ -58,6 +62,7 @@ public class Weapon extends Item {
 
     /**
      * Prüft, ob Waff eine Zweihänder ist, und entsprechend zwei Waffenplätze belegt
+     *
      * @return {@code true}, wenn Waffe ein Zweihänder ist.
      */
     public boolean isTwoHanded() {
@@ -66,6 +71,7 @@ public class Weapon extends Item {
 
     /**
      * Gibt die Klasse/Art der Waffe zurück.
+     *
      * @return {@code WeaponClass}
      */
     public WeaponClass getWeaponClass() {
@@ -74,6 +80,7 @@ public class Weapon extends Item {
 
     /**
      * Gibt die Damage-Modifier der Waffe zurück.
+     *
      * @return {@code ArrayList<Double>}
      */
     private ArrayList<Double> getDamageModifier() {
@@ -83,6 +90,7 @@ public class Weapon extends Item {
     /**
      * Fügt der Waffe einen beliebigen Damage-Modifier hinzu. Dieser kann die Waffe stärken
      * oder schwächen. Alle Modifier werden in einer Liste gespeichert und zusammengezählt.
+     *
      * @param modifier Der Modifier, der hinzugefügt werden soll.
      */
     public void addDamageModifier(double modifier) {
@@ -92,6 +100,7 @@ public class Weapon extends Item {
     /**
      * Entfernt einen gegebenen Modifier. Sollte es zufälligerweise mehrmals denselben Modifier geben,
      * wird der erste in der Liste entfernt.
+     *
      * @param modifier Der Modifier, der entfernt werden soll.
      */
     public void removeDamageModifier(double modifier) {
@@ -106,6 +115,7 @@ public class Weapon extends Item {
 
     /**
      * Berechnet den gesamten Schaden einer Waffe, inkl. der Modifier, und gibt diesen zurück.
+     *
      * @return {@code double}
      */
     public double getTotalDamage() {
@@ -114,6 +124,25 @@ public class Weapon extends Item {
             damage *= d;
         }
         return damage;
+    }
+
+    /**
+     * Gibt eine zufällige Waffenklase zurück
+     *
+     * @return {@code WeaponClass}
+     */
+    private WeaponClass getRandomWeaponClass() {
+        Random rnd = new Random();
+        return WeaponClass.values()[rnd.nextInt(WeaponClass.values().length)];
+    }
+
+    /**
+     * Gibt den Item Typ zurück.
+     *
+     * @return {@code String} ~ "Weapon"
+     */
+    public String getItemType() {
+        return "Weapon";
     }
 
     /**
@@ -164,38 +193,23 @@ public class Weapon extends Item {
         public double baseDamage;
 
         /**
-         * Prüft. ob die Waffe ein Zweihänder ist.
-         * @return {@code true}, wenn die Waffe ein Zweihänder ist.
-         */
-        public boolean isTwoHanded() {
-            return this == LNS || this == KTN;
-        }
-
-        /**
          * Initiiert die Klasse.
-         * @param basePrice Standardpreis der Waffe, für Shop und Verkauf.
+         *
+         * @param basePrice  Standardpreis der Waffe, für Shop und Verkauf.
          * @param baseDamage Standardschaden der Waffe.
          */
         WeaponClass(int basePrice, double baseDamage) {
             this.basePrice = basePrice;
             this.baseDamage = baseDamage;
         }
-    }
 
-    /**
-     * Gibt eine zufällige Waffenklase zurück
-     * @return {@code WeaponClass}
-     */
-    private WeaponClass getRandomWeaponClass() {
-        Random rnd = new Random();
-        return WeaponClass.values()[rnd.nextInt(WeaponClass.values().length)];
-    }
-
-    /**
-     * Gibt den Item Typ zurück.
-     * @return {@code String} ~ "Weapon"
-     */
-    public String getItemType() {
-        return "Weapon";
+        /**
+         * Prüft. ob die Waffe ein Zweihänder ist.
+         *
+         * @return {@code true}, wenn die Waffe ein Zweihänder ist.
+         */
+        public boolean isTwoHanded() {
+            return this == LNS || this == KTN;
+        }
     }
 }

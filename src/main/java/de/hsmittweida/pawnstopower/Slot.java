@@ -19,10 +19,10 @@ public class Slot {
      * Dieser Konstruktor erstellt ein neues Fenster zum Ausrüsten der Items.
      *
      * @param reference Knopf, der mit zur Referenz übergeben wird. Hierbei handelt es sich um das "Körperteil" das der Spieler anklickt, um an der Stelle etwas auszurüsten
-     * Siehe dazu auch die Slotverteilung in Pawn.clothingSlotUsed bzw. Pawn.weaponSlotUsed.
-     * @param p Der Pawn, der aktuell ausgerüstet wird.
-     * @param type Waffe oder Kleidungsstück (Rüstung).
-     * @param id Die ID des Slots, an dem die Ausrüstung ausgerüstet werden soll. Unterschieden wird bei den Slots gemäß {@code @param type}.
+     *                  Siehe dazu auch die Slotverteilung in Pawn.clothingSlotUsed bzw. Pawn.weaponSlotUsed.
+     * @param p         Der Pawn, der aktuell ausgerüstet wird.
+     * @param type      Waffe oder Kleidungsstück (Rüstung).
+     * @param id        Die ID des Slots, an dem die Ausrüstung ausgerüstet werden soll. Unterschieden wird bei den Slots gemäß {@code @param type}.
      */
     Slot(StackPane reference, Pawn p, String type, int id, String title) {
         Stage stage = new Stage();
@@ -58,7 +58,7 @@ public class Slot {
                         /* Pawn ist nicht Besitzer */
                         if (p != w.getOwner()) {
                             System.out.println("!!!" + w.getOwner().getName());
-                            System.out.println(w.getOwner() +" .. "+ p);
+                            System.out.println(w.getOwner() + " .. " + p);
                             equip.setOnAction(e -> {
                                 System.out.println(w.getOwner());
                                 System.out.println(p);
@@ -76,7 +76,9 @@ public class Slot {
                                     /* Dem alten Pawn entrüsten */
                                     w.getOwner().removeWeapon(w);
                                     stage.close();
-                                } else if (res.equals("no")) {}
+                                } else if (res.equals("no")) {
+                                    // Do nothing
+                                }
                             });
                         /* Pawn ist Besitzer */
                         } else {
@@ -91,19 +93,19 @@ public class Slot {
                     } else {
                         equip.setOnAction(e -> {
                             /* Prüfen, ob bereits ein Zweihänder ausgerüstet ist. */
-                            if(id == 0) {
-                                if((w.isTwoHanded() && p.getWeapon((byte)1) != null)) {
+                            if (id == 0) {
+                                if ((w.isTwoHanded() && p.getWeapon((byte) 1) != null)) {
                                     Tools.popup("Zweihänder", "Du willst ein Zweihänder ausrüsten.", "Lege dazu erst die Waffe aus der anderen Hand ab.");
                                     return;
-                                } else if(p.getWeapon((byte)1) != null && p.getWeapon((byte)1).isTwoHanded()) {
+                                } else if (p.getWeapon((byte) 1) != null && p.getWeapon((byte) 1).isTwoHanded()) {
                                     Tools.popup("Zweihänder", "Ein Zweihänder ist bereits ausgerüstet.", "Lege diesen zunächst ab, wenn du eine neue Waffe ausrüsten willst.");
                                     return;
                                 }
                             } else if (id == 1) {
-                                if((w.isTwoHanded() && p.getWeapon((byte)0) != null)) {
+                                if ((w.isTwoHanded() && p.getWeapon((byte) 0) != null)) {
                                     Tools.popup("Zweihänder", "Du willst ein Zweihänder ausrüsten.", "Lege dazu erst die Waffe aus der anderen Hand ab.");
                                     return;
-                                } else if(p.getWeapon((byte)0) != null && p.getWeapon((byte)0).isTwoHanded()) {
+                                } else if (p.getWeapon((byte) 0) != null && p.getWeapon((byte) 0).isTwoHanded()) {
                                     Tools.popup("Zweihänder", "Ein Zweihänder ist bereits ausgerüstet.", "Lege diesen zunächst ab, wenn du eine neue Waffe ausrüsten willst.");
                                     return;
                                 }
@@ -115,7 +117,7 @@ public class Slot {
                     }
 
                     sell.setOnAction(e -> {
-                        if(w.getOwner() != null) {
+                        if (w.getOwner() != null) {
                             String res = Tools.confirmPopup("Item bereits ausgerüstet.", "Dieses Item ist bei " + w.getOwner().getName() + " ausgerüstet.", "Möchtest du es verkaufen?");
                             if (res.equals("yes")) {
                                 w.getOwner().removeWeapon(w);
@@ -157,7 +159,7 @@ public class Slot {
 
                 for (Armor a : Inventory.getArmor()) {
                     /* Kurzer Check, dass auch nur Kleidungsstücke angezeigt werden, die auch an dem bestimmten Slot ausgerüstet werden können. */
-                    if(!(a.getSlotType() == id)) {
+                    if (!(a.getSlotType() == id)) {
                         continue;
                     }
 
@@ -174,7 +176,8 @@ public class Slot {
                         if (p != a.getOwner()) {
                             equip.setOnAction(e -> {
                                 String res = Tools.confirmPopup("Item bereits ausgerüstet.", "Dieses Item ist bereits bei " + a.getOwner().getName() + " ausgerüstet.", "Möchtest du es bei dem aktuellen Pawn ausrüsten?");
-                                if (res.equals("yes")) { for (Armor arm : a.getOwner().getArmors()) {
+                                if (res.equals("yes")) {
+                                    for (Armor arm : a.getOwner().getArmors()) {
                                         if (arm != null) System.out.println(arm.getName());
                                     }
 
@@ -186,7 +189,9 @@ public class Slot {
                                     a.getOwner().removeArmor(a);
                                     p.giveArmor(reference, a, (byte) id);
                                     stage.close();
-                                } else if (res.equals("no")) {}
+                                } else if (res.equals("no")) {
+                                    // Do nothing
+                                }
                             });
                         /* Pawn ist Besitzer */
                         } else {
@@ -200,11 +205,11 @@ public class Slot {
                     /* Armor noch nicht ausgerüstet */
                     } else {
                         equip.setOnAction(e -> {
-                            if(p.getArmor((byte)id) != null) {
-                                p.removeArmor(p.getArmor((byte)id));
+                            if (p.getArmor((byte) id) != null) {
+                                p.removeArmor(p.getArmor((byte) id));
                             }
 
-                            p.giveArmor( reference, a, (byte) id);
+                            p.giveArmor(reference, a, (byte) id);
 
                             Inspector.refreshImages();
                             stage.close();
@@ -212,7 +217,7 @@ public class Slot {
                     }
 
                     sell.setOnAction(e -> {
-                        if(a.getOwner() != null) {
+                        if (a.getOwner() != null) {
                             String res = Tools.confirmPopup("Item bereits ausgerüstet.", "Dieses Item ist bei " + a.getOwner().getName() + " ausgerüstet.", "Möchtest du es verkaufen?");
                             if (res.equals("yes")) {
                                 a.getOwner().removeArmor(a);
@@ -241,11 +246,11 @@ public class Slot {
                     HBox.setHgrow(sell, Priority.ALWAYS);
                     HBox.setHgrow(equip, Priority.ALWAYS);
                     name.setMaxWidth(Double.MAX_VALUE);
-                    hbox.getChildren().addAll(name, details, sell,  equip);
+                    hbox.getChildren().addAll(name, details, sell, equip);
                     box.getChildren().add(hbox);
                 }
 
-                if(box.getChildren().size() == 0) {
+                if (box.getChildren().size() == 0) {
                     Tools.popup("Inventar", "Es wurden keine Kleidungsstücke im Inventar gefunden.", "Besuche den Shop, um Items zu kaufen!");
                     return;
                 }

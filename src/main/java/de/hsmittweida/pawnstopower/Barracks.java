@@ -18,6 +18,7 @@ public class Barracks {
     /**
      * Die Anzeige, die alle Kämpfer im Besitz anzeigt. <br>
      * Gibt ein Pane zurück, welches dann in {@link Game#drawSpace()} angezeigt wird.
+     *
      * @return {@code Pane}
      */
     public static Pane Barrack_view() {
@@ -56,7 +57,7 @@ public class Barracks {
             name.setMaxWidth(Double.MAX_VALUE);
             HBox.setHgrow(name, Priority.ALWAYS);
             HBox.setHgrow(inspect, Priority.ALWAYS);
-            box.getChildren().addAll(name,  inspect);
+            box.getChildren().addAll(name, inspect);
 
             inspect.setOnAction(e -> {
                 Game.drawSpace(Inspector.Inspector_view(p));

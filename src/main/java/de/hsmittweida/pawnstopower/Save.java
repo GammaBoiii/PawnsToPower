@@ -29,25 +29,25 @@ public class Save {
         /* Da die XP der Pawns mit SimpleInt gespeichert werden, sind diese nicht serialisierbar
          * und müssen daher manuell als int (serialisierbar) abgespeichert werden. */
         ArrayList<Integer> pawnXP = new ArrayList<Integer>();
-        for(Pawn p : Inventory.getPawns()) {
+        for (Pawn p : Inventory.getPawns()) {
             pawnXP.add(p.getXpAsInt());
         }
 
         /* Die folgenden zwei Schleifen generieren eine Vorlage für ausgerüstete Items,
-        * sodass diese später beim Laden korrekt an die passenden Pawns gegeben werden können.
-        * Siehe dazu auch Item.pushEquipLocation() und Item.generateEquipLocation().
-        * In einem weiteren Schritt werden die jeweiligen Items aber zunächst noch entfernt,
-        * da sich herausgestellt hat, dass die Pawns dann beim Laden teilweise noch die Referenz zu
-        * den "alten" Items haben, welche dann nicht korrekt geladen werden können.
-        * */
-        for(Weapon w : Inventory.getWeapons()) {
-            if(w.getOwner() != null) {
+         * sodass diese später beim Laden korrekt an die passenden Pawns gegeben werden können.
+         * Siehe dazu auch Item.pushEquipLocation() und Item.generateEquipLocation().
+         * In einem weiteren Schritt werden die jeweiligen Items aber zunächst noch entfernt,
+         * da sich herausgestellt hat, dass die Pawns dann beim Laden teilweise noch die Referenz zu
+         * den "alten" Items haben, welche dann nicht korrekt geladen werden können.
+         * */
+        for (Weapon w : Inventory.getWeapons()) {
+            if (w.getOwner() != null) {
                 w.generateEquipLocation(w.getOwner().getId(), Item.getSlotOfItem(w));
                 w.getOwner().removeWeapon(w);
             }
         }
-        for(Armor a : Inventory.getArmor()) {
-            if(a.getOwner() != null) {
+        for (Armor a : Inventory.getArmor()) {
+            if (a.getOwner() != null) {
                 a.generateEquipLocation(a.getOwner().getId(), Item.getSlotOfItem(a));
                 a.getOwner().removeArmor(a);
             }
@@ -55,11 +55,11 @@ public class Save {
 
 
         /* Nutzung des PrintWriter Objects, mit Hilfe der serialize() Methode.
-        * Erlaubt einfaches schreiben in eine Datei, sofern die einzelnen Objekte
-        * ersteinmal serialisiert sind.
-        * Einzelne Werte, Gold, Reputation und Tage, werden mit einem Präfix gespeichert,
-        * damit diese später einfacher ausgelesen werden können.
-        * */
+         * Erlaubt einfaches schreiben in eine Datei, sofern die einzelnen Objekte
+         * ersteinmal serialisiert sind.
+         * Einzelne Werte, Gold, Reputation und Tage, werden mit einem Präfix gespeichert,
+         * damit diese später einfacher ausgelesen werden können.
+         * */
         PrintWriter writer = null;
         try {
             writer = new PrintWriter(path);
@@ -75,9 +75,8 @@ public class Save {
             // e.printStackTrace();
             Tools.popup("Fehler beim Speichern des Spielstands!", "Fehler", "Das Spiel kann nicht gespeichert werden.\nPrüfe die Eingaben!");
             errorTemp = true;
-        }
-        finally {
-            if(writer != null) writer.close();
+        } finally {
+            if (writer != null) writer.close();
         }
         return !errorTemp;
     }
@@ -93,9 +92,9 @@ public class Save {
         boolean errorTemp = false;
 
         /* Falls noch nicht vorhanden, wird zunächst ein frisches
-        * Inventar initiiert.
-        * */
-        if(Inventory.isInitialized()) {
+         * Inventar initiiert.
+         * */
+        if (Inventory.isInitialized()) {
             Inventory.clear();
         } else {
             Inventory.setup();
@@ -111,11 +110,11 @@ public class Save {
         int day = 0;
 
         /* Mithilfe eines BufferedReaders werdn die Serialisierungen der Objekte aus der Datei gelesen
-        * und anschließend mit der deserialize Methode wieder in ihre entsprechenden Objekte umgewandelt.
-        * Die einzelnen Werte des Goldes, der Reputation und der Taganzahl können mithilfe
-        * der Präfixe einfach ausgelesen werden. Der Rest wird per Reihenfolge (jeweils ein Objekt pro Zeile)
-        * ausgelesen.
-        * */
+         * und anschließend mit der deserialize Methode wieder in ihre entsprechenden Objekte umgewandelt.
+         * Die einzelnen Werte des Goldes, der Reputation und der Taganzahl können mithilfe
+         * der Präfixe einfach ausgelesen werden. Der Rest wird per Reihenfolge (jeweils ein Objekt pro Zeile)
+         * ausgelesen.
+         * */
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader(path));
@@ -146,9 +145,8 @@ public class Save {
             // e.printStackTrace();
             Tools.popup("Fehler beim Laden des Spielstands!", "Fehler", "Das Spiel kann nicht gestartet werden.\nDer Spielstand scheint korrupt zu sein.");
             errorTemp = true;
-        }
-        finally {
-            if(reader != null) {
+        } finally {
+            if (reader != null) {
                 try {
                     reader.close();
                 } catch (IOException e) {
@@ -156,11 +154,11 @@ public class Save {
                 }
             }
         }
-        if(errorTemp) return false;
+        if (errorTemp) return false;
 
         /* Alles in das Spiel hineinladen */
-        if(pawns != null && !pawns.isEmpty()) {
-            for(int i = 0; i < pawns.size(); i++) {
+        if (pawns != null && !pawns.isEmpty()) {
+            for (int i = 0; i < pawns.size(); i++) {
                 Inventory.addPawn(pawns.get(i));
                 pawns.get(i).addXp(pawnXP.get(i));
                 System.out.println("pawn hier: " + pawns.get(i).getName() + " hash: " + pawns.get(i));
@@ -168,13 +166,13 @@ public class Save {
         }
 
         /* Die Items, insbesondere die, die beim Speichern an einem Pawn ausgerüstet waren,
-        * werden mit den folgenden Anweisungsblöcken an ihren entsprechenden Pawns zurück
-        * ausgerüstet.
-        * */
-        if(weapons != null && !weapons.isEmpty()) {
-            for(Weapon w : weapons) {
+         * werden mit den folgenden Anweisungsblöcken an ihren entsprechenden Pawns zurück
+         * ausgerüstet.
+         * */
+        if (weapons != null && !weapons.isEmpty()) {
+            for (Weapon w : weapons) {
                 Inventory.addItem(w);
-                if(w.getEquipLocation() != null) {
+                if (w.getEquipLocation() != null) {
 //                    System.out.println("firstowner:" + w.getOwner());
                     w.pushEquipLocation(w);
 //                    System.out.println("Name of weapon: " + w.getName() + " Owner: " + w.getOwner());
@@ -182,10 +180,10 @@ public class Save {
             }
         }
 
-        if(armors != null && !armors.isEmpty()) {
-            for(Armor a : armors) {
+        if (armors != null && !armors.isEmpty()) {
+            for (Armor a : armors) {
                 Inventory.addItem(a);
-                if(a.getEquipLocation() != null) {
+                if (a.getEquipLocation() != null) {
                     System.out.println("firstowner:" + a.getOwner());
                     a.pushEquipLocation(a);
                     System.out.println("Name of weapon: " + a.getName() + " Owner: " + a.getOwner());
@@ -212,6 +210,7 @@ public class Save {
     /**
      * Methode zum Serialisieren eines Objekts.
      * Nutzt ein Base64 Enkodierer auf den ObjectOutputStream.
+     *
      * @param obj Objekt, welches serialisiert werden soll.
      * @return {@code String} - Serialisierte String-Version des Objekts.
      * @throws IOException wenn etwas beim Serialisieren schiefgeht.
@@ -228,9 +227,10 @@ public class Save {
     /**
      * Methode zum Deserialisieren eines Objekts.
      * Umgekehrtes Verfahren zur Serialisierung, hier mit ObjectInputStream.
+     *
      * @param code Serialisierte String-Version des Objekts.
      * @return {@code Object} - Deserialisierte Version des Objekts.
-     * @throws IOException wenn etwas beim Deserialisieren schiefgeht.
+     * @throws IOException            wenn etwas beim Deserialisieren schiefgeht.
      * @throws ClassNotFoundException wenn das Objekt nicht gefunden werden konnte.
      */
     public static Object deserialze(String code) throws IOException, ClassNotFoundException {

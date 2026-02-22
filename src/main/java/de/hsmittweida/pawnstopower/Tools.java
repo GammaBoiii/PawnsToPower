@@ -42,6 +42,7 @@ public class Tools {
      *     <li> 'w' ~ width </li>
      *     <li> 'h' ~ height </li>
      * </ul>
+     *
      * @return {@code HashMap<Character, Integer>}
      */
     public static HashMap<Character, Integer> getScreenSize() {
@@ -58,12 +59,13 @@ public class Tools {
 
     /**
      * Setzt ein Hintergrund auf einen Button
-     * @param value Buttonelement, auf das das Hintergrundbild angewendet werden soll.
+     *
+     * @param value  Buttonelement, auf das das Hintergrundbild angewendet werden soll.
      * @param radius radius des Bildes.
-     * @param path Pfad zum Bild.
+     * @param path   Pfad zum Bild.
      * @deprecated
      */
-    public static void setBackground(Button value, int radius, String path){
+    public static void setBackground(Button value, int radius, String path) {
         Image i = new Image(path);
         BackgroundFill f = new BackgroundFill(new ImagePattern(i), new CornerRadii(radius), new Insets(0));
         value.setBackground(new Background(f));
@@ -73,7 +75,8 @@ public class Tools {
      * Schließt Nebenfenster automatisch, sobald das Hauptfenster im Vordergrund ist.
      * Verhindert somit, dass viele Fenster offen sind, und somit auch, dass 2 Fenster
      * vom selben Objekt gleichzeitig offen sind.
-     * @param stage stage des Fensters, das geprüft und ggf. geschlossen werden soll.
+     *
+     * @param stage      stage des Fensters, das geprüft und ggf. geschlossen werden soll.
      * @param ownerClass Eine einzigartige Bezeichnung für das Fenster, um das Öffnen
      *                   von mehreren Fenstern des selben Objekts zu verhindern.
      */
@@ -100,8 +103,9 @@ public class Tools {
     /**
      * Erstelle ein PopUp Fenster.
      * Dient nur zur Informationsanzeige. Erwartet kein User-Input.
-     * @param title Titel des Popups
-     * @param header Kopfzeile
+     *
+     * @param title   Titel des Popups
+     * @param header  Kopfzeile
      * @param context Kontext
      */
     public static void popup(String title, String header, String context) {
@@ -116,8 +120,9 @@ public class Tools {
     /**
      * Erstellt ein PopUp-Fenster, das nach einem einfach "Ja/Nein"
      * als Input fragt, und das entsprechende Ergebnis zurückgibt.
-     * @param title Titel des Popups
-     * @param header Kopfzeile
+     *
+     * @param title   Titel des Popups
+     * @param header  Kopfzeile
      * @param context Kontext
      * @return {@code String} mit der gewählten Option.
      */
@@ -142,8 +147,9 @@ public class Tools {
     /**
      * Erstellt ein PopUp-Fenster, das den User nach einem TextInput fragt,
      * und diesen anschließend zurückgibt.
-     * @param title Titel des Popups
-     * @param header Kopfzeile
+     *
+     * @param title   Titel des Popups
+     * @param header  Kopfzeile
      * @param context Kontext
      * @return {@code String} mit den eingegebenen Text, oder <i>"empty"</i>, falls
      * kein Input erfolgte.
@@ -157,7 +163,7 @@ public class Tools {
 
         Optional<String> r = dialog.showAndWait();
         System.out.println(r.toString());
-        if(r.isEmpty()) return "empty";
+        if (r.isEmpty()) return "empty";
         else return r.get();
 
 
@@ -165,7 +171,8 @@ public class Tools {
 
     /**
      * Fügt einer Scene eine .css an
-     * @param s Scene, die das Stylesheet erhalten soll
+     *
+     * @param s    Scene, die das Stylesheet erhalten soll
      * @param name Name der .css
      */
     public static void addStylesheet(Scene s, String name) {
@@ -174,6 +181,7 @@ public class Tools {
 
     /**
      * Fügt einem Pane eine .css an.
+     *
      * @param pane Pane, das das Stylesheet erhalten soll.
      * @param name Name der .css.
      */
@@ -183,15 +191,16 @@ public class Tools {
 
     /**
      * Ersetzt das -fx-transition aus .css
-     * @param b Der Button, der animiert werden soll.
-     * @param millis Transitionszeit in Millisek.
-     * @param fac Der Faktor um wie viel vergrößert wird.
+     *
+     * @param b          Der Button, der animiert werden soll.
+     * @param millis     Transitionszeit in Millisek.
+     * @param fac        Der Faktor um wie viel vergrößert wird.
      * @param glowEffect Wendet Glow-Effekt (Vergrößerung) an, wenn {@code true}
      */
     public static void addHoverEffect(Button b, int millis, double fac, boolean glowEffect) {
         /* Definiert zunächst zwei ScaleTransitions, jeweils zur Vergrößerung
-        * und zur Verkleinerung des Buttons.
-        * */
+         * und zur Verkleinerung des Buttons.
+         * */
         ScaleTransition scaleIn = new ScaleTransition(Duration.millis(millis), b);
         scaleIn.setToX(fac);
         scaleIn.setToY(fac);
@@ -205,8 +214,8 @@ public class Tools {
         b.setEffect(shadow);
 
         /* TimeLine, um da Glow-Animation des Buttons zu steuern.
-        * Zwei TimeLines für das Erscheinen und Verschiwnden der Glow-Animation des Buttons.
-        * */
+         * Zwei TimeLines für das Erscheinen und Verschiwnden der Glow-Animation des Buttons.
+         * */
         Timeline glowIn = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(shadow.radiusProperty(), 0)),
                 new KeyFrame(Duration.millis(millis), new KeyValue(shadow.radiusProperty(), 20))
@@ -218,8 +227,8 @@ public class Tools {
         );
 
         /* Spielt die entsprechende Animation jeweils beim Eintritt
-        * und Austritt der Maus ab.
-        * */
+         * und Austritt der Maus ab.
+         * */
         b.setOnMouseEntered(e -> {
             glowIn.playFromStart();
             if (glowEffect) scaleIn.playFromStart();
@@ -232,10 +241,11 @@ public class Tools {
 
     /**
      * Fügt einer Liste von Buttons den SoundEffekt hinzu.
+     *
      * @param buttons Buttons, welche den Soundeffekt bekommen sollen.
      */
     public static void addButtonSfx(Button... buttons) {
-        for(Button b : buttons) {
+        for (Button b : buttons) {
 
             /* Hier addEventHandler, da setOnAction() bereits bei den Buttons benutzt wird,
              * und es daher zu Überschreibungen kommen würde */
@@ -253,6 +263,7 @@ public class Tools {
 
     /**
      * Pausiert den Thread des Spiels.
+     *
      * @param time in ms, die der Haupt-Thread des Spiels pausiert werden soll.
      * @deprecated, aus offensichtlichen Gründen... (blockiert das ganze Spiel,
      * bleibt hier nur als Museums-Stück stehen)
@@ -268,6 +279,7 @@ public class Tools {
     /**
      * Diente zum Debuggen und zum Finden bestimmter Koordinaten auf einem Node.
      * Vereinfachte die Positionierung von UI-Elementen mit Platzierung durch Koordinaten.
+     *
      * @param node Node, von dem die Koordinaten ausgelesen werden sollen.
      * @deprecated, da das Programm soweit abgabefertig ist.
      */

@@ -12,24 +12,27 @@ import java.util.ArrayList;
  */
 public class SoundManager {
     /**
+     * Playlist, die mehrere Lieder beinhaltet, die alle hintereinander automatisch abgespielt werden
+     * sollen.
+     *
+     * @see SoundManager#playCurrentSong()
+     */
+    ArrayList<String> playlist;
+    /**
      * Der MediaPlayer, der den Sound wiedergibt.
      */
     private MediaPlayer mp;
     /**
      * Index eines Songs aus einer Playlist, der gerade abgespielt wird
+     *
      * @see SoundManager#playCurrentSong()
      */
     private int index = 0;
-    /**
-     * Playlist, die mehrere Lieder beinhaltet, die alle hintereinander automatisch abgespielt werrden
-     * sollen.
-     * @see SoundManager#playCurrentSong()
-     */
-    ArrayList<String> playlist;
 
     /**
      * Registriert einen Sound aus einem Namen und spielt diesen ab.
      * Gut nutzbar für einzelne, kurze Sounds/Soundeffekte.
+     *
      * @param name Name der Sounddatei.
      */
     SoundManager(String name) {
@@ -48,6 +51,7 @@ public class SoundManager {
      * Registriert mehrere Sounds aus einem Array und spielt diese ab.
      * Gut nutzbar für Hintergrundmusik, da hier wie aus einer Playlist alles
      * abgespielt wird.
+     *
      * @param name Varaible Menge an Namen der Sounddateien.
      */
     SoundManager(String... name) {
@@ -61,6 +65,7 @@ public class SoundManager {
 
     /**
      * Gibt den MediaPlayer zurück, der von einem Sound verwendet wird.
+     *
      * @return {@code MediaPlayer}
      */
     public MediaPlayer getMediaPlayer() {
@@ -78,7 +83,7 @@ public class SoundManager {
         mp = createSound(currentSong);
         mp.play();
         mp.setOnEndOfMedia(() -> {
-            if(index + 1 >= playlist.size()) {
+            if (index + 1 >= playlist.size()) {
                 index = 0;
                 playCurrentSong();
             } else {
@@ -91,6 +96,7 @@ public class SoundManager {
     /**
      * Erstellt den eigentlichen MediaPlayer für eine Sounddatei. <br>
      * Gibt den MediaPlayer für einen Sound zurück.
+     *
      * @param f Pfad zur Datei.
      * @return {@code MediaPlayer}
      */

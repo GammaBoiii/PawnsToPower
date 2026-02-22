@@ -78,6 +78,7 @@ public class Inspector {
     /**
      * Die Anzeige, die einen Kämpfer detailliert anzeigt.
      * Gibt das Pane zurück, welches dann in {@link Game#drawSpace()} angezeigt wird.
+     *
      * @param p Pawn, der inspiziert werden soll.
      * @return {@code Pane}
      */
@@ -126,7 +127,7 @@ public class Inspector {
 
         VBox stats = createStats();
         AnchorPane.setTopAnchor(stats, 6.0);
-        stats.setPadding(new Insets(10,15,10,15));
+        stats.setPadding(new Insets(10, 15, 10, 15));
 
 
         /* Slot 0 - siehe Pawn.clothingSlotUsed */
@@ -232,9 +233,9 @@ public class Inspector {
         paneRight.setMaxHeight(175);
         paneRight.setMinWidth(175);
         paneRight.setMinHeight(175);
-        if(p.getWeapon((byte)0) != null) {
+        if (p.getWeapon((byte) 0) != null) {
             System.out.println("weapon in rigght hand");
-            setImage(paneRight, p.getWeapon((byte)0).getWeaponClass());
+            setImage(paneRight, p.getWeapon((byte) 0).getWeaponClass());
         }
         AnchorPane.setRightAnchor(btnRight, 456.0);
         AnchorPane.setTopAnchor(btnRight, 370.0);
@@ -252,9 +253,9 @@ public class Inspector {
         paneLeft.setMaxHeight(175);
         paneLeft.setMinWidth(175);
         paneLeft.setMinHeight(175);
-        if(p.getWeapon((byte)1) != null) {
+        if (p.getWeapon((byte) 1) != null) {
             System.out.println("weapon in left thand");
-            setImage(paneLeft, p.getWeapon((byte)1).getWeaponClass());
+            setImage(paneLeft, p.getWeapon((byte) 1).getWeaponClass());
         }
         AnchorPane.setLeftAnchor(btnLeft, 456.0);
         AnchorPane.setTopAnchor(btnLeft, 370.0);
@@ -264,7 +265,9 @@ public class Inspector {
 
         Button debug = new Button("Fix img");
         AnchorPane.setBottomAnchor(debug, 10.0);
-        debug.setOnAction(e -> {refreshImages();});
+        debug.setOnAction(e -> {
+            refreshImages();
+        });
         anchorPane.getChildren().addAll(headPane, armPane, legPane, torsoPane, paneRight, paneLeft, btnHead, btnArms, btnTorso, btnLegs, btnLeft, btnRight, stats, debug);
         Inspector.refreshImages();
         Platform.runLater(() -> {
@@ -276,8 +279,9 @@ public class Inspector {
     /**
      * Setzt ein Bild auf ein Stackpane. Die StackPanes sind hier die Körperregionen des Kämpfers.
      * Dadurch wird mehr Interaktivität mit dem Kämpfer geboten.
+     *
      * @param ref StackPane, auf den das Bild gelegt werden soll.
-     * @param wc Waffenklasse, die als Referenz für das richtige Bild dient.
+     * @param wc  Waffenklasse, die als Referenz für das richtige Bild dient.
      */
     public static void setImage(StackPane ref, Weapon.WeaponClass wc) {
         String picName = switch (wc) {
@@ -290,7 +294,7 @@ public class Inspector {
             case SPR -> "SPR.png";
             case SWT -> "SWT.png";
         };
-        String location = Inspector.class.getResource("image/weapons/"+picName).toExternalForm();
+        String location = Inspector.class.getResource("image/weapons/" + picName).toExternalForm();
         Image img = new Image(location);
         ImageView iv = new ImageView(img);
 
@@ -303,8 +307,9 @@ public class Inspector {
     /**
      * Setzt ein Bild auf einen StackPane. Die StackPanes sind hier die Körperregionen des Kämpfers.
      * Dadurch wird mehr Interaktivität mit dem Kämpfer geboten.
-     * @param ref StackPane, auf den das Bild gelegt werden soll.
-     * @param ac Rüstungsklasse, die zur Auswahl des richtigen Bildes dient.
+     *
+     * @param ref  StackPane, auf den das Bild gelegt werden soll.
+     * @param ac   Rüstungsklasse, die zur Auswahl des richtigen Bildes dient.
      * @param slot Körperregion, an der das Rüstungsstück ausgerüstet werden soll.
      */
     public static void setImage(StackPane ref, Armor.ArmorClass ac, byte slot) {
@@ -316,14 +321,14 @@ public class Inspector {
             case 3 -> "beinschutz.png";
             default -> "";
         };
-        String picName = switch(ac) {
+        String picName = switch (ac) {
             case FAB -> "stoff_" + path;
             case LTH -> "leder_" + path;
             case IRN -> "eisen_" + path;
             case STL -> "stahl_" + path;
         };
 
-        String location = Inspector.class.getResource("image/clothing/"+picName).toExternalForm();
+        String location = Inspector.class.getResource("image/clothing/" + picName).toExternalForm();
         Image img = new Image(location);
         ImageView iv = new ImageView(img);
 
@@ -349,6 +354,7 @@ public class Inspector {
 
     /**
      * Entfernt ein Bild aus einem StackPane, wenn ein Item abgelegt wird.
+     *
      * @param ref Button, von dem das Bild entfernt werden soll.
      */
     public static void clearImage(StackPane ref) {
@@ -372,6 +378,7 @@ public class Inspector {
      * Erstellt in dem Inspector ein kleines Übersichtsfenster zu dem ausgewählten Kämpfer.
      * Abzulesen sind Level, Name und ein weitere Button für das SkillMenu.
      * Gibt eine VBox zurück, welche oben Links im Inspector dargestellt wird.
+     *
      * @return {@code VBox} mit den Stats
      */
     private static VBox createStats() {
@@ -386,7 +393,7 @@ public class Inspector {
         Label pawnName = new Label(pawn.getName());
         HBox.setHgrow(nameLabel, Priority.ALWAYS);
         nameLabel.setMaxWidth(Double.MAX_VALUE);
-        name.getChildren().addAll(nameLabel,pawnName);
+        name.getChildren().addAll(nameLabel, pawnName);
 
         /* Level */
         HBox level = new HBox();
@@ -431,32 +438,32 @@ public class Inspector {
     public static void refreshImages() {
         clearAllImages();
         if (pawn != null) {
-            if(pawn.getWeapon((byte)0) == null) {
+            if (pawn.getWeapon((byte) 0) == null) {
                 clearImage(paneRight);
             } else {
                 setImage(paneRight, pawn.getWeapon((byte) 0).getWeaponClass());
             }
-            if(pawn.getWeapon((byte)1) == null) {
+            if (pawn.getWeapon((byte) 1) == null) {
                 clearImage(paneLeft);
             } else {
                 setImage(paneLeft, pawn.getWeapon((byte) 1).getWeaponClass());
             }
-            if(pawn.getArmor((byte)0) == null) {
+            if (pawn.getArmor((byte) 0) == null) {
                 clearImage(headPane);
             } else {
                 setImage(headPane, pawn.getArmor((byte) 0).getArmorClass(), (byte) 0);
             }
-            if(pawn.getArmor((byte)1) == null) {
+            if (pawn.getArmor((byte) 1) == null) {
                 clearImage(torsoPane);
             } else {
                 setImage(torsoPane, pawn.getArmor((byte) 1).getArmorClass(), (byte) 1);
             }
-            if(pawn.getArmor((byte)2) == null) {
+            if (pawn.getArmor((byte) 2) == null) {
                 clearImage(armPane);
             } else {
                 setImage(armPane, pawn.getArmor((byte) 2).getArmorClass(), (byte) 2);
             }
-            if(pawn.getArmor((byte)3) == null) {
+            if (pawn.getArmor((byte) 3) == null) {
                 clearImage(legPane);
             } else {
                 setImage(legPane, pawn.getArmor((byte) 3).getArmorClass(), (byte) 3);

@@ -13,6 +13,7 @@ public class Main extends Application {
 
     /**
      * main Methode.
+     *
      * @param args args
      */
     public static void main(String[] args) {
@@ -21,6 +22,7 @@ public class Main extends Application {
 
     /**
      * Startmethode für Startmenu.
+     *
      * @param primaryStage Primary Stage für den Start
      */
     public void start(Stage primaryStage) {

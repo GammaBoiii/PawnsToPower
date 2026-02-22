@@ -15,6 +15,7 @@ import java.util.Random;
 public class ArenaWinScreen {
     /**
      * Gibt ein Pane zurück, welches dann in {@link Game#drawSpace()} angezeigt wird.
+     *
      * @param playerWins {@code true}, wenn der Spieler gewonnen hat. Sonst {@code false}.
      * @return {@code Pane}
      */
@@ -40,12 +41,12 @@ public class ArenaWinScreen {
                     Arena.getPrice()[1]);
 
             /* Wird der Spieler den besiegten Pawn gewinnen? Mit 10% Chance */
-            if(Math.random() < 0.1) { //Debug 100%
+            if (Math.random() < 0.1) { //Debug 100%
                 Pawn p = Arena.getCombatans()[1];
-                for(Armor a : p.getArmors()) {
+                for (Armor a : p.getArmors()) {
                     p.removeArmor(a);
                 }
-                for(Weapon w : p.getWeapons()) {
+                for (Weapon w : p.getWeapons()) {
                     p.removeWeapon(w);
                 }
                 Inventory.addPawn(p);
@@ -53,7 +54,7 @@ public class ArenaWinScreen {
                         Der Pawn %s schließt sich außerdem deinem Trupp an!
                         Damit erhälst du einen neuen Level %d Kämpfer.
                         """, p.getName(), p.getLvl());
-                s+=congrats;
+                s += congrats;
             }
             msg = new Label(s);
             Inventory.addMoney(Arena.getPrice()[0]);
@@ -67,7 +68,7 @@ public class ArenaWinScreen {
                     Arena.getCombatans()[1].getName(), Math.round(Arena.getPrice()[0] * 0.25), Math.round(Arena.getPrice()[1] * 0.4));
             msg = new Label(s);
             Inventory.addMoney(-1 * (int) Math.round(Arena.getPrice()[0] * 0.25));
-            if(Inventory.getMoney() < 0) {
+            if (Inventory.getMoney() < 0) {
                 Inventory.addMoney(Inventory.getMoney() * -1);
             }
 
@@ -89,12 +90,13 @@ public class ArenaWinScreen {
 
     /**
      * Generiert ein Eintrag ins Tagebuch nach einem Arena-Kampf.
+     *
      * @param won {@code true}, wenn der Spieler gewonnen hat.
      * @return {@code String} mit der Nachricht.
      */
     public static String generateArenaDiaryMsg(boolean won) {
         String[] msg = new String[3];
-        if(won) {
+        if (won) {
             msg[0] = Arena.getCombatans()[0].getName() + " besiegt den Gegner.\n";
             msg[1] = Arena.getCombatans()[1].getName() + " wurde von uns geschlagen.\n";
             msg[2] = "Wir haben den Kampf mit " + Arena.getCombatans()[0].getName() + " an unserer Seite gewonnen.\n";

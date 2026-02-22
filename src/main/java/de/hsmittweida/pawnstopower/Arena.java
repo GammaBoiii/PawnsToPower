@@ -462,7 +462,7 @@ public class Arena {
      */
     public static void log(String text, String style) {
         Platform.runLater(() -> {
-            Text newText = new Text("\n"+text);
+            Text newText = new Text("\n" + text);
             newText.setFont(Game.getFont("MedievalSharp"));
             String style2 = style + "; -fx-font-size: 32;";
             newText.wrappingWidthProperty().bind(textField.widthProperty());
@@ -480,10 +480,10 @@ public class Arena {
     public static void damage(Pawn p, double damage) {
         Platform.runLater(() -> {
             /* Schaden für Spieler-Kämpfer: */
-            if(p.equals(choosenFighter)) {
+            if (p.equals(choosenFighter)) {
                 currentHealth_fighter.set(Math.round(currentHealth_fighter.get() - damage));
-            /* Schaden für Feind-Kämpfer: */
-            } else if(p.equals(enemy)) {
+                /* Schaden für Feind-Kämpfer: */
+            } else if (p.equals(enemy)) {
                 currentHealth_enemy.set(Math.round(currentHealth_enemy.get() - damage));
             }
         });
@@ -495,20 +495,21 @@ public class Arena {
      * @return {@code double}
      */
     public static double getLife(Pawn p) {
-            if(p.equals(choosenFighter)) return Math.round(currentHealth_fighter.get());
-            else if(p.equals(enemy)) return Math.round(currentHealth_enemy.get());
-            return 0;
+        if (p.equals(choosenFighter)) return Math.round(currentHealth_fighter.get());
+        else if (p.equals(enemy)) return Math.round(currentHealth_enemy.get());
+        return 0;
     }
 
     /**
      * Gibt den Pawn zurück, der gerade nicht am Zug ist.
      * Da nur 2 gegeneinander Kämpfen, kann es entweder der Kämpfer sein, der
      * dem Spieler gehört oder nicht.
+     *
      * @param pawn Pawn, der gerade am Zug ist und dessen Gegner returned werden soll.
      * @return {@code Pawn}
      */
     public static Pawn getOther(Pawn pawn) {
-        if(pawn.ownedByPlayer()) {
+        if (pawn.ownedByPlayer()) {
             return enemy;
         } else {
             return choosenFighter;
@@ -521,10 +522,10 @@ public class Arena {
      * @param disabled Boolean, der den Aktiv-Status der Buttons festlegt.
      */
     public static void disableActionButtons(boolean disabled) {
-            Platform.runLater(() -> {
-                attack.setDisable(disabled);
-                defense.setDisable(disabled);
-            });
+        Platform.runLater(() -> {
+            attack.setDisable(disabled);
+            defense.setDisable(disabled);
+        });
     }
 
     /**
@@ -589,7 +590,7 @@ public class Arena {
         };
         String[] gegnerFolge = {"Platzhalter"};
         /*  Volltreffer */
-        if(graze == 0) {
+        if (graze == 0) {
             gegnerFolge = new String[]{
                     "Die Waffe des Gegners saust auf dich herab.",
                     "Ein dumpfer Schlag trifft dich an der Schulter.",
@@ -609,7 +610,7 @@ public class Arena {
             };
         }
         /* Streifschus */
-        else if(graze == 1) {
+        else if (graze == 1) {
             gegnerFolge = new String[]{
                     "Du stolperst rückwärts, während Funken durch die Luft fliegen.",
                     "Ein Stück deiner Kleidung wird zerrissen.",
@@ -619,7 +620,7 @@ public class Arena {
             };
         }
         /* Fehltreffer */
-        else if(graze == 2) {
+        else if (graze == 2) {
             gegnerFolge = new String[]{
                     "Du spürst den Luftzug des Schlags an deinem Gesicht vorbeirauschen.",
                     "Die Waffe des Gegners verfehlt dich knapp.",
@@ -669,7 +670,7 @@ public class Arena {
         /* Neuer Thread hier, da durch die kurze Wartezeit (sleep) nicht das ganze Spiel pausiert werden soll. */
         new Thread(() -> {
             try {
-                if(!turn.getThread().isInterrupted()) {
+                if (!turn.getThread().isInterrupted()) {
                     /* Arena Thread wird beendet: */
                     turn.kill();
 
@@ -687,6 +688,7 @@ public class Arena {
 
     /**
      * Returned den Preis zurück, den es zu gewinnen gilt.
+     *
      * @return {@code int[]}
      */
     public static int[] getPrice() {
@@ -697,10 +699,10 @@ public class Arena {
      * Returned die beiden Pawns, die gegeneinander antreteten.
      *
      * @return {@code Pawn[]}<br>
-     *          {@code [0]} ~ Kämpfer des Spielers
-     *          {@code [1]} ~ Gegnerischer Kämpfer
+     * {@code [0]} ~ Kämpfer des Spielers <br>
+     * {@code [1]} ~ Gegnerischer Kämpfer
      */
-    public static Pawn[] getCombatans( ){
-        return new Pawn[] {choosenFighter, enemy};
+    public static Pawn[] getCombatans() {
+        return new Pawn[]{choosenFighter, enemy};
     }
 }

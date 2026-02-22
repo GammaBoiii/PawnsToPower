@@ -39,10 +39,11 @@ public class Skill implements Serializable {
 
     /**
      * Konstruktor der Skill Klasse.
-     * @param id Dient zur Eindeutigen Identifikation des Skills.
-     * @param name Name des Skills.
+     *
+     * @param id      Dient zur Eindeutigen Identifikation des Skills.
+     * @param name    Name des Skills.
      * @param baseVal Standardwert des Skills.
-     * @param pawn Pawn, dem der SKill zugeordnet wird.
+     * @param pawn    Pawn, dem der SKill zugeordnet wird.
      */
     public Skill(String id, String name, int baseVal, Pawn pawn) {
         this.id = id;
@@ -56,25 +57,28 @@ public class Skill implements Serializable {
 
     /**
      * Berechnet den Wert des Skills anhand aller Modifikatoren.
+     *
      * @return {@code double}
      */
     public double getSkillValue() {
         double bV = baseVal;//.get();
-        double lvlFactor = (((pawn.getLvl()-1.0) * 5.0) / 100.0) * bV;
-        return (bV * getFactor() + lvlFactor ) * multiplier;
+        double lvlFactor = (((pawn.getLvl() - 1.0) * 5.0) / 100.0) * bV;
+        return (bV * getFactor() + lvlFactor) * multiplier;
     }
 
     /**
      * Gibt den Basis-Wert des SKills zurück.
+     *
      * @return {@code SimpleDoubleProperty} - Basiswert des Skills.
      * @deprecated
      */
     public SimpleDoubleProperty getBaseVal() {
-        return new SimpleDoubleProperty(((9.0+pawn.getLvl()) / 10.0) * getFactor() + baseVal);//.get());
+        return new SimpleDoubleProperty(((9.0 + pawn.getLvl()) / 10.0) * getFactor() + baseVal);
     }
 
     /**
      * Gibt den Wert des Skills basierend auf dessen Level zurück.
+     *
      * @return {@code double}
      */
     private double getFactor() {
@@ -83,6 +87,7 @@ public class Skill implements Serializable {
 
     /**
      * Gibt den Level des Skills zurück.
+     *
      * @return {@code int}
      */
     public int getSkillLevel() {
@@ -98,6 +103,7 @@ public class Skill implements Serializable {
 
     /**
      * Gibt die Id des Skills zurück.
+     *
      * @return {@code String}
      */
     public String getId() {
@@ -106,6 +112,7 @@ public class Skill implements Serializable {
 
     /**
      * Gibt den Namen des Skill zurück.
+     *
      * @return {@code String}
      */
     public String getName() {
@@ -114,6 +121,7 @@ public class Skill implements Serializable {
 
     /**
      * Gibt dem Skill einen Multiplikator auf dessen Wert.
+     *
      * @param multiplier Multiplikator auf die Skillwerte.
      */
     public void setMultiplier(double multiplier) {
