@@ -16,8 +16,8 @@ import javafx.scene.text.TextAlignment;
 public class Barracks {
 
     /**
+     * Die Anzeige, die alle Kämpfer im Besitz anzeigt. <br>
      * Gibt ein Pane zurück, welches dann in {@link Game#drawSpace()} angezeigt wird.
-     * Die Anzeige, die alle Kämpfer im Besitz anzeigt.
      * @return {@code Pane}
      */
     public static Pane Barrack_view() {

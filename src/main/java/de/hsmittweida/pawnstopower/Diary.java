@@ -14,8 +14,26 @@ import java.util.Random;
  * rechten Seite.
  */
 public class Diary {
-    private static int oldMoney, oldPawnNum, oldReputation;
+    /**
+     * Wert des Geldes im letzten Eintrag
+     */
+    private static int oldMoney;
+    /**
+     * Anzahl der Pawns im letzten Eintrag
+     */
+    private static int oldPawnNum;
+    /**
+     * Wert der Reputation im letzten Eintrag
+     */
+    private static int oldReputation;
+    /**
+     * Alle Einträge im Tagebuch.
+     * Mit Tagesindex.
+     */
     private static HashMap<Integer, ArrayList<Text>> diaryEntries;
+    /**
+     * Einmalige Start-Variable für besonderen Fall beim ersten Tag.
+     */
     private static boolean skipDailyGains = false;
 
     /**

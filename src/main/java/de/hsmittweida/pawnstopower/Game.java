@@ -243,31 +243,44 @@ public class Game {
         nextDay = new Button("\t»\t");
         prevDay.setId("day-button");
         nextDay.setId("day-button");
+
+        /* Zeigt Tagebucheinträge vom Vortag an */
         prevDay.setOnAction(e -> {
             diaryIndex--;
             diary.getChildren().clear();
             System.out.println("Diary index: " + diaryIndex);
+            /* Inseriert alle Elemente von dem Tag */
             for(Text t : Diary.getDiaryEntries().get(diaryIndex-1)) {
                 diary.getChildren().add(t);
                 t.setStyle("-fx-font-size: 36px;");
             }
+            /* Wenn man einen Tag zurückgehen kann, kann man danach auch garantiert wieder einen vor.
+             * Nur, wenn der DiaryIndex noch nicht am Anfang ist, kann man auch weiterhin einen Tag zurück
+             * */
             nextDay.setDisable(false);
             if(diaryIndex - 1 <= 0) {
                 prevDay.setDisable(true);
             }
         });
+
+        /* Zeigt Tagebucheinträge vom nächsten Tag an */
         nextDay.setOnAction(e -> {
             diaryIndex++;
             diary.getChildren().clear();
+            /* Inseriert alle Elemente von dem Tag */
             for(Text t : Diary.getDiaryEntries().get(diaryIndex-1)) {
                 diary.getChildren().add(t);
                 t.setStyle("-fx-font-size: 36px;");
             }
+            /* Wenn man einen Tag weitergehen kann, kann man danach auch garantiert wieder einen Tag zurück.
+             * Nur, wenn der DiaryIndex noch nicht am Ende (aktuellster Tag) ist, kann man weiterhin ein Tag vor.
+             */
             prevDay.setDisable(false);
             if(diaryIndex + 1 > getDay()) {
                 nextDay.setDisable(true);
             }
         });
+        /* Ursprünglich die Buttons deaktivieren, da es kein vor und zurpck am ersten Tag gibt. */
         prevDay.setDisable(true);
         nextDay.setDisable(true);
         entryChooser.setAlignment(Pos.CENTER);
@@ -372,6 +385,7 @@ public class Game {
         Diary.newDay();
         diaryIndex = day.get();
 
+        /* Shop aktualisieren */
         Shop.refreshShop();
 
         /* Pawn Kämpfe zurücksetzen */
@@ -473,23 +487,27 @@ public class Game {
      * Spiel einmal fertig verpackt wird.
      */
     private static void loadFonts() {
+        /* Fonts aus Dateien implementieren */
         Font f1 = Font.loadFont(Game.class.getResourceAsStream("fonts/DancingScript-Regular.ttf"), 21);
         Font f2 = Font.loadFont(Game.class.getResourceAsStream("fonts/MedievalSharp-Regular.ttf"), 21);
         Font f3 = Font.loadFont(Game.class.getResourceAsStream("fonts/MoonDance-Regular.ttf"), 21);
         Font f4 = Font.loadFont(Game.class.getResourceAsStream("fonts/CinzelDecorative-Regular.ttf"), 21);
         Font f5 = Font.loadFont(Game.class.getResourceAsStream("fonts/CinzelDecorative-Bold.ttf"), 21);
 
+        /* Lokal im Code abspeichern */
         fonts.put("DancingScript", f1);
         fonts.put("MedievalSharp", f2);
         fonts.put("MoonDance", f3);
         fonts.put("CinzelDecorative", f4);
         fonts.put("CinzelDecorativeBold", f5);
 
+        /*
         System.out.println("DancingScript name: " + f1.getName());
         System.out.println("MedievalSharp name: " + f2.getName());
         System.out.println("MoonDance name: " + f3.getName());
         System.out.println("CinzelDecorative name: " + f4.getName());
         System.out.println("CinzelDecorativeBold name: " + f5.getName());
+        */
     }
 
     /**

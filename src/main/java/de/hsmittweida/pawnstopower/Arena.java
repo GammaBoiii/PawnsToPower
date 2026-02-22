@@ -465,7 +465,7 @@ public class Arena {
             Text newText = new Text("\n"+text);
             newText.setFont(Game.getFont("MedievalSharp"));
             String style2 = style + "; -fx-font-size: 32;";
-            newText.wrappingWidthProperty().bind(textField.widthProperty()); // ?
+            newText.wrappingWidthProperty().bind(textField.widthProperty());
             newText.setStyle(style2);
             log.getChildren().add(newText);
         });
@@ -479,8 +479,10 @@ public class Arena {
      */
     public static void damage(Pawn p, double damage) {
         Platform.runLater(() -> {
+            /* Schaden für Spieler-Kämpfer: */
             if(p.equals(choosenFighter)) {
                 currentHealth_fighter.set(Math.round(currentHealth_fighter.get() - damage));
+            /* Schaden für Feind-Kämpfer: */
             } else if(p.equals(enemy)) {
                 currentHealth_enemy.set(Math.round(currentHealth_enemy.get() - damage));
             }
@@ -664,10 +666,13 @@ public class Arena {
      * @param playerWins
      */
     private static void fightOver(boolean playerWins) {
+        /* Neuer Thread hier, da durch die kurze Wartezeit (sleep) nicht das ganze Spiel pausiert werden soll. */
         new Thread(() -> {
             try {
                 if(!turn.getThread().isInterrupted()) {
+                    /* Arena Thread wird beendet: */
                     turn.kill();
+
                     Thread.sleep(2000);
                     Platform.runLater(() -> {
                         Game.drawSpace(ArenaWinScreen.winscreen(playerWins));
