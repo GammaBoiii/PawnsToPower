@@ -35,11 +35,12 @@ public class StartMenu {
 			Label title = new Label("Pawn to Power");
 			Button newGame = new Button("Neues Spiel");
 			Button loadGame = new Button("Spiel laden");
-			Button setup = new Button("Setup"); //@Deprecated
+			Button setup = new Button("Setup"); //WIP
+            setup.setDisable(true);
 			Button exit = new Button ("Exit");
 
 			Tools.addButtonSfx(newGame,loadGame,exit);
-			
+
 			newGame.setOnAction(e -> {
                 Game.Game_view();
 				stage.close();
@@ -76,15 +77,15 @@ public class StartMenu {
 			exit.setOnAction(e -> {
 				stage.close();
 			});
-			
+
 			setup.setOnAction(e -> {
 				new SetupMenu();
 			});
-			
+
 			root.setId("main-menu");
-			root.getChildren().addAll(title,newGame, loadGame,setup,exit);
+			root.getChildren().addAll(title, newGame, loadGame, setup, exit);
 			root.setAlignment(Pos.CENTER);
-			
+
 			stage.show();
 	}
 }
