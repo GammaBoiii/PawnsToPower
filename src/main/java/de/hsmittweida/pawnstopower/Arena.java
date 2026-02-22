@@ -182,6 +182,23 @@ public class Arena {
 
         winner = null;
 
+        /* Debug Buttons zum Testen im Kampf */
+        Button debug = new Button("-");
+        debug.setOnAction(e->{
+            Arena.damage(enemy, 1.0);
+            System.out.println(currentHealth_enemy.get());
+        });
+        Button debug2 = new Button("--");
+        debug2.setOnAction(e->{
+            Arena.damage(enemy, 10.0);
+            System.out.println(currentHealth_enemy.get());
+        });
+        AnchorPane.setTopAnchor(debug2, 25.0);
+        debug.setDisable(true);
+        debug.setVisible(false);
+        debug2.setDisable(true);
+        debug2.setVisible(false);
+
         /* Textbereich, der als Kampf-Log dient */
         textField = new ScrollPane();
         textField.setId("log-background");
@@ -231,7 +248,15 @@ public class Arena {
         String quickStyle = "-fx-font-size: 25";
         attack.setStyle(quickStyle);
         defense.setStyle(quickStyle);
-        arena.getChildren().addAll(attack, defense);
+        arena.getChildren().addAll(attack, defense, debug, debug2);
+
+        /* Finish him! Label */
+        Label finish = new Label("Finish him!");
+        AnchorPane.setTopAnchor(finish, 230.0);
+        finish.setId("finisher");
+        finish.setFont(Game.getFont("CinzelDecorative"));
+        finish.setVisible(false);
+        arena.getChildren().add(finish);
 
         /* Charactere darstellen */
         ImageView char2 = new ImageView(new Image(Arena.class.getResource("image/stickman.png").toExternalForm()));
@@ -253,6 +278,7 @@ public class Arena {
 
         /* Tot */
         currentHealth_fighter.addListener((observable, oldValue, newValue) -> {
+            /* Todesfall */
             if (newValue.intValue() < 0) {
                 currentHealth_fighter.set(0);
             } else if (newValue.intValue() == 0) {
@@ -262,8 +288,15 @@ public class Arena {
                 }
                 char1.setRotate(90);
             }
+            /* finish him active */
+            if (newValue.intValue() / choosenFighter.getSkills().get(0).getSkillValue() <= 0.06) {
+                AnchorPane.setLeftAnchor(finish, 200.0);
+                finish.setText("Get finished!");
+                finish.setVisible(true);
+            }
         });
         currentHealth_enemy.addListener((observable, oldValue, newValue) -> {
+            /* Todesfall */
             if (newValue.intValue() < 0) {
                 currentHealth_enemy.set(0);
             } else if (newValue.intValue() == 0) {
@@ -272,7 +305,12 @@ public class Arena {
                     fightOver(true);
                 }
                 char2.setRotate(270);
-
+            }
+            /* finish him active */
+            if (newValue.intValue() / enemy.getSkills().get(0).getSkillValue() <= 0.06) {
+                AnchorPane.setRightAnchor(finish, 200.0);
+                finish.setText("Finish him!");
+                finish.setVisible(true);
             }
         });
 
@@ -307,6 +345,8 @@ public class Arena {
         /* Name der Kämpfer */
         Label fighterlabel = new Label(choosenFighter.getName());
         Label enemylabel = new Label(enemy.getName());
+        fighterlabel.setFont(Game.getFont("MoonDance"));
+        enemylabel.setFont(Game.getFont("MoonDance"));
         AnchorPane.setLeftAnchor(fighterlabel, 210.0);
         AnchorPane.setTopAnchor(fighterlabel, 625.0);
         AnchorPane.setRightAnchor(enemylabel, 210.0);

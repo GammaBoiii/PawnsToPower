@@ -81,3 +81,8 @@
     -fx-background-color: rgba(57, 62, 62, 0.88);
     -fx-font-family: "Cinzel Decorative";
 }
+
+#finisher {
+    -fx-font-size: 35;
+    -fx-font-family: "MedievalSharp";
+}
