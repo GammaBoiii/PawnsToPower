@@ -7,7 +7,13 @@ import javafx.application.Platform;
  * Beinhaltet extra Thread.
  */
 public class Turn extends Thread {
+    /**
+     * Der Pawn aus dem aktuellen Kontext (am Zug)
+     */
     private Pawn pawn;
+    /**
+     * Der aktuelle Kampf-Thread aus der Arena.
+     */
     private final Turn thread;
 
     /**
