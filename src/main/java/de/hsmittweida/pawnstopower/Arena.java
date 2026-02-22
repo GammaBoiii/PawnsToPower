@@ -206,7 +206,7 @@ public class Arena {
         /* Gegner wird generiert */
         enemy = generateEnemy();
 
-        /* Schlacthfeld */
+        /* Schlachtfeld */
         AnchorPane arena = new AnchorPane();
         field.setCenter(arena);
         arena.setMaxWidth(Double.MAX_VALUE);

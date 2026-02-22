@@ -14,8 +14,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2caedb46-d777-419c-a57b-5cad63dbf490" name="Changes" comment="changed style">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Inspector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Inspector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hsmittweida/pawnstopower/Arena.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -283,7 +282,7 @@
       <workItem from="1771758751536" duration="4694000" />
       <workItem from="1771767720250" duration="78000" />
       <workItem from="1771767861975" duration="190000" />
-      <workItem from="1771771553688" duration="4479000" />
+      <workItem from="1771771553688" duration="5458000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
