@@ -393,6 +393,7 @@ public class Arena {
             }
         }
 
+        /* Absicherung, dass Level mindestens 1 ist */
         if(choosenFighter.getLvl() + level < 1) level = 0;
         p.setLvl(choosenFighter.getLvl() + level);
 
