@@ -33,7 +33,7 @@ public class StartMenu {
             startmenusound.getMediaPlayer().stop();
         });
 
-        Label title = new Label("Pawn to Power");
+        Label title = new Label("Pawns to Power");
         Button newGame = new Button("Neues Spiel");
         Button loadGame = new Button("Spiel laden");
         Button setup = new Button("Setup"); //WIP
