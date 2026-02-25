@@ -268,7 +268,7 @@ public class Inspector {
         debug.setOnAction(e -> {
             refreshImages();
         });
-        anchorPane.getChildren().addAll(headPane, armPane, legPane, torsoPane, paneRight, paneLeft, btnHead, btnArms, btnTorso, btnLegs, btnLeft, btnRight, stats, debug);
+        anchorPane.getChildren().addAll(headPane, armPane, legPane, torsoPane, paneRight, paneLeft, btnHead, btnArms, btnTorso, btnLegs, btnLeft, btnRight, stats);
         Inspector.refreshImages();
         Platform.runLater(() -> {
             refreshImages();
